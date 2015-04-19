@@ -2,9 +2,10 @@
 KaBOB (Knowledge Base Of Biomedicine)
 
 This library is associated with the publication: <br />
-KaBOB: Ontology-Based Semantic Integration of Biomedical Databases <br />
-Kevin M Livingston, Michael Bada, William A Baumgartner, Lawrence E Hunter <br />
-BMC Bioinformatics (2015, to appear) <br />
+> KaBOB: Ontology-Based Semantic Integration of Biomedical Databases <br />
+> Kevin M Livingston, Michael Bada, William A Baumgartner, Lawrence E Hunter <br />
+> BMC Bioinformatics (2015, to appear)
+
 Please cite when using.
 
 KaBOB is built on top of the [KR][] library, and numerous biomedical ontologies and data sources, which are parsed using the [datasources][] library.  KaBOB is primarily written in Clojure and is driven by Maven as well as a collection of Bash shell scripts.
