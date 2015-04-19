@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http//www.w3.org/2001/XMLSchema-instance"
+	       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<properties>
+		<clojure.version>1.6.0</clojure.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+
+		<!-- switched to latest public release -->
+		<!--<kr.version>1.4.12</kr.version>-->
+		<!--<kr.version>1.4.17</kr.version>-->
+		<kr.version>1.4.18</kr.version>
+		<kr.groupId>edu.ucdenver.ccp</kr.groupId>
+
+		<ver.log4j>1.2.17</ver.log4j>
+		<ver.slf4j>1.7.2</ver.slf4j>
+
+	</properties>
+
+	<groupId>edu.ucdenver.ccp</groupId>
+	<artifactId>kabob</artifactId>
+	<packaging>pom</packaging>
+	<version>1.3.0-SNAPSHOT</version>
+	<name>${project.artifactId}</name>
+	<description>KaBOB: Knowledge Base Of Biomedicine</description>
+
+
+	<modules>
+    <!-- this module has to be first to ensure local repo is populated-->
+		<module>local-repository</module>
+
+		<module>kabob-core</module>
+		<module>kabob-build</module>
+
+		<module>kabob-query</module>
+
+		<module>kabob-dev</module>
+		<module>kabob-view</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.clojure</groupId>
+			<artifactId>clojure</artifactId>
+			<version>${clojure.version}</version>
+		</dependency>
+
+    <!--
+        <dependency>
+        <groupId>cider</groupId>
+        <artifactId>cider-nrepl</artifactId>
+        <version>0.6.0</version>
+        </dependency>
+    -->
+
+
+    <!--
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>java.classpath</artifactId>
+      <version>0.1.0</version>
+      <version>0.2.2</version>
+    </dependency>
+    -->
+    
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>core.cache</artifactId>
+      <version>0.6.4</version>
+    </dependency>
+
+    
+    <dependency>
+      <groupId>cheshire</groupId>
+      <artifactId>cheshire</artifactId>
+      <version>5.2.0</version>
+    </dependency>
+    <!--
+        <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>14.0.1</version>
+        </dependency>
+    -->
+
+    <!--
+        <dependency>
+        <groupId>virtuoso</groupId>
+        <artifactId>jdbc</artifactId>
+        <version>3.0.0</version>
+        </dependency>
+        <dependency>
+        <groupId>virtuoso</groupId>
+        <artifactId>sesame</artifactId>
+        <version>2.6.0</version>
+        </dependency>
+    -->
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+
+
+      
+			<dependency>
+				<groupId>${kr.groupId}</groupId>
+				<artifactId>kr-core</artifactId>
+				<version>${kr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${kr.groupId}</groupId>
+				<artifactId>kr-core</artifactId>
+				<version>${kr.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>${kr.groupId}</groupId>
+				<artifactId>kr-sesame-core</artifactId>
+				<version>${kr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${kr.groupId}</groupId>
+				<artifactId>kr-sesame-core</artifactId>
+				<version>${kr.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+
+
+
+      <dependency>
+        <groupId>org.clojure</groupId>
+        <artifactId>core.memoize</artifactId>
+        <version>0.5.6</version>
+      </dependency>
+
+      <!-- graph library api -->
+      <dependency>
+        <groupId>aysylu</groupId>
+        <artifactId>loom</artifactId>
+        <version>0.5.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.clojure</groupId>
+        <artifactId>data.csv</artifactId>
+        <version>0.1.2</version>
+      </dependency>
+      
+      <!--
+          <dependency>
+          <groupId>org.clojure</groupId>
+          <artifactId>tools.nrepl</artifactId>
+          <version>0.2.3</version>
+          </dependency>
+      -->
+
+      <!--
+			    <dependency>
+				  <groupId>${kr.groupId}</groupId>
+				  <artifactId>kr-jena-core</artifactId>
+				  <version>${kr.version}</version>
+			    </dependency>
+			    <dependency>
+				  <groupId>${kr.groupId}</groupId>
+				  <artifactId>kr-backend-bigdata</artifactId>
+				  <version>1.2.0-SNAPSHOT</version>
+			    </dependency>
+
+<dependency>
+<groupId>swank-clojure</groupId>
+<artifactId>swank-clojure</artifactId>
+<version>1.4.0</version>
+</dependency>
+      -->
+
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${ver.log4j}</version>
+      </dependency>
+      <dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${ver.slf4j}</version>
+			</dependency>
+      <dependency>
+        <groupId>potemkin</groupId>
+        <artifactId>potemkin</artifactId>
+        <version>0.1.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.neo4j</groupId>
+        <artifactId>neo4j</artifactId>
+        <version>1.8.1</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.6</version>
+        <!--<version>1.7</version>-->
+      </dependency>
+
+      <!--
+      -->
+      <dependency>
+        <groupId>virtuoso</groupId>
+        <artifactId>jdbc</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>virtuoso</groupId>
+        <artifactId>sesame</artifactId>
+        <version>2.6.0</version>
+      </dependency>
+      <!--
+      -->
+
+		</dependencies>
+	</dependencyManagement>
+
+
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>amc-bakeoff.ucdenver.pvt</id>
+			<name>amc-bakeoff.ucdenver.pvt-snapshots</name>
+			<url>http://amc-bakeoff.ucdenver.pvt:8081/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+    <!-- this repository needs to be here it's not there, but the ID has to be
+         to "hack" maven into see the jars that were pre-loaded with the
+         local-repository module.-->
+    <repository>
+      <id>kabob-local-repository</id>
+      <url>file://${basedir}/mvn-local-repository</url>
+    </repository>
+    <!--
+        <repository>
+        <id>mvn-local-repos.virtuoso</id>
+        <url>file://${basedir}/mvn-local-repos/virtuoso</url>
+        </repository>
+    -->
+		<!-- clojure related repositories -->
+		<repository>
+			<id>clojars</id>
+			<url>http://clojars.org/repo</url>
+		</repository>
+    <!--
+		    <repository>
+			  <id>clojure-snapshots</id>
+			  <url>http://build.clojure.org/snapshots</url>
+			  <releases>
+				<enabled>false</enabled>
+			  </releases>
+			  <snapshots>
+				<enabled>true</enabled>
+			  </snapshots>
+		    </repository>
+		    <repository>
+			  <id>clojure-releases</id>
+			  <url>http://build.clojure.org/releases</url>
+			  <releases>
+				<enabled>true</enabled>
+			  </releases>
+			  <snapshots>
+				<enabled>false</enabled>
+			  </snapshots>
+		    </repository>
+    -->
+
+		<!-- this is where OpenRDF / Sesame lives -->
+    <!--		<repository>
+			  <releases>
+				<enabled>true</enabled>
+			  </releases>
+			  <snapshots>
+				<enabled>false</enabled>
+			  </snapshots>
+			  <id>aduna-opensource.releases</id>
+			  <name>Aduna Open Source - Maven releases</name>
+			  <url>http://repo.aduna-software.org/maven2/releases</url>
+		    </repository> -->
+
+		<!-- A local file repository to store Virtuoso files not maven-ified -->
+
+	</repositories>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/clojure</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+
+    <plugins>
+      <plugin>
+        <groupId>com.theoryinpractise</groupId>
+        <artifactId>clojure-maven-plugin</artifactId>
+        <version>1.3.9</version>
+        <!--<version>1.3.20</version>-->
+        <!--<version>1.3.23</version>-->
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>compile-clojure</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sourceDirectories>
+            <sourceDirectory>src/main/clojure</sourceDirectory>
+          </sourceDirectories>
+          <testSourceDirectories>
+            <testSourceDirectory>src/test/clojure</testSourceDirectory>
+          </testSourceDirectories>
+          <!--<vmargs>-d64 -Xmx4G</vmargs> -->
+          <!-- command line override -Dclojure.vmargs="-d64 -Xmx4G" -->
+        </configuration>
+        <!--<configuration> <sourceDirectories> <sourceDirectory>src/main/clojure</sourceDirectory> 
+            </sourceDirectories> </configuration> -->
+      </plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<testClassesDirectory>src/test/clojure/</testClassesDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. 
+            It has no influence on the Maven build itself.-->
+        <!--
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.theoryinpractise
+										</groupId>
+										<artifactId>
+											clojure-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.3.20,)
+										</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+    -->
+	</build>
+</project>
