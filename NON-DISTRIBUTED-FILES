@@ -1,0 +1,7 @@
+The following files may be referenced in this code but are not distributed with it as they are licensed independently.
+
+./kabob-view/src/main/resources/public/js/jquery-1.9.1.min.js
+./local-repository/mvn-local-repository/virtuoso/jdbc/3.0.0/jdbc-3.0.0.jar
+./local-repository/mvn-local-repository/virtuoso/jdbc/4.0.0/jdbc-4.0.0.jar
+./local-repository/mvn-local-repository/virtuoso/sesame/2.6.0/sesame-2.6.0.jar
+./local-repository/mvn-local-repository/virtuoso/sesame/2.7.0/sesame-2.7.0.jar
