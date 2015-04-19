@@ -1,0 +1,38 @@
+;; This script will execute the de_ice rules on the specified KB. 
+;; Generated triples are output to files in the specified output directory.
+;; This script is designed to be run by the clojure:run goal of the maven clojure plugin.
+
+(ns edu.ucdenver.ccp.kabob.build.impl.de-ice-script)
+(use 'edu.ucdenver.ccp.kr.kb)
+(use 'edu.ucdenver.ccp.kr.rdf)
+(use 'edu.ucdenver.ccp.kr.sparql)
+(use 'edu.ucdenver.ccp.kr.repl-utils)
+(use 'edu.ucdenver.ccp.kabob.build.build)
+(require 'edu.ucdenver.ccp.kabob.build.kb-connection)
+(require 'edu.ucdenver.ccp.kabob.build.id-mapping)
+(import '(java.io File))
+
+(def kb-journal-file (nth *command-line-args* 0)) ;; The file path to the BigData journal file containing the KB
+(def kb-properties-file (nth *command-line-args* 1)) ;; The file path to the BigData properties file for the KB
+(def kb-name (nth *command-line-args* 2)) ;; The name of the store, e.g. kaboblt
+(def output-directory (nth *command-line-args* 3)) ;; The file path to the output directory where generated triple files will be placed. 
+                                                   ;; IMPORTANT: The output directory path must end with a forward slash!!!!
+
+(prn "Running id_mapping script...")
+(prn (str "Clojure version: " *clojure-version*))
+(prn (str "BigData journal file: " kb-journal-file))
+(prn (str "BigData properties file: " kb-properties-file))
+(prn (str "KB name: " kb-name))
+(prn (str "Output directory: " output-directory))
+
+(def jFile (File. kb-journal-file))
+(if-not (.exists jFile) (throw (RuntimeException. (str "FILE DOES NOT EXIST!!!!!!!!" kb-journal-file))))
+
+(def my-kb (edu.ucdenver.ccp.kabob.build.kb-connection/builder-kb {
+                                                                    :properties kb-properties-file
+                                                                    :journal kb-journal-file
+                                                                    :store-name kb-name}))
+(set!-kb my-kb)
+
+(binding [*output-dir* output-directory]
+  (serialize-rule-output *kb*  edu.ucdenver.ccp.kabob.build.id-mapping/*id-mapping-post-processing-rules*))
