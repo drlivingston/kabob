@@ -1,27 +1,49 @@
 #!/bin/bash
 
-echo Sourcing Default Variables
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $SCRIPT_DIR/INIT.sh
+echo Sourcing default variables
 
-#MAVEN_BIN=/data/hudson/apache-maven-3.1.1/bin
-MAVEN_BIN=/data/hudson/apache-maven-3.2.2/bin
-JAVA_HOME=/data/hudson/jdk1.7.0_45
-#AG_BIN=/home/agraph/ag412/bin
-#AG_BIN=/home/agraph/ag413/bin
-#AG_BIN=/home/agraph/ag413.1/bin
-AG_BIN=/home/agraph/ag414/bin
+## ------------------------------------------------------------------------- ##
+## Set variables for build environment and installation.                     ##
+## ------------------------------------------------------------------------- ##
 
-#DEFAULT_AG=ag414
-DEFAULT_KB_SERVER=http://localhost
-DEFAULT_KB_PORT=10035
+# We use Maven as a Java execution engine ):
+MAVEN=${PLATFORM_MAVEN:?}
 
-#DEFAULT_KB=kabob20121201
-DEFAULT_KB=kabob20140123
+# The build expects to be co-located with an Allegrograph installation.
+AG_HOME=${PLATFORM_ALLEGROGRAPH_HOME:?}
+AG_PORT=${PLATFORM_ALLEGROGRAPH_PORT:?}
 
-DEFAULT_UNAME=xx_user_xx
-DEFAULT_PASS=xx_pass_xx
+# The URL by which to connect to the knowledgebase when generating the rules.
+KB_URL=${KB_INSTANCE_URL:?}
+# The name used to connect to the database when generating the rules.
+KB_USER=${KB_INSTANCE_USER:?}
+# The password used to connect to the database when generating the rules.
+KB_PASS=${KB_INSTANCE_PASS:?}
+# The database or schema name by which the knowledgebase is known to the store.
+KB_NAME=${KB_INSTANCE_NAME:?}
 
+# The directories containing the data source files that must be loaded.
+function assert_datasource_dir_exists {
+    if ! [[ -d $1 ]]; then
+        echo "Invalid $2 directory $1"
+        exit 1
+    fi
+}
+# The location of the downloaded ontologies.
+DATASOURCE_OWL_DIR=${PLATFORM_DATASOURCE_OWL_DIR:?}
+assert_datasource_dir_exists $DATASOURCE_OWL_DIR OWL
+# The location of the downloaded data source files.
+DATASOURCE_ICE_DIR=${PLATFORM_DATASOURCE_ICE_DIR:?}
+assert_datasource_dir_exists $DATASOURCE_ICE_DIR ICE
 
-DATE_STAMP=20140123
-DEFAULT_KABOB_DATA_ROOT=/data/kabob/$DATE_STAMP
+# The directory into which the genereated rules will be written.
+KB_DATA_DIR=${KB_INSTANCE_DATA_DIR:?}
 
-DEFAULT_KB_INDICES="ospgi posgi spogi gspoi"
+## ------------------------------------------------------------------------- ##
+## No user-adjustable variables beyond this point.                           ##
+## ------------------------------------------------------------------------- ##
+
+AG_BIN=${AG_HOME}/bin
+AG_INDICES="ospgi,posgi,spogi,gspoi"

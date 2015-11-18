@@ -4,22 +4,22 @@
 cat scripts/ENV.sh
 source scripts/ENV.sh
 
-$MAVEN_BIN/mvn --version
+$MAVEN --version
 
 #echo Skipping mvn rebuild
-$MAVEN_BIN/mvn clean install
+$MAVEN clean install
 
 HUDSON_DIR=`pwd`
 chmod 755 scripts/*.sh
 
 # clobber the old KB, then load the OWL files, then dedup
-#ssh agraph@localhost "$HUDSON_DIR/scripts/new-kb.sh $AG_BIN $DEFAULT_KB_PORT $DEFAULT_KB $DEFAULT_KABOB_DATA_ROOT file_lists/owl-files.$DATE_STAMP.list guess"
+#ssh agraph@localhost "$HUDSON_DIR/scripts/new-kb.sh $AG_BIN $AG_PORT $KB_NAME $KB_DATA_DIR file_lists/owl-files.$KB_NAME.list guess"
 #./scripts/DEDUP.sh
 ##echo "early fail for logging"
 ##exit 1;
 
 # invoke the index optimizer
-# ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $DEFAULT_KB"
+# ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $AG_PORT $KB_NAME"
 
 #./scripts/RUN_RULES_AND_LOAD.sh rules/bio_to_ice
 
@@ -27,7 +27,7 @@ chmod 755 scripts/*.sh
 
 ##./scripts/DEDUP.sh
 # invoke the index optimizer
-ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $DEFAULT_KB"
+ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $AG_PORT $KB_NAME"
 
 ##echo "early fail for logging"
 ##exit 1;
@@ -35,13 +35,13 @@ ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $
 ./scripts/RUN_RULES_AND_LOAD.sh rules/id_typing
 ./scripts/RUN_RULES_AND_LOAD.sh rules/id_mapping/skos_exact
 
-ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $DEFAULT_KB"
+ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $AG_PORT $KB_NAME"
 echo "early fail for logging"
 exit 1;
 
 
 
-$MAVEN_BIN/mvn -e -f kabob-build/pom.xml -Dclojure.vmargs="-d64 -Xmx24G -XX:MaxPermSize=8G -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:-UseGCOverheadLimit" -Dclojure.mainClass="edu.ucdenver.ccp.kabob.build.id_sets.generate" -Dclojure.args="$DEFAULT_KB_SERVER:$DEFAULT_KB_PORT $DEFAULT_KB $DEFAULT_UNAME $DEFAULT_PASS $DEFAULT_KABOB_DATA_ROOT/id_sets/exact/ $DEFAULT_KABOB_DATA_ROOT/id_sets/graph_dbs/" clojure:run
+$MAVEN -e -f kabob-build/pom.xml -Dclojure.vmargs="-d64 -Xmx24G -XX:MaxPermSize=8G -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:-UseGCOverheadLimit" -Dclojure.mainClass="edu.ucdenver.ccp.kabob.build.id_sets.generate" -Dclojure.args="$KB_URL $KB_NAME $KB_USER $KB_PASS $KB_DATA_DIR/id_sets/exact/ $KB_DATA_DIR/id_sets/graph_dbs/" clojure:run
 
 
 ./scripts/LOAD.sh id_sets/exact
@@ -55,7 +55,7 @@ $MAVEN_BIN/mvn -e -f kabob-build/pom.xml -Dclojure.vmargs="-d64 -Xmx24G -XX:MaxP
 
 
 
-ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $DEFAULT_KB"
+ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $AG_PORT $KB_NAME"
 
 # this should be in ice_to_bio now... something wrong with this rule (file parser generating different ICE id's than ice-to-bio does)
 ./scripts/RUN_RULES_AND_LOAD.sh rules/temp/taxon
@@ -74,7 +74,4 @@ ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $
 ./scripts/RUN_RULES_AND_LOAD.sh rules/temp/goa
 
 ./scripts/DEDUP.sh
-ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $DEFAULT_KB_PORT $DEFAULT_KB"
-
-
-
+ssh agraph@localhost "$HUDSON_DIR/scripts/optimize.sh $AG_BIN $AG_PORT $KB_NAME"

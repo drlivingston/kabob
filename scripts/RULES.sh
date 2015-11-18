@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $SCRIPT_DIR/ENV.sh
 
 if [ $# -ne 1 ]
 then
@@ -11,21 +12,10 @@ fi
 
 RULE_PAT=$1
 
-# ##SOURCING DEFAULTS
-source $SCRIPT_DIR/ENV.sh
-#source ./scripts/ENV.sh
-
-echo MAVEN_BIN: $MAVEN_BIN
-#echo AG_BIN: $AG_BIN
-#echo DEFAULT_AG: $DEFAULT_AG
-echo DEFAULT_KB_SERVER: $DEFAULT_KB_SERVER
-echo DEFAULT_KB_PORT: $DEFAULT_KB_PORT
-echo DEFAULT_KB: $DEFAULT_KB
-echo DEFAULT_UNAME: $DEFAULT_UNAME
-echo DEFAULT_PASS: $DEFAULT_PASS
-
-echo DEFAULT_KABOB_DATA_ROOT: $DEFAULT_KABOB_DATA_ROOT
-
-echo RULE_PAT: $RULE_PAT
-
-/usr/bin/time -v $SCRIPT_DIR/run-rules.sh $MAVEN_BIN $DEFAULT_KB_SERVER $DEFAULT_KB_PORT $DEFAULT_KB $DEFAULT_UNAME $DEFAULT_PASS $DEFAULT_KABOB_DATA_ROOT $RULE_PAT
+/usr/bin/time -v $SCRIPT_DIR/run-rules.sh \
+              $MAVEN \
+              $KB_URL \
+              $KB_NAME \
+              $KB_USER $KB_PASS \
+              $KB_DATA_DIR \
+              $RULE_PAT
