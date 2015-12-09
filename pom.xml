@@ -228,17 +228,7 @@
 		</dependencies>
 	</dependencyManagement>
 
-
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>amc-bakeoff.ucdenver.pvt</id>
-			<name>amc-bakeoff.ucdenver.pvt-snapshots</name>
-			<url>http://amc-bakeoff.ucdenver.pvt:8081/artifactory/libs-snapshot-local</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<repositories>
+    <repositories>
     <!-- this repository needs to be here it's not there, but the ID has to be
          to "hack" maven into see the jars that were pre-loaded with the
          local-repository module.-->
