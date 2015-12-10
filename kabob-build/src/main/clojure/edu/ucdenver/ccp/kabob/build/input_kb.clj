@@ -1,15 +1,11 @@
+
 (ns edu.ucdenver.ccp.kabob.build.input-kb
   (use edu.ucdenver.ccp.kr.kb
        edu.ucdenver.ccp.kr.rdf
        edu.ucdenver.ccp.kr.sesame.kb
        edu.ucdenver.ccp.kabob.namespace)
   (import org.openrdf.rio.RDFFormat
-          org.openrdf.query.resultio.TupleQueryResultFormat
-
-          ;;virtuoso
-          virtuoso.sesame2.driver.VirtuosoRepository
-
-))
+          org.openrdf.query.resultio.TupleQueryResultFormat))
 
 ;;; --------------------------------------------------------
 ;;; kabob source kbs
@@ -40,16 +36,6 @@
     (binary-kb)))
 
 (def source-kb open-kb)
-
-
-;; (defn source-kb [args]
-;;   ;;Init source KB connection
-;;   (println "forcing a virtuoso connection")
-;;   (let [kb (kb (VirtuosoRepository. "jdbc:virtuoso://localhost:1111","dba","dba"))]
-;;     (update-namespaces (connection kb)
-;;                        *namespaces*)))
-
-
 
 ;;; --------------------------------------------------------
 ;;; end

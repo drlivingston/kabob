@@ -46,7 +46,6 @@
 			<type>test-jar</type>
 		</dependency>
 
-
     <!--bring in virtuoso sesame bindings -->
     <!--
     <dependency>
@@ -65,18 +64,6 @@
 			<version>${project.version}</version>
 		</dependency>
     -->
-      <dependency>
-        <groupId>virtuoso</groupId>
-        <artifactId>jdbc</artifactId>
-        <!--<version>3.0.0</version>-->
-      </dependency>
-      <dependency>
-        <groupId>virtuoso</groupId>
-        <artifactId>sesame</artifactId>
-        <!--<version>2.6.0</version>-->
-      </dependency>
-
-
 
 		<!--<dependency>
 			<groupId>${kr.groupId}</groupId>

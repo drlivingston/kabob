@@ -29,10 +29,7 @@
 	<description>KaBOB: Knowledge Base Of Biomedicine</description>
 
 
-	<modules>
-    <!-- this module has to be first to ensure local repo is populated-->
-		<module>local-repository</module>
-
+    <modules>
 		<module>kabob-core</module>
 		<module>kabob-build</module>
 
@@ -229,20 +226,7 @@
 	</dependencyManagement>
 
     <repositories>
-    <!-- this repository needs to be here it's not there, but the ID has to be
-         to "hack" maven into see the jars that were pre-loaded with the
-         local-repository module.-->
-    <repository>
-      <id>kabob-local-repository</id>
-      <url>file://${basedir}/mvn-local-repository</url>
-    </repository>
-    <!--
-        <repository>
-        <id>mvn-local-repos.virtuoso</id>
-        <url>file://${basedir}/mvn-local-repos/virtuoso</url>
-        </repository>
-    -->
-		<!-- clojure related repositories -->
+        <!-- clojure related repositories -->
 		<repository>
 			<id>clojars</id>
 			<url>http://clojars.org/repo</url>
