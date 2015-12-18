@@ -1,13 +1,15 @@
-(ns edu.ucdenver.ccp.kabob.build.id-sets.generate
-  (:gen-class)
-  (use ;;edu.ucdenver.ccp.kabob.build.id-sets.id-sets
-       edu.ucdenver.ccp.kabob.build.id-sets.kabob-id-sets
-       edu.ucdenver.ccp.kabob.build.id-sets.id-set-triples
 
+(ns edu.ucdenver.ccp.kabob.build.id-sets.generate
+  (:require [clojure.java.io :refer [make-parents]]
+            [clojure.string :as str])
+  (:import [java.io File])
+  (use edu.ucdenver.ccp.kabob.build.id-sets.kabob-id-sets
+       edu.ucdenver.ccp.kabob.build.id-sets.id-set-triples
        edu.ucdenver.ccp.kr.kb
        edu.ucdenver.ccp.kabob.build.input-kb
        clojure.pprint
-       clojure.stacktrace))
+       clojure.stacktrace)
+  (:gen-class))
 
 ;;;-------------------------------------------------------------------
 ;;; id types
@@ -18,9 +20,7 @@
                 kiao/ProteinIdentifier
                 kiao/DiseaseIdentifier
                 kiao/RNAIdentifier
-                kiao/mRNAIdentifier
-
-                ))
+                kiao/mRNAIdentifier))
 
 ;;;-------------------------------------------------------------------
 ;;; extract ids from source kb, group in temp graph db, output to file
@@ -173,10 +173,10 @@
 
 (defn -main [& args]
   (pprint args)
-  (let [args (command-line-args args)]
-    (generate-all-id-sets (source-kb args)
-                          (:graph-db-dir args)
-                          (:output-directory args)))
+  (let [{out-dir :output-directory gdb-dir :graph-db-dir :as args}
+        (command-line-args args)]
+    (make-parents (str/join File/separator [out-dir "file"]))
+    (generate-all-id-sets (source-kb args) gdb-dir out-dir))
   (System/exit 0))
 
 ;;;-------------------------------------------------------------------
