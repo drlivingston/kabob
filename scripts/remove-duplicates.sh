@@ -1,34 +1,33 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $SCRIPT_DIR/INIT.sh
 
-EXPECTED_ARGS=4
-
-# ${KABOB_DATA_ROOT:?"Need to set KABOB_DATA_ROOT non-empty"}
-
-if [ $# -ne $EXPECTED_ARGS ]
-then
-  echo "Usage: AG_BIN KB_PORT KB_NAME KABOB_ROOT"
+if [[ $# -ne 4 ]]; then
+  echo "Usage: AG_BIN AG_PORT AG_INDICES KB_NAME"
   echo $@
   exit 1
 fi
 
-AG_BIN=$1
-PORT=$2
-KB=$3
-KABOB_DATA_ROOT=$4
+AG_BIN=${1:?}
+AG_PORT=${2:?}
+AG_INDICES=${3,?}
+KB_NAME=${4,?}
 
-mkdir -p $KABOB_DATA_ROOT/temp
-touch    $KABOB_DATA_ROOT/temp/empty.nt
-
-source $SCRIPT_DIR/ENV.sh
-
-echo AG_BIN: $AG_BIN
-echo KB: $KB
-echo PORT: $PORT
-echo KABOB_DATA_ROOT: $KABOB_DATA_ROOT
-echo DEFAULT_KB_INDICES: $DEFAULT_KB_INDICES
+# Create an empty file to be passed to `agload` as the source.  The command
+# requires a source, but at this we don't want actually want to load any data.
+# All we want is to trigger AG's `delete-duplicate-triples` function, which is
+# triggered only at the end of a load cycle.
+NULL_LOAD_FILE=$(mktemp)
 
 echo Removing duplicates
-
-$AG_BIN/agload -v --bulk  --with-indices "$DEFAULT_KB_INDICES" -p $PORT --input ntriples --encoding utf8 -d delete $KB $KABOB_DATA_ROOT/temp/empty.nt
+$AG_BIN/agload \
+    --verbose \
+    --bulk \
+    --with-indices $AG_INDICES \
+    --port $AG_PORT \
+    --input ntriples \
+    --encoding utf8 \
+    --duplicates delete \
+    $KB_NAME \
+    $NULL_LOAD_FILE

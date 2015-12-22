@@ -29,10 +29,7 @@
 	<description>KaBOB: Knowledge Base Of Biomedicine</description>
 
 
-	<modules>
-    <!-- this module has to be first to ensure local repo is populated-->
-		<module>local-repository</module>
-
+    <modules>
 		<module>kabob-core</module>
 		<module>kabob-build</module>
 
@@ -228,31 +225,8 @@
 		</dependencies>
 	</dependencyManagement>
 
-
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>amc-bakeoff.ucdenver.pvt</id>
-			<name>amc-bakeoff.ucdenver.pvt-snapshots</name>
-			<url>http://amc-bakeoff.ucdenver.pvt:8081/artifactory/libs-snapshot-local</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<repositories>
-    <!-- this repository needs to be here it's not there, but the ID has to be
-         to "hack" maven into see the jars that were pre-loaded with the
-         local-repository module.-->
-    <repository>
-      <id>kabob-local-repository</id>
-      <url>file://${basedir}/mvn-local-repository</url>
-    </repository>
-    <!--
-        <repository>
-        <id>mvn-local-repos.virtuoso</id>
-        <url>file://${basedir}/mvn-local-repos/virtuoso</url>
-        </repository>
-    -->
-		<!-- clojure related repositories -->
+    <repositories>
+        <!-- clojure related repositories -->
 		<repository>
 			<id>clojars</id>
 			<url>http://clojars.org/repo</url>
