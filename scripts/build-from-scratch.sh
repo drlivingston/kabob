@@ -54,6 +54,17 @@ EOF
 )
 ssh agraph@localhost "$AGRAPH_CMD"
 
+AGRAPH_CMD=$(cat <<EOF
+$HUDSON_DIR/scripts/load-list-file.sh \
+$AG_BIN \
+$AG_PORT \
+$AG_INDICES \
+$KB_NAME \
+$KB_DATA_DIR/file-lists/large-ice-files.$KB_NAME.list
+EOF
+)
+ssh agraph@localhost "$AGRAPH_CMD"
+
 # remove any duplicate triples in the KB
 AGRAPH_CMD=$(cat <<EOF
 $HUDSON_DIR/scripts/remove-duplicates.sh \
@@ -77,9 +88,6 @@ ssh agraph@localhost "$AGRAPH_CMD"
 
 ./scripts/RUN_RULES_AND_LOAD.sh rules/id_typing
 ./scripts/RUN_RULES_AND_LOAD.sh rules/id_mapping/skos_exact
-
-# Removed for parity with `build-kabob-ag`
-# ssh agraph@localhost "$HUDSON_DIR/scripts/load-list-file.sh $AG_BIN $AG_PORT $KB_NAME $KB_DATA_DIR file-lists/large-ice-files.$KB_NAME.list"
 
 # Create the ID sets
 $MAVEN -e -f kabob-build/pom.xml \
