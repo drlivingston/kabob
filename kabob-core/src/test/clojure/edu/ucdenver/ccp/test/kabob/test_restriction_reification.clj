@@ -43,10 +43,10 @@
 '{:name "test-rule"
   :head ((?/interaction rdfs/subClassOf obo/MI_0000) ;interaction
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/has_participant)
+         (?/r1 owl/onProperty obo/RO_0000057) ;; RO_0000057 = has_participant
          (?/r1 owl/someValuesFrom ?/drug)
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty obo/has_participant)
+         (?/r2 owl/onProperty obo/RO_0000057)
          (?/r2 owl/someValuesFrom ?/bio)
          (?/interaction rdfs/subClassOf ?/r1)
          (?/interaction rdfs/subClassOf ?/r2))
@@ -61,9 +61,14 @@
                    :ns "ex" :prefix "R_"}])
   })
 
-(def result-syms #{'ex/R_8ZBPhXkCF7k9lxqGarTkJiDHkho
-                   'ex/R_CzuzE2Zeuqr9bIwoW3uLZthK_vA
-                   'ex/R_BHmARoS1ItA4F9tccmRvvt0iiXk})
+
+;; HARD-CODED SHA1 KEYS!!!!
+
+(def result-syms #{'ex/R_BLinnle7D0tdku--nrCl9h79EOQ
+                   'ex/R_I-Cu5vw53kCa9OgyZ67Y38Xj4DI
+                   'ex/R_vPs6bRpZjM-6uIwTRYhda-P2IDw
+                   })
+
 
 (def dynamically-generated-syms
   (set
@@ -73,13 +78,13 @@
                (str "R_"
                     (sha-1 (apply str sym-list))))
              '((owl/Restriction
-                owl/onProperty obo/has_participant
+                owl/onProperty obo/RO_0000057
                 owl/someValuesFrom ex/drug1)
                (owl/Restriction
-                owl/onProperty obo/has_participant
+                owl/onProperty obo/RO_0000057
                 owl/someValuesFrom ex/bio1)
                (owl/Restriction
-                owl/onProperty obo/has_participant
+                owl/onProperty obo/RO_0000057
                 owl/someValuesFrom ex/bio2))))))
 
 ;;; --------------------------------------------------------

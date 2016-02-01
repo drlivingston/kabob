@@ -6,7 +6,7 @@
 
          
          (?/hr1 rdf/type owl/Restriction)
-         (?/hr1 owl/onProperty obo/has_participant)
+         (?/hr1 owl/onProperty obo/RO_0000057)
          (?/hr1 owl/someValuesFrom ?/bioentity)
 
          ;;make the interaction be necessarily part of these 3 restrictions

@@ -8,11 +8,11 @@
   :head ((?/interaction rdfs/subClassOf obo/MI_0000) ;interaction
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/has_participant)
+         (?/r1 owl/onProperty obo/RO_0000057)
          (?/r1 owl/someValuesFrom ?/protein1)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty obo/has_participant)
+         (?/r2 owl/onProperty obo/RO_0000057)
          (?/r2 owl/someValuesFrom ?/protein2)
 
          ;;make the interaction be necessarily part of these 3 restrictions
@@ -110,7 +110,7 @@
   :head (;(?/interaction rdfs/subClassOf obo/MI_0000) ;interaction
          ;(?/complex rdfs/subClassOf obo/GO_0032991)  ;macromolecular complex
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/has_participant)
+         (?/r1 owl/onProperty obo/RO_0000057)
          (?/r1 owl/someValuesFrom ?/protein)
 
          (?/r2 rdf/type owl/Restriction)

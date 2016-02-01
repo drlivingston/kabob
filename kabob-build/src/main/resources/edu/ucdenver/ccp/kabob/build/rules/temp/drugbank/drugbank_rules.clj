@@ -16,11 +16,11 @@
          ;(?/interaction kbio/rsv_has_participant ?/drug)
          
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/has_participant)
+         (?/r1 owl/onProperty obo/RO_0000057)
          (?/r1 owl/someValuesFrom ?/drug)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty obo/has_participant)
+         (?/r2 owl/onProperty obo/RO_0000057)
          (?/r2 owl/someValuesFrom ?/gorgporv)
 
          (?/r3 rdf/type owl/Restriction)
