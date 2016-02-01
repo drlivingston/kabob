@@ -11,3 +11,5 @@
 
 .project
 /.settings/
+
+test-rule-on-modelorgs.sh
