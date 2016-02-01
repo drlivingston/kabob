@@ -6,6 +6,9 @@
        edu.ucdenver.ccp.kr.sparql
        edu.ucdenver.ccp.kr.rule))
 
+;; NOTE: IF THIS CODE IS RESURRECTED:
+;; records obo/BFO_0000051 (has_part) field values
+;; this code uses field values obo/BFO_0000050 part_of records
 
 
 (defn de-ice [ice new-base]
@@ -19,7 +22,7 @@
   [name field new-ns class recordTemplate]
   {:name name
    :query `((_/record kiao/hasTemplate ~recordTemplate)
-            (_/fv ro/part_of _/record)
+            (_/fv obo/BFO_0000050 _/record)
             (_/fv kiao/hasTemplate ~field)
             (_/fv iao/IAO_0000219 ?ice))
    :post-process (fn [bindings]
@@ -50,7 +53,7 @@
   [name field new-ns recordTemplate]
   {:name name
    :query `((_/fv kiao/hasTemplate ~field)
-             (_/fv ro/part_of _/record)
+             (_/fv obo/BFO_0000050 _/record)
              (_/record kiao/hasTemplate ~recordTemplate)
              (_/fv iao/IAO_0000219 ?ice))
    :post-process (fn [bindings]

@@ -61,7 +61,7 @@
          (?/r2 owl/someValuesFrom ?/gene)
 
          (?/r3 rdf/type owl/Restriction)
-         (?/r3 owl/onProperty obo/part_of)
+         (?/r3 owl/onProperty obo/BFO_0000050)
          (?/r3 owl/someValuesFrom ?/uberon)
          
          (?/celltype rdfs/subClassOf ?/r3)
@@ -137,7 +137,7 @@
          (?/r2 owl/someValuesFrom ?/gene)
 
          (?/r3 rdf/type owl/Restriction)
-         (?/r3 owl/onProperty obo/part_of)
+         (?/r3 owl/onProperty obo/BFO_0000050)
          (?/r3 owl/someValuesFrom ?/uberon)
          
          (?/celltype rdfs/subClassOf ?/r3)
@@ -228,7 +228,7 @@
 ;         (?/r2 owl/someValuesFrom ?/gene)
 ;
 ;         (?/r3 rdf/type owl/Restriction)
-;         (?/r3 owl/onProperty obo/part_of)
+;         (?/r3 owl/onProperty obo/BFO_0000050)
 ;         (?/r3 owl/someValuesFrom ?/uberon)
 ;         
 ;         (?/celltype rdfs/subClassOf ?/r3)

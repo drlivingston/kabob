@@ -6,6 +6,11 @@
        edu.ucdenver.ccp.kr.sparql
        edu.ucdenver.ccp.kr.rule))
 
+;; NOTE: IF THIS CODE IS RESURRECTED:
+;; records obo/BFO_0000051 (has_part) field values
+;; this code uses field values obo/BFO_0000050 part_of records
+
+
 
 ;; I can't for the life of me figure out why I can't get this to work as
 ;;   a macro do you don't have the quote all the arguments - ugh
@@ -15,13 +20,13 @@
                      (~fv iao/IAO_0000219 ~value))))
   ([record field value] (let [fv (symbol "_" (str (gensym)))]
                           ;; (list (list fv 'kiao/hasTemplate field)
-                          ;;       (list fv 'ro/part_of record)
+                          ;;       (list fv 'obo/BFO_0000050 record)
                           ;;       (list fv 'iao/IAO_0000219 value))))
                           `((~fv kiao/hasTemplate ~field)
-                            (~fv ro/part_of ~record)
+                            (~fv obo/BFO_0000050 ~record)
                             (~fv iao/IAO_0000219 ~value))))
   ([record fv field value] `((~fv kiao/hasTemplate ~field)
-                             (~fv ro/part_of ~record)
+                             (~fv obo/BFO_0000050 ~record)
                              (~fv iao/IAO_0000219 ~value))))
 
 
@@ -31,8 +36,8 @@
       {:name 'uniprot-to-eg
        :query 
        '((fv1 kiao/hasTemplate iaouniprot/uniprotuniProtAccessionIDDataField1)
-         (fv1 ro/part_of r)
-         (fv2 ro/part_of r)
+         (fv1 obo/BFO_0000050 r)
+         (fv2 obo/BFO_0000050 r)
          (fv2 kiao/hasTemplate iaouniprot/uniprotentrezGeneIDsDataField1) 
          (fv1 iao/IAO_0000219 protICE)
          (protICE iao/IAO_0000219 ?prot)

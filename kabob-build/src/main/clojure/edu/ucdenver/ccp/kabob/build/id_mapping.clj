@@ -6,6 +6,12 @@
        edu.ucdenver.ccp.kr.sparql
        edu.ucdenver.ccp.kr.rule))
 
+;; NOTE: IF THIS CODE IS RESURRECTED:
+;; records obo/BFO_0000051 (has_part) field values
+;; this code uses field values obo/BFO_0000050 part_of records
+
+
+
 ;; TODO - should log a warning if none of the conditions are met, 
 ;; e.g. if cls1 is a gene and cls2 is a protein
 (defn determine-bio-relation [cls1 cls2]
@@ -50,12 +56,12 @@
 (defn id-mapping-post-processing-rule [rule-name record-template field1 field2]
   {:name rule-name
    :query `((_/record kiao/hasTemplate ~record-template)
-            (_/fv1 ro/part_of _/record)
+            (_/fv1 obo/BFO_0000050 _/record)
             (_/fv1 kiao/hasTemplate ~field1)
             (_/fv1 iao/IAO_0000219 _/fv1ice)
             (_/fv1ice iao/IAO_0000219 ?bio1)
             (?bio1 rdfs/subClassOf ?bio1ParentCls)
-            (_/fv2 ro/part_of _/record)
+            (_/fv2 obo/BFO_0000050 _/record)
             (_/fv2 kiao/hasTemplate ~field2)
             (_/fv2 iao/IAO_0000219 _/fv2ice)
             (_/fv2ice iao/IAO_0000219 ?bio2)
@@ -82,15 +88,15 @@
 ;;(defn pro-exact-processing-rule [rule related-supercls relation]
 ;;  (assoc rule :query 
 ;;    '((_/record kiao/hasTemplate ~record-template)
-;;       (_/fv1 ro/part_of _/record)
+;;       (_/fv1 obo/BFO_0000050 _/record)
 ;;       (_/fv1 kiao/hasTemplate ~field1)
 ;;       (_/fv1 iao/IAO_0000219 ?fv1ice)
-;;       (_/fv2 ro/part_of _/record)
+;;       (_/fv2 obo/BFO_0000050 _/record)
 ;;       (_/fv2 kiao/hasTemplate ~field2)
 ;;       (_/fv2 iao/IAO_0000219 _/fv2ice)
 ;;       (_/fv2ice iao/IAO_0000219 ?bio2)
 ;;       (?bio2 rdfs/subClassOf ~related-supercls)
-;;       (_/fv3 ro/part_of _/record)
+;;       (_/fv3 obo/BFO_0000050 _/record)
 ;;       (_/fv3 kiao/hasTemplate 'pr/prmappingTypeDataField1)
 ;;       (_/fv3 iao/IAO_0000219 "exact")))
 ;;  (assoc rule :post-process (fn [bindings]
@@ -105,13 +111,13 @@
 (defn pro-exact-processing-rule [rule-name record-template field1 field2]
   {:name rule-name
    :query `((_/record kiao/hasTemplate ~record-template)
-       (_/f1 ro/part_of _/record)
+       (_/f1 obo/BFO_0000050 _/record)
        (_/f1 kiao/hasTemplate ~field1)
        (_/f1 iao/IAO_0000219 ?f1ice)
-       (_/f2 ro/part_of _/record)
+       (_/f2 obo/BFO_0000050 _/record)
        (_/f2 kiao/hasTemplate ~field2)
        (_/f2 iao/IAO_0000219 ?f2ice)
-       (_/f3 ro/part_of _/record)
+       (_/f3 obo/BFO_0000050 _/record)
        (_/f3 kiao/hasTemplate iaopr/prmappingTypeDataField1)
        (_/f3 iao/IAO_0000219 "exact"))
    :post-process (fn [bindings]
@@ -127,7 +133,7 @@
 (defn filter-refseq-rule [rule]
   (assoc rule 
          :query (concat (:query rule) 
-               '((?fv3 ro/part_of _/record)
+               '((?fv3 obo/BFO_0000050 _/record)
                  (?fv3 kiao/hasTemplate iaoeg/egstatusDataField1)
 									(:union ((?fv3 iao/IAO_0000219 "VALIDATED"))
 									        ((?fv3 iao/IAO_0000219 "REVIEWED")))

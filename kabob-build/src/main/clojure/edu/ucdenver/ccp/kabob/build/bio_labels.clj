@@ -7,6 +7,9 @@
        edu.ucdenver.ccp.kr.sparql
        edu.ucdenver.ccp.kr.rule))
 
+;; NOTE: IF THIS CODE IS RESURRECTED:
+;; records obo/BFO_0000051 (has_part) field values
+;; this code uses field values obo/BFO_0000050 part_of records
 
 
 ;; (defn has-id-property-hierarchy []
@@ -56,13 +59,13 @@
 (defn entrezgene-label-rules []
   {:name "entrezgene-labels"
    :query `((_/record kiao/hasTemplate iaoeg/egEntrezGeneInfoFileDataSchema1)
-             (_/fv ro/part_of _/record)
+             (_/fv obo/BFO_0000050 _/record)
              (_/fv kiao/hasTemplate iaoeg/eggeneIDDataField1)
              (_/fv iao/IAO_0000219 ?ice)
-             (_/fv2 ro/part_of _/record)
+             (_/fv2 obo/BFO_0000050 _/record)
              (_/fv2 kiao/hasTemplate iaoeg/egsymbolDataField1)
              (_/fv2 iao/IAO_0000219 ?symbol)
-             (_/fv3 ro/part_of _/record)
+             (_/fv3 obo/BFO_0000050 _/record)
              (_/fv3 kiao/hasTemplate iaoeg/egtaxonIDDataField1)
              (_/fv3 iao/IAO_0000219 ?taxonice))
    :post-process 
@@ -90,18 +93,18 @@
   {:name "uniprot-labels"
    :query
    `((_/record kiao/hasTemplate iaouniprot/uniprotUniProtDatFileDataSchema1)
-     (_/fv ro/part_of _/record)
+     (_/fv obo/BFO_0000050 _/record)
      (_/fv kiao/hasTemplate iaouniprot/uniprotprimaryUniProtIDDataField1)
      (_/fv iao/IAO_0000219 ?ice)
      ;; not every record has a secondary ID field, 
      ;; so this may need to be queryied for separately.. not sure.
-     ;;(_/fv2 ro/part_of _/record)
+     ;;(_/fv2 obo/BFO_0000050 _/record)
      ;;(_/fv2 kiao/hasTemplate iaouniprot/uniprotsecondaryUniProtIDsDataField1)
      ;;(_/fv2 iao/IAO_0000219 ?secondary)
-     (_/fv3 ro/part_of _/record)
+     (_/fv3 obo/BFO_0000050 _/record)
      (_/fv3 kiao/hasTemplate iaouniprot/uniprotuniprotEntryNameDataField1)
      (_/fv3 iao/IAO_0000219 ?entryname)
-     (_/fv4 ro/part_of _/record)
+     (_/fv4 obo/BFO_0000050 _/record)
      (_/fv4 kiao/hasTemplate iaouniprot/uniprotncbiTaxonomyIDDataField1)
      (_/fv4 iao/IAO_0000219 ?taxonice))
    :post-process 
@@ -128,10 +131,10 @@
 (defn mgigene-label-rules []
   {:name "mgigene-labels"
    :query `((_/record kiao/hasTemplate iaomgi/mgiMRKListFileDataSchema1)
-             (_/fv ro/part_of _/record)
+             (_/fv obo/BFO_0000050 _/record)
              (_/fv kiao/hasTemplate iaomgi/mgimgiAccessionIDDataField1)
              (_/fv iao/IAO_0000219 ?ice)
-             (_/fv2 ro/part_of _/record)
+             (_/fv2 obo/BFO_0000050 _/record)
              (_/fv2 kiao/hasTemplate iaomgi/mgimarkerSymbolDataField1)
              (_/fv2 iao/IAO_0000219 ?symbol))
    :post-process (fn [bindings]
@@ -155,10 +158,10 @@
 (defn hgncgene-label-rules []
   {:name "hgncgene-labels"
    :query `((_/record kiao/hasTemplate iaohgnc/hgncHgncDownloadFileDataSchema1)
-             (_/fv ro/part_of _/record)
+             (_/fv obo/BFO_0000050 _/record)
              (_/fv kiao/hasTemplate iaohgnc/hgnchgncIDDataField1)
              (_/fv iao/IAO_0000219 ?ice)
-             (_/fv2 ro/part_of _/record)
+             (_/fv2 obo/BFO_0000050 _/record)
              (_/fv2 kiao/hasTemplate iaohgnc/hgnchgncGeneSymbolDataField1)
              (_/fv2 iao/IAO_0000219 ?symbol))
    :post-process (fn [bindings]
@@ -182,10 +185,10 @@
   {:name "hprdgene-labels"
    :query 
    `((_/record kiao/hasTemplate iaohprd/hprdHprdIdMappingsTxtFileDataSchema1)
-     (_/fv ro/part_of _/record)
+     (_/fv obo/BFO_0000050 _/record)
      (_/fv kiao/hasTemplate iaohprd/hprdhprdIDDataField1)
      (_/fv iao/IAO_0000219 ?ice)
-     (_/fv2 ro/part_of _/record)
+     (_/fv2 obo/BFO_0000050 _/record)
      (_/fv2 kiao/hasTemplate iaohprd/hprdgeneSymbolDataField1)
      (_/fv2 iao/IAO_0000219 ?symbol))
    :post-process 
