@@ -7,13 +7,13 @@
 
 `{:name "drugbank-gene-drug-relation"
   ;; this need to be hashed and have proper classes
-  :head ((?/gorgporv kiao/STANDIN_gene_drug ?/drug);)
-         (?/gorgporv kiao/STANDIN_drugbank_gene_drug ?/drug);)
+  :head (;(?/gorgporv kiao/STANDIN_gene_drug ?/drug);)
+         ;(?/gorgporv kiao/STANDIN_drugbank_gene_drug ?/drug);)
          (?/interaction rdfs/subClassOf obo/MI_0000) ;interaction
 
          ;;these two triples are redundant rdf macros
-         (?/interaction kbio/rsv_has_participant ?/gorgporv)
-         (?/interaction kbio/rsv_has_participant ?/drug)
+         ;(?/interaction kbio/rsv_has_participant ?/gorgporv)
+         ;(?/interaction kbio/rsv_has_participant ?/drug)
          
          (?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/has_participant)

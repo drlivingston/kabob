@@ -7,12 +7,13 @@
 
 `{:name "pharmgkb-gene-drug-relation"
   ;; this need to be hashed and have proper classes
-  :head ((?/gene kiao/STANDIN_gene_drug ?/drug);)
+  :head (
+          ;(?/gene kiao/STANDIN_gene_drug ?/drug);)
          (?/interaction rdfs/subClassOf obo/MI_0000) ;interaction
 
          ;;these two triples are redundant rdf macros
-         (?/interaction kbio/rsv_has_participant ?/gorgporv)
-         (?/interaction kbio/rsv_has_participant ?/drug)
+         ;(?/interaction kbio/rsv_has_participant ?/gorgporv)
+         ;(?/interaction kbio/rsv_has_participant ?/drug)
          
          (?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/has_participant)
@@ -93,13 +94,15 @@
 
 `{:name "pharmgkb-drug-gene-relation"
   ;; this need to be hashed and have proper classes
-  :head ((?/gene kiao/STANDIN_gene_drug ?/drug);)
+  :head (
+          
+          ;(?/gene kiao/STANDIN_gene_drug ?/drug);)
          ;;(?/geneid kiao/STANDIN_gene_drug ?/drugid))
          (?/interaction rdfs/subClassOf obo/MI_0000) ;interaction
 
          ;;these two triples are redundant rdf macros
-         (?/interaction kbio/rsv_has_participant ?/gorgporv)
-         (?/interaction kbio/rsv_has_participant ?/drug)
+         ;(?/interaction kbio/rsv_has_participant ?/gorgporv)
+         ;(?/interaction kbio/rsv_has_participant ?/drug)
          
          (?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/has_participant)

@@ -52,7 +52,8 @@
 
 
 `{:name "goa-cc"
-  :head ((?/bioentity kiao/STANDIN_bio_go ?/go)
+  :head (
+          ;;(?/bioentity kiao/STANDIN_bio_go ?/go)
 
          (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
 
