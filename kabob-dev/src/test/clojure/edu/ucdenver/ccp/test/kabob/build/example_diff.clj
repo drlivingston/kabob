@@ -90,9 +90,9 @@
     (binding [*select-type* select-distinct] 
       (query-template kb '?/template
          '((_/fv kiao/hasTemplate ?/template)
-           (_/r obo/has_part _/fv)
+           (_/r obo/BFO_0000051 _/fv)
            (iaogad/gadGeneticAssociationDbAllTxtFileDataDataSet20110209
-            obo/has_part _/r)))))))
+            obo/BFO_0000051 _/r)))))))
 
 
 (defn gad-diff-triples [old-kb new-kb]
@@ -128,9 +128,9 @@
     (binding [*select-type* select-distinct] 
       (query-template kb '?/template
          '((_/fv kiao/hasTemplate ?/template)
-           (_/r obo/has_part _/fv)
+           (_/r obo/BFO_0000051 _/fv)
            (iaoeg/egEntrezGeneInfoFileDataDataSet20110209
-            obo/has_part _/r)))))))
+            obo/BFO_0000051 _/r)))))))
 
 
 (defn eg-fields [old-kb new-kb]
@@ -190,7 +190,7 @@
   (dorun
    (map (fn [f]
           (add! kb `(iaoeg/egEntrezGeneInfoFileDataSchema1
-                     obo/has_part
+                     obo/BFO_0000051
                      ~f)))
         '(iaoeg/EntrezGeneInfoFileData_symbolDataField1
           iaoeg/EntrezGeneInfoFileData_geneIDDataField1

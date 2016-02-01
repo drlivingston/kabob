@@ -24,7 +24,7 @@
   (;; just look this up once we'll need it later
    (_/Ftypename kiao/hasTemplate iaoirefweb/IRefWebInteractorType_interactorTypeNameDataField1)
    (_/Ftypename obo/IAO_0000219 "protein")
-   (_/Rtype obo/has_part _/Ftypename)
+   (_/Rtype obo/BFO_0000051 _/Ftypename)
    (_/Rtype kiao/hasTemplate iaoirefweb/IRefWebInteractorTypeSchema1)
 
 
@@ -32,31 +32,31 @@
    (_/fvnum kiao/hasTemplate iaoirefweb/IRefWebInteraction_numParticipantsDataField1)
    ;;(_/fvnum obo/IAO_0000219 ["2" xsd/integer])
    (_/fvnum obo/IAO_0000219 2)
-   (_/interactionrecord obo/has_part _/fvnum)
+   (_/interactionrecord obo/BFO_0000051 _/fvnum)
 
    ;; get top record
-   (_/psimi obo/has_part _/interactionrecord)
+   (_/psimi obo/BFO_0000051 _/interactionrecord)
 
    ;;get two distinct interactors
-   (_/psimi obo/has_part ?/Rinteractor1)
+   (_/psimi obo/BFO_0000051 ?/Rinteractor1)
    (?/Rinteractor1 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
-   (_/psimi obo/has_part ?/Rinteractor2)
+   (_/psimi obo/BFO_0000051 ?/Rinteractor2)
    (?/Rinteractor2 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
    (!= ?/Rinteractor1 ?/Rinteractor2)
 
    ;;all two part interactions should be protein and protein but verify
    ;; reuse type from initial lookup
-   (?/Rinteractor1 obo/has_part _/Rtype)
-   (?/Rinteractor2 obo/has_part _/Rtype)
+   (?/Rinteractor1 obo/BFO_0000051 _/Rtype)
+   (?/Rinteractor2 obo/BFO_0000051 _/Rtype)
 
    ;;get the first interactor ID and then BIO entity
-   (?/Rinteractor1 obo/has_part _/FID1)
+   (?/Rinteractor1 obo/BFO_0000051 _/FID1)
    (_/FID1 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/FID1 obo/IAO_0000219 _/ID1)
    (_/ID1 obo/IAO_0000219 ?/protein1)
 
    ;;get the second interactor ID and then BIO entity
-   (?/Rinteractor2 obo/has_part _/FID2)
+   (?/Rinteractor2 obo/BFO_0000051 _/FID2)
    (_/FID2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/FID2 obo/IAO_0000219 _/ID2)
    (_/ID2 obo/IAO_0000219 ?/protein2)
@@ -86,14 +86,14 @@
   :body
   ((_/Ftypename kiao/hasTemplate iaoirefweb/IRefWebInteractorType_interactorTypeNameDataField1)
    (_/Ftypename obo/IAO_0000219 "protein complex")
-   (_/Rtype obo/has_part _/Ftypename)
+   (_/Rtype obo/BFO_0000051 _/Ftypename)
    (_/Rtype kiao/hasTemplate iaoirefweb/IRefWebInteractorTypeSchema1)
 
    ;;get all the interactor records that are protein complex stand-ins
-   (?/Rinteractor obo/has_part _/Rtype)
+   (?/Rinteractor obo/BFO_0000051 _/Rtype)
 
    ;;get the complex ID
-   (?/Rinteractor obo/has_part _/FID1)
+   (?/Rinteractor obo/BFO_0000051 _/FID1)
    (_/FID1 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/FID1 obo/IAO_0000219 ?/complexID))
 
@@ -114,7 +114,7 @@
          (?/r1 owl/someValuesFrom ?/protein)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty obo/has_part)
+         (?/r2 owl/onProperty obo/BFO_0000051)
          (?/r2 owl/someValuesFrom ?/protein)
 
          (?/interaction rdfs/subClassOf ?/r1)
@@ -125,30 +125,30 @@
   (;; just look this up once we'll need it later
    (_/FtypenameP kiao/hasTemplate iaoirefweb/IRefWebInteractorType_interactorTypeNameDataField1)
    (_/FtypenameP obo/IAO_0000219 "protein")
-   (_/RtypeP obo/has_part _/FtypenameP)
+   (_/RtypeP obo/BFO_0000051 _/FtypenameP)
    (_/RtypeP kiao/hasTemplate iaoirefweb/IRefWebInteractorTypeSchema1)
 
    ;;get the protein complex type
    (_/FtypenamePC kiao/hasTemplate iaoirefweb/IRefWebInteractorType_interactorTypeNameDataField1)
    (_/FtypenamePC obo/IAO_0000219 "protein complex")
-   (_/RtypePC obo/has_part _/FtypenamePC)
+   (_/RtypePC obo/BFO_0000051 _/FtypenamePC)
    (_/RtypePC kiao/hasTemplate iaoirefweb/IRefWebInteractorTypeSchema1)
 
    ;;get all the protein complex interaction records
-   (?/RinteractorPC obo/has_part _/RtypePC)
-   (_/psimi obo/has_part ?/RinteractorPC)
+   (?/RinteractorPC obo/BFO_0000051 _/RtypePC)
+   (_/psimi obo/BFO_0000051 ?/RinteractorPC)
 
    ;;get the one protein mentioned in this record
-   (_/psimi obo/has_part ?/RinteractorP)
-   (?/RinteractorP obo/has_part _/RtypeP)
+   (_/psimi obo/BFO_0000051 ?/RinteractorP)
+   (?/RinteractorP obo/BFO_0000051 _/RtypeP)
 
    ;;get the first interactor ID and then BIO entity
-   (?/RinteractorPC obo/has_part _/FID1)
+   (?/RinteractorPC obo/BFO_0000051 _/FID1)
    (_/FID1 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/FID1 obo/IAO_0000219 ?/complexID)
 
    ;;get the second interactor ID and then BIO entity
-   (?/RinteractorP obo/has_part _/FID2)
+   (?/RinteractorP obo/BFO_0000051 _/FID2)
    (_/FID2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/FID2 obo/IAO_0000219 _/ID2)
    (_/ID2 obo/IAO_0000219 ?/protein))

@@ -15,14 +15,14 @@
   :body
   ((?/fv0 kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
    (?/fv0 obo/IAO_0000219  ?/dbice)
-   (?/record obo/has_part  ?/fv0)
+   (?/record obo/BFO_0000051  ?/fv0)
 
-   (?/record obo/has_part  ?/externalfv)
+   (?/record obo/BFO_0000051  ?/externalfv)
    (?/externalfv kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_externalIdentifiersDataField1)
    (?/externalfv obo/IAO_0000219  ?/otherice)
 
    ;;check to see if that fv is in another record
-   (:optional ((?/record2 obo/has_part  ?/externalfv)
+   (:optional ((?/record2 obo/BFO_0000051  ?/externalfv)
                (:not (= ?/record2 ?/record))))
    (:not (:bound ?/record2))
    )

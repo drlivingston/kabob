@@ -6,8 +6,8 @@
         (_/idfv obo/IAO_0000219 ?/irefice)
         (?/irefice kiao/denotesSubClassOf obo/CHEBI_36080) ;protein)
 
-        (_/interactorrec obo/has_part _/idfv)
-        (_/interactorrec obo/has_part _/otheridfv)
+        (_/interactorrec obo/BFO_0000051 _/idfv)
+        (_/interactorrec obo/BFO_0000051 _/otheridfv)
 
         (_/otheridfv kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
         (_/otheridfv obo/IAO_0000219 ?/otherice)

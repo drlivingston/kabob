@@ -3,10 +3,10 @@
  :head ((?/ice kiao/denotesSubClassOf obo/CHEBI_36080)) ;protein
  :body ((_/typefv kiao/hasTemplate iaoirefweb/IRefWebInteractorType_interactorTypeNameDataField1)
         (_/typefv obo/IAO_0000219 "protein")
-        (_/typerec obo/has_part _/typefv)
-        (_/interactorrec obo/has_part _/typerec)
+        (_/typerec obo/BFO_0000051 _/typefv)
+        (_/interactorrec obo/BFO_0000051 _/typerec)
 
-        (_/interactorrec obo/has_part _/idfv)
+        (_/interactorrec obo/BFO_0000051 _/idfv)
         (_/idfv kiao/hasTemplate iaoirefweb/IRefWebInteractor_irogidDataField1)
         (_/idfv obo/IAO_0000219 ?/ice))
 

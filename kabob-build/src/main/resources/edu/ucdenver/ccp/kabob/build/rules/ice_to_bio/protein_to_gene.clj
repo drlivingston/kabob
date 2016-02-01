@@ -18,8 +18,8 @@
          (?/fv0 kiao/hasTemplate  iaouniprot/UniProtIDMappingFileData_uniProtAccessionIDDataField1)
          (?/fv0 obo/IAO_0000219 _/proteinice)
 
-         (?/record1 obo/has_part ?/fv0)
-         (?/record1 obo/has_part ?/fv1)
+         (?/record1 obo/BFO_0000051 ?/fv0)
+         (?/record1 obo/BFO_0000051 ?/fv1)
          (?/fv1 kiao/hasTemplate iaouniprot/UniProtIDMappingFileData_entrezGeneIDsDataField1)
          (?/fv1 obo/IAO_0000219 _/geneice)
 
@@ -50,8 +50,8 @@
          (?/fv0 kiao/hasTemplate  iaorgd/RgdGeneFileRecord_uniprotIdsDataField1)
          (?/fv0 obo/IAO_0000219 _/proteinice)
 
-         (?/record1 obo/has_part ?/fv0)
-         (?/record1 obo/has_part ?/fv1)
+         (?/record1 obo/BFO_0000051 ?/fv0)
+         (?/record1 obo/BFO_0000051 ?/fv1)
          (?/fv1 kiao/hasTemplate iaorgd/RgdGeneFileRecord_geneIdDataField1)
          (?/fv1 obo/IAO_0000219 _/geneice)
 

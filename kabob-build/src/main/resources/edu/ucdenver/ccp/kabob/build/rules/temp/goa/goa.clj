@@ -18,8 +18,8 @@
          (?/fv0 obo/IAO_0000219 ?/goid)
          (?/fv0 kiao/hasTemplate  iaogoa/GpAssociationGoaUniprotFileData_goIDDataField1)
 
-         (?/record obo/has_part ?/fv0)         
-         (?/record obo/has_part ?/fv1)
+         (?/record obo/BFO_0000051 ?/fv0)         
+         (?/record obo/BFO_0000051 ?/fv1)
 
          (?/fv1 kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_databaseObjectIDDataField1)
          (?/fv1 obo/IAO_0000219 ?/gp)
@@ -28,7 +28,7 @@
          
          ;; ;;filter out the negations
           (:optional
-           ((?/record obo/has_part ?/qualfv)
+           ((?/record obo/BFO_0000051 ?/qualfv)
             (?/qualfv kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_qualifierDataField1)
             (?/qualfv obo/IAO_0000219 ?/qualifier)))
           (:or (:not (:bound ?/qualifier))
@@ -74,8 +74,8 @@
          (?/fv0 obo/IAO_0000219 ?/goid)
          (?/fv0 kiao/hasTemplate  iaogoa/GpAssociationGoaUniprotFileData_goIDDataField1)
 
-         (?/record obo/has_part ?/fv0)         
-         (?/record obo/has_part ?/fv1)
+         (?/record obo/BFO_0000051 ?/fv0)         
+         (?/record obo/BFO_0000051 ?/fv1)
 
          (?/fv1 kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_databaseObjectIDDataField1)
          (?/fv1 obo/IAO_0000219 ?/gp)
@@ -84,7 +84,7 @@
          
          ;; ;;filter out the negations
           (:optional
-           ((?/record obo/has_part ?/qualfv)
+           ((?/record obo/BFO_0000051 ?/qualfv)
             (?/qualfv kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_qualifierDataField1)
             (?/qualfv obo/IAO_0000219 ?/qualifier)))
           (:or (:not (:bound ?/qualifier))
@@ -136,12 +136,12 @@
 
          
 ;;          (?/fv0 kiao/hasTemplate  iaogoa/GpAssociationGoaUniprotFileData_goIDDataField1)
-;;          (?/record obo/has_part ?/fv0)
+;;          (?/record obo/BFO_0000051 ?/fv0)
 ;;          (?/fv0 obo/IAO_0000219 ?/goid)
 ;;          (?/goid obo/IAO_0000219 ?/go)
 ;;          (?/go [rdfs/subClassOf *] obo/GO_0008150)
 
-;;          (?/record obo/has_part ?/fv1)
+;;          (?/record obo/BFO_0000051 ?/fv1)
 ;;          (?/fv1 kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_databaseObjectIDDataField1)
 ;;          (?/fv1 obo/IAO_0000219 ?/gp)
 ;;          (?/gp obo/IAO_0000219 ?/bioentity)

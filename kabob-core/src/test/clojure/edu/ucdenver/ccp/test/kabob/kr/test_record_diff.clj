@@ -72,7 +72,7 @@
 ;;      (concat (if key-field?
 ;;                `((~r-type kiao/hasKeyField ~field))
 ;;                '())
-;;              `((~schema obo/has_part ~field)))]))
+;;              `((~schema obo/BFO_0000051 ~field)))]))
 
 ;; change the schema should have the keyfields not the record
 
@@ -83,7 +83,7 @@
      (concat (if key-field?
                `((~schema kiao/hasKeyField ~field))
                '())
-             `((~schema obo/has_part ~field)))]))
+             `((~schema obo/BFO_0000051 ~field)))]))
 
 (defn create-record-type [num-key-fields num-other-fields]
   (let [r-type (new-sym)
@@ -122,7 +122,7 @@
                (~r kiao/hasTemplate ~schema))
              (mapcat (fn [f]
                        (let [[fv new-triples] (create-field-value f)]
-                         (cons `(~r obo/has_part ~fv)
+                         (cons `(~r obo/BFO_0000051 ~fv)
                                new-triples)))
                      (concat key-fields other-fields)))]))
 
@@ -133,7 +133,7 @@
      (concat `((~r rdf/type ~r-type)
                (~r kiao/hasTemplate ~schema))
              (map (fn [fv]
-                    `(~r obo/has_part ~fv))
+                    `(~r obo/BFO_0000051 ~fv))
                   fvs))]))
   
 ;;; pairs of records with overlap
@@ -253,7 +253,7 @@
               (~rs kiao/hasTemplate ~schema)
               (~rs kiao/hasCreationDate ~date))
             (map (fn [rec]
-                   `(~rs obo/has_part ~rec))
+                   `(~rs obo/BFO_0000051 ~rec))
                  records))))
 
 ;;; --------------------------------------------------------
@@ -405,7 +405,7 @@
                                     '?/field
                                     '((_/rs rdf/type kiao/DataSet)
                                       (_/rs kiao/hasTemplate _/schema)
-                                      (_/schema obo/has_part ?/field)))))))
+                                      (_/schema obo/BFO_0000051 ?/field)))))))
 
                    
       (pprint (count (query-rdf output-kb nil nil nil)))
@@ -468,7 +468,7 @@
                                     '?/field
                                     '((_/rs rdf/type kiao/DataSet)
                                       (_/rs kiao/hasTemplate _/schema)
-                                      (_/schema obo/has_part ?/field)))))))
+                                      (_/schema obo/BFO_0000051 ?/field)))))))
 
 
       (pprint (count (query-rdf output-kb nil nil nil)))

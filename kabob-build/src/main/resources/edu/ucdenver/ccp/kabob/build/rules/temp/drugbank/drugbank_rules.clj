@@ -46,26 +46,26 @@
 
 ;;iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1
 ;;iaodrugbank/DrugBankPartnerRecord_externalIdentifiersDataField1
-  ;;(?/partnerRec obo/has_part ?/entityFV)
+  ;;(?/partnerRec obo/BFO_0000051 ?/entityFV)
   
   :body
   (
    ;; (_/fv0 kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
    ;; (_/fv0 obo/IAO_0000219 _/drugid)
-   ;; (_/record obo/has_part _/fv0)
+   ;; (_/record obo/BFO_0000051 _/fv0)
 
-   ;; (_/record obo/has_part _/subrecord1)
-   ;; (_/subrecord1 obo/has_part _/fv1)
+   ;; (_/record obo/BFO_0000051 _/subrecord1)
+   ;; (_/subrecord1 obo/BFO_0000051 _/fv1)
    ;; (_/fv1 kiao/hasTemplate iaodrugbank/DrugBankPartnerRecord_externalIdentifiersDataField1)
    ;; (_/fv1 obo/IAO_0000219 _/externalid)
    
    (_/fv1 kiao/hasTemplate iaodrugbank/DrugBankPartnerRecord_externalIdentifiersDataField1)
    (_/fv1 obo/IAO_0000219 _/externalid)
-   (_/partnerRecord1 obo/has_part _/fv1)
-   (_/targetRecord1 obo/has_part _/partnerRecord1)
-   (_/record obo/has_part _/targetRecord1)
+   (_/partnerRecord1 obo/BFO_0000051 _/fv1)
+   (_/targetRecord1 obo/BFO_0000051 _/partnerRecord1)
+   (_/record obo/BFO_0000051 _/targetRecord1)
 
-   (_/record obo/has_part _/fv0)
+   (_/record obo/BFO_0000051 _/fv0)
    (_/fv0 kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
    (_/fv0 obo/IAO_0000219 _/drugid)
 

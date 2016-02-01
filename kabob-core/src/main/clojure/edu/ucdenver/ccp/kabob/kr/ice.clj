@@ -8,7 +8,7 @@
   
 (defn rftv-fn [record field-value template value]
   `(;;(~field-value obo/part_of ~record)
-    (~record obo/has_part ~field-value)
+    (~record obo/BFO_0000051 ~field-value)
     ~@(ftv-fn field-value template value)))
     ;; (~field-value kiao/hasTemplate ~template)
     ;; (~field-value iao/IAO_0000219 ~value)))

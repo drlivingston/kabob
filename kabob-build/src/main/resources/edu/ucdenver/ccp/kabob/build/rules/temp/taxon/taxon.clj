@@ -35,12 +35,12 @@
   :body 
   ((_/fv0 kiao/hasTemplate iaouniprot/UniProtFileRecord_primaryAccessionDataField1)
    (_/fv0 obo/IAO_0000219 _/uniprotIce)
-   (_/record obo/has_part _/fv0)
+   (_/record obo/BFO_0000051 _/fv0)
 
-   (_/record obo/has_part _/taxrecord)
-   (_/taxrecord obo/has_part _/dbrecord)
+   (_/record obo/BFO_0000051 _/taxrecord)
+   (_/taxrecord obo/BFO_0000051 _/dbrecord)
 
-   (_/dbrecord obo/has_part _/fv1)
+   (_/dbrecord obo/BFO_0000051 _/fv1)
    (_/fv1 kiao/hasTemplate iaouniprot/DbReference_idDataField1)
    (_/fv1 obo/IAO_0000219 _/taxonIce)
 
@@ -63,12 +63,12 @@
   :body 
   ((_/fv0 kiao/hasTemplate iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
    (_/fv0 obo/IAO_0000219 _/uniprotIce)
-   (_/record obo/has_part _/fv0)
+   (_/record obo/BFO_0000051 _/fv0)
 
-   (_/record obo/has_part _/taxrecord)
-   (_/taxrecord obo/has_part _/dbrecord)
+   (_/record obo/BFO_0000051 _/taxrecord)
+   (_/taxrecord obo/BFO_0000051 _/dbrecord)
 
-   (_/dbrecord obo/has_part _/fv1)
+   (_/dbrecord obo/BFO_0000051 _/fv1)
    (_/fv1 kiao/hasTemplate iaouniprot/DbReference_idDataField1)
    (_/fv1 obo/IAO_0000219 _/taxonIce)
 

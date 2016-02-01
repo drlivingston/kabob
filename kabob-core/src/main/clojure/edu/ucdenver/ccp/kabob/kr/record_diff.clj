@@ -87,7 +87,7 @@
 
 ;; (defn record-fields-and-values [kb record]
 ;;   (query-template kb '(?/template ?/value)
-;;                   `((~record obo/has_part _/fv)
+;;                   `((~record obo/BFO_0000051 _/fv)
 ;;                     (_/fv kiao/hasTemplate ?/template)
 ;;                     (_/fv obo/IAO_0000219 ?/value))))
 
@@ -102,11 +102,11 @@
 
 (defn record-fv [kb record]
   (query-template kb '?/fv
-                  `((~record obo/has_part ?/fv))))
+                  `((~record obo/BFO_0000051 ?/fv))))
 
 (defn record-fv-and-templates [kb record]
   (query-template kb '(?/fv ?/template)
-                  `((~record obo/has_part ?/fv)
+                  `((~record obo/BFO_0000051 ?/fv)
                     (?/fv kiao/hasTemplate ?/template))))
 
 (defn record-set-schema [kb rs]
@@ -145,13 +145,13 @@
 ;;TODO WARNING: this will over clone fvs every time the missing one appears
 (defn clone-record [source-kb target-kb fv-cache rec]
   ;; (println "***foo: "
-  ;;           (query-template source-kb '?/fv `((~rec obo/has_part ?/fv))))
+  ;;           (query-template source-kb '?/fv `((~rec obo/BFO_0000051 ?/fv))))
 ;;  (concat
   (binding [*use-inference* false]
    (query-rdf source-kb rec nil nil))
    ;; (mapcat (fn [fv]
    ;;           (clone-fv-if-necessary source-kb target-kb fv-cache fv))
-   ;;         (query-template source-kb '?/fv `((~rec obo/has_part ?/fv))))))
+   ;;         (query-template source-kb '?/fv `((~rec obo/BFO_0000051 ?/fv))))))
 
 )
 
@@ -186,7 +186,7 @@
 ;; ;;this would be better as returning a function of record
 ;; (defn record-signature-f-and-v [kb sig-fields record]
 ;;   (query-template kb '(?/template ?/value)
-;;                   `((~record obo/has_part _/fv)
+;;                   `((~record obo/BFO_0000051 _/fv)
 ;;                     (_/fv kiao/hasTemplate ?/template)
 ;;                     (_/fv obo/IAO_0000219 ?/value)
 ;;                     (:or
@@ -222,7 +222,7 @@
     (if (empty? keys)
       nil
       (if (every? keys (query-template kb '?/f
-                                       `((~schema obo/has_part ?/f))))
+                                       `((~schema obo/BFO_0000051 ?/f))))
         nil
         keys))))
 
@@ -239,10 +239,10 @@
 (defn record-with-key-query [key & [record-set]]
   (concat 
    (if record-set
-     `((~record-set obo/has_part ?/record))
+     `((~record-set obo/BFO_0000051 ?/record))
      '())
    (map (fn [fv]
-          `(?/record obo/has_part ~fv))
+          `(?/record obo/BFO_0000051 ~fv))
         key)))
 
 (defn records-with-key [kb key & [record-set]]
@@ -255,7 +255,7 @@
 
 (defn records-and-fv-with-key [kb key & [record-set]]
   (let [query-pat (concat (record-with-key-query key record-set)
-                          '((?/record obo/has_part ?/fv)))]
+                          '((?/record obo/BFO_0000051 ?/fv)))]
     (query-template kb '(?/record ?/fv) query-pat)))
 
 
@@ -308,7 +308,7 @@
                           record key-field-set fv-cache]
   ;;(dorun (map pprint (list rs-diff old-rs record key-field-set)))
   ;;first see if the identical record existed before
-  (if (ask-rdf old-kb old-rs 'obo/has_part record)
+  (if (ask-rdf old-kb old-rs 'obo/BFO_0000051 record)
     nil ;do nothing ;;if this is more than one we should complain loudly?
     ;;otherwise check for a record with matching key fields
     (if (not key-field-set) ;; there are no keys drop the record
@@ -342,7 +342,7 @@
                           record key-field-set fv-cache]
   ;;(dorun (map pprint (list rs-diff old-rs record key-field-set)))
   ;;first see if the identical record existed before
-  (if (ask-rdf new-kb new-rs 'obo/has_part record)
+  (if (ask-rdf new-kb new-rs 'obo/BFO_0000051 record)
     nil ;do nothing ;;if this is more than one we should complain loudly?
     ;;otherwise check for a record with matching key fields
     (if (and key-field-set
@@ -384,7 +384,7 @@
                             (when (not (empty? new-triples))
                               (blocking-write-triples write-agent
                                                       new-triples))))))
-                     `((~new-rs obo/has_part ?/record))))
+                     `((~new-rs obo/BFO_0000051 ?/record))))
       (finally (close new-kb-conn)))))
 
 (defn old-kb-record-diff [old-kb
@@ -414,7 +414,7 @@
                             (when (not (empty? new-triples))
                               (blocking-write-triples write-agent
                                                       new-triples))))))
-                     `((~old-rs obo/has_part ?/record))))
+                     `((~old-rs obo/BFO_0000051 ?/record))))
       (finally (close old-kb-conn)))))
 
 

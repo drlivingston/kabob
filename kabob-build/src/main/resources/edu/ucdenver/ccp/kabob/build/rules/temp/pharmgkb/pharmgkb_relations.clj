@@ -55,17 +55,17 @@
   :body
   ((_/fv0 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1TypeDataField1)
    (_/fv0 obo/IAO_0000219 "Gene")
-   (_/record obo/has_part _/fv0)
+   (_/record obo/BFO_0000051 _/fv0)
 
-   (_/record obo/has_part _/fv1)
+   (_/record obo/BFO_0000051 _/fv1)
    (_/fv1 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2TypeDataField1)
    (_/fv1 obo/IAO_0000219 "Drug")
 
-   (_/record obo/has_part _/fv2)
+   (_/record obo/BFO_0000051 _/fv2)
    (_/fv2 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1IdDataField1)
    (_/fv2 obo/IAO_0000219 _/geneid)
 
-   (_/record obo/has_part _/fv3)
+   (_/record obo/BFO_0000051 _/fv3)
    (_/fv3 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2IdDataField1)
    (_/fv3 obo/IAO_0000219 _/drugid)
 
@@ -144,17 +144,17 @@
   :body
   ((_/fv0 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2TypeDataField1)
    (_/fv0 obo/IAO_0000219 "Gene")
-   (_/record obo/has_part _/fv0)
+   (_/record obo/BFO_0000051 _/fv0)
 
-   (_/record obo/has_part _/fv1)
+   (_/record obo/BFO_0000051 _/fv1)
    (_/fv1 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1TypeDataField1)
    (_/fv1 obo/IAO_0000219 "Drug")
 
-   (_/record obo/has_part _/fv2)
+   (_/record obo/BFO_0000051 _/fv2)
    (_/fv2 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2IdDataField1)
    (_/fv2 obo/IAO_0000219 _/geneid)
 
-   (_/record obo/has_part _/fv3)
+   (_/record obo/BFO_0000051 _/fv3)
    (_/fv3 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1IdDataField1)
    (_/fv3 obo/IAO_0000219 _/drugid)
 
@@ -218,17 +218,17 @@
 ;;   :body
 ;;   ((_/fv0 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1TypeDataField1)
 ;;    (_/fv0 obo/IAO_0000219 "Gene")
-;;    (_/record obo/has_part _/fv0)
+;;    (_/record obo/BFO_0000051 _/fv0)
 
-;;    (_/record obo/has_part _/fv1)
+;;    (_/record obo/BFO_0000051 _/fv1)
 ;;    (_/fv1 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2TypeDataField1)
 ;;    (_/fv1 obo/IAO_0000219 "Disease")
 
-;;    (_/record obo/has_part _/fv2)
+;;    (_/record obo/BFO_0000051 _/fv2)
 ;;    (_/fv2 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1IdDataField1)
 ;;    (_/fv2 obo/IAO_0000219 _/geneid)
 
-;;    (_/record obo/has_part _/fv3)
+;;    (_/record obo/BFO_0000051 _/fv3)
 ;;    (_/fv3 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2IdDataField1)
 ;;    (_/fv3 obo/IAO_0000219 _/diseaseid)
 

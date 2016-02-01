@@ -124,7 +124,7 @@
 ;;                           (when (not (empty? new-triples))
 ;;                             (blocking-write-triples write-agent
 ;;                                                     new-triples))))))
-;;                    `((~new-rs obo/has_part ?/record))))
+;;                    `((~new-rs obo/BFO_0000051 ?/record))))
 ;;     (finally (close new-kb-conn)))))
 
 ;;; --------------------------------------------------------

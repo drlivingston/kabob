@@ -55,8 +55,8 @@
 ;;        (?/idfv obo/IAO_0000219 ?/id)
 ;;        (?/idfv kiao/hasTemplate
 ;;                iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
-;;        (?/rec obo/has_part ?/idfv)
-;;        (?/rec obo/has_part ?/namefv)
+;;        (?/rec obo/BFO_0000051 ?/idfv)
+;;        (?/rec obo/BFO_0000051 ?/namefv)
 ;;        (?/namefv kiao/hasTemplate
 ;;                  iaodrugbank/DrugBankDrugRecord_drugNameDataField1)
 ;;        (?/namefv obo/IAO_0000219 ?/drugname)))))
@@ -77,8 +77,8 @@
        (?/idfv kiao/hasTemplate
                iaouniprot/UniProtFileRecord_primaryAccessionDataField1)
                ;;iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
-       (?/rec obo/has_part ?/idfv)
-       (?/rec obo/has_part ?/namefv)
+       (?/rec obo/BFO_0000051 ?/idfv)
+       (?/rec obo/BFO_0000051 ?/namefv)
        (?/namefv kiao/hasTemplate
                  iaouniprot/UniProtFileRecord_nameDataField1)
                  ;;iaouniprot/SparseUniProtFileRecord_nameDataField1)
@@ -96,8 +96,8 @@
                iaouniprot/UniProtFileRecord_accessionDataField1)
                ;;iaouniprot/UniProtFileRecord_primaryAccessionDataField1)
                ;;iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
-       (?/rec obo/has_part ?/idfv)
-       (?/rec obo/has_part ?/namefv)
+       (?/rec obo/BFO_0000051 ?/idfv)
+       (?/rec obo/BFO_0000051 ?/namefv)
        (?/namefv kiao/hasTemplate
                  iaouniprot/UniProtFileRecord_nameDataField1)
                  ;;iaouniprot/SparseUniProtFileRecord_nameDataField1)
@@ -112,8 +112,8 @@
        (?/idfv obo/IAO_0000219 ?/id)
        (?/idfv kiao/hasTemplate
                iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
-       (?/rec obo/has_part ?/idfv)
-       (?/rec obo/has_part ?/namefv)
+       (?/rec obo/BFO_0000051 ?/idfv)
+       (?/rec obo/BFO_0000051 ?/namefv)
        (?/namefv kiao/hasTemplate
                  iaouniprot/SparseUniProtFileRecord_nameDataField1)
        (?/namefv obo/IAO_0000219 ?/drugname)))))
@@ -137,8 +137,8 @@
        (?/idfv obo/IAO_0000219 ?/id)
        (?/idfv kiao/hasTemplate
                iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
-       (?/rec obo/has_part ?/idfv)
-       (?/rec obo/has_part ?/namefv)
+       (?/rec obo/BFO_0000051 ?/idfv)
+       (?/rec obo/BFO_0000051 ?/namefv)
        (?/namefv kiao/hasTemplate
                  iaodrugbank/DrugBankDrugRecord_drugNameDataField1)
        (?/namefv obo/IAO_0000219 ?/drugname)))))

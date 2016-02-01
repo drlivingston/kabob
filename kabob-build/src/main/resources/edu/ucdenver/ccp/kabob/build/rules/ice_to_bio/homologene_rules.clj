@@ -19,13 +19,13 @@
          ;;we don't actually care what the group is the FV is unique and shared
          ;;(?/fv0 obo/IAO_0000219 ?/group)
 
-         (?/record1 obo/has_part ?/fv0)
-         (?/record1 obo/has_part ?/fv1)
+         (?/record1 obo/BFO_0000051 ?/fv0)
+         (?/record1 obo/BFO_0000051 ?/fv1)
          (?/fv1 kiao/hasTemplate iaohomologene/HomoloGeneDataFileData_entrezGeneIDDataField1)
          (?/fv1 obo/IAO_0000219 ?/gene1ice)
 
-         (?/record2 obo/has_part ?/fv0)
-         (?/record2 obo/has_part ?/fv2)
+         (?/record2 obo/BFO_0000051 ?/fv0)
+         (?/record2 obo/BFO_0000051 ?/fv2)
          (?/fv2 kiao/hasTemplate iaohomologene/HomoloGeneDataFileData_entrezGeneIDDataField1)
          (?/fv2 obo/IAO_0000219 ?/gene2ice)
 

@@ -12,14 +12,14 @@
    *kb*
    '?/r
    `((?/fv obo/IAO_0000219 ~v)
-     (?/r obo/has_part ?/fv) ;should put a type constraint on here
+     (?/r obo/BFO_0000051 ?/fv) ;should put a type constraint on here
      )))
 
 (defn record-field-values [r]
   (query-template 
    *kb*
    '(?/t ?/v)
-   `((~r obo/has_part ?/fv)
+   `((~r obo/BFO_0000051 ?/fv)
      (?/fv obo/IAO_0000219 ?/v)
      (?/fv kiao/hasTemplate ?/t))))
 

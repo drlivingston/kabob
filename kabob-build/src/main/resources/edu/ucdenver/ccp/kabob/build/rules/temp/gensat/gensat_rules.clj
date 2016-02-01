@@ -25,8 +25,8 @@
    (_/uberonice obo/IAO_0000219 ?/uberon)
    (?/uberon [rdfs/subClassOf *] obo/UBERON_0001062) 
    
-   (?/record obo/has_part _/fv2)
-   (?/record obo/has_part _/fv1)
+   (?/record obo/BFO_0000051 _/fv2)
+   (?/record obo/BFO_0000051 _/fv1)
 
    (_/fv1 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_egIdDataField1)
    (_/fv1 obo/IAO_0000219 _/geneice)
@@ -83,8 +83,8 @@
    (?/cell [rdfs/subClassOf *] ?/parent)
     (= ?/parent  obo/CL_0000000)
    
-   (?/record obo/has_part _/fv3)
-   (?/record obo/has_part _/fv2)
+   (?/record obo/BFO_0000051 _/fv3)
+   (?/record obo/BFO_0000051 _/fv2)
     
    (_/fv2 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_anatomicalSectionDataField1)
    (_/fv2 obo/IAO_0000219 _/uberon_name)
@@ -93,7 +93,7 @@
    (_/uberonice obo/IAO_0000219 ?/uberon)
    (?/uberon [rdfs/subClassOf *] obo/UBERON_0001062) 
    
-   (?/record obo/has_part _/fv1)
+   (?/record obo/BFO_0000051 _/fv1)
 
    (_/fv1 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_egIdDataField1)
    (_/fv1 obo/IAO_0000219 _/geneice)
@@ -164,8 +164,8 @@
    (?/cellsub [rdfs/subClassOf *] ?/parentsub)
     (= ?/parentsub  obo/CL_0000000) 
     
-   (?/record obo/has_part _/fv4)
-   (?/record obo/has_part _/fv3)
+   (?/record obo/BFO_0000051 _/fv4)
+   (?/record obo/BFO_0000051 _/fv3)
    
    (_/fv3 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_cellTypeNameDataField1)
    ;;(_/fv3 obo/IAO_0000219 _/celltype_name)
@@ -176,7 +176,7 @@
    (?/cell [rdfs/subClassOf *] ?/parent)
     (= ?/parent  obo/CL_0000000)
    
-   (?/record obo/has_part _/fv2)
+   (?/record obo/BFO_0000051 _/fv2)
     
    (_/fv2 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_anatomicalSectionDataField1)
    (_/fv2 obo/IAO_0000219 _/uberon_name)
@@ -185,7 +185,7 @@
    (_/uberonice obo/IAO_0000219 ?/uberon)
    (?/uberon [rdfs/subClassOf *] obo/UBERON_0001062) 
    
-   (?/record obo/has_part _/fv1)
+   (?/record obo/BFO_0000051 _/fv1)
 
    (_/fv1 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_egIdDataField1)
    (_/fv1 obo/IAO_0000219 _/geneice)
@@ -250,8 +250,8 @@
 ;   (_/fv4 obo/IAO_0000219 "FIBERS")
 ;   (_/fv4 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_cellSubTypeNameDataField1)
 ;    
-;   (?/record obo/has_part _/fv4)
-;   (?/record obo/has_part _/fv3)
+;   (?/record obo/BFO_0000051 _/fv4)
+;   (?/record obo/BFO_0000051 _/fv3)
 ;   
 ;   (_/fv3 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_cellTypeNameDataField1)
 ;   ;;(_/fv3 obo/IAO_0000219 _/celltype_name)
@@ -262,7 +262,7 @@
 ;   (?/cell [rdfs/subClassOf *] ?/parent)
 ;    (= ?/parent  obo/CL_0000000)
 ;   
-;   (?/record obo/has_part _/fv2)
+;   (?/record obo/BFO_0000051 _/fv2)
 ;    
 ;   (_/fv2 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_anatomicalSectionDataField1)
 ;   (_/fv2 obo/IAO_0000219 _/uberon_name)
@@ -271,7 +271,7 @@
 ;   (_/uberonice obo/IAO_0000219 ?/uberon)
 ;   (?/uberon [rdfs/subClassOf *] obo/UBERON_0001062) 
 ;   
-;   (?/record obo/has_part _/fv1)
+;   (?/record obo/BFO_0000051 _/fv1)
 ;
 ;   (_/fv1 kiao/hasTemplate iaogensat/GensatQueryOutputFileRecord_egIdDataField1)
 ;   (_/fv1 obo/IAO_0000219 _/geneice)
