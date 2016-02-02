@@ -62,7 +62,7 @@
          (?/of1 owl/someValuesFrom ?/bioentity)
 
          (?/to1 rdf/type owl/Restriction)
-         (?/to1 owl/onProperty kro/results_in_localization_to)
+         (?/to1 owl/onProperty obo/RO_0002344) ; results in transport to from or in
          (?/to1 owl/someValuesFrom ?/go)
 
          ;;make the interaction be necessarily part of these 3 restrictions

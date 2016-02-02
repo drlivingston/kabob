@@ -29,7 +29,7 @@
      (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
      (?/loc rdfs/subClassOf ?/to1)
 
-     (?/to1 owl/onProperty kro/results_in_localization_to)
+     (?/to1 owl/onProperty obo/RO_0002344) ;results in transport to from or in
      (?/to1 owl/someValuesFrom ?/loc)
      (?/loc [rdfs/subClassOf *] ?/location)))
 
@@ -41,7 +41,7 @@
      (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
      (?/loc rdfs/subClassOf ?/to1)
 
-     (?/to1 owl/onProperty kro/results_in_localization_to)
+     (?/to1 owl/onProperty obo/RO_0002344) ; results in transport to from or in
      (?/to1 owl/someValuesFrom ?/location)))
 
 
