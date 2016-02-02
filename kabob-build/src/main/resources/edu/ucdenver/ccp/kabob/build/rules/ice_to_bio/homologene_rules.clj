@@ -5,10 +5,10 @@
 
 
 `{:name "homologene-eg-gene-homologous-to"
-  :head ((?/gene1 obo/homologous_to ?/gene2);)
+  :head (;(?/gene1 obo/RO_0002158 ?/gene2);)
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/homologous_to)
+         (?/r1 owl/onProperty obo/RO_0002158)
          (?/r1 owl/someValuesFrom ?/gene2)
 
          ;;still need to add a sufficient definition?
