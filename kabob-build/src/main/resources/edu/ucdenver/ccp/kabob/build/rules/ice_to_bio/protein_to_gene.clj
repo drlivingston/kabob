@@ -1,10 +1,10 @@
 ;;;; Rules to map from protein identifiers to gene identifiers
 
 `{:name "uniprot-protein-eg-gene-mapping"
-  :head ((?/protein kso/hasIndirectTemplate ?/dna);)
+  :head ((?/protein kso/has_indirect_template ?/dna);)
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/hasIndirectTemplate)
+         (?/r1 owl/onProperty kso/has_indirect_template)
          (?/r1 owl/someValuesFrom ?/dna)
 
          ;;still need to add a sufficient definition?
@@ -33,10 +33,10 @@
 
 
 `{:name "rgd-gene-to-protein-mapping"
-  :head ((?/protein kso/hasIndirectTemplate ?/dna);)
+  :head ((?/protein kso/has_indirect_template ?/dna);)
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/hasIndirectTemplate)
+         (?/r1 owl/onProperty kso/has_indirect_template)
          (?/r1 owl/someValuesFrom ?/dna)
 
          ;;still need to add a sufficient definition?

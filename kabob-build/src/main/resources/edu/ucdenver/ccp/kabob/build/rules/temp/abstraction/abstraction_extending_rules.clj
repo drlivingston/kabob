@@ -15,7 +15,7 @@
    (?/gorgporv rdf/type kbio/GeneSpecificGorGPorVClass)
 
    (?/r1 owl/someValuesFrom ?/gene)
-   (?/r1 owl/onProperty obo/hasIndirectTemplate)
+   (?/r1 owl/onProperty kso/has_indirect_template)
    (?/geneProduct rdfs/subClassOf ?/r1))
 
   :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
