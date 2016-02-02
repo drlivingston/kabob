@@ -257,7 +257,7 @@ entity-str
     
     ;;verify that the other participant is playing a drug role in the interaction
     (?/interaction rdfs/subClassOf ?/rx)
-    (?/rx owl/onProperty obo/realizes)))
+    (?/rx owl/onProperty obo/BFO_0000055)))
     ;;need a few more triples here
     ;;?rx owl:someValuesFrom ?realized .
 
@@ -286,7 +286,7 @@ entity-str
 
     ;;verify that the other participant is playing a drug role in the interaction
     (?/interaction rdfs/subClassOf ?/rx)
-    (?/rx owl/onProperty obo/realizes)
+    (?/rx owl/onProperty obo/BFO_0000055)
 
     (?/interaction rdfs/subClassOf ?/rparticipant2)
     (!= ?/rparticipant2 ?/rdrugparticipant)   ;; redundant for effeciency

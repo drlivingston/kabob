@@ -24,7 +24,7 @@
          (?/r2 owl/someValuesFrom ?/gorgporv)
 
          (?/r3 rdf/type owl/Restriction)
-         (?/r3 owl/onProperty obo/realizes)
+         (?/r3 owl/onProperty obo/BFO_0000055)
          (?/r3 owl/someValuesFrom ?/inheres)
 
          ;;create a new anonymous class that is CHEBI drug role
