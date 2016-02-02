@@ -4,11 +4,11 @@
          (?/record obo/IAO_0000142 ?/expression)
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/BFO_0000066)
+         (?/r1 owl/onProperty obo/BFO_0000066) ; occurs_in
          (?/r1 owl/someValuesFrom ?/uberon)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty kro/results_in_expression_from)
+         (?/r2 owl/onProperty obo/RO_0002510) ; transcribed_from
          (?/r2 owl/someValuesFrom ?/gene)
 
          ;;make the interaction be necessarily part of these 3 restrictions
@@ -57,7 +57,7 @@
          (?/r1 owl/someValuesFrom ?/celltype)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty kro/results_in_expression_from)
+         (?/r2 owl/onProperty obo/RO_0002510) ; transcribed_from
          (?/r2 owl/someValuesFrom ?/gene)
 
          (?/r3 rdf/type owl/Restriction)
@@ -133,7 +133,7 @@
          (?/r1 owl/someValuesFrom ?/cellsubtype)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty kro/results_in_expression_from)
+         (?/r2 owl/onProperty obo/RO_0002510) ; transcribed_from
          (?/r2 owl/someValuesFrom ?/gene)
 
          (?/r3 rdf/type owl/Restriction)
@@ -224,7 +224,7 @@
 ;         (?/r1 owl/someValuesFrom ?/cellpart)
 ;
 ;         (?/r2 rdf/type owl/Restriction)
-;         (?/r2 owl/onProperty kro/results_in_expression_from)
+;         (?/r2 owl/onProperty obo/RO_0002510) ; transcribed_from
 ;         (?/r2 owl/someValuesFrom ?/gene)
 ;
 ;         (?/r3 rdf/type owl/Restriction)
