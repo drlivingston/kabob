@@ -14,15 +14,15 @@
  :head ((?/dbice skos/exactMatch ?/otherice))
   :body
   ((?/fv0 kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
-   (?/fv0 obo/IAO_0000219  ?/dbice)
-   (?/record obo/BFO_0000051  ?/fv0)
+   (?/fv0 obo/IAO_0000219  ?/dbice)  ; denotes
+   (?/record obo/BFO_0000051  ?/fv0) ; has_part
 
-   (?/record obo/BFO_0000051  ?/externalfv)
+   (?/record obo/BFO_0000051  ?/externalfv) ; has_part
    (?/externalfv kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_externalIdentifiersDataField1)
-   (?/externalfv obo/IAO_0000219  ?/otherice)
+   (?/externalfv obo/IAO_0000219  ?/otherice) ; denotes
 
    ;;check to see if that fv is in another record
-   (:optional ((?/record2 obo/BFO_0000051  ?/externalfv)
+   (:optional ((?/record2 obo/BFO_0000051  ?/externalfv) ; has_part
                (:not (= ?/record2 ?/record))))
    (:not (:bound ?/record2))
    )

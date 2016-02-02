@@ -46,7 +46,7 @@
          (?/r1 owl/onProperty obo/RO_0000057) ;; RO_0000057 = has_participant
          (?/r1 owl/someValuesFrom ?/drug)
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty obo/RO_0000057)
+         (?/r2 owl/onProperty obo/RO_0000057) ; has_participant
          (?/r2 owl/someValuesFrom ?/bio)
          (?/interaction rdfs/subClassOf ?/r1)
          (?/interaction rdfs/subClassOf ?/r2))
@@ -78,13 +78,13 @@
                (str "R_"
                     (sha-1 (apply str sym-list))))
              '((owl/Restriction
-                owl/onProperty obo/RO_0000057
+                owl/onProperty obo/RO_0000057 ; has_participant
                 owl/someValuesFrom ex/drug1)
                (owl/Restriction
-                owl/onProperty obo/RO_0000057
+                owl/onProperty obo/RO_0000057 ; has_participant
                 owl/someValuesFrom ex/bio1)
                (owl/Restriction
-                owl/onProperty obo/RO_0000057
+                owl/onProperty obo/RO_0000057 ; has_participant
                 owl/someValuesFrom ex/bio2))))))
 
 ;;; --------------------------------------------------------

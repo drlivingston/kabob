@@ -5,4 +5,4 @@
   ((_/f kiao/hasTemplate
         iaotransfac/TransfacGeneDatFileData_transfacGeneIDDataField1)
         ;;transfactransfacGeneIDDataField1)
-   (_/f obo/IAO_0000219 ?/ice))}
+   (_/f obo/IAO_0000219 ?/ice))} ; denotes

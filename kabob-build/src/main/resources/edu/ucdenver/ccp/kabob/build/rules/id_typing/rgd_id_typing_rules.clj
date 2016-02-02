@@ -2,7 +2,7 @@
 `{:name "rgd-id-type-assertion"
  :head ((?/ice kiao/denotesSubClassOf obo/SO_0000352)) ;dna
   :body ((_/f kiao/hasTemplate iaorgd/RgdGeneFileRecord_geneIdDataField1)
-         (_/f obo/IAO_0000219 ?/ice))
+         (_/f obo/IAO_0000219 ?/ice)) ; denotes
 
   ;; :options {:magic-prefixes [
   ;;                            ["franzOption_chunkProcessingAllowed" "franz:yes"]

@@ -3,7 +3,7 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the BRENDA Tissue Ontology
 `{:name "brenda-ontology-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/BTO_0000000))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaobto" :prefix "" :suffix "_ICE"}])}
@@ -13,7 +13,7 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the Cell Ontology
 `{:name "cell-ontology-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/CL_0000000))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaocl" :prefix "" :suffix "_ICE"}])}
@@ -23,21 +23,21 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the ChEBI:subatomic particle subontology
 `{:name "chebi-subatomic-particle-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/CHEBI_36342))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaochebi" :prefix "" :suffix "_ICE"}])}
 
 ;; create ICE URI's for each term in the ChEBI:role subontology
 `{:name "chebi-role-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/CHEBI_50906))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaochebi" :prefix "" :suffix "_ICE"}])}
 
 ;; create ICE URI's for each term in the ChEBI:chemical entity subontology
 `{:name "chebi-chemical-entity-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/CHEBI_24431))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaochebi" :prefix "" :suffix "_ICE"}])}
@@ -48,21 +48,21 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the GO BP subontology
 `{:name "go-bp-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/GO_0008150))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaogo" :prefix "" :suffix "_ICE"}])}
 
 ;; create ICE URI's for each term in the GO MF subontology
 `{:name "go-mf-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/GO_0003674))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaogo" :prefix "" :suffix "_ICE"}])}
 
 ;; create ICE URI's for each term in the GO CC subontology
 `{:name "go-cc-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/GO_0005575))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaogo" :prefix "" :suffix "_ICE"}])}
@@ -72,7 +72,7 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the PSI Molecular Interaction Ontology
 `{:name "mi-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subroot [obo/part_of *] obo/MI_0000) ;; NEED TO CHECK THE NAMESAPCE OF THIS PART_OF RELATION
           (?/subclass [rdfs/subClassOf *] ?/subroot)
          (:not (:isBlank ?/subclass)))
@@ -84,7 +84,7 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the Mammalian Phenotype ontology
 `{:name "mpheno-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/MP_0000001)
          (:not (:isBlank ?/subclass)))
   :reify ([?/ice {:ln (:localname ?/subclass)
@@ -98,7 +98,7 @@
 ;;iao/ncbi_taxon/NCBI_TAXON_215158_ICE
 
 `{:name "ncbitaxon-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/NCBITaxon_1))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaoncbitaxon" :prefix "" :suffix "_ICE"}])}
@@ -166,7 +166,7 @@
 
 
 `{:name "pr-macromolecular-complex-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/GO_0032991)
          (:regex (:str ?/subclass) "^http://purl.obolibrary.org/obo/PR"))
   ;;         (:regex ?/subclass "^http://purl.obolibrary.org/obo/PR"))
@@ -176,7 +176,7 @@
 
 
 `{:name "pr-aa-chain-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/PR_000018263)
          (:regex (:str ?/subclass) "^http://purl.obolibrary.org/obo/PR"))
          ;;(:regex ?/subclass "^http://purl.obolibrary.org/obo/PR"))
@@ -205,25 +205,25 @@
 ;; ----------- Sequence Ontology -------------  
 ;; -------------------------------------------
 `{:name "so-sequence-attribute-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/SO_0000400))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaoso" :prefix "" :suffix "_ICE"}])}
 
 `{:name "so-sequence-collection-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/SO_0001260))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaoso" :prefix "" :suffix "_ICE"}])}
 
 `{:name "so-sequence-feature-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/SO_0000110))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaoso" :prefix "" :suffix "_ICE"}])}
 
 `{:name "so-sequence-variant-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/SO_0001060))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaoso" :prefix "" :suffix "_ICE"}])}

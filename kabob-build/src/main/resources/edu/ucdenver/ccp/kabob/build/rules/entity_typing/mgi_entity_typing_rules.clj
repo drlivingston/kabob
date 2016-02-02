@@ -50,7 +50,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["BAC/YAC end" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; Complex/Cluster/Region maps to SO:0000001 (so:region)
 `{:name "mgi-entity-ccr-type-assertion"
@@ -59,7 +59,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["Complex/Cluster/Region" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; Cytogenetic Marker maps to SO:0001645 (so:genetic_marker)
 `{:name "mgi-entity-cytomarker-type-assertion"
@@ -68,7 +68,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; STILL NEEDS CLASSIFICATION !!!!!!!
 ;; DNA Segment maps to SO: (so:)
@@ -78,7 +78,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; Gene maps to SO:0000704 (so:gene)
 `{:name "mgi-entity-gene-type-assertion"
@@ -87,7 +87,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["gene" "en"])
-            (_/ice iao/IAO_0000219 ?/bio-entity))}
+            (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; Other Genome Feature maps to SO:0000110 (so:sequence_feature)
 `{:name "mgi-entity-ogf-type-assertion"
@@ -96,7 +96,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["Other Genome Feature" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; Pseudogene maps to SO:0000336 (so:pseudogene)
 `{:name "mgi-entity-pseudogene-type-assertion"
@@ -105,7 +105,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["pseudogene" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; QTL maps to SO:0000771 (so:QTL)
 `{:name "mgi-entity-qtl-type-assertion"
@@ -114,7 +114,7 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["QTL" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; Transgene maps to SO:0000902 (so:transgene)
 `{:name "mgi-entity-transgene-type-assertion"
@@ -123,4 +123,4 @@
          ~@(kabob/rtv _/record
                       iaomig/mgimgiAccessionIDDataField1 _/ice
                       iaomgi/mgitypeDataField1 ["transgene" "en"])
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes

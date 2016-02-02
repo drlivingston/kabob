@@ -13,7 +13,7 @@
   :body
   ((_/f kiao/hasTemplate
         iaouniprot/UniProtFileRecord_primaryAccessionDataField1)
-   (_/f obo/IAO_0000219 ?/ice))}
+   (_/f obo/IAO_0000219 ?/ice))} ; denotes
 
 
 `{:name "uniprot-trembl-primary-accession-id-type"
@@ -21,7 +21,7 @@
   :body
   ((_/f kiao/hasTemplate
         iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
-   (_/f obo/IAO_0000219 ?/ice))}
+   (_/f obo/IAO_0000219 ?/ice))} ; denotes
 
 
 ;; All UniProt identifiers are of type kiao/ProteinIdentifier

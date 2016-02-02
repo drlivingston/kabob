@@ -3,4 +3,4 @@
 `{:name "propigate-denotesSubClassOf"
   :head ((?/entity rdfs/subClassOf ?/sc))
   :body ((_/ice kiao/denotesSubClassOf ?/sc)
-         (_/ice obo/IAO_0000219 ?/entity))}
+         (_/ice obo/IAO_0000219 ?/entity))} ; denotes

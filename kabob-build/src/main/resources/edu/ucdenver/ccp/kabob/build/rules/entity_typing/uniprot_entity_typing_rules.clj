@@ -8,4 +8,4 @@
   :body ((_/record kiao/hasTemplate iaouniprot/uniprotUniProtDatFileDataSchema1)
          ~@(kabob/rtv _/record
                       iaouniprot/uniprotprimaryUniProtIDDataField1 _/ice)
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes

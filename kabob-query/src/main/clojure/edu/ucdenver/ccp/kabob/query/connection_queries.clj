@@ -86,7 +86,7 @@
 (def process-query
    '((?/subentity [rdfs/subClassOf *] ?/entity)
      (?/of1 owl/someValuesFrom ?/subentity)
-     (?/of1 owl/onProperty  obo/RO_0000057)
+     (?/of1 owl/onProperty  obo/RO_0000057) ; has_participant
 
      (?/event rdfs/subClassOf ?/of1)
      (?/event rdfs/subClassOf ?/proc)
@@ -113,7 +113,7 @@
    '(;;(?/subentity rdfs/subClassOf ?/entity)
      ;;(?/of1 owl/someValuesFrom ?/subentity)
      (?/of1 owl/someValuesFrom ?/entity)
-     (?/of1 owl/onProperty  obo/RO_0000057)
+     (?/of1 owl/onProperty  obo/RO_0000057) ; has_participant
 
      (?/event rdfs/subClassOf ?/of1)
      (?/event rdfs/subClassOf ?/process)
@@ -210,7 +210,7 @@ entity-str
 (def interaction-query
   ;;get the processes they participate in
   '((?/rparticipant1 owl/someValuesFrom ?/participant1)
-    (?/rparticipant1 owl/onProperty obo/RO_0000057)
+    (?/rparticipant1 owl/onProperty obo/RO_0000057) ; has_participant
 
     ;;look for interactions
     (?/interaction rdfs/subClassOf ?/rparticipant1)
@@ -219,7 +219,7 @@ entity-str
     ;;get all the other participants
     (?/interaction rdfs/subClassOf ?/rparticipant2)
     (!= ?/rparticipant1 ?/rparticipant2)
-    (?/rparticipant2 owl/onProperty obo/RO_0000057)
+    (?/rparticipant2 owl/onProperty obo/RO_0000057) ; has_participant
     (?/rparticipant2 owl/someValuesFrom ?/participant2)))
 
 (defn interactions [kb participant1]
@@ -243,7 +243,7 @@ entity-str
 (def drug-query
   ;;get the processes they participate in
   '((?/rparticipant2 owl/someValuesFrom ?/entity)
-    (?/rparticipant2 owl/onProperty obo/RO_0000057)
+    (?/rparticipant2 owl/onProperty obo/RO_0000057) ; has_participant
 
     ;;look for interactions
     (?/interaction rdfs/subClassOf ?/rparticipant2)
@@ -252,12 +252,12 @@ entity-str
     ;;get all the other participants
     (?/interaction rdfs/subClassOf ?/rdrugparticipant)
     (!= ?/rparticipant2 ?/rdrugparticipant)   ;; redundant for effeciency
-    (?/rdrugparticipant owl/onProperty obo/RO_0000057)
+    (?/rdrugparticipant owl/onProperty obo/RO_0000057) ; has_participant
     (?/rdrugparticipant owl/someValuesFrom ?/drug)
     
     ;;verify that the other participant is playing a drug role in the interaction
     (?/interaction rdfs/subClassOf ?/rx)
-    (?/rx owl/onProperty obo/BFO_0000055)))
+    (?/rx owl/onProperty obo/BFO_0000055))) ; realizes
     ;;need a few more triples here
     ;;?rx owl:someValuesFrom ?realized .
 
@@ -280,18 +280,18 @@ entity-str
 (def target-query
   ;;get the processes they participate in
   '((?/rdrugparticipant owl/someValuesFrom ?/drug)
-    (?/rdrugparticipant owl/onProperty obo/RO_0000057)
+    (?/rdrugparticipant owl/onProperty obo/RO_0000057) ; has_participant
     (?/interaction rdfs/subClassOf ?/rdrugparticipant)
     (?/interaction rdfs/subClassOf obo/MI_0000)
 
     ;;verify that the other participant is playing a drug role in the interaction
     (?/interaction rdfs/subClassOf ?/rx)
-    (?/rx owl/onProperty obo/BFO_0000055)
+    (?/rx owl/onProperty obo/BFO_0000055) ; realizes
 
     (?/interaction rdfs/subClassOf ?/rparticipant2)
     (!= ?/rparticipant2 ?/rdrugparticipant)   ;; redundant for effeciency
     
-    (?/rparticipant2 owl/onProperty obo/RO_0000057)
+    (?/rparticipant2 owl/onProperty obo/RO_0000057) ; has_participant
     (?/rparticipant2 owl/someValuesFrom ?/entity)))
 
 (defn drug-targets [kb drug]

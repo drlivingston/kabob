@@ -10,5 +10,5 @@
          (!= ?/type "pseudo")
          (!= ?/type "unknown")
          (!= ?/type "other")
-         (_/egIce obo/IAO_0000219 ?/dna))
+         (_/egIce obo/IAO_0000219 ?/dna)) ; denotes
   }

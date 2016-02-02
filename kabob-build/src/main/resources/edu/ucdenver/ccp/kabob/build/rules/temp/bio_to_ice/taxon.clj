@@ -11,7 +11,7 @@
 
 
 `{:name "ncbitaxon-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass))
+  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
   :body ((?/subclass [rdfs/subClassOf *] obo/NCBITaxon_1))
   :reify ([?/ice {:ln (:regex "obo/NCBITaxon" "NCBI_TAXON" ?/subclass)
                   :ns "iaoncbitaxon" :prefix "" :suffix "_ICE"}])}

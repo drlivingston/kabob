@@ -4,14 +4,14 @@
 
 ;;converts ID sets into reified entities
 `{:name "idset-mentions-entity"
-  :head ((?/idset obo/IAO_0000142 ?/entity))
+  :head ((?/idset obo/IAO_0000142 ?/entity)) ; mentions
   :body ((?/idset rdf/type kiao/ID-Set))
   :reify ([?/entity {:ln (:md5 ?/idset)
                      :ns "kbio" :prefix "BIO_" :suffix ""}])}
 
 
 `{:name "ice-denotes-entity"
-  :head ((?/ice obo/IAO_0000219 ?/entity))
+  :head ((?/ice obo/IAO_0000219 ?/entity)) ; mentions
   :body ((?/idset rdf/type kiao/ID-Set)
          (?/idset kro/hasMember ?/ice))
   :reify ([?/entity {:ln (:md5 ?/idset)

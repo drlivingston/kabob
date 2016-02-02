@@ -35,7 +35,7 @@
          ~@(kabob/rtv _/record
                       iaoeg/EntrezGeneInfoFileData_geneIDDataField1 _/egIce
                       iaoeg/EntrezGeneInfoFileData_typeOfGeneDataField1 "protein-coding")
-         (_/egIce obo/IAO_0000219 ?/egKabobDna))}
+         (_/egIce obo/IAO_0000219 ?/egKabobDna))} ; denotes
 
 ;; ;; ncRNA maps to SO:0000655 (so:ncRNA)
 ;; `{:name "i2b11-eg-ncRNA-gene-type-assertion"
@@ -53,7 +53,7 @@
          ~@(kabob/rtv _/record
                       iaoeg/EntrezGeneInfoFileData_geneIDDataField1 _/egIce
                       iaoeg/EntrezGeneInfoFileData_typeOfGeneDataField1 "pseudo")
-         (_/egIce obo/IAO_0000219 ?/egKabobDna))}
+         (_/egIce obo/IAO_0000219 ?/egKabobDna))} ; denotes
 
 ;; rRNA maps to SO:0000252 (so:rRNA)
 ;; `{:name "i2b13-eg-rrna-gene-type-assertion"

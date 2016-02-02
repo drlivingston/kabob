@@ -55,24 +55,24 @@
 
   :body
   ((_/fv0 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1TypeDataField1)
-   (_/fv0 obo/IAO_0000219 "Gene")
-   (_/record obo/BFO_0000051 _/fv0)
+   (_/fv0 obo/IAO_0000219 "Gene") ; denotes
+   (_/record obo/BFO_0000051 _/fv0) ; has_part
 
-   (_/record obo/BFO_0000051 _/fv1)
+   (_/record obo/BFO_0000051 _/fv1) ; has_part
    (_/fv1 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2TypeDataField1)
-   (_/fv1 obo/IAO_0000219 "Drug")
+   (_/fv1 obo/IAO_0000219 "Drug") ; denotes
 
-   (_/record obo/BFO_0000051 _/fv2)
+   (_/record obo/BFO_0000051 _/fv2) ; has_part
    (_/fv2 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1IdDataField1)
-   (_/fv2 obo/IAO_0000219 _/geneid)
+   (_/fv2 obo/IAO_0000219 _/geneid) ; denotes
 
-   (_/record obo/BFO_0000051 _/fv3)
+   (_/record obo/BFO_0000051 _/fv3) ; has_part
    (_/fv3 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2IdDataField1)
-   (_/fv3 obo/IAO_0000219 _/drugid)
+   (_/fv3 obo/IAO_0000219 _/drugid) ; denotes
 
-   (_/drugid obo/IAO_0000219 ?/drug)
+   (_/drugid obo/IAO_0000219 ?/drug) ; denotes
 
-   (_/geneid obo/IAO_0000219 ?/gene)
+   (_/geneid obo/IAO_0000219 ?/gene) ; denotes
    (?/gene [rdfs/subClassOf clojure.core/*] ?/gorgporv)
    (?/gorgporv rdf/type kbio/GeneSpecificGorGPorVClass))
 
@@ -146,24 +146,24 @@
 
   :body
   ((_/fv0 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2TypeDataField1)
-   (_/fv0 obo/IAO_0000219 "Gene")
-   (_/record obo/BFO_0000051 _/fv0)
+   (_/fv0 obo/IAO_0000219 "Gene") ; denotes
+   (_/record obo/BFO_0000051 _/fv0) ; has_part
 
-   (_/record obo/BFO_0000051 _/fv1)
+   (_/record obo/BFO_0000051 _/fv1) ; has_part
    (_/fv1 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1TypeDataField1)
-   (_/fv1 obo/IAO_0000219 "Drug")
+   (_/fv1 obo/IAO_0000219 "Drug") ; denotes
 
-   (_/record obo/BFO_0000051 _/fv2)
+   (_/record obo/BFO_0000051 _/fv2) ; has_part
    (_/fv2 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity2IdDataField1)
-   (_/fv2 obo/IAO_0000219 _/geneid)
+   (_/fv2 obo/IAO_0000219 _/geneid) ; denotes
 
-   (_/record obo/BFO_0000051 _/fv3)
+   (_/record obo/BFO_0000051 _/fv3) ; has_part
    (_/fv3 kiao/hasTemplate iaopharmgkb/PharmGkbRelationFileRecord_entity1IdDataField1)
-   (_/fv3 obo/IAO_0000219 _/drugid)
+   (_/fv3 obo/IAO_0000219 _/drugid) ; denotes
 
-   (_/drugid obo/IAO_0000219 ?/drug)
+   (_/drugid obo/IAO_0000219 ?/drug) ; denotes
 
-   (_/geneid obo/IAO_0000219 ?/gene)
+   (_/geneid obo/IAO_0000219 ?/gene) ; denotes
    (?/gene [rdfs/subClassOf clojure.core/*] ?/gorgporv)
    (?/gorgporv rdf/type kbio/GeneSpecificGorGPorVClass))
 

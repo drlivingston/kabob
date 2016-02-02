@@ -61,7 +61,7 @@
          ~@(kabob/rtv _/record
                       iaorefseq/refseqmolecularTypeDataField1 ["Genomic" "en"]
                       iaorefseq/refseqrefseqIdDataField1 _/ice)
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; RefSeq RNA identifiers map to kso/???
 `{:name "refseq-rna-entity-id-type-assertion"
@@ -71,7 +71,7 @@
          ~@(kabob/rtv _/record
                       iaorefseq/refseqmolecularTypeDataField1 ["RNA" "en"]
                       iaorefseq/refseqrefseqIdDataField1 _/ice)
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; RefSeq mRNA identifiers map to kso/???
 `{:name "refseq-mrna-entity-id-type-assertion"
@@ -81,7 +81,7 @@
          ~@(kabob/rtv _/record
                       iaorefseq/refseqmolecularTypeDataField1 ["mRNA" "en"]
                       iaorefseq/refseqrefseqIdDataField1 _/ice)
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 ;; RefSeq protein identifiers map to kso/???
 `{:name "refseq-protein-entity-id-type-assertion"
@@ -91,6 +91,6 @@
          ~@(kabob/rtv _/record
                       iaorefseq/refseqmolecularTypeDataField1 ["Protein" "en"]
                       iaorefseq/refseqrefseqIdDataField1 _/ice)
-         (_/ice iao/IAO_0000219 ?/bio-entity))}
+         (_/ice iao/IAO_0000219 ?/bio-entity))} ; denotes
 
 

@@ -28,24 +28,24 @@
 `{:name "uniprot-in-taxon"
   :head (
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/RO_0002162)
+         (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
 
          (?/protein rdfs/subClassOf ?/r1))
   :body 
   ((_/fv0 kiao/hasTemplate iaouniprot/UniProtFileRecord_primaryAccessionDataField1)
-   (_/fv0 obo/IAO_0000219 _/uniprotIce)
-   (_/record obo/BFO_0000051 _/fv0)
+   (_/fv0 obo/IAO_0000219 _/uniprotIce) ; denotes
+   (_/record obo/BFO_0000051 _/fv0) ; has_part
 
-   (_/record obo/BFO_0000051 _/taxrecord)
-   (_/taxrecord obo/BFO_0000051 _/dbrecord)
+   (_/record obo/BFO_0000051 _/taxrecord) ; has_part
+   (_/taxrecord obo/BFO_0000051 _/dbrecord) ; has_part
 
-   (_/dbrecord obo/BFO_0000051 _/fv1)
+   (_/dbrecord obo/BFO_0000051 _/fv1) ; has_part
    (_/fv1 kiao/hasTemplate iaouniprot/DbReference_idDataField1)
-   (_/fv1 obo/IAO_0000219 _/taxonIce)
+   (_/fv1 obo/IAO_0000219 _/taxonIce) ; denotes
 
-   (_/uniprotIce obo/IAO_0000219 ?/protein)
-   (_/taxonIce obo/IAO_0000219 ?/taxon))
+   (_/uniprotIce obo/IAO_0000219 ?/protein) ; denotes
+   (_/taxonIce obo/IAO_0000219 ?/taxon)) ; denotes
 
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
@@ -53,27 +53,27 @@
 }
 
 `{:name "uniprot-sparse-in-taxon"
-  :head ((?/protein obo/RO_0002162 ?/taxon)
+  :head ((?/protein obo/RO_0002162 ?/taxon) ; in_taxon
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/RO_0002162)
+         (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
 
          (?/protein rdfs/subClassOf ?/r1))
   :body 
   ((_/fv0 kiao/hasTemplate iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
-   (_/fv0 obo/IAO_0000219 _/uniprotIce)
-   (_/record obo/BFO_0000051 _/fv0)
+   (_/fv0 obo/IAO_0000219 _/uniprotIce)  ; denotes
+   (_/record obo/BFO_0000051 _/fv0) ; has_part
 
-   (_/record obo/BFO_0000051 _/taxrecord)
-   (_/taxrecord obo/BFO_0000051 _/dbrecord)
+   (_/record obo/BFO_0000051 _/taxrecord) ; has_part
+   (_/taxrecord obo/BFO_0000051 _/dbrecord) ; has_part
 
-   (_/dbrecord obo/BFO_0000051 _/fv1)
+   (_/dbrecord obo/BFO_0000051 _/fv1) ; has_part
    (_/fv1 kiao/hasTemplate iaouniprot/DbReference_idDataField1)
-   (_/fv1 obo/IAO_0000219 _/taxonIce)
+   (_/fv1 obo/IAO_0000219 _/taxonIce) ; denotes
 
-   (_/uniprotIce obo/IAO_0000219 ?/protein)
-   (_/taxonIce obo/IAO_0000219 ?/taxon))
+   (_/uniprotIce obo/IAO_0000219 ?/protein) ; denotes
+   (_/taxonIce obo/IAO_0000219 ?/taxon)) ; denotes
 
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
@@ -83,10 +83,10 @@
 
 
 `{:name "eg-in-taxon"
-  :head ((?/gene obo/RO_0002162 ?/taxon)
+  :head ((?/gene obo/RO_0002162 ?/taxon) ; in_taxon
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/RO_0002162)
+         (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
 
          (?/gene rdfs/subClassOf ?/r1))
@@ -96,8 +96,8 @@
          ~@(kabob/rtv _/record
                       iaoeg/EntrezGeneInfoFileData_geneIDDataField1 _/egIce
                       iaoeg/EntrezGeneInfoFileData_taxonIDDataField1 _/taxonIce)
-         (_/egIce obo/IAO_0000219 ?/gene)
-         (_/taxonIce obo/IAO_0000219 ?/taxon))
+         (_/egIce obo/IAO_0000219 ?/gene) ; denotes
+         (_/taxonIce obo/IAO_0000219 ?/taxon)) ; denotes
 
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
@@ -106,10 +106,10 @@
 
 ;; This rule assigns taxons to bio-entities represented by RefSeq IDs (so genes, proteins, RNAs...)
 `{:name "refseq-in-taxon"
-  :head ((?/bioentity obo/RO_0002162 ?/taxon)
+  :head ((?/bioentity obo/RO_0002162 ?/taxon) ; in_taxon
 
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/RO_0002162)
+         (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
 
          (?/bioentity rdfs/subClassOf ?/r1))
@@ -119,8 +119,8 @@
          ~@(kabob/rtv _/record
                       iaorefseq/RefSeqReleaseCatalogFileData_refseqIdDataField1 _/refseqIce
                       iaorefseq/RefSeqReleaseCatalogFileData_taxIdDataField1 _/taxonIce)
-         (_/refseqIce obo/IAO_0000219 ?/bioentity)
-         (_/taxonIce obo/IAO_0000219 ?/taxon))
+         (_/refseqIce obo/IAO_0000219 ?/bioentity) ; denotes
+         (_/taxonIce obo/IAO_0000219 ?/taxon)) ; denotes
 
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])

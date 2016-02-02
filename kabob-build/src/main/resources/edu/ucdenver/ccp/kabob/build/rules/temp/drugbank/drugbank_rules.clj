@@ -16,15 +16,15 @@
          ;(?/interaction kbio/rsv_has_participant ?/drug)
          
          (?/r1 rdf/type owl/Restriction)
-         (?/r1 owl/onProperty obo/RO_0000057)
+         (?/r1 owl/onProperty obo/RO_0000057) ; has_participant
          (?/r1 owl/someValuesFrom ?/drug)
 
          (?/r2 rdf/type owl/Restriction)
-         (?/r2 owl/onProperty obo/RO_0000057)
+         (?/r2 owl/onProperty obo/RO_0000057) ; has_participant
          (?/r2 owl/someValuesFrom ?/gorgporv)
 
          (?/r3 rdf/type owl/Restriction)
-         (?/r3 owl/onProperty obo/BFO_0000055)
+         (?/r3 owl/onProperty obo/BFO_0000055) ; realizes
          (?/r3 owl/someValuesFrom ?/inheres)
 
          ;;create a new anonymous class that is CHEBI drug role
@@ -61,17 +61,17 @@
    
    (_/fv1 kiao/hasTemplate iaodrugbank/DrugBankPartnerRecord_externalIdentifiersDataField1)
    (_/fv1 obo/IAO_0000219 _/externalid)
-   (_/partnerRecord1 obo/BFO_0000051 _/fv1)
-   (_/targetRecord1 obo/BFO_0000051 _/partnerRecord1)
-   (_/record obo/BFO_0000051 _/targetRecord1)
+   (_/partnerRecord1 obo/BFO_0000051 _/fv1) ; has_part
+   (_/targetRecord1 obo/BFO_0000051 _/partnerRecord1) ; has_part
+   (_/record obo/BFO_0000051 _/targetRecord1) ; has_part
 
-   (_/record obo/BFO_0000051 _/fv0)
+   (_/record obo/BFO_0000051 _/fv0) ; has_part
    (_/fv0 kiao/hasTemplate iaodrugbank/DrugBankDrugRecord_drugBankIdDataField1)
-   (_/fv0 obo/IAO_0000219 _/drugid)
+   (_/fv0 obo/IAO_0000219 _/drugid) ; denotes
 
-   (_/drugid obo/IAO_0000219 ?/drug)
+   (_/drugid obo/IAO_0000219 ?/drug) ; denotes
 
-   (_/externalid obo/IAO_0000219 ?/bio)
+   (_/externalid obo/IAO_0000219 ?/bio) ; denotes
    (?/bio [rdfs/subClassOf clojure.core/*] ?/gorgporv)
    (?/gorgporv rdf/type kbio/GeneSpecificGorGPorVClass))
 

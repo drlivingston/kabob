@@ -16,15 +16,15 @@
          ;;              iaouniprot/UniProtIDMappingFileData_entrezGeneIDsDataField1 _/geneice)
 
          (?/fv0 kiao/hasTemplate  iaouniprot/UniProtIDMappingFileData_uniProtAccessionIDDataField1)
-         (?/fv0 obo/IAO_0000219 _/proteinice)
+         (?/fv0 obo/IAO_0000219 _/proteinice) ; denotes
 
-         (?/record1 obo/BFO_0000051 ?/fv0)
-         (?/record1 obo/BFO_0000051 ?/fv1)
+         (?/record1 obo/BFO_0000051 ?/fv0) ; has_part
+         (?/record1 obo/BFO_0000051 ?/fv1) ; has_part
          (?/fv1 kiao/hasTemplate iaouniprot/UniProtIDMappingFileData_entrezGeneIDsDataField1)
-         (?/fv1 obo/IAO_0000219 _/geneice)
+         (?/fv1 obo/IAO_0000219 _/geneice) ; denotes
 
-         (_/proteinice obo/IAO_0000219 ?/protein)
-         (_/geneice obo/IAO_0000219 ?/dna))
+         (_/proteinice obo/IAO_0000219 ?/protein) ; denotes
+         (_/geneice obo/IAO_0000219 ?/dna)) ; denotes
 
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
@@ -48,15 +48,15 @@
          ;;              iaorgd/RgdGeneFileRecord_geneIdDataField1 _/geneice)
 
          (?/fv0 kiao/hasTemplate  iaorgd/RgdGeneFileRecord_uniprotIdsDataField1)
-         (?/fv0 obo/IAO_0000219 _/proteinice)
+         (?/fv0 obo/IAO_0000219 _/proteinice) ; denotes
 
-         (?/record1 obo/BFO_0000051 ?/fv0)
-         (?/record1 obo/BFO_0000051 ?/fv1)
+         (?/record1 obo/BFO_0000051 ?/fv0) ; has_part
+         (?/record1 obo/BFO_0000051 ?/fv1) ; has_part
          (?/fv1 kiao/hasTemplate iaorgd/RgdGeneFileRecord_geneIdDataField1)
-         (?/fv1 obo/IAO_0000219 _/geneice)
+         (?/fv1 obo/IAO_0000219 _/geneice) ; denotes
 
-         (_/proteinice obo/IAO_0000219 ?/protein)
-         (_/geneice obo/IAO_0000219 ?/dna))
+         (_/proteinice obo/IAO_0000219 ?/protein) ; denotes
+         (_/geneice obo/IAO_0000219 ?/dna)) ; denotes
 
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
