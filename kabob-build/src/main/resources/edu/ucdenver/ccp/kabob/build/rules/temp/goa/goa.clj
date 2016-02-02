@@ -58,7 +58,7 @@
          (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
 
          (?/of1 rdf/type owl/Restriction)
-         (?/of1 owl/onProperty kro/results_in_localization_of)
+         (?/of1 owl/onProperty obo/RO_0002313) ;transports or maintains localization of
          (?/of1 owl/someValuesFrom ?/bioentity)
 
          (?/to1 rdf/type owl/Restriction)

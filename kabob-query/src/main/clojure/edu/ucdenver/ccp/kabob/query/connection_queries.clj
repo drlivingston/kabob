@@ -23,7 +23,7 @@
 
 (def location-query
    '((?/of1 owl/someValuesFrom ?/entity)
-     (?/of1 owl/onProperty kro/results_in_localization_of)
+     (?/of1 owl/onProperty obo/RO_0002313) ;transports or maintains localization of
 
      (?/loc rdfs/subClassOf ?/of1)
      (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
@@ -35,7 +35,7 @@
 
 (def simple-location-query
    '((?/of1 owl/someValuesFrom ?/entity)
-     (?/of1 owl/onProperty kro/results_in_localization_of)
+     (?/of1 owl/onProperty obo/RO_0002313) ;transports or maintains localization of
 
      (?/loc rdfs/subClassOf ?/of1)
      (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
