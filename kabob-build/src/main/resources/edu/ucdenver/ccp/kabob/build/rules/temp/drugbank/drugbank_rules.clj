@@ -31,7 +31,7 @@
          ;;   that inheres in this specific drug
          ;;   so that it can be realized by the restriction above
          (?/r4 rdf/type owl/Restriction)
-         (?/r4 owl/onProperty obo/inheres_in)
+         (?/r4 owl/onProperty obo/RO_0000052) ;inheres_in
          (?/r4 owl/someValuesFrom ?/drug)
          
          (?/inheres rdfs/subClassOf obo/CHEBI_23888) ;drug role
