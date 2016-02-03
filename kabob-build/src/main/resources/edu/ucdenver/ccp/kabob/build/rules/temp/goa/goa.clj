@@ -59,7 +59,7 @@
          (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
 
          (?/protein rdfs/subClassOf ?/bioentity)
-         (?/gocc rdfs/subClassOf ?go)
+         (?/gocc rdfs/subClassOf ?/go)
          
          (?/of1 rdf/type owl/Restriction)
          (?/of1 owl/onProperty obo/RO_0002313) ;transports or maintains localization of
