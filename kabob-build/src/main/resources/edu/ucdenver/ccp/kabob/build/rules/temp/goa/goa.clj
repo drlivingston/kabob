@@ -4,10 +4,11 @@
   :head (
          (?/bp rdfs/subClassOf ?/go) ;interaction
 
+         (?/protein rdfs/subClassOf ?/bioentity)
          
          (?/hr1 rdf/type owl/Restriction)
          (?/hr1 owl/onProperty obo/RO_0000057) ; has_participant
-         (?/hr1 owl/someValuesFrom ?/bioentity)
+         (?/hr1 owl/someValuesFrom ?/protein)
 
          ;;make the interaction be necessarily part of these 3 restrictions
          ;;still need to add a sufficient definition
@@ -53,17 +54,18 @@
 
 `{:name "goa-cc"
   :head (
-          ;;(?/bioentity kiao/STANDIN_bio_go ?/go)
-
          (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
 
+         (?/protein rdfs/subClassOf ?/bioentity)
+         (?/gocc rdfs/subClassOf ?go)
+         
          (?/of1 rdf/type owl/Restriction)
          (?/of1 owl/onProperty obo/RO_0002313) ;transports or maintains localization of
-         (?/of1 owl/someValuesFrom ?/bioentity)
+         (?/of1 owl/someValuesFrom ?/protein)
 
          (?/to1 rdf/type owl/Restriction)
-         (?/to1 owl/onProperty obo/RO_0002344) ; results in transport to from or in
-         (?/to1 owl/someValuesFrom ?/go)
+         (?/to1 owl/onProperty obo/RO_0002339) ; has target end location
+         (?/to1 owl/someValuesFrom ?/gocc)
 
          ;;make the interaction be necessarily part of these 3 restrictions
          ;;still need to add a sufficient definition
