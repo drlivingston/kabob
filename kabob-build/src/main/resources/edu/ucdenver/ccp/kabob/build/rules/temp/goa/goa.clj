@@ -111,7 +111,7 @@
                  :ns "kbio" :prefix "R_"}]
           [?/protein {:ln (:sha-1 ?/go ?/bioentity)
                      :ns "kbio" :prefix "P_"}]
-          [?/gocc {:ln (:sha-1 ?/go ?/to1)
+          [?/gocc {:ln (:sha-1 ?/go ?/bioentity)
                    :ns "kbio" :prefix "CC_"}]
           )
 
