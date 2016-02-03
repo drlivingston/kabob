@@ -45,7 +45,7 @@
          )
   :reify ([?/bp {:ln (:sha-1 ?/go ?/hr1)
                  :ns "kbio" :prefix "BP_"}]
-          [?/protein {:ln (:sha-1 ?/go ?/hr1 ?/bioentity)
+          [?/protein {:ln (:sha-1 ?/go ?/bioentity)
                     :ns "kbio" :prefix "P_"}]
           [?/hr1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
@@ -109,7 +109,7 @@
                  :ns "kbio" :prefix "R_"}]
           [?/to1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}]
-          [?/protein {:ln (:sha-1 ?/go ?/of1 ?/bioentity)
+          [?/protein {:ln (:sha-1 ?/go ?/bioentity)
                      :ns "kbio" :prefix "P_"}]
           [?/gocc {:ln (:sha-1 ?/go ?/to1)
                    :ns "kbio" :prefix "CC_"}]
