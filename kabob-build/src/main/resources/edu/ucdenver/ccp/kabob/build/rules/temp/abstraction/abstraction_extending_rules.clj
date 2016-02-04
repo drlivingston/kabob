@@ -11,7 +11,7 @@
   
   :body
   ((?/gene rdf/type kbio/GeneSpecificGClass)
-   (?/gene [rdfs/subClassOf clojure.core/*] ?/gorgp)
+   (?/gene rdfs/subClassOf ?/gorgp)
    (?/gorgp rdf/type kbio/GeneSpecificGorGPClass)
 
    (?/r1 owl/someValuesFrom ?/gene)
