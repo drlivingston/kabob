@@ -7,12 +7,12 @@
 
 `{:name "connect-GP-to-GorGP-abstraction"
   ;; this need to be hashed and have proper classes
-  :head ((?/geneProduct rdfs/subClassOf ?/gorgporv))
+  :head ((?/geneProduct rdfs/subClassOf ?/gorgp))
   
   :body
   ((?/gene rdf/type kbio/GeneSpecificGClass)
-   (?/gene [rdfs/subClassOf clojure.core/*] ?/gorgporv)
-   (?/gorgporv rdf/type kbio/GeneSpecificGorGPorVClass)
+   (?/gene [rdfs/subClassOf clojure.core/*] ?/gorgp)
+   (?/gorgp rdf/type kbio/GeneSpecificGorGPClass)
 
    (?/r1 owl/someValuesFrom ?/gene)
    (?/r1 owl/onProperty kso/has_indirect_template)
