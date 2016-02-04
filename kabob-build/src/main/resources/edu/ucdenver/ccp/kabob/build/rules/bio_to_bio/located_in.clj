@@ -1,10 +1,10 @@
 
 ;; DEFINITION: If a localization-process results-in-the-localization-of object-X and 
-;;             has-target-end-location object-Y, then X part-of Y
-`{:name "localization-infers-part_of"
+;;             has-target-end-location object-Y, then X RO:0001025 (located_in) Y
+`{:name "localization-infers-located_in"
   :head (
           (?/r rdf/type owl/Restriction)
-          (?/r owl/onProperty obo/BFO_0000050) ; part_of
+          (?/r owl/onProperty obo/RO_0001025) ; located_in
           (?/r owl/someValuesFrom ?/gocc)
 
           (?/protein rdfs/subClassOf ?/r)
