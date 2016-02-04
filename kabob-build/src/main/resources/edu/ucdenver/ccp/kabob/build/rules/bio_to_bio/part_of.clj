@@ -10,11 +10,11 @@
           (?/protein rdfs/subClassOf ?/r)
           )
   :body (
-          (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
-          (?/loc rdfs/subClassOf ?/of1)
-          (?/of1 rdf/type owl/Restriction)
           (?/of1 owl/onProperty obo/RO_0002313) ;transports or maintains localization of
           (?/of1 owl/someValuesFrom ?/protein) 
+          (?/of1 rdf/type owl/Restriction)
+          (?/loc rdfs/subClassOf ?/of1)
+          (?/loc rdfs/subClassOf obo/GO_0051179) ;localization
           
           (?/loc rdfs/subClassOf ?/to1)
           (?/to1 rdf/type owl/Restriction)
