@@ -37,11 +37,19 @@ http://purl.obolibrary.org/obo/ro.owl
 http://purl.obolibrary.org/obo/so.owl
 http://purl.obolibrary.org/obo/uberon/ext.owl"
 
+exit_code=0
 for url in $URLS
 do
   echo "downloading $url" 
   $DIR/download-and-log.sh $LOG_FILE $TARGET_DIR $url
+  e=$?
+  if [ $e -ne 0 ]; then
+    exit_code=$e
+  fi
 done
+
+exit $exit_code
+
 
 
 

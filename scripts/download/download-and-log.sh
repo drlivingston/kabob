@@ -49,7 +49,8 @@ echo -e "\nONT FILE: $ONT_FILE" | tee -a $LOG_FILE
 echo "OUTPUT FILE: $OUTPUT_FILE" | tee -a $LOG_FILE
 cd $CUR_DIR
 ./scripts/download/flatten-ontology.sh -i $ONT_FILE -o $OUTPUT_FILE | tee -a $LOG_FILE
+e=$?
 date | tee -a $LOG_FILE
-
+exit $e
 
 
