@@ -40,7 +40,7 @@ if ! [[ -e README.md ]]; then
     exit 1
 fi
 
-PATH_TO_ME=$(PWD)
+PATH_TO_ME=`pwd`
 
 mvn -e -f scripts/download/pom-flatten-ontology.xml exec:exec \
         -DontologyFile=$ONT_FILE \
