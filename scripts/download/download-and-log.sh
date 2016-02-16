@@ -38,7 +38,9 @@ touch $LOG_FILE
 echo "downloading $URL" 
 date | tee -a $LOG_FILE
 curl --remote-name --write-out "file: %{filename_effective} final-url: %{url_effective} size: %{size_download} time: %{time_total} final-time: " -L $URL | tee -a $LOG_FILE
-ONT_FILE_NAME=$(tail -n 1 $LOG_FILE | cut -f 2 -d " ")
+# filename_effective does not get filled on all systems, so we parse the downloaded file name from the URL
+URL=$(tail -n 1 $LOG_FILE | cut -f 4 -d " ")
+ONT_FILE_NAME=${URL##*/}
 ONT_FILE=$TARGET_DIR$ONT_FILE_NAME
 name=$(echo $ONT_FILE_NAME | cut -f 1 -d ".")
 ext="flattened.owl"
