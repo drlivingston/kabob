@@ -23,12 +23,32 @@ CUR_DIR=`pwd`
 mkdir -p $TARGET_DIR
 cd $TARGET_DIR
 
+#append forwardslash to target directory if it doesn't end in a slash already
+case "$TARGET_DIR" in
+*/)
+;;
+*)
+TARGET_DIR=$(echo "$TARGET_DIR/")
+;;
+esac
+
 #verify the log file
 touch $LOG_FILE
 
 echo "downloading $URL" 
 date | tee -a $LOG_FILE
 curl --remote-name --write-out "file: %{filename_effective} final-url: %{url_effective} size: %{size_download} time: %{time_total} final-time: " -L $URL | tee -a $LOG_FILE
+ONT_FILE_NAME=$(tail -n 1 $LOG_FILE | cut -f 2 -d " ")
+ONT_FILE=$TARGET_DIR$ONT_FILE_NAME
+name=$(echo $ONT_FILE_NAME | cut -f 1 -d ".")
+ext="flattened.owl"
+ONT_FILE_NAME_FLAT=$(echo ${name}_${ext})
+OUTPUT_FILE=$TARGET_DIR$ONT_FILE_NAME_FLAT
+echo -e "\nONT FILE: $ONT_FILE" | tee -a $LOG_FILE
+echo "OUTPUT FILE: $OUTPUT_FILE" | tee -a $LOG_FILE
+cd $CUR_DIR
+./scripts/download/flatten-ontology.sh -i $ONT_FILE -o $OUTPUT_FILE | tee -a $LOG_FILE
 date | tee -a $LOG_FILE
 
-cd $CUR_DIR
+
+

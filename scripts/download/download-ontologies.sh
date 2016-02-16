@@ -20,22 +20,22 @@ TARGET_DIR=$2
 echo "Logging to: $LOG_FILE"
 echo "Saving files to: $TARGET_DIR"
 
-URLS="http://www.ifomis.org/bfo/owl
+URLS="http://purl.obolibrary.org/obo/bfo.owl
 http://purl.obolibrary.org/obo/chebi.owl
 http://purl.obolibrary.org/obo/cl.owl
 http://purl.obolibrary.org/obo/doid.owl
-http://purl.obolibrary.org/obo/go.owl
-http://purl.obolibrary.org/obo/iao/dev/iao-main.owl
+http://geneontology.org/ontology/extensions/go-plus.owl
+http://purl.obolibrary.org/obo/iao.owl
 http://purl.obolibrary.org/obo/ncbitaxon.owl
+http://www.openannotation.org/spec/core/20130208/oa.owl
+http://purl.obolibrary.org/obo/oba.owl
 http://purl.obofoundry.org/obo/obi.owl
-http://purl.obolibrary.org/obo/ogms.owl
 http://purl.obolibrary.org/obo/pato.owl
+http://purl.obolibrary.org/obo/po.owl
 http://purl.obolibrary.org/obo/pr.owl
-http://purl.obolibrary.org/obo/so.owl"
-
-#RO?
-#Uberon
-#INO: http://rest.bioontology.org/bioportal/ontologies/download/49845?apikey=4ea81d74-8960-4525-810b-fa1baab576ff&userapikey=
+http://purl.obolibrary.org/obo/ro.owl
+http://purl.obolibrary.org/obo/so.owl
+http://purl.obolibrary.org/obo/uberon/ext.owl"
 
 for url in $URLS
 do
