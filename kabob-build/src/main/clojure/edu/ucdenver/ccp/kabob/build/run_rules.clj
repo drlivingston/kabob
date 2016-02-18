@@ -175,11 +175,6 @@
             target-connection (rule-output-kb (:output-directory args) rule)]
         (try (time (run-forward-rule source-connection target-connection rule))
              true
-             (catch Exception e
-               (println "query failed.")
-               (prn e)
-               (.printStackTrace e)
-               nil)
              (finally (close target-connection)
                       (close source-connection)))))))
 
