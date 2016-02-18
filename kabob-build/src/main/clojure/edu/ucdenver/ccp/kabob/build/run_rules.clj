@@ -127,30 +127,6 @@
                  {:select-vars query-vars})
     (println "final count: " @visit-counter)))
 
-;; TODO factor out constants below so they can be shared across binding forms
-
-(defn failover-process-rule [args rule]
-  (binding [edu.ucdenver.ccp.kr.sparql/*force-prefixes*
-            [["franzOption_memoryLimit" "franz:85g"]
-             ["franzOption_memoryExhaustionWarningPercentage" "franz:95"]
-             ["franzOption_chunkProcessingAllowed" "franz:yes"]
-             ["franzOption_chunkProcessingSize" "franz:500000"]]]
-    (prn (str "Failover Processing rule: " (:name rule)))
-    (let [source-connection (source-kb args)
-          target-connection (rule-output-kb (:output-directory args) rule)]
-      (try (time
-            (kabob-run-forward-ice-rule-parts source-connection
-                                              target-connection
-                                              rule))
-           true
-           (catch Exception e
-             (println "query failed.")
-             (prn e)
-             (.printStackTrace e)
-             nil)
-           (finally (close target-connection)
-                    (close source-connection))))))
-
 ;; This needs to check for duplicates and prefer one, but which?
 ;; This should probably take multiple lists, then defaults and hard-codes can
 ;; also be given in addition to what's in the rule.
@@ -206,45 +182,6 @@
                nil)
              (finally (close target-connection)
                       (close source-connection)))))))
-
-(defn warmup-kb [args]
-  (binding [edu.ucdenver.ccp.kr.sparql/*force-prefixes*
-            (add-magic-prefixes
-             [["franzOption_warmupStringTable" "franz:yes"]
-              ["franzOption_logQuery" "franz:yes"]]
-             {})
-            edu.ucdenver.ccp.kr.rdf/*use-inference* false
-            edu.ucdenver.ccp.kr.sparql/*select-limit* 1]
-    (let [query '((?/s ?/p ?/o))]
-      (prn (str "warming up kb: "))
-      (let [source-connection (source-kb args)]
-        (binding [*kb* source-connection]
-          (println "query:")
-          (prn query)
-          (println (sparql-select-query query))
-          (try (println "running:")
-               (time
-                (query-visit source-connection
-                             (fn [bindings]
-                               (pprint bindings))
-                             query))
-               true
-               (catch Exception e
-                 (println "query failed.")
-                 (prn e)
-                 nil)
-               (finally (close source-connection))))))))
-
-(defn try-process [args rule]
-  (try (primary-process-rule args rule)
-       true
-       (catch Exception e
-         nil)))
-
-(defn try-process-failover [args rule]
-  (try (primary-process-rule args rule)
-       (catch Exception e
-         (failover-process-rule args rule))))
 
 (defn process-forward-rules [args rules]
   (println "select limit (before bound): " edu.ucdenver.ccp.kr.sparql/*select-limit* )
