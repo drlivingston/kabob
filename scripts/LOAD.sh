@@ -23,7 +23,7 @@ $DIR_PAT \
 $FORMAT
 EOF
 )
-/usr/bin/time -v ssh agraph@localhost "$AGRAPH_CMD"
+ssh agraph@localhost "$AGRAPH_CMD"
 
 AGRAPH_CMD=$(cat <<EOF
 $SCRIPT_DIR/remove-duplicates.sh \
@@ -33,4 +33,4 @@ $AG_INDICES \
 $KB_NAME
 EOF
 )
-/usr/bin/time -v ssh agraph@localhost "$AGRAPH_CMD"
+ssh agraph@localhost "$AGRAPH_CMD"

@@ -15,4 +15,4 @@ AG_PORT=${2:?}
 KB_NAME=${3:?}
 
 echo Optimizing KB: $KB_NAME
-time $AG_BIN/../lib/agquery --port $AG_PORT --optimize 2 $KB_NAME
+$AG_BIN/../lib/agquery --port $AG_PORT --optimize 2 $KB_NAME

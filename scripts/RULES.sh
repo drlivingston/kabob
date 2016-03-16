@@ -12,7 +12,7 @@ fi
 
 RULE_PAT=$1
 
-/usr/bin/time -v $SCRIPT_DIR/run-rules.sh \
+$SCRIPT_DIR/run-rules.sh \
               $MAVEN \
               $KB_URL \
               $KB_NAME \
