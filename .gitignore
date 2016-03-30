@@ -12,6 +12,5 @@
 .project
 /.settings/
 
-
 test-rule-on-modelorgs.sh
 test-output/
