@@ -84,10 +84,13 @@
                  :ns "kbio" :prefix "R_"}]
           [?/r2 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}]
+          [?/rcard {:ln (:restriction)
+                 :ns "kbio" :prefix "R_"}]
           [?/protein1_sc {:ln (:sha-1 ?/interaction ?/protein1)
                           :ns "kbio" :prefix "P_"}]
           [?/protein2_sc {:ln (:sha-1 ?/interaction ?/protein2)
                           :ns "kbio" :prefix "P_"}])
 
-  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed" "franz:yes"]]}
   }
