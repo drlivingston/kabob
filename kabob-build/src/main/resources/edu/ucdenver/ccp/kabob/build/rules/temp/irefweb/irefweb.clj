@@ -20,55 +20,55 @@
 
   :body
   ;; get binary interaction records
-  ((?/edge_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_edgeTypeDataField1)
-   (?/edge_field obo/IAO_0000219 ["X" "en"])   ;; "X" signifies binary interaction
-   (?/interaction_record obo/BFO_0000051 ?/edge_field)  ;; bfo/has_part
+  ((_/edge_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_edgeTypeDataField1)
+   (_/edge_field obo/IAO_0000219 ["X" "en"])   ;; "X" signifies binary interaction
+   (_/interaction_record obo/BFO_0000051 _/edge_field)  ;; bfo/has_part
 
    ;; get the unique interaction identifier
-   (?/interaction_record obo/BFO_0000051 ?/interaction_checksum_field) ;; bfo/has_part
-   (?/interaction_checksum_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_checksumInteractionDataField1)
-   (?/interaction_checksum_field obo/IAO_0000219 ?/unique_interaction_id) ;; iao/denotes
+   (_/interaction_record obo/BFO_0000051 _/interaction_checksum_field) ;; bfo/has_part
+   (_/interaction_checksum_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_checksumInteractionDataField1)
+   (_/interaction_checksum_field obo/IAO_0000219 ?/unique_interaction_id) ;; iao/denotes
 
    ;; get the interaction type name and ID
-   (?/interaction_record obo/BFO_0000051 ?/interaction_type_record) ;; bfo/has_part
-   (?/interaction_type_record kiao/hasTemplate iaoirefweb/IRefWebInteractionTypeSchema1)
-   (?/interaction_type_record obo/BFO_0000051 ?/int_type_name_field) ;; bfo/has_part
-   (?/int_type_name_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeNameDataField1)
-   (?/int_type_name_field obo/IAO_0000219 ?/int_type_name) ;; iao/denotes
-   (?/interaction_type_record obo/BFO_0000051 ?/int_type_id_field) ;; bfo/has_part
-   (?/int_type_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeIdDataField1)
-   (?/int_type_id_field obo/IAO_0000219 ?/int_type_id_ice) ;; iao/denotes
-   (?/int_type_id_ice obo/IAO_0000219 ?/int_type_id) ;; iao/denotes
+   (_/interaction_record obo/BFO_0000051 _/interaction_type_record) ;; bfo/has_part
+   (_/interaction_type_record kiao/hasTemplate iaoirefweb/IRefWebInteractionTypeSchema1)
+ ;;  (?/interaction_type_record obo/BFO_0000051 ?/int_type_name_field) ;; bfo/has_part
+ ;;  (?/int_type_name_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeNameDataField1)
+ ;;  (?/int_type_name_field obo/IAO_0000219 ?/int_type_name) ;; iao/denotes
+   (_/interaction_type_record obo/BFO_0000051 _/int_type_id_field) ;; bfo/has_part
+   (_/int_type_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeIdDataField1)
+   (_/int_type_id_field obo/IAO_0000219 _/int_type_id_ice) ;; iao/denotes
+   (_/int_type_id_ice obo/IAO_0000219 ?/int_type_id) ;; iao/denotes
 
    ;; get the detection method
-   (?/interaction_record obo/BFO_0000051 ?/interaction_detection_method_record) ;; bfo/has_part
-   (?/interaction_detection_method_record kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethodSchema1)
-   (?/interaction_detection_method_record obo/BFO_0000051 ?/detection_method_id_field) ;; bfo/has_part
-   (?/detection_method_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethod_detectionMethodIdDataField1)
-   (?/detection_method_id_field obo/IAO_0000219 ?/detection_method_id) ;; iao/denotes
+   (_/interaction_record obo/BFO_0000051 _/interaction_detection_method_record) ;; bfo/has_part
+   (_/interaction_detection_method_record kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethodSchema1)
+   (_/interaction_detection_method_record obo/BFO_0000051 _/detection_method_id_field) ;; bfo/has_part
+   (_/detection_method_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethod_detectionMethodIdDataField1)
+   (_/detection_method_id_field obo/IAO_0000219 ?/detection_method_id) ;; iao/denotes
 
    ;; there is a "super" record in IRefWeb that contains references
    ;; to the interaction record and interactor record(s)
-   (?/super_record obo/BFO_0000051 ?/interaction_record) ;; bfo/has_part
+   (_/super_record obo/BFO_0000051 _/interaction_record) ;; bfo/has_part
 
    ;; get the two distinct interactors for this binary interaction
-   (?/super_record obo/BFO_0000051 ?/interactor_record1) ;; bfo/has_part
-   (?/interactor_record1 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
-   (?/super_record obo/BFO_0000051 ?/interactor_record2) ;; bfo/has_part
-   (?/interactor_record2 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
-   (!= ?/interactor_record1 ?/interactor_record2)
+   (_/super_record obo/BFO_0000051 _/interactor_record1) ;; bfo/has_part
+   (_/interactor_record1 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
+   (_/super_record obo/BFO_0000051 _/interactor_record2) ;; bfo/has_part
+   (_/interactor_record2 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
+   (!= _/interactor_record1 _/interactor_record2)
 
    ;; get the bioentity (protein) corresponding to interactor 1
-   (?/interactor_record1 obo/BFO_0000051 ?/id_field1) ;; bfo/has_part
-   (?/id_field1 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
-   (?/id_field1 obo/IAO_0000219 ?/id1) ;; iao/denotes
-   (?/id1 obo/IAO_0000219 ?/protein1) ;; iao/denotes
+   (_/interactor_record1 obo/BFO_0000051 _/id_field1) ;; bfo/has_part
+   (_/id_field1 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
+   (_/id_field1 obo/IAO_0000219 _/id1) ;; iao/denotes
+   (_/id1 obo/IAO_0000219 ?/protein1) ;; iao/denotes
 
    ;; get the bioentity (protein) corresponding to interactor 2
-   (?/interactor_record2 obo/BFO_0000051 ?/id_field2) ;; bfo/has_part
-   (?/id_field2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
-   (?/id_field2 obo/IAO_0000219 ?/id2) ;; iao/denotes
-   (?/id2 obo/IAO_0000219 ?/protein2)) ;; iao/denotes
+   (_/interactor_record2 obo/BFO_0000051 _/id_field2) ;; bfo/has_part
+   (_/id_field2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
+   (_/id_field2 obo/IAO_0000219 _/id2) ;; iao/denotes
+   (_/id2 obo/IAO_0000219 ?/protein2)) ;; iao/denotes
 
   ;; we take advantage of the fact that IRefWeb has
   ;; created a unique id for the interaction. This will allow us to reproducibly create
@@ -231,6 +231,5 @@
           [?/protein1_sc {:ln (:sha-1 ?/interaction ?/protein1)
                           :ns "kbio" :prefix "P_"}])
 
-  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
-                             ["franzOption_memoryLimit" "franz:85g"]]}
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
   }
