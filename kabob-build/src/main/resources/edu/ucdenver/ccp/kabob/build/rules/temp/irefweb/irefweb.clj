@@ -7,6 +7,11 @@
          (?/protein1_sc rdfs/subClassOf ?/protein1)
          (?/protein2_sc rdfs/subClassOf ?/protein2)
 
+         ;; create a cardinality restriction of 2 on the has_participant property
+         (?/rcard rdf/type owl/Restriction)
+         (?/rcard owl/onProperty obo/RO_0000057) ; has_participant
+         (?/rcard owl/cardinality 2) ;; binary interactions must have 2 participants.
+
          (?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/RO_0000057) ; has_participant
          (?/r1 owl/someValuesFrom ?/protein1_sc)
@@ -16,7 +21,8 @@
          (?/r2 owl/someValuesFrom ?/protein2_sc)
 
          (?/interaction rdfs/subClassOf ?/r1)
-         (?/interaction rdfs/subClassOf ?/r2))
+         (?/interaction rdfs/subClassOf ?/r2)
+         (?/interaction rdfs/subClassOf ?/rcard))
 
   :body
   ;; get binary interaction records
@@ -100,7 +106,13 @@
          (?/r1 owl/onProperty obo/RO_0000057) ; has_participant
          (?/r1 owl/someValuesFrom ?/protein1_sc)
 
-         (?/interaction rdfs/subClassOf ?/r1))
+          ;; create a cardinality restriction of 2 on the has_participant property
+         (?/rcard rdf/type owl/Restriction)
+         (?/rcard owl/onProperty obo/RO_0000057) ; has_participant
+         (?/rcard owl/cardinality 1) ;; unary interactions must have 1 participant.
+
+         (?/interaction rdfs/subClassOf ?/r1)
+         (?/interaction rdfs/subClassOf ?/rcard))
 
   :body
   ;; get binary interaction records
@@ -172,7 +184,13 @@
          (?/r1 owl/onProperty obo/RO_0000057) ; has_participant
          (?/r1 owl/someValuesFrom ?/protein1_sc)
 
-         (?/interaction rdfs/subClassOf ?/r1))
+           ;; create a cardinality restriction of >2 on the has_participant property
+         (?/rcard rdf/type owl/Restriction)
+         (?/rcard owl/onProperty obo/RO_0000057) ; has_participant
+         (?/rcard owl/minCardinality 3) ;; n-ary interactions must have >2 participant.
+
+         (?/interaction rdfs/subClassOf ?/r1)
+         (?/interaction rdfs/subClassOf ?/rcard))
 
   :body
   ;; get binary interaction records
