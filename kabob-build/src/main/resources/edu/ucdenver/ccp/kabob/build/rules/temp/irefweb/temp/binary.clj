@@ -50,7 +50,7 @@
    (?/interactor_record2 obo/BFO_0000051 _/id_field2) ;; bfo/has_part
    (_/id_field2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/id_field2 obo/IAO_0000219 _/id2) ;; iao/denotes
-   (_/id2 obo/IAO_0000219 ?/protein2)) ;; iao/denotes
+   (_/id2 obo/IAO_0000219 ?/protein2) ;; iao/denotes
 
   ;; get the unique interaction identifier
   (_/interaction_record obo/BFO_0000051 _/interaction_checksum_field) ;; bfo/has_part
@@ -73,7 +73,7 @@
   (_/interaction_detection_method_record kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethodSchema1)
   (_/interaction_detection_method_record obo/BFO_0000051 _/detection_method_id_field) ;; bfo/has_part
   (_/detection_method_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethod_detectionMethodIdDataField1)
-  (_/detection_method_id_field obo/IAO_0000219 ?/detection_method_id) ;; iao/denotes
+  (_/detection_method_id_field obo/IAO_0000219 ?/detection_method_id)) ;; iao/denotes
 
   ;; we take advantage of the fact that IRefWeb has
   ;; created a unique id for the interaction. This will allow us to reproducibly create
