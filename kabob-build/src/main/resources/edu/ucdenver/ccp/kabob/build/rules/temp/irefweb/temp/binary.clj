@@ -1,4 +1,4 @@
-`{:name "irefweb-binary-interactions"
+`{:name "irefweb-binary-interactions-tmp"
   :description ""
   :head ((?/interaction rdfs/subClassOf ?/int_type_id) ;interaction
 
