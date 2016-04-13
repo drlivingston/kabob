@@ -23,29 +23,6 @@
    (_/edge_field obo/IAO_0000219 ["X" "en"])   ;; "X" signifies binary interaction
    (_/interaction_record obo/BFO_0000051 _/edge_field)  ;; bfo/has_part
 
-   ;; get the unique interaction identifier
-   (_/interaction_record obo/BFO_0000051 _/interaction_checksum_field) ;; bfo/has_part
-   (_/interaction_checksum_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_checksumInteractionDataField1)
-   (_/interaction_checksum_field obo/IAO_0000219 ?/unique_interaction_id) ;; iao/denotes
-
-   ;; get the interaction type name and ID
-   (_/interaction_record obo/BFO_0000051 _/interaction_type_record) ;; bfo/has_part
-   (_/interaction_type_record kiao/hasTemplate iaoirefweb/IRefWebInteractionTypeSchema1)
- ;;  (?/interaction_type_record obo/BFO_0000051 ?/int_type_name_field) ;; bfo/has_part
- ;;  (?/int_type_name_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeNameDataField1)
- ;;  (?/int_type_name_field obo/IAO_0000219 ?/int_type_name) ;; iao/denotes
-   (_/interaction_type_record obo/BFO_0000051 _/int_type_id_field) ;; bfo/has_part
-   (_/int_type_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeIdDataField1)
-   (_/int_type_id_field obo/IAO_0000219 _/int_type_id_ice) ;; iao/denotes
-   (_/int_type_id_ice obo/IAO_0000219 ?/int_type_id) ;; iao/denotes
-
-   ;; get the detection method
-   (_/interaction_record obo/BFO_0000051 _/interaction_detection_method_record) ;; bfo/has_part
-   (_/interaction_detection_method_record kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethodSchema1)
-   (_/interaction_detection_method_record obo/BFO_0000051 _/detection_method_id_field) ;; bfo/has_part
-   (_/detection_method_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethod_detectionMethodIdDataField1)
-   (_/detection_method_id_field obo/IAO_0000219 ?/detection_method_id) ;; iao/denotes
-
    ;; there is a "super" record in IRefWeb that contains references
    ;; to the interaction record and interactor record(s)
    (_/super_record obo/BFO_0000051 _/interaction_record) ;; bfo/has_part
@@ -68,6 +45,29 @@
    (_/id_field2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/id_field2 obo/IAO_0000219 _/id2) ;; iao/denotes
    (_/id2 obo/IAO_0000219 ?/protein2)) ;; iao/denotes
+
+  ;; get the unique interaction identifier
+   (_/interaction_record obo/BFO_0000051 _/interaction_checksum_field) ;; bfo/has_part
+   (_/interaction_checksum_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_checksumInteractionDataField1)
+   (_/interaction_checksum_field obo/IAO_0000219 ?/unique_interaction_id) ;; iao/denotes
+
+   ;; get the interaction type name and ID
+   (_/interaction_record obo/BFO_0000051 _/interaction_type_record) ;; bfo/has_part
+   (_/interaction_type_record kiao/hasTemplate iaoirefweb/IRefWebInteractionTypeSchema1)
+ ;;  (?/interaction_type_record obo/BFO_0000051 ?/int_type_name_field) ;; bfo/has_part
+ ;;  (?/int_type_name_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeNameDataField1)
+ ;;  (?/int_type_name_field obo/IAO_0000219 ?/int_type_name) ;; iao/denotes
+   (_/interaction_type_record obo/BFO_0000051 _/int_type_id_field) ;; bfo/has_part
+   (_/int_type_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionType_interactionTypeIdDataField1)
+   (_/int_type_id_field obo/IAO_0000219 _/int_type_id_ice) ;; iao/denotes
+   (_/int_type_id_ice obo/IAO_0000219 ?/int_type_id) ;; iao/denotes
+
+   ;; get the detection method
+   (_/interaction_record obo/BFO_0000051 _/interaction_detection_method_record) ;; bfo/has_part
+   (_/interaction_detection_method_record kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethodSchema1)
+   (_/interaction_detection_method_record obo/BFO_0000051 _/detection_method_id_field) ;; bfo/has_part
+   (_/detection_method_id_field kiao/hasTemplate iaoirefweb/IRefWebInteractionDetectionMethod_detectionMethodIdDataField1)
+   (_/detection_method_id_field obo/IAO_0000219 ?/detection_method_id) ;; iao/denotes
 
   ;; we take advantage of the fact that IRefWeb has
   ;; created a unique id for the interaction. This will allow us to reproducibly create
