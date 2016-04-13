@@ -21,7 +21,7 @@
   :body
   ;; get binary interaction records
   ((?/edge_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_edgeTypeDataField1)
-   (?/edge_field obo/IAO_0000219 "X"@en)   ;; "X" signifies binary interaction
+   (?/edge_field obo/IAO_0000219 ["X" "en"])   ;; "X" signifies binary interaction
    (?/interaction_record obo/BFO_0000051 ?/edge_field)  ;; bfo/has_part
 
    ;; get the unique interaction identifier
@@ -105,7 +105,7 @@
   :body
   ;; get binary interaction records
   ((?/edge_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_edgeTypeDataField1)
-   (?/edge_field obo/IAO_0000219 "Y"@en)   ;; "Y" signifies intra-molecular interaction
+   (?/edge_field obo/IAO_0000219 ["Y" "en"])   ;; "Y" signifies intra-molecular interaction
    (?/interaction_record obo/BFO_0000051 ?/edge_field)  ;; bfo/has_part
 
    ;; get the unique interaction identifier
@@ -177,7 +177,7 @@
   :body
   ;; get binary interaction records
   ((?/edge_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_edgeTypeDataField1)
-   (?/edge_field obo/IAO_0000219 "C"@en)   ;; "C" signifies "complex" in IRefWeb, but really mean n-ary interaction where n>2
+   (?/edge_field obo/IAO_0000219 ["C" "en"])   ;; "C" signifies "complex" in IRefWeb, but really mean n-ary interaction where n>2
    (?/interaction_record obo/BFO_0000051 ?/edge_field)  ;; bfo/has_part
 
    ;; get the unique interaction identifier
