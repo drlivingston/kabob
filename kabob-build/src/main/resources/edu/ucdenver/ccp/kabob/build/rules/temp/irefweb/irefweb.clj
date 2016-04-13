@@ -52,20 +52,20 @@
    (_/super_record obo/BFO_0000051 _/interaction_record) ;; bfo/has_part
 
    ;; get the two distinct interactors for this binary interaction
-   (_/super_record obo/BFO_0000051 _/interactor_record1) ;; bfo/has_part
-   (_/interactor_record1 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
-   (_/super_record obo/BFO_0000051 _/interactor_record2) ;; bfo/has_part
-   (_/interactor_record2 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
-   (!= _/interactor_record1 _/interactor_record2)
+   (_/super_record obo/BFO_0000051 ?/interactor_record1) ;; bfo/has_part
+   (?/interactor_record1 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
+   (_/super_record obo/BFO_0000051 ?/interactor_record2) ;; bfo/has_part
+   (?/interactor_record2 kiao/hasTemplate iaoirefweb/IRefWebInteractorSchema1)
+   (!= ?/interactor_record1 ?/interactor_record2)
 
    ;; get the bioentity (protein) corresponding to interactor 1
-   (_/interactor_record1 obo/BFO_0000051 _/id_field1) ;; bfo/has_part
+   (?/interactor_record1 obo/BFO_0000051 _/id_field1) ;; bfo/has_part
    (_/id_field1 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/id_field1 obo/IAO_0000219 _/id1) ;; iao/denotes
    (_/id1 obo/IAO_0000219 ?/protein1) ;; iao/denotes
 
    ;; get the bioentity (protein) corresponding to interactor 2
-   (_/interactor_record2 obo/BFO_0000051 _/id_field2) ;; bfo/has_part
+   (?/interactor_record2 obo/BFO_0000051 _/id_field2) ;; bfo/has_part
    (_/id_field2 kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
    (_/id_field2 obo/IAO_0000219 _/id2) ;; iao/denotes
    (_/id2 obo/IAO_0000219 ?/protein2)) ;; iao/denotes
