@@ -231,5 +231,6 @@
           [?/protein1_sc {:ln (:sha-1 ?/interaction ?/protein1)
                           :ns "kbio" :prefix "P_"}])
 
-  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_memoryLimit" "franz:85g"]]}
   }
