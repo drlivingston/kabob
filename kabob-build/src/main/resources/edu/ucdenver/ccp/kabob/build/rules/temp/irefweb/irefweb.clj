@@ -3,6 +3,7 @@
   :description "IRefWeb distinguishes among three different categories of protein interactions:
   those that involve a single protein interacting with itself (intra-molecular),
   those that involve two proteins (binary), and those that involve >2 proteins (n-ary).
+  Documentation for IRefWeb is available [here](http://irefindex.org/wiki/index.php?title=README_MITAB2.6_for_iRefIndex).
   This rule generates bio-representations for all binary protein interactions cataloged by
   IRefWeb. Binary interactions are indicated by an 'X' in the 'edge type' column of IRefWeb
   records. For each binary interaction, this rule creates a subclass of the 'interaction type'
@@ -123,6 +124,7 @@
   :description "IRefWeb distinguishes among three different categories of protein interactions:
   those that involve a single protein interacting with itself (intra-molecular),
   those that involve two proteins (binary), and those that involve >2 proteins (n-ary).
+  Documentation for IRefWeb is available [here](http://irefindex.org/wiki/index.php?title=README_MITAB2.6_for_iRefIndex).
   This rule generates bio-representations for all unary (intra-molecular) protein interactions
   cataloged by IRefWeb. Unary interactions are indicated by an 'Y' in the 'edge type' column of
   IRefWeb records. For each unary interaction, this rule creates a subclass of the
@@ -221,6 +223,7 @@
   :description "IRefWeb distinguishes among three different categories of protein interactions:
   those that involve a single protein interacting with itself (intra-molecular),
   those that involve two proteins (binary), and those that involve >2 proteins (n-ary).
+  Documentation for IRefWeb is available [here](http://irefindex.org/wiki/index.php?title=README_MITAB2.6_for_iRefIndex).
   This rule generates bio-representations for all n-ary protein interactions cataloged by
   IRefWeb, where n>2. N-ary interactions are indicated by an 'C' in the 'edge type' column of
   IRefWeb records. The 'C' is referred to as 'complex' in the IRefWeb documentation, however this
