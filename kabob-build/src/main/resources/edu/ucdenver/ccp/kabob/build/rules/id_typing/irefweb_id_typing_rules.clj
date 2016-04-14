@@ -12,20 +12,3 @@
 
   :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
 }
-
-;;TODO replicate the above and create denotesSubClassOf for Complexes
-
-
-
-;; IREFWEB ids are of type kiao/ProteinIdentifier
-;; `{:name "irefweb-A-id-type-assertion"
-;;  :head ((?/ice kiao/denotesSubClassOf obo/CHEBI_36080)) ;protein
-;;  :body ((_/f kiao/hasTemplate iaoirefweb/irefwebirefwebInteractorID_ADataField1)
-;;         (_/f obo/IAO_0000219 ?/ice))}
-
-;; `{:name "irefweb-B-id-type-assertion"
-;;  :head ((?/ice kiao/denotesSubClassOf obo/CHEBI_36080)) ;protein
-;;  :body ((_/f kiao/hasTemplate iaoirefweb/irefwebirefwebInteractorID_BDataField1)
-;;         (_/f obo/IAO_0000219 ?/ice))}
-
-
