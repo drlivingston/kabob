@@ -232,7 +232,7 @@
   interactions are composed from multiple IRefWeb records as each record catalogs only a single
   participant in the n-ary interaction. IRefWeb records involved in an n-ary interaction share a unique
   interaction identifier which is used by the rule to connect all n participants for a given n-ary interaction.
-  The rule also places a minimum-cardinality restriction of 2 on the interaction subclass for the
+  The rule also places a minimum-cardinality restriction of 3 on the interaction subclass for the
   ro:has_participant property."
   :head ((?/interaction rdfs/subClassOf ?/int_type_id) ;interaction
          (?/interaction rdfs/label ?/int_type_label) ; transfer label to the subclass
@@ -255,7 +255,7 @@
          (?/interaction rdfs/subClassOf ?/rcard))
 
   :body
-  ;; get binary interaction records
+  ;; get n-ary interaction records
   ((?/edge_field kiao/hasTemplate iaoirefweb/IRefWebInteraction_edgeTypeDataField1)
    (?/edge_field obo/IAO_0000219 ["C" "en"])   ;; "C" signifies "complex" in IRefWeb, but really mean n-ary interaction where n>2
    (?/interaction_record obo/BFO_0000051 ?/edge_field)  ;; bfo/has_part
