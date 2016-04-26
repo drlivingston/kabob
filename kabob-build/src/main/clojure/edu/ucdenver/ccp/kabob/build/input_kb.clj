@@ -1,7 +1,7 @@
 
 (ns edu.ucdenver.ccp.kabob.build.input-kb
   (:require [edu.ucdenver.ccp.kr.kb
-             :refer [connection]]
+             :refer [connection kb]]
             [edu.ucdenver.ccp.kr.rdf
              :refer [register-namespaces synch-ns-mappings]]
             [edu.ucdenver.ccp.kr.sesame.kb
@@ -20,6 +20,6 @@
             *repository-name* (:repo-name args)
             *username* (:username args)
             *password* (:password args)]
-    (initialize-kb HTTPRepository)))
+    (initialize-kb (kb HTTPRepository))))
 
 (def source-kb open-kb)
