@@ -1,5 +1,5 @@
 ;; -------------------------------------------
-;; --------- BRENDA Tissue Ontology ----------  
+;; --------- BRENDA Tissue Ontology ----------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the BRENDA Tissue Ontology
 `{:name "brenda-ontology-ice-gen"
@@ -9,7 +9,7 @@
                   :ns "iaobto" :prefix "" :suffix "_ICE"}])}
 
 ;; -------------------------------------------
-;; -------------- Cell Ontology --------------  
+;; -------------- Cell Ontology --------------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the Cell Ontology
 `{:name "cell-ontology-ice-gen"
@@ -19,7 +19,7 @@
                   :ns "iaocl" :prefix "" :suffix "_ICE"}])}
 
 ;; -------------------------------------------
-;; ------------- ChEBI Ontology --------------  
+;; ------------- ChEBI Ontology --------------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the ChEBI:subatomic particle subontology
 `{:name "chebi-subatomic-particle-ice-gen"
@@ -44,7 +44,7 @@
 
 
 ;; -------------------------------------------
-;; --------------- GO Ontology ---------------  
+;; --------------- GO Ontology ---------------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the GO BP subontology
 `{:name "go-bp-ice-gen"
@@ -68,19 +68,18 @@
                   :ns "iaogo" :prefix "" :suffix "_ICE"}])}
 
 ;; -------------------------------------------
-;; --------------- MI Ontology ---------------  
+;; --------------- MI Ontology ---------------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the PSI Molecular Interaction Ontology
 `{:name "mi-ice-gen"
-  :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes
-  :body ((?/subroot [obo/part_of *] obo/MI_0000) ;; NEED TO CHECK THE NAMESAPCE OF THIS PART_OF RELATION
-          (?/subclass [rdfs/subClassOf *] ?/subroot)
-         (:not (:isBlank ?/subclass)))
+  :head ((?/ice obo/IAO_0000219 ?/cls)) ; denotes
+  :body ((?/cls oboInOwl:hasOBONamespace ["PSI-MI"])
+         (?/cls rdf/type owl/Class))
   :reify ([?/ice {:ln (:localname ?/subclass)
                   :ns "iaomi" :prefix "" :suffix "_ICE"}])}
 
 ;; -------------------------------------------
-;; --------------- MP Ontology ---------------  
+;; --------------- MP Ontology ---------------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the Mammalian Phenotype ontology
 `{:name "mpheno-ice-gen"
@@ -92,7 +91,7 @@
 
 
 ;; -------------------------------------------
-;; ----------- NCBITaxon Ontology ------------  
+;; ----------- NCBITaxon Ontology ------------
 ;; -------------------------------------------
 
 ;;iao/ncbi_taxon/NCBI_TAXON_215158_ICE
@@ -161,7 +160,7 @@
 ;;                   :ns "iaoncbitaxon" :prefix "" :suffix "_ICE"}])}
 
 ;; -------------------------------------------
-;; ------------ Protein Ontology -------------  
+;; ------------ Protein Ontology -------------
 ;; -------------------------------------------
 
 
@@ -202,7 +201,7 @@
 ;;                   :ns "iaopr" :prefix "" :suffix "_ICE"}])}
 
 ;; -------------------------------------------
-;; ----------- Sequence Ontology -------------  
+;; ----------- Sequence Ontology -------------
 ;; -------------------------------------------
 `{:name "so-sequence-attribute-ice-gen"
   :head ((?/ice obo/IAO_0000219 ?/subclass)) ; denotes

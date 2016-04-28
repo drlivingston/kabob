@@ -35,12 +35,13 @@ http://purl.obolibrary.org/obo/po.owl
 http://purl.obolibrary.org/obo/pr.owl
 http://purl.obolibrary.org/obo/ro.owl
 http://purl.obolibrary.org/obo/so.owl
-http://purl.obolibrary.org/obo/uberon/ext.owl"
+http://purl.obolibrary.org/obo/uberon/ext.owl
+http://purl.obolibrary.org/obo/mi.owl"
 
 exit_code=0
 for url in $URLS
 do
-  echo "downloading $url" 
+  echo "downloading $url"
   $DIR/download-and-log.sh $LOG_FILE $TARGET_DIR $url
   e=$?
   if [ $e -ne 0 ]; then
