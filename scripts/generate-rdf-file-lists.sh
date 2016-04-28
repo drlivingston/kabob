@@ -19,10 +19,17 @@ if [[ ! -d $FILE_LIST_BASE ]]; then
     mkdir -p $FILE_LIST_BASE
 fi
 
-for list in $ICE_LIST $LARGE_ICE_LIST $OWL_LIST $SCHEMA_LIST; do
+for LISTFILE in $ICE_LIST $LARGE_ICE_LIST $OWL_LIST $SCHEMA_LIST; do
     if [[ -f $list ]]; then
-        rm $list
+        rm $LISTFILE
     fi
+    # Touch each of the list files that we're going to try to load.  In
+    # practice this is only useful when testing the build process with a
+    # much smaller subset of the files (in particular the large ice files
+    # won't be present).  Ensuring that all the list file for each categoty
+    # of file exists before the discovery (below) is done prevents errors
+    # when we try to access them later.
+    touch $LISTFILE
 done
 
 for file in $(find -L "$ICE_BASE" -type f \( -iname "*.nt.gz" ! -iname "*goa*" ! -iname "*protein2ipr*" ! -iname "*uniprot-Trembl*" \)); do echo "$file" >> "$ICE_LIST"; done
