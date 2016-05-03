@@ -26,11 +26,9 @@
 ;; }
 
 `{:name "uniprot-in-taxon"
-  :head (
-         (?/r1 rdf/type owl/Restriction)
+  :head ((?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
-
          (?/protein rdfs/subClassOf ?/r1))
   :body 
   ((_/fv0 kiao/hasTemplate iaouniprot/UniProtFileRecord_primaryAccessionDataField1)
@@ -53,12 +51,9 @@
 }
 
 `{:name "uniprot-sparse-in-taxon"
-  :head ((?/protein obo/RO_0002162 ?/taxon) ; in_taxon
-
-         (?/r1 rdf/type owl/Restriction)
+  :head ((?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
-
          (?/protein rdfs/subClassOf ?/r1))
   :body 
   ((_/fv0 kiao/hasTemplate iaouniprot/SparseUniProtFileRecord_primaryAccessionDataField1)
@@ -83,9 +78,7 @@
 
 
 `{:name "eg-in-taxon"
-  :head ((?/gene obo/RO_0002162 ?/taxon) ; in_taxon
-
-         (?/r1 rdf/type owl/Restriction)
+  :head ((?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
 
@@ -104,17 +97,14 @@
 }
 
 
-;; This rule assigns taxons to bio-entities represented by RefSeq IDs (so genes, proteins, RNAs...)
+;; This rule assigns taxons to bio-entities represented by RefSeq IDs (so
+;; genes, proteins, RNAs...)
 `{:name "refseq-in-taxon"
-  :head ((?/bioentity obo/RO_0002162 ?/taxon) ; in_taxon
-
-         (?/r1 rdf/type owl/Restriction)
+  :head ((?/r1 rdf/type owl/Restriction)
          (?/r1 owl/onProperty obo/RO_0002162) ; in_taxon
          (?/r1 owl/someValuesFrom ?/taxon)
-
          (?/bioentity rdfs/subClassOf ?/r1))
 
-         
   :body (;;(_/record kiao/hasTemplate iaorefseq/RefSeqReleaseCatalogFileDataSchema1)
          ~@(kabob/rtv _/record
                       iaorefseq/RefSeqReleaseCatalogFileData_refseqIdDataField1 _/refseqIce
@@ -125,47 +115,3 @@
   :reify ([?/r1 {:ln (:restriction)
                  :ns "kbio" :prefix "R_"}])
 }
-
-
-
-;; `{:name "uniprot-in-taxon"
-;;   :head ((?/protein obo/inTaxon ?/taxon)
-
-;;          (?/r1 rdf/type owl/Restriction)
-;;          (?/r1 owl/onProperty obo/inTaxon)
-;;          (?/r1 owl/someValuesFrom ?/taxon)
-
-;;          (?/protein rdfs/subClassOf ?/r1))
-
-         
-;;   :body 
-;;   (~@(kabob/rtv _/record
-;;         iaouniprot/UniProtIDMappingFileData_taxonomyIDDataField1 _/taxonIce
-;;         iaouniprot/UniProtIDMappingFileData_uniProtAccessionIDDataField1
-;;                                                                  _/uniprotIce)
-;;    (_/uniprotIce obo/IAO_0000219 ?/protein)
-;;    (_/taxonIce obo/IAO_0000219 ?/taxon))
-
-;;   :reify (?/r1)
-;; }
-
-;; `{:name "eg-in-taxon"
-;;   :head ((?/gene obo/inTaxon ?/taxon)
-
-;;          (?/r1 rdf/type owl/Restriction)
-;;          (?/r1 owl/onProperty obo/inTaxon)
-;;          (?/r1 owl/someValuesFrom ?/taxon)
-
-;;          (?/gene rdfs/subClassOf ?/r1))
-
-         
-;;   :body (;;(_/record kiao/hasTemplate iaoeg/EntrezGeneInfoFileDataSchema1)
-;;          ~@(kabob/rtv _/record
-;;                       iaoeg/EntrezGeneInfoFileData_geneIDDataField1 _/egIce
-;;                       iaoeg/EntrezGeneInfoFileData_taxonIDDataField1 _/taxonIce)
-;;          (_/egIce obo/IAO_0000219 ?/gene)
-;;          (_/taxonIce obo/IAO_0000219 ?/taxon))
-
-;;   :reify (?/r1)
-;; }
-
