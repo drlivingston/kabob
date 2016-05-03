@@ -22,7 +22,7 @@ OUTPUTDIR=$KB_DATA_DIR/$RULETYPE/
 RULES_RES_DIR=edu/ucdenver/ccp/kabob/build/$RULETYPE/
 
 echo Running rules
-mkdir --parents $OUTPUTDIR
+mkdir -p $OUTPUTDIR
 $MAVEN \
     --debug \
     --file kabob-build/pom.xml \
