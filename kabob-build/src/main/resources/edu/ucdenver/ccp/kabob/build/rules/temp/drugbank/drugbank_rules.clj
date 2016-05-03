@@ -15,15 +15,23 @@
          (?/interaction rdfs/subClassOf obo/MI_0407) ;direct interaction
          (?/interaction rdfs/subClassOf obo/GO_0005488) ;binding
 
+         ;; create a subclass of the target that will participate in this
+         ;; particular binding
+         (?/target rdfs/subClassOf ?/target_bioentity)
+
           ;; link the binding event to the target participant (protein in this case)
          (?/r_target_participant rdf/type owl/Restriction)
          (?/r_target_participant owl/onProperty obo/RO_0000057) ; has_participant
-         (?/r_target_participant owl/someValuesFrom ?/target_bioentity)
+         (?/r_target_participant owl/someValuesFrom ?/target)
+
+         ;; create a subclass of the drug molecule that will participate
+         ;; in this particular binding
+         (?/drug rdfs/subClassOf ?/drug_bioentity)
 
           ;; link the binding event to the drug
          (?/r_drug_participant rdf/type owl/Restriction)
          (?/r_drug_participant owl/onProperty obo/RO_0000057) ; has_participant
-         (?/r_drug_participant owl/someValuesFrom ?/drug_bioentity)
+         (?/r_drug_participant owl/someValuesFrom ?/drug)
 
           ;; this binding realizes the drug_role that inheres_in the drug
          (?/r_realizes_drug_role rdf/type owl/Restriction)
@@ -35,7 +43,7 @@
          ;;   so that it can be realized by the restriction above
          (?/r_inheres rdf/type owl/Restriction)
          (?/r_inheres owl/onProperty obo/RO_0000052) ;inheres_in
-         (?/r_inheres owl/someValuesFrom ?/drug_bioentity)
+         (?/r_inheres owl/someValuesFrom ?/drug)
 
          (?/inheres rdfs/subClassOf obo/CHEBI_23888) ;drug (role)
          (?/inheres rdfs/subClassOf ?/r_inheres)
@@ -72,6 +80,10 @@
 
   :reify ([?/interaction {:ln (:sha-1 "interaction" ?/target_bioentity ?/drug_bioentity)
                           :ns "kbio" :prefix "I_"}]
+          [?/target {:ln (:sha-1 ?/target_bioentity ?/drug_bioentity)
+                    :ns "kbio" :prefix "T_"}]
+          [?/drug {:ln (:sha-1 ?/target_bioentity ?/drug_bioentity)
+                    :ns "kbio" :prefix "D_"}]
           [?/r_target_participant {:ln (:restriction)
                  :ns "kbio" :prefix "RESTR_"}]
           [?/r_drug_participant {:ln (:restriction)
