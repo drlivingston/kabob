@@ -28,6 +28,7 @@
 
 
        ;;("iao" "http://purl.obolibrary.org/obo/")
+       ("ccp_obo_ext" "http://ccp.ucdenver.edu/obo/ext/")
        ("kiao" "http://kabob.ucdenver.edu/iao/")
        ("kabob" "http://kabob.ucdenver.edu/")
        ("kbio" "http://kabob.ucdenver.edu/bio/")
