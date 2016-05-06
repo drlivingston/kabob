@@ -71,6 +71,7 @@
     ;; links to a protein bio-entity
     ;; of 12,704 target records, all but 225 have an associated polypeptide record
     ;; we should look into those 225 targets at some point as they are currently excluded
+    ;; There is card for this: https://trello.com/c/JulbRanl
     (_/target_record obo/BFO_0000051 _/polypeptide_record)
     (_/polypeptide_record kiao/hasTemplate iaodrugbank/PolypeptideSchema1)
     (_/polypeptide_record obo/BFO_0000051 _/polypeptide_id_field)
