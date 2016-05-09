@@ -132,6 +132,10 @@ ssh agraph@localhost "$AGRAPH_CMD"
 ./scripts/RUN_RULES_AND_LOAD.sh rules/temp/irefweb
 ./scripts/RUN_RULES_AND_LOAD.sh rules/temp/goa
 
+# Apply labels to the BIO entities that have been created by the preceding
+# rules.
+./scripts/RUN_RULES_AND_LOAD.sh rules/bio_labels
+
 ./scripts/DEDUP.sh
 AGRAPH_CMD=$(cat <<EOF
 $HUDSON_DIR/scripts/optimize.sh \
