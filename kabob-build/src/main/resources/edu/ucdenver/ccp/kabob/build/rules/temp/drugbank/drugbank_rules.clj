@@ -76,6 +76,9 @@
     (_/polypeptide_record kiao/hasTemplate iaodrugbank/PolypeptideSchema1)
     (_/polypeptide_record obo/BFO_0000051 _/polypeptide_id_field)
     (_/polypeptide_id_field obo/IAO_0000219 _/protein_ice_id)
+    ;; ensure that the identifier is a protein identifier
+    ;; the polypeptide id sometimes contains gene ids (e.g. HGNC ids)
+    (_/protein_ice_id kiao/denotesSubClassOf obo/CHEBI_36080)
     (_/protein_ice_id obo/IAO_0000219 ?/target_bioentity)
   )
 
