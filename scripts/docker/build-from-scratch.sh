@@ -21,45 +21,46 @@ echo "DATASOURCE_ICE_DIR=$DATASOURCE_ICE_DIR"
 echo "KB_DATA_DIR=$KB_DATA_DIR"
 
 ### Clean out the directory in which we're going to place our artefacts.
-#rm -rvf $KB_DATA_DIR
-#mkdir -p $KB_DATA_DIR
+rm -rvf $KB_DATA_DIR
+mkdir -p $KB_DATA_DIR
 
 ### generate lists of RDF files that will be loaded in subsequent steps
-#$SCRIPT_DIR/generate-rdf-file-lists.sh
+$SCRIPT_DIR/generate-rdf-file-lists.sh
 
 ### create a new KB and load the ontologies
-#$SCRIPT_DIR/new-kb.sh \
-#  $AG_BIN \
-#  $AG_PORT \
-#  $AG_INDICES \
-#  $KB_NAME \
-#  $KB_DATA_DIR/file-lists/owl-files.$KB_NAME.list \
-#  "rdfxml"
+$SCRIPT_DIR/new-kb.sh \
+  $AG_BIN \
+  $AG_PORT \
+  $AG_INDICES \
+  $KB_NAME \
+  $KB_DATA_DIR/file-lists/owl-files.$KB_NAME.list \
+  "rdfxml"
 
-#$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_to_ice
+$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_to_ice
+$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/bio_to_ice/hp
 
 ### load the ICE schema RDF ...
-#$SCRIPT_DIR/load-list-file.sh \
-#  $AG_BIN \
-#  $AG_PORT \
-#  $AG_INDICES \
-#  $KB_NAME \
-#  $KB_DATA_DIR/file-lists/schema-files.$KB_NAME.list
+$SCRIPT_DIR/load-list-file.sh \
+  $AG_BIN \
+  $AG_PORT \
+  $AG_INDICES \
+  $KB_NAME \
+  $KB_DATA_DIR/file-lists/schema-files.$KB_NAME.list
 
 ### ... and then the ICE RDF
-#$SCRIPT_DIR/load-list-file.sh \
-#  $AG_BIN \
-#  $AG_PORT \
-#  $AG_INDICES \
-#  $KB_NAME \
-#  $KB_DATA_DIR/file-lists/ice-files.$KB_NAME.list
+$SCRIPT_DIR/load-list-file.sh \
+  $AG_BIN \
+  $AG_PORT \
+  $AG_INDICES \
+  $KB_NAME \
+  $KB_DATA_DIR/file-lists/ice-files.$KB_NAME.list
 
-#$SCRIPT_DIR/load-list-file.sh \
-#  $AG_BIN \
-#  $AG_PORT \
-#  $AG_INDICES \
-#  $KB_NAME \
-#  $KB_DATA_DIR/file-lists/large-ice-files.$KB_NAME.list
+$SCRIPT_DIR/load-list-file.sh \
+  $AG_BIN \
+  $AG_PORT \
+  $AG_INDICES \
+  $KB_NAME \
+  $KB_DATA_DIR/file-lists/large-ice-files.$KB_NAME.list
 
 ### Index optimization
 $SCRIPT_DIR/optimize.sh \
@@ -108,6 +109,7 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/drugbank
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/pharmgkb
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/irefweb
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/goa
+$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/hp
 
 ### Apply labels to the BIO entities that have been created by the preceding
 ### rules.
