@@ -31,7 +31,7 @@
   ;; (pprint "reify sha1")
   ;; (pprint rest)
   ;;(pprint *reify-prefix*)
-  (reify-sym (sha-1 (apply str rest))))
+  (reify-sym (sha-1 (apply str (sort (map str rest))))))
 
 
 
