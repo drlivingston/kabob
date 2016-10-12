@@ -39,18 +39,18 @@ echo "downloading $URL"
 date | tee -a $LOG_FILE
 curl --remote-name --write-out "file: %{filename_effective} final-url: %{url_effective} size: %{size_download} time: %{time_total} final-time: " -L $URL | tee -a $LOG_FILE
 # filename_effective does not get filled on all systems, and parsing the file name from the URL is problematic due to the occasional redirection, e.g. so.owl --> so-xp.obo.owl, so we use ls to get the most recent file downloaded in order to get the downloaded file name
-ONT_FILE_NAME=$(ls -lhrt $TARGET_DIR | tail -n 1 | tr -s " " | rev | cut -f 1 -d " " | rev)
-ONT_FILE=$TARGET_DIR$ONT_FILE_NAME
-name=$(echo $ONT_FILE_NAME | cut -f 1 -d ".")
-ext="flattened.owl"
-ONT_FILE_NAME_FLAT=$(echo ${name}_${ext})
-OUTPUT_FILE=$TARGET_DIR$ONT_FILE_NAME_FLAT
-echo -e "\nONT FILE: $ONT_FILE" | tee -a $LOG_FILE
-echo "OUTPUT FILE: $OUTPUT_FILE" | tee -a $LOG_FILE
-cd $CUR_DIR
-./scripts/download/flatten-ontology.sh -i $ONT_FILE -o $OUTPUT_FILE | tee -a $LOG_FILE
-e=$?
-date | tee -a $LOG_FILE
-exit $e
+#ONT_FILE_NAME=$(ls -lhrt $TARGET_DIR | tail -n 1 | tr -s " " | rev | cut -f 1 -d " " | rev)
+#ONT_FILE=$TARGET_DIR$ONT_FILE_NAME
+#name=$(echo $ONT_FILE_NAME | cut -f 1 -d ".")
+#ext="flattened.owl"
+#ONT_FILE_NAME_FLAT=$(echo ${name}_${ext})
+#OUTPUT_FILE=$TARGET_DIR$ONT_FILE_NAME_FLAT
+#echo -e "\nONT FILE: $ONT_FILE" | tee -a $LOG_FILE
+#echo "OUTPUT FILE: $OUTPUT_FILE" | tee -a $LOG_FILE
+#cd $CUR_DIR
+#./scripts/download/flatten-ontology.sh -i $ONT_FILE -o $OUTPUT_FILE | tee -a $LOG_FILE
+#e=$?
+#date | tee -a $LOG_FILE
+#exit $e
 
 
