@@ -32,6 +32,7 @@ su agraph -c "$AG_BIN/agload \
     --with-indices $AG_INDICES \
     --port $AG_PORT \
     --input $FORMAT \
+    --error-strategy save \
     $KB_NAME \
     @$LIST_FILE"
 # --bulk: Faster (no transaction log processing), but potentially unsafe;

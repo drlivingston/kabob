@@ -33,7 +33,8 @@ $SCRIPT_DIR/new-kb.sh \
   $AG_PORT \
   $AG_INDICES \
   $KB_NAME \
-  $KB_DATA_DIR/file-lists/owl-files.$KB_NAME.list
+  $KB_DATA_DIR/file-lists/owl-files.$KB_NAME.list \
+  "rdfxml"
 
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_to_ice
 

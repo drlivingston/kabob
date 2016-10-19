@@ -37,7 +37,7 @@ done
 for file in $(find -L "$ICE_BASE" -type f \( -iname "*.nt.gz" ! -iname "*goa*" ! -iname "*protein2ipr*" ! -iname "*uniprot-Trembl*" \)); do echo "$file" >> "$ICE_LIST"; done
 for file in $(find -L "$ICE_BASE" -type f \( -iname "*goa*.nt.gz" -or -iname "*protein2ipr*.nt.gz" \)); do echo "$file" >> "$LARGE_ICE_LIST"; done
 for file in $(find -L "$ICE_BASE" -type f -name "*.schema.nt"); do echo "$file" >> "$SCHEMA_LIST"; done
-for file in $(find -L "$OWL_BASE" -type f -name "*_flattened.owl"); do echo "$file" >> "$OWL_LIST"; done
+for file in $(find -L "$OWL_BASE" -type f -name "*.owl"); do echo "$file" >> "$OWL_LIST"; done
 
 echo "SCHEMA file to load:"
 cat $SCHEMA_LIST
