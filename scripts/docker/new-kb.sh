@@ -24,7 +24,7 @@ echo Loading list file: $LIST_FILE
 echo List file count: $(wc -l $LIST_FILE)
 cat $LIST_FILE
 
-$AG_BIN/agload \
+su agraph -c "$AG_BIN/agload \
     --verbose \
     --supersede \
     --bulk \
@@ -33,7 +33,7 @@ $AG_BIN/agload \
     --port $AG_PORT \
     --input $FORMAT \
     $KB_NAME \
-    @$LIST_FILE
+    @$LIST_FILE"
 # --bulk: Faster (no transaction log processing), but potentially unsafe;
 #         errors during the load process could result in a corrupt db.
 # --supersede: Blow away an existing database with the same name as the one

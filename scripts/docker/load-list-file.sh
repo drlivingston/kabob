@@ -24,7 +24,7 @@ echo Loading list file: $LIST_FILE
 echo List file count: $(wc -l $LIST_FILE)
 cat $LIST_FILE
 
-$AG_BIN/agload \
+su agraph -c "$AG_BIN/agload \
     --verbose \
     --bulk \
     --graph :source \
@@ -32,4 +32,4 @@ $AG_BIN/agload \
     --port $AG_PORT \
     --input $FORMAT \
     $KB_NAME \
-    @$LIST_FILE
+    @$LIST_FILE"

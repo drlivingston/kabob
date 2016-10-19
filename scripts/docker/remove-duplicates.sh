@@ -24,7 +24,7 @@ KB_NAME=${4,?}
 NULL_LOAD_FILE=$(mktemp)
 
 echo Removing duplicates
-$AG_BIN/agload \
+su agraph -c "$AG_BIN/agload \
     --verbose \
     --bulk \
     --with-indices $AG_INDICES \
@@ -33,4 +33,4 @@ $AG_BIN/agload \
     --encoding utf8 \
     --duplicates delete \
     $KB_NAME \
-    $NULL_LOAD_FILE
+    $NULL_LOAD_FILE"
