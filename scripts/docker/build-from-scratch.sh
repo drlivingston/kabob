@@ -117,11 +117,13 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/drugbank
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/pharmgkb
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/irefweb
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/goa
-$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/hp
 
 ### Apply labels to the BIO entities that have been created by the preceding
 ### rules.
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_labels
+
+### the hp rule looks for labels, so it must be run after the bio_labels rule
+$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/hp
 
 $SCRIPT_DIR/optimize.sh \
   $AG_BIN \
