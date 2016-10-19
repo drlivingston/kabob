@@ -39,6 +39,14 @@ $SCRIPT_DIR/new-kb.sh \
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_to_ice
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/bio_to_ice/hp
 
+### load any ontology extension files
+$SCRIPT_DIR/load-list-file.sh \
+  $AG_BIN \
+  $AG_PORT \
+  $AG_INDICES \
+  $KB_NAME \
+  $KB_DATA_DIR/file-lists/ext-files.$KB_NAME.list
+
 ### load the ICE schema RDF ...
 $SCRIPT_DIR/load-list-file.sh \
   $AG_BIN \
