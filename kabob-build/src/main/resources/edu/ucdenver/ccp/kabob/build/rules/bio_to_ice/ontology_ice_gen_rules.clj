@@ -73,7 +73,7 @@
 ;; create ICE URI's for each term in the PSI Molecular Interaction Ontology
 `{:name "mi-ice-gen"
   :head ((?/ice obo/IAO_0000219 ?/cls)) ; denotes
-  :body ((?/cls oboInOwl:hasOBONamespace ["PSI-MI"])
+  :body ((?/cls oboInOwl/hasOBONamespace ["PSI-MI"])
          (?/cls rdf/type owl/Class))
   :reify ([?/ice {:ln (:localname ?/cls)
                   :ns "iaomi" :prefix "" :suffix "_ICE"}])}
