@@ -118,6 +118,8 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/pharmgkb
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/irefweb
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/goa
 
+$SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_to_bio
+
 ### Apply labels to the BIO entities that have been created by the preceding
 ### rules.
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_labels
