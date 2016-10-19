@@ -23,6 +23,7 @@ FORMAT=${6:-"ntriples"}
 echo Loading list file: $LIST_FILE
 echo List file count: $(wc -l $LIST_FILE)
 cat $LIST_FILE
+chmod 755 $LIST_FILE
 
 su agraph -c "$AG_BIN/agload \
     --verbose \
