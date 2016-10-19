@@ -45,7 +45,8 @@ $SCRIPT_DIR/load-list-file.sh \
   $AG_PORT \
   $AG_INDICES \
   $KB_NAME \
-  $KB_DATA_DIR/file-lists/ext-files.$KB_NAME.list
+  $KB_DATA_DIR/file-lists/ext-files.$KB_NAME.list \
+  "rdfxml"
 
 ### load the ICE schema RDF ...
 $SCRIPT_DIR/load-list-file.sh \
