@@ -23,8 +23,8 @@ $SCRIPT_DIR/load-directory.sh \
   $DIR_PAT \
   $FORMAT
 
-$SCRIPT_DIR/remove-duplicates.sh \
-  $AG_BIN \
-  $AG_PORT \
-  $AG_INDICES \
-  $KB_NAME
+#$SCRIPT_DIR/remove-duplicates.sh \
+#  $AG_BIN \
+#  $AG_PORT \
+#  $AG_INDICES \
+#  $KB_NAME

@@ -31,5 +31,6 @@ su agraph -c "$AG_BIN/agload \
     --with-indices $AG_INDICES \
     --port $AG_PORT \
     --input $FORMAT \
+    --duplicates delete \
     $KB_NAME \
     @$LIST_FILE"

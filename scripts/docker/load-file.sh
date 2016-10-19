@@ -39,6 +39,6 @@ echo AG_INDICES: $AG_INDICES
 
 echo Loading file: $FILE
 
-su agraph -c '$AG_BIN/agload -v --bulk --graph :source --with-indices "$AG_INDICES" -p $AG_PORT --input $FORMAT $KB $FILE'
+su agraph -c '$AG_BIN/agload -v --bulk --graph :source --with-indices "$AG_INDICES" -p $AG_PORT --duplicates delete --input $FORMAT $KB $FILE'
 
 #  --with-indices "ospgi posgi spogi"  --encoding utf8

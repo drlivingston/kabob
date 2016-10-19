@@ -33,6 +33,7 @@ su agraph -c "$AG_BIN/agload \
     --port $AG_PORT \
     --input $FORMAT \
     --error-strategy save \
+    --duplicates delete \
     $KB_NAME \
     @$LIST_FILE"
 # --bulk: Faster (no transaction log processing), but potentially unsafe;
@@ -45,4 +46,4 @@ su agraph -c "$AG_BIN/agload \
 # TODO: Why is this being done as a separate step, and not as part of the
 # initial load?  agload's `--duplicates` option would seem to suggest that this
 # is possible.
-$SCRIPT_DIR/remove-duplicates.sh $AG_BIN $AG_PORT $AG_INDICES $KB_NAME
+#$SCRIPT_DIR/remove-duplicates.sh $AG_BIN $AG_PORT $AG_INDICES $KB_NAME

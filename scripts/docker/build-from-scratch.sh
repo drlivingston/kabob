@@ -62,11 +62,11 @@ $SCRIPT_DIR/load-list-file.sh \
   $KB_DATA_DIR/file-lists/large-ice-files.$KB_NAME.list
 
 # remove any duplicate triples in the KB
-$SCRIPT_DIR/remove-duplicates.sh \
-  $AG_BIN \
-  $AG_PORT \
-  $AG_INDICES \
-  $KB_NAME
+#$SCRIPT_DIR/remove-duplicates.sh \
+#  $AG_BIN \
+#  $AG_PORT \
+#  $AG_INDICES \
+#  $KB_NAME
 
 # Index optimization
 $SCRIPT_DIR/optimize.sh \
@@ -120,7 +120,7 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/goa
 # rules.
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_labels
 
-$SCRIPT_DIR/DEDUP.sh
+#$SCRIPT_DIR/DEDUP.sh
 $SCRIPT_DIR/optimize.sh \
   $AG_BIN \
   $AG_PORT \
