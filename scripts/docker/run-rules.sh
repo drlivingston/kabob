@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-source /config/user-env.sh
 source $SCRIPT_DIR/docker-env.sh
 source $SCRIPT_DIR/ENV.sh
 
@@ -28,7 +27,7 @@ mkdir -p $OUTPUTDIR
 $MAVEN \
     --debug \
     --file /kabob.git/kabob-build/pom.xml \
-    -Dclojure.vmargs="-d64 -Xmx2G -XX:MaxPermSize=256m" \
+    -Dclojure.vmargs="-d64 -Xmx2G" \
     -Dclojure.mainClass="edu.ucdenver.ccp.kabob.build.run_rules" \
     -Dclojure.args="$KB_URL $KB $KB_USER $KB_PASS $OUTPUTDIR $RULES_RES_DIR" \
     clojure:run

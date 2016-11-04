@@ -1,16 +1,17 @@
-#
 #!/bin/bash
 #
 
 SCRIPT_DIR=/kabob.git/scripts/docker
 chmod 755 $SCRIPT_DIR/*.sh
 
-source /config/user-env.sh
+# This script takes a single argument specifying the repository name
+# to use/construct
+export KB_INSTANCE_NAME=$1
+
 source $SCRIPT_DIR/docker-env.sh
 source $SCRIPT_DIR/ENV.sh
 
 echo "MAVEN=$MAVEN"
-echo "AG_HOME=$AG_HOME"
 echo "AG_PORT=$AG_PORT"
 echo "KB_URL=$KB_URL"
 echo "KB_USER=$KB_USER"
@@ -25,13 +26,11 @@ rm -rvf $KB_DATA_DIR
 mkdir -p $KB_DATA_DIR
 
 ### generate lists of RDF files that will be loaded in subsequent steps
-$SCRIPT_DIR/generate-rdf-file-lists.sh
+$SCRIPT_DIR/generate-rdf-file-lists.sh $KB_NAME
 
 ### create a new KB and load the ontologies
 $SCRIPT_DIR/new-kb.sh \
-  $AG_BIN \
   $AG_PORT \
-  $AG_INDICES \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/owl-files.$KB_NAME.list \
   "rdfxml"
@@ -39,41 +38,25 @@ $SCRIPT_DIR/new-kb.sh \
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_to_ice
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/bio_to_ice/hp
 
-### load any ontology extension files
-$SCRIPT_DIR/load-list-file.sh \
-  $AG_BIN \
-  $AG_PORT \
-  $AG_INDICES \
-  $KB_NAME \
-  $KB_DATA_DIR/file-lists/ext-files.$KB_NAME.list \
-  "rdfxml"
-
 ### load the ICE schema RDF ...
 $SCRIPT_DIR/load-list-file.sh \
-  $AG_BIN \
   $AG_PORT \
-  $AG_INDICES \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/schema-files.$KB_NAME.list
 
 ### ... and then the ICE RDF
 $SCRIPT_DIR/load-list-file.sh \
-  $AG_BIN \
   $AG_PORT \
-  $AG_INDICES \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/ice-files.$KB_NAME.list
 
 $SCRIPT_DIR/load-list-file.sh \
-  $AG_BIN \
   $AG_PORT \
-  $AG_INDICES \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/large-ice-files.$KB_NAME.list
 
 ### Index optimization
 $SCRIPT_DIR/optimize.sh \
-  $AG_BIN \
   $AG_PORT \
   $KB_NAME
 
@@ -98,7 +81,6 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/entity/abstraction
 
 ### Index optimization
 $SCRIPT_DIR/optimize.sh \
-  $AG_BIN \
   $AG_PORT \
   $KB_NAME
 
@@ -129,7 +111,6 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_labels
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/hp
 
 $SCRIPT_DIR/optimize.sh \
-  $AG_BIN \
   $AG_PORT \
   $KB_NAME
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-source /config/user-env.sh
 source $SCRIPT_DIR/docker-env.sh
 source $SCRIPT_DIR/ENV.sh
 

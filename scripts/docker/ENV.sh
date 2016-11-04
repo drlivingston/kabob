@@ -11,8 +11,7 @@ echo Sourcing default variables
 # We use Maven as a Java execution engine ):
 MAVEN=${PLATFORM_MAVEN:?}
 
-# The build expects to be co-located with an Allegrograph installation.
-AG_HOME=${PLATFORM_ALLEGROGRAPH_HOME:?}
+# The build requires the port with which to connect to AllegroGraph
 AG_PORT=${PLATFORM_ALLEGROGRAPH_PORT:?}
 
 # The URL by which to connect to the knowledgebase when generating the rules.
@@ -44,6 +43,3 @@ KB_DATA_DIR=${KB_INSTANCE_DATA_DIR:?}
 ## ------------------------------------------------------------------------- ##
 ## No user-adjustable variables beyond this point.                           ##
 ## ------------------------------------------------------------------------- ##
-
-AG_BIN=${AG_HOME}/bin
-AG_INDICES="ospgi,posgi,spogi,gspoi"
