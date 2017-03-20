@@ -18,16 +18,14 @@
     <owl:Ontology rdf:about="http://ccp.ucdenver.edu/obo/ext/"/>
 
 
+    <!-- 
 
-    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
-
-
 
 
     <!-- http://ccp.ucdenver.edu/obo/ext/GO_MI_EXT_binding_or_direct_interaction -->
@@ -46,13 +44,11 @@
     </owl:Class>
 
 
-
     <!-- http://purl.obolibrary.org/obo/GO_0005488 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/GO_0005488">
         <rdfs:subClassOf rdf:resource="http://ccp.ucdenver.edu/obo/ext/GO_MI_EXT_binding_or_direct_interaction"/>
     </owl:Class>
-
 
 
     <!-- http://purl.obolibrary.org/obo/MI_0407 -->
