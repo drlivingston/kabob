@@ -26,7 +26,8 @@
        edu.ucdenver.ccp.kabob.parallel-utils
        clojure.pprint
        edu.ucdenver.ccp.kabob.build.input-kb
-       edu.ucdenver.ccp.kabob.build.output-kb)
+       edu.ucdenver.ccp.kabob.build.output-kb
+       [edu.ucdenver.ccp.kabob.reification-extensions :refer [reify-sha-1]])
   (require [clojure.set :as set]
            kabob))
 
@@ -97,6 +98,27 @@
         body-variables (set (variables body))]
     (set/intersection needed-variables body-variables)))
 
+;; this function adds triples to the target kb describing metadata of
+;; processing a rule by creating a KabobRuleMetadata instance and
+;; populating it with the time the rule was run, the number of triples
+;; that were generated, the time it took to run the rule, and the name
+;; of the rule.
+(defn add-rule-metadata [target-kb rule-name time-at-run triple-count elapsed-time-in-ms]
+  (let [metadata-uri (symbol (binding [*reify-ns* "kiao"
+                                *reify-prefix* "RULEMETA_"
+                                *reify-suffix* ""]
+                               (reify-sha-1 rule-name time-at-run)))
+        dateformatter  (doto (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss'Z'")
+                         (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
+        timestamp (.format dateformatter (java.util.Date. time-at-run))
+        date-at-run `[~timestamp xsd/dateTime]]
+    (add! target-kb `(~metadata-uri rdf/type kiao/KabobRuleMetadata))
+    (add! target-kb `(~metadata-uri dc/title ~rule-name))
+    (add! target-kb `(~metadata-uri kiao/triple-count ~triple-count))
+    (add! target-kb `(~metadata-uri kiao/time-at-run ~date-at-run))
+    (add! target-kb `(~metadata-uri kiao/elapsed-time-in-ms ~elapsed-time-in-ms))
+    ))
+
 (defn run-forward-rule [source-kb target-kb rule]
   (let [{head :head body :body reify :reify :as rule} (add-reify-fns rule)
          visit-counter (atom 0)
@@ -125,7 +147,9 @@
                                                           bindings))))))
                  body ;; TODO: need to add reify find clauses on optionally
                  {:select-vars query-vars})
-    (println "final count: " @visit-counter)))
+    (println "final count: " @visit-counter)
+    (let [new-t (.getTime (java.util.Date.))]
+      (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t)))))
 
 ;; This needs to check for duplicates and prefer one, but which?
 ;; This should probably take multiple lists, then defaults and hard-codes can

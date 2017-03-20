@@ -17,12 +17,12 @@
   :body ((?/go [rdfs/subClassOf *] obo/GO_0008150)
          (?/goid obo/IAO_0000219 ?/go) ; denotes
          (?/fv0 obo/IAO_0000219 ?/goid) ; denotes
-         (?/fv0 kiao/hasTemplate  iaogoa/GpAssociationGoaUniprotFileData_goIDDataField1)
+         (?/fv0 kiao/hasTemplate  iaogoa/GoaGaf2FileRecord_ontologyTermIdDataField1)
 
          (?/record obo/BFO_0000051 ?/fv0) ; has_part        
          (?/record obo/BFO_0000051 ?/fv1) ; has_part
 
-         (?/fv1 kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_databaseObjectIDDataField1)
+         (?/fv1 kiao/hasTemplate iaogoa/GoaGaf2FileRecord_dbObjectIdDataField1)
          (?/fv1 obo/IAO_0000219 ?/gp) ; denotes
          (?/gp obo/IAO_0000219 ?/bioentity) ; denotes
 
@@ -30,7 +30,7 @@
          ;; ;;filter out the negations
           (:optional
            ((?/record obo/BFO_0000051 ?/qualfv) ; has_part
-            (?/qualfv kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_qualifierDataField1)
+            (?/qualfv kiao/hasTemplate iaogoa/GoaGaf2FileRecord_qualifierDataField)
             (?/qualfv obo/IAO_0000219 ?/qualifier))) ; denotes
           (:or (:not (:bound ?/qualifier))
                (:not (:regex ?/qualifier "^NOT" "i")))
@@ -77,12 +77,12 @@
   :body ((?/go [rdfs/subClassOf *] obo/GO_0005575) ;cellular_component
          (?/goid obo/IAO_0000219 ?/go) ; denotes
          (?/fv0 obo/IAO_0000219 ?/goid) ; denotes
-         (?/fv0 kiao/hasTemplate  iaogoa/GpAssociationGoaUniprotFileData_goIDDataField1)
+         (?/fv0 kiao/hasTemplate  iaogoa/GoaGaf2FileRecord_ontologyTermIdDataField1)
 
          (?/record obo/BFO_0000051 ?/fv0) ; has_part 
          (?/record obo/BFO_0000051 ?/fv1) ; has_part
 
-         (?/fv1 kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_databaseObjectIDDataField1)
+         (?/fv1 kiao/hasTemplate iaogoa/GoaGaf2FileRecord_dbObjectIdDataField1)
          (?/fv1 obo/IAO_0000219 ?/gp) ; denotes
          (?/gp obo/IAO_0000219 ?/bioentity) ; denotes
 
@@ -90,7 +90,7 @@
          ;; ;;filter out the negations
           (:optional
            ((?/record obo/BFO_0000051 ?/qualfv) ; has_part
-            (?/qualfv kiao/hasTemplate iaogoa/GpAssociationGoaUniprotFileData_qualifierDataField1)
+            (?/qualfv kiao/hasTemplate iaogoa/GoaGaf2FileRecord_qualifierDataField1)
             (?/qualfv obo/IAO_0000219 ?/qualifier)))
           (:or (:not (:bound ?/qualifier))
                (:not (:regex ?/qualifier "^NOT" "i")))

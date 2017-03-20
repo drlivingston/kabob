@@ -64,9 +64,9 @@
 
 ;; HARD-CODED SHA1 KEYS!!!!
 
-(def result-syms #{'ex/R_BLinnle7D0tdku--nrCl9h79EOQ
-                   'ex/R_I-Cu5vw53kCa9OgyZ67Y38Xj4DI
-                   'ex/R_vPs6bRpZjM-6uIwTRYhda-P2IDw
+(def result-syms #{'ex/R_XTThXzY88gvwfoc57ivMafWgG3Q
+                   'ex/R_TIQCT4s9j0qMaZ-8JMYhRvw8960
+                   'ex/R_N3vQlyC9YqEeGjprdvFcU3TvHB4
                    })
 
 
@@ -76,7 +76,7 @@
           (symbol "ex" sym-name))
         (map (fn [sym-list]
                (str "R_"
-                    (sha-1 (apply str sym-list))))
+                    (sha-1 (apply str (sort (map str sym-list))))))
              '((owl/Restriction
                 owl/onProperty obo/RO_0000057 ; has_participant
                 owl/someValuesFrom ex/drug1)
