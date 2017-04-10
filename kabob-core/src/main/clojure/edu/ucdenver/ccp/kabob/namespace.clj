@@ -79,6 +79,8 @@
        ("homologene" "http://www.ncbi.nlm.nih.gov/homologene/")
        ("iaohomologene" "http://kabob.ucdenver.edu/iao/homologene/")
 
+       ("iaohp" "http://kabob.ucdenver.edu/iao/hp/")
+
        ("hprd" "http://www.hprd.org/")
        ("iaohprd" "http://kabob.ucdenver.edu/iao/hprd/")
 

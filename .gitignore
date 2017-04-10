@@ -8,9 +8,10 @@
 .lein-plugins/
 .lein-failures
 .nrepl-port
-
+.idea
 .project
 /.settings/
 
 test-rule-on-modelorgs.sh
 test-output/
+*~
