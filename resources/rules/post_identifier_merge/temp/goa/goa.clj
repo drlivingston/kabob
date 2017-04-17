@@ -2,53 +2,48 @@
 
 `{:name "goa-bp"
   :head (
-         (?/bp rdfs/subClassOf ?/go) ;interaction
+         ;; create a subclass of the biological process
+         (?/process_sc rdfs/subClassOf ?/process)
+         ;; create a subclass of the participating bioentity
+         (?/bioentity_sc rdfs/subClassOf ?/bioentity)
 
-         (?/protein rdfs/subClassOf ?/bioentity)
-         
-         (?/hr1 rdf/type owl/Restriction)
-         (?/hr1 owl/onProperty obo/RO_0000057) ; has_participant
-         (?/hr1 owl/someValuesFrom ?/protein)
+         ;; create a has_participant restriction
+         (?/participation_restriction rdf/type owl/Restriction)
+         (?/participation_restriction owl/onProperty obo/RO_0000057) ; has_participant
+         (?/participation_restriction  owl/someValuesFrom ?/bioentity_sc)
 
-         ;;make the interaction be necessarily part of these 3 restrictions
-         ;;still need to add a sufficient definition
-         (?/bp rdfs/subClassOf ?/hr1))
+         ;; connect the process subclass to the participation restriction
+         (?/process_sc rdfs/subClassOf ?/participation_restriction)
+
+         ;; provenance: connect the record to the process subclass
+         (?/record obo/IAO_0000219 ?/process_sc)) ; IAO:denotes
     
-  :body ((?/go [rdfs/subClassOf *] obo/GO_0008150)
-         (?/goid obo/IAO_0000219 ?/go) ; denotes
-         (?/fv0 obo/IAO_0000219 ?/goid) ; denotes
-         (?/fv0 kiao/hasTemplate  iaogoa/GoaGaf2FileRecord_ontologyTermIdDataField1)
+  :body ((?/go_ice_id rdf:type ccp/IAO_EXT_0000103) ; ccp:GO_BP_concept_identifier
+         (?/go_ice_id obo/IAO_0000219 ?/process) ; IAO:denotes
+         (?/record obo/BFO_0000051 ?/go_ice_id) ; BFO:has_part
+         (?/record rdf/type ccp/IAO_EXT_0000007) ; ccp:GAF_record_v2.0
+         (?/go_ice_id rdf/type ccp/IAO_EXT_0000014) ; ccp:GAF_ontology_identifier_field_value
 
-         (?/record obo/BFO_0000051 ?/fv0) ; has_part        
-         (?/record obo/BFO_0000051 ?/fv1) ; has_part
+         ;; retrieve the process participant identifier
+         (?/record obo/BFO_0000051 ?/bioentity_ice_id) ; BFO:has_part
+         (?/bioentity_ice_id rdf/type ccp/IAO_EXT_0000010) ; ccp:database_object_identifier_field_value
+         (?/bioentity_ice_id obo/IAO_0000219 ?/participating_bioentity) ; IAO:denotes
 
-         (?/fv1 kiao/hasTemplate iaogoa/GoaGaf2FileRecord_dbObjectIdDataField1)
-         (?/fv1 obo/IAO_0000219 ?/gp) ; denotes
-         (?/gp obo/IAO_0000219 ?/bioentity) ; denotes
-
-         
-         ;; ;;filter out the negations
+         ;;filter out the negations
           (:optional
-           ((?/record obo/BFO_0000051 ?/qualfv) ; has_part
-            (?/qualfv kiao/hasTemplate iaogoa/GoaGaf2FileRecord_qualifierDataField)
-            (?/qualfv obo/IAO_0000219 ?/qualifier))) ; denotes
+           ((?/record obo/BFO_0000051 ?/qualifier_fv) ; has_part
+            (?/qualifier_fv rdf/type ccp/IAO_EXT_0000013) ; ccp:GAF_qualifier_field_value
+            (?/qualifier_fv rdfs/label ?/qualifier))) ; denotes
           (:or (:not (:bound ?/qualifier))
                (:not (:regex ?/qualifier "^NOT" "i")))
-
-         ;;is it always a protein, or do we need to go up to GorGP?  
-         ;;(_/gp obo/IAO_0000219 ?/bioentity))
-
-         ;; (_/geneid obo/IAO_0000219 ?/gene)
-         ;; (?/gene [rdfs/subClassOf *] ?/gorgporv) 
-         ;; (?/gorgporv rdf/type kbio/GeneSpecificGorGPorVClass))
-
          )
-  :reify ([?/bp {:ln (:sha-1 ?/go ?/hr1)
-                 :ns "kbio" :prefix "BP_"}]
-          [?/protein {:ln (:sha-1 ?/go ?/bioentity)
-                    :ns "kbio" :prefix "P_"}]
-          [?/hr1 {:ln (:restriction)
-                 :ns "kbio" :prefix "R_"}])
+  
+  :reify ([?/bp {:ln (:sha-1 ?/process ?/hr1)
+                 :ns "ccp" :prefix "BP_"}]
+          [?/bioentity_sc {:ln (:sha-1 ?/process ?/participating_bioentity)
+                    :ns "ccp" :prefix "BE_"}]
+          [?/participation_restriction {:ln (:restriction)
+                 :ns "ccp" :prefix "R_"}])
 
   :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
   }
