@@ -10,7 +10,7 @@
 								  minus{?root rdfs:subClassOf ?class}
 								  minus{?root owl:deprecated true}  
 								         }"
-  :reify ([?/id {:ln (:localname ?/subclass)
+  :reify ([?/id {:ln (:localname ?/root)
                  :ns "ccp" :prefix "" :suffix ""}])}
 
 
