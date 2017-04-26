@@ -25,10 +25,11 @@
   :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
-                  select ?id ?class ?definition ?label ?id_string {
+                  select ?id ?class ?bound_definition ?label ?id_string {
                   ?id rdf:type ccp:IAO_EXT_0000088 .
                   ?id obo:IAO_0000219 ?class .
                   optional {?class obo:IAO_0000115 ?definition } .
                   optional {?class rdfs:label ?label } .
                   optional {?class oboInOwl:id ?id_string } .
+                  BIND(IF(bound(?definition), ?definition, 'no definition') as ?bound_definition) .
                   }" }
