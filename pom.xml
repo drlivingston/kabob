@@ -6,14 +6,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<clojure.version>1.6.0</clojure.version>
+		<clojure.version>1.8.0</clojure.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 
 		<!-- switched to latest public release -->
 		<!--<kr.version>1.4.12</kr.version>-->
 		<!--<kr.version>1.4.17</kr.version>-->
-		<kr.version>1.4.18</kr.version>
+		<kr.version>1.4.20-SNAPSHOT</kr.version>
 		<kr.groupId>edu.ucdenver.ccp</kr.groupId>
 
 		<ver.log4j>1.2.17</ver.log4j>
