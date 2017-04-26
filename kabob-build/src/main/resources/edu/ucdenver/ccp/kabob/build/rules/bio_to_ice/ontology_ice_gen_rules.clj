@@ -3,11 +3,10 @@
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the ontology
 `{:name "root-concept-ice-gen"
-  :head (;(?/id obo/IAO_0000219 ?/root) ; denotes
-         (?/id rdfs/subClassOf ccp/IAO_EXT_0000190)) ; ontology root concept identifer
+  :head ((?/id rdfs/subClassOf ccp/IAO_EXT_0000190)) ; ontology root concept identifer
   :sparql-string "select ?root {
 								  ?root rdf:type owl:Class .
-								  minus{?root rdfs:subClassOf ?class}
+								  minus{?root rdf:type ?class}
 								  minus{?root owl:deprecated true}  
 								         }"
   :reify ([?/id {:ln (:localname ?/root)
