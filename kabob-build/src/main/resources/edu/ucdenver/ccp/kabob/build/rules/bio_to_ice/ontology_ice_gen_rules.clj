@@ -2,16 +2,47 @@
 ;; --------- Root Concept Assignment ---------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the ontology
-`{:name "root-concept-ice-gen"
-  :head ((?/id rdfs/subClassOf ccp/IAO_EXT_0000190)) ; ontology root concept identifer
+`{:name "ontology-concept-record-gen"
+  :head ((?/id rdf/type ccp/IAO_EXT_0000190) ; ontology root concept identifer
+         (?/id obo/IAO_0000219 ?/root)) ; denotes
   :sparql-string "select ?root {
-								  ?root rdf:type owl:Class .
+								  ?root rdfs:subClassOf owl:Class .
 								  minus{?root rdf:type ?class}
 								  minus{?root owl:deprecated true}  
 								         }"
   :reify ([?/id {:ln (:localname ?/root)
                  :ns "ccp" :prefix "" :suffix ""}])}
 
+
+;; ------------------------------------------------------------------------
+;; --------- Ontology Concept Identifier Denotes Ontology Concept ---------
+;; ------------------------------------------------------------------------
+;; create instance of ontology record for each ontology concept
+;`{:name "ontology-concept-record-gen"
+;  :head ((?/id rdfs/subClassOf ccp/IAO_EXT_0000190) ; ontology root concept identifer
+;         (?/id obo/IAO_0000219 ?/root)) ; denotes
+;  :sparql-string "select ?root {
+;								  ?root rdf:type owl:Class .
+;								  minus{?root rdf:type ?class}
+;								  minus{?root owl:deprecated true}  
+;								         }"
+;  :reify ([?/id {:ln (:localname ?/root)
+;                 :ns "ccp" :prefix "" :suffix ""}])}
+
+
+;; ----------------------------------------------------
+;; --------- Ontology Concept Record Creation ---------
+;; ----------------------------------------------------
+;; create instance of ontology record for each ontology concept
+;`{:name "ontology-concept-record-gen"
+;  :head ((?/id rdfs/subClassOf ccp/IAO_EXT_0000190)) ; ontology root concept identifer
+;  :sparql-string "select ?root {
+;								  ?root rdf:type owl:Class .
+;								  minus{?root rdf:type ?class}
+;								  minus{?root owl:deprecated true}  
+;								         }"
+;  :reify ([?/id {:ln (:localname ?/root)
+;                 :ns "ccp" :prefix "" :suffix ""}])}
 
 ;
 ;; -------------------------------------------
