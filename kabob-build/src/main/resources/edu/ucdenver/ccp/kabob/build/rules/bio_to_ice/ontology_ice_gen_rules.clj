@@ -2,7 +2,7 @@
 ;; --------- Root Concept Assignment ---------
 ;; -------------------------------------------
 ;; create ICE URI's for each term in the ontology
-`{:name "ontology-concept-record-gen"
+`{:name "root-concept-identifier-gen"
   :head ((?/id rdf/type ccp/IAO_EXT_0000190) ; ontology root concept identifer
          (?/id obo/IAO_0000219 ?/root)) ; denotes
   :sparql-string "select ?root {
