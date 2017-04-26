@@ -6,8 +6,8 @@
   :head ((?/id rdf/type ccp/IAO_EXT_0000190) ; ontology root concept identifer
          (?/id obo/IAO_0000219 ?/root)) ; denotes
   :sparql-string "select ?root {
-								  ?root rdfs:subClassOf owl:Class .
-								  minus{?root rdf:type ?class}
+								  ?root rdf:type owl:Class .
+								  minus{?root rdfs:subClassOf ?class}
 								  minus{?root owl:deprecated true}  
 								         }"
   :reify ([?/id {:ln (:localname ?/root)
