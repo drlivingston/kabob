@@ -151,6 +151,41 @@
     (let [new-t (.getTime (java.util.Date.))]
       (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t)))))
 
+
+(defn run-forward-rule-sparql-string [source-kb target-kb rule]
+  "This function is very similar to run-forward-rule, however it takes
+  as input a rule that has an explicitly defined SPARQL string. This
+  can be used for complex SPARQL queryies that are difficult to
+  represent using the DSL defined by the forward rule machinery in
+  this project."
+  (let [{head :head sparql-string :sparql-string reify :reify :as rule} (add-reify-fns rule)
+        visit-counter (atom 0)
+        t (atom (.getTime (java.util.Date.)))]
+    (println "rule query:")
+    (binding [*kb* source-kb]
+      (println sparql-string)
+      (println "running:")
+      (visit-sparql source-kb
+                    (fn [bindings]
+                      (swap! visit-counter inc)
+                      (when (= 0 (mod @visit-counter 10000))
+                        (System/gc))
+                      (when (= 0 (mod @visit-counter 250000))
+                        (let [new-t (.getTime (java.util.Date.))]
+                          (println @visit-counter " in " (- new-t @t) "ms")
+                          (reset! t new-t)))
+                      (dorun 
+                       (map (partial add! target-kb)
+                            (doall
+                             (subst-bindings head
+                                             bindings
+                                             (reify-bindings reify
+                                                             bindings))))))
+                    sparql-string)
+      (println "final count: " @visit-counter))))
+
+
+
 ;; This needs to check for duplicates and prefer one, but which?
 ;; This should probably take multiple lists, then defaults and hard-codes can
 ;; also be given in addition to what's in the rule.
@@ -197,7 +232,9 @@
       (prn (str "Processing rule: " (:name rule)))
       (let [source-connection (source-kb args)
             target-connection (rule-output-kb (:output-directory args) rule)]
-        (try (time (run-forward-rule source-connection target-connection rule))
+        (try (time (if (contains? rule :sparql-string)
+                     (run-forward-rule-sparql-string source-connection target-connection rule)
+                     (run-forward-rule source-connection target-connection rule)))
              true
              (finally (close target-connection)
                       (close source-connection)))))))
