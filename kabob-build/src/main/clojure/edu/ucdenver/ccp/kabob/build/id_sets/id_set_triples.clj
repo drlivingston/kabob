@@ -28,6 +28,7 @@
        "PREFIX franzOption_logQuery: <franz:yes> \n "
        "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n"
        "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
+       "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/> \n"
        ;; "PREFIX franzOption_chunkProcessingAllowed: <franz:yes> \n"
        ;; "PREFIX franzOption_chunkProcessingSize: <franz:500000> \n"
        ))
