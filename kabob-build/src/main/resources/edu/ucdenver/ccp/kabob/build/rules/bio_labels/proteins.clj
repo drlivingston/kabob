@@ -48,9 +48,6 @@
 
 {:name "protein-labels-UniProt-Trembl"
 
- ;; The form of the new triples that will be constructed.
- :head '((?/bio rdfs/label ?/proteinName))
-
  ;; The query pattern used to retrieve the data that will be used to construct
  ;; the new triples.
  :body
@@ -69,6 +66,10 @@
    (_/record obo/BFO_0000051 _/nameRecord)
    (_/nameRecord kiao/hasTemplate iaouniprot/SparseUniProtFileRecord_nameDataField1)
    (_/nameRecord obo/IAO_0000219 ?/proteinName))
+
+ ;; The form of the new triples that will be constructed.
+ :head
+ '((?/bio rdfs/label ?/proteinName))
 
  ;; In this case no `:reify` entry is required, since all of the data required
  ;; to form the new triples already exist.
