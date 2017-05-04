@@ -20,7 +20,7 @@
 
 ;;(def ^:dynamic *graph-db-path* "/temp/kabob/neo4j/idsets/")
 
-(def ^:dynamic *id-set-ns* "kiao")
+(def ^:dynamic *id-set-ns* "ccp")
 
 (def magic-prefixes
   (str "PREFIX franzOption_memoryLimit: <franz:85g> \n"
