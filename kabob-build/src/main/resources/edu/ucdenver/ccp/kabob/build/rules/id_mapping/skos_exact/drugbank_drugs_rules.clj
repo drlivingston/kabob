@@ -1,3 +1,10 @@
+;; -------------------------------------------
+;; --------- drugbank_drugs_rules ---------
+;; -------------------------------------------
+;; create drugbank  id to other chemical id mappings
+
+
+
 ;; drugbank id to other chemical id mappings
 ;; it would be nice if this rule just worked - unfortunately there are errors
 ;;   in the drugbank mappings - they are NOT UNIQUE
