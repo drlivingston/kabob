@@ -31,5 +31,5 @@
                   optional {?class obo:IAO_0000115 ?definition } .
                   optional {?class rdfs:label ?label } .
                   optional {?class oboInOwl:id ?id_string } .
-                  BIND(IF(bound(?definition), ?definition, 'no definition') as ?bound_definition) .
+                  bind(IF(bound(?definition), ?definition, 'no definition') as ?bound_definition) .
                   }" }
