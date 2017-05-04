@@ -15,12 +15,12 @@
 ;;; id types
 ;;;-------------------------------------------------------------------
 
-(def id-types '(kiao/DrugIdentifier
-                kiao/DNAIdentifier
-                kiao/ProteinIdentifier
-                kiao/DiseaseIdentifier
-                kiao/RNAIdentifier
-                kiao/mRNAIdentifier))
+;(def id-types '(kiao/DrugIdentifier
+;                kiao/DNAIdentifier
+;                kiao/ProteinIdentifier
+;                kiao/DiseaseIdentifier
+;                kiao/RNAIdentifier
+;                kiao/mRNAIdentifier))
 
 ;;;-------------------------------------------------------------------
 ;;; extract ids from source kb, group in temp graph db, output to file
@@ -155,9 +155,9 @@
   (prn "Clojure version: " *clojure-version*)
   (prn "Server URL: " (:server-url args))
   (prn "Repo name: " (:repo-name args))
-  (prn "Output directory: " (:output-directory args))
-  (prn "ID types: ")
-  (pprint id-types))
+  (prn "Output directory: " (:output-directory args)))
+;  (prn "ID types: ")
+;  (pprint id-types))
 
 ;; (defn source-kb [args]
 ;;   ;; Init source KB connection
