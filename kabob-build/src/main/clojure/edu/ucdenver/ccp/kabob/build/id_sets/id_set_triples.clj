@@ -235,7 +235,7 @@
                      (dorun
                       (map (partial add! output-kb)
                            (doall
-                            (let [id (get bindings '?/ice nil)]
+                            (let [id (get bindings '?/id nil)]
                               (generic-id-set-triples (list id)))))))
                    singles-query ;need to add reify find clauses on optionally
                    ))))
