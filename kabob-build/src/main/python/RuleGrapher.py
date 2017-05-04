@@ -7,6 +7,7 @@ import argparse
 import networkx as nx
 import re
 import os
+import graphviz as gv
 
 
 
@@ -85,12 +86,12 @@ def TripleMaker_SS(rule):
     '''
     if 'select' in rule: # accounts for sparql-string formatting
         mod_triples = []
-        if 'BIND' in rule:
+        if 'bind' in rule.lower():
             triple = [y for y in
-                      filter(None, [x.strip('"') for x in rule.split('BIND')[:-1][0].split(',') if 'select' not in x])
+                      filter(None, [x.strip('"') for x in rule.lower().split('bind')[:-1][0].split(',') if 'select' not in x.lower()])
                       if '?' in y]
         else:
-            triple = [y for y in filter(None, [x.strip('"') for x in rule.split(',') if 'select' not in x]) if '?' in y]
+            triple = [y for y in filter(None, [x.strip('"') for x in rule.split(',') if 'select' not in x.lower()]) if '?' in y]
         for i in triple:
             if 'minus' in i:
                 trip = i.split('{')[-1].rstrip().strip('}').split(' ')
@@ -158,8 +159,7 @@ def RulesDict(rule_set):
         if [x for x in rule.split(':') if x.startswith('name')]:
             key = [i for i in [x.strip('name').replace('"', '').strip() for x in rule.split(':') if x.startswith('name')] if x][0].strip(',')
             rules_dict[key] = {}
-            rules_dict[key]['head'] = [];
-            rules_dict[key]['body'] = []
+            rules_dict[key]['head'] = []; rules_dict[key]['body'] = []
             rules_dict[key]['head'] += TripleMaker([x.strip('head') for x in rule.split(':') if x.startswith('head')])
             rules_dict[key]['body'] += TripleMaker([x.strip('body') for x in rule.split(':') if x.startswith('body')])
 
@@ -242,59 +242,90 @@ def GraphMaker(triple_dict):
 
         if 'sparql-string' in value.keys():
             for trip in value['sparql-string']: #body of rule - set node and edge attributes
-                if str(trip[0]).startswith('?'):
-                    graph.add_node(str(trip[0]),shape='box', label=str(trip[0]), style='filled', color='gray65')
-                if not str(trip[0]).startswith('?') and not str(trip[0].strip('-')).startswith('?'):
-                    graph.add_node(str(trip[0]), label=str(trip[0]), shape='ellipse', color='gray30')
-                if str(trip[0]).startswith('-'):
-                    if str(trip[0].strip('-')).startswith('?'):
-                        graph.add_node(str(trip[0].strip('-')), shape='box', style='filled', label=str(trip[0].strip('-')), color='red')
-                    if not str(trip[0].strip('-')).startswith('?'):
-                        graph.add_node(str(trip[0].strip('-')), shape='ellipse', label=str(trip[0].strip('-')), color='red')
-                if str(trip[0]).startswith('o'):
-                    if str(trip[0].strip('o')).startswith('?'):
-                        graph.add_node(str(trip[0].strip('o')), shape='box', style='filled', label=str(trip[0].strip('o')), color='green')
-                    if not str(trip[0].strip('o')).startswith('?'):
-                        graph.add_node(str(trip[0].strip('o')), shape='ellipse', label=str(trip[0].strip('-')), color='green')
+                if 'subClass' in str(trip[1]):
+                    if str(trip[0]).startswith('-'):  # gives subClassOf relations a different a different arrowhead type
+                        graph.add_edge(str(trip[0].strip('-')), str(trip[2]), label=str(trip[1]), color='red', arrowhead='onormal', arrowsize=1.5)
+                        if str(trip[0].strip('-')).startswith('?'):
+                            graph.add_node(str(trip[0].strip('-')), shape='box', style='filled', label=str(trip[0].strip('-')), color='red')
+                        else:
+                            graph.add_node(str(trip[0].strip('-')), shape='ellipse', label=str(trip[0].strip('-')), color='red')
+                        if str(trip[2]).startswith('?'):
+                            graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='red')
+                        else:
+                            graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='red')
 
-                # set edges and edge attributes
-                if ('subClass' in str(trip[1]) and not (str(trip[0]).startswith('-') or str(trip[0]).startswith('o'))): #gives subClassOf relations a different a different arrowhead type
-                    graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='gray65', arrowhead='onormal', arrowsize=1.5)
+                    elif str(trip[0]).startswith('o'):
+                        graph.add_edge(str(trip[0].strip('o')), str(trip[2]), label=str(trip[1]), color='green', arrowhead='onormal', arrowsize=1.5)
+                        if str(trip[0].strip('o')).startswith('?'):
+                            graph.add_node(str(trip[0].strip('o')), shape='box', style='filled', label=str(trip[0].strip('o')), color='green')
+                        else:
+                            graph.add_node(str(trip[0].strip('o')), shape='ellipse', label=str(trip[0].strip('o')), color='green')
+                        if str(trip[2]).startswith('?'):
+                            graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='green')
+                        else:
+                            graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='green')
+                    else:
+                        graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='gray65', arrowhead='onormal', arrowsize=1.5)
+                        if str(trip[0]).startswith('?'):
+                            graph.add_node(str(trip[0]), shape='box', style='filled', label=str(trip[0]), color='gray65')
+                        else:
+                            graph.add_node(str(trip[0]), shape='ellipse', label=str(trip[0]), color='gray65')
+                        if str(trip[2]).startswith('?'):
+                            graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='gray65')
+                        else:
+                            graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='gray65')
 
-                if ('subClass' in str(trip[1]) and str(trip[0]).startswith('-')):
-                    graph.add_edge(str(trip[0].strip('-')), str(trip[2]), label=str(trip[1]), color='red', arrowhead='onormal', arrowsize=1.5)
-                    if str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='red')
-                    if not str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='red')
+                if 'subClass' not in str(trip[1]):
+                    if str(trip[0]).startswith('-'):  # gives subClassOf relations a different a different arrowhead type
+                        graph.add_edge(str(trip[0].strip('-')), str(trip[2]), label=str(trip[1]), color='red', arrowhead='normal', arrowsize=1.0)
+                        if str(trip[0].strip('-')).startswith('?'):
+                            graph.add_node(str(trip[0].strip('-')), shape='box', style='filled', label=str(trip[0].strip('-')), color='red')
+                        else:
+                            graph.add_node(str(trip[0].strip('-')), shape='ellipse', label=str(trip[0].strip('-')), color='red')
+                        if str(trip[2]).startswith('?'):
+                            graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='red')
+                        else:
+                            graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='red')
 
-                if ('subClass' not in str(trip[1]) and str(trip[0]).startswith('-')):
-                    graph.add_edge(str(trip[0].strip('-')), str(trip[2]), label=str(trip[1]), color='red', arrowhead='normal', arrowsize=1.0)
-                    if str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='red')
-                    if not str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='red')
+                    elif str(trip[0]).startswith('o'):
+                        graph.add_edge(str(trip[0].strip('o')), str(trip[2]), label=str(trip[1]), color='green', arrowhead='normal', arrowsize=1.0)
+                        if str(trip[0].strip('o')).startswith('?'):
+                            graph.add_node(str(trip[0].strip('o')), shape='box', style='filled', label=str(trip[0].strip('o')), color='green')
+                        else:
+                            graph.add_node(str(trip[0].strip('o')), shape='ellipse', label=str(trip[0].strip('o')), color='green')
+                        if str(trip[2]).startswith('?'):
+                            graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='green')
+                        else:
+                            graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='green')
+                    else:
+                        graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='gray65', arrowhead='normal', arrowsize=1.0)
+                        if str(trip[0]).startswith('?'):
+                            graph.add_node(str(trip[0]), shape='box', style='filled', label=str(trip[0]), color='gray65')
+                        else:
+                            graph.add_node(str(trip[0]), shape='ellipse', label=str(trip[0]), color='gray65')
+                        if str(trip[2]).startswith('?'):
+                            graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='gray65')
+                        else:
+                            graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='gray65')
 
-                if ('subClass' in str(trip[1]) and str(trip[0]).startswith('o')):
-                    graph.add_edge(str(trip[0].strip('o')), str(trip[2]), label=str(trip[1]), color='green', arrowhead='onormal', arrowsize=1.5)
-                    if str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='green')
-                    if not str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='green')
-
-                if ('subClass' not in str(trip[1]) and str(trip[0]).startswith('o')):
-                    graph.add_edge(str(trip[0].strip('o')), str(trip[2]), label=str(trip[1]), color='green', arrowhead='normal', arrowsize=1.0)
-                    if str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), shape='box', style='filled', label=str(trip[2]), color='green')
-                    if not str(trip[2]).startswith('?'):
-                        graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='green')
-
-                if ('subClass' not in str(trip[1]) and not (str(trip[0]).startswith('-')) or not str(trip[0].startswith('o'))):
-                    graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='gray65', arrowhead='normal', arrowsize=1.0)
+            #add legend
+            graph.add_node('bodyVar', shape='ellipse', label='bodyVar', color='gray65')
+            # head + not subclass
+            graph.add_node('?headVar', shape='box', style='filled', label='?headVar', color='orange')
+            graph.add_edge('?headVar', 'bodyVar', label='subClassOf', color='orange', arrowhead='onormal', arrowsize=1.5)
+            # minus + not subclass
+            graph.add_node('?Var{MINUS}', shape='box', style='filled', label='?Var{MINUS}', color='red')
+            graph.add_edge('?Var{MINUS}', 'bodyVar', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
+            # option
+            graph.add_edge('bodyVar', 'literal2', label='!not', color='red', arrowhead='tee', arrowsize=1.0)
+            graph.add_node('?Var{OPTION}', shape='box', style='filled', label='?Var{OPTION}', color='green')
+            graph.add_node('literal2', shape='ellipse', label='literal3', color='green')
+            graph.add_edge('?Var{OPTION}', 'literal2', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
 
         graph_dict[key] = graph
 
     return graph_dict
+
 
 
 def GraphViewer(graph_dict, output):
@@ -306,6 +337,7 @@ def GraphViewer(graph_dict, output):
     :param output: a string containing the file pathway information for outputting the graphical representations
     :return: saves a ng file containing the graphical figure for each rule
     '''
+
     for key, graph in graph_dict.items():
         title = key.strip(',')
 
@@ -317,6 +349,7 @@ def GraphViewer(graph_dict, output):
         A.edge_attr['fontname'] = 'Arial'
         A.edge_attr['fontsize'] = 9.0
         A.node_attr['fontsize'] = 9.0
+
         A.draw(str(output) + '/' + str(title) + '_Rules_figure.png', prog='dot')
 
     return
@@ -334,7 +367,6 @@ def main():
     for root, dirs, files in os.walk(args.input):
         for file in files:
             if file.endswith(".clj"):
-                print file
                 rule_file = (os.path.join(root, file))
                 rules = []
                 for line in open(rule_file).readlines():
