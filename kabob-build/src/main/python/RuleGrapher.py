@@ -83,8 +83,7 @@ def TripleMaker_SS(rule):
     :param rule: list of text
     :return: list of lists where each list is a triple
     '''
-
-    if 'select' in rule:
+    if 'select' in rule: # accounts for sparql-string formatting
         mod_triples = []
         if 'BIND' in rule:
             triple = [y for y in
@@ -107,7 +106,7 @@ def TripleMaker_SS(rule):
 
         return mod_triples
 
-    if '(' in rule:
+    if '(' in rule: 
         r_set = []
         for i in rule.split(')'):
             if '/' in i and '@' not in i:
@@ -138,7 +137,6 @@ def RuleSplitter(rule, start, stop):
     :param stop: sub-string that is present in rule
     :return: sub-string from rule that was between the start and stop sub-strings
     '''
-
     result = re.search(str(start) + '(.*)' + str(stop), rule)
     return result.group(1)
 
@@ -180,7 +178,6 @@ def RulesDict_SS(rule_set):
     triple lists
     '''
     rules_dict = {}
-
     for rule in rule_set:
         if 'name' in rule:
             key = re.sub('[", ]', '', RuleSplitter(rule, ':name', ':')).split(':')[0]
@@ -309,7 +306,6 @@ def GraphViewer(graph_dict, output):
     :param output: a string containing the file pathway information for outputting the graphical representations
     :return: saves a ng file containing the graphical figure for each rule
     '''
-
     for key, graph in graph_dict.items():
         title = key.strip(',')
 
