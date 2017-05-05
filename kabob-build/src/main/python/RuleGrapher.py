@@ -314,13 +314,13 @@ def GraphMaker(triple_dict):
             graph.add_node('?headVar', shape='box', style='filled', label='?headVar', color='orange')
             graph.add_edge('?headVar', 'bodyLiteral', label='subClassOf', color='orange', arrowhead='onormal', arrowsize=1.5)
             # minus + not subclass
-            graph.add_node('?Var{MINUS}', shape='box', style='filled', label='?Var{MINUS}', color='red')
-            graph.add_edge('?Var{MINUS}', 'bodyLiteral', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
+            graph.add_node('?var{MINUS}', shape='box', style='filled', label='?var{MINUS}', color='red')
+            graph.add_edge('?var{MINUS}', 'bodyLiteral', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
             # option
             graph.add_edge('bodyLiteral', 'literal', label='!not', color='red', arrowhead='tee', arrowsize=1.0)
-            graph.add_node('?Var{OPTION}', shape='box', style='filled', label='?Var{OPTION}', color='green')
+            graph.add_node('?var{OPTION}', shape='box', style='filled', label='?var{OPTION}', color='green')
             graph.add_node('literal', shape='ellipse', label='literal', color='green')
-            graph.add_edge('?Var{OPTION}', 'literal', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
+            graph.add_edge('?var{OPTION}', 'literal', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
 
         graph_dict[key] = graph
 
