@@ -309,18 +309,18 @@ def GraphMaker(triple_dict):
                             graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='gray65')
 
             #add legend
-            graph.add_node('bodyVar', shape='ellipse', label='bodyVar', color='gray65')
+            graph.add_node('bodyLiteral', shape='ellipse', label='bodyLiteral', color='gray65')
             # head + not subclass
             graph.add_node('?headVar', shape='box', style='filled', label='?headVar', color='orange')
-            graph.add_edge('?headVar', 'bodyVar', label='subClassOf', color='orange', arrowhead='onormal', arrowsize=1.5)
+            graph.add_edge('?headVar', 'bodyLiteral', label='subClassOf', color='orange', arrowhead='onormal', arrowsize=1.5)
             # minus + not subclass
             graph.add_node('?Var{MINUS}', shape='box', style='filled', label='?Var{MINUS}', color='red')
-            graph.add_edge('?Var{MINUS}', 'bodyVar', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
+            graph.add_edge('?Var{MINUS}', 'bodyLiteral', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
             # option
-            graph.add_edge('bodyVar', 'literal2', label='!not', color='red', arrowhead='tee', arrowsize=1.0)
+            graph.add_edge('bodyLiteral', 'literal', label='!not', color='red', arrowhead='tee', arrowsize=1.0)
             graph.add_node('?Var{OPTION}', shape='box', style='filled', label='?Var{OPTION}', color='green')
-            graph.add_node('literal2', shape='ellipse', label='literal3', color='green')
-            graph.add_edge('?Var{OPTION}', 'literal2', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
+            graph.add_node('literal', shape='ellipse', label='literal', color='green')
+            graph.add_edge('?Var{OPTION}', 'literal', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
 
         graph_dict[key] = graph
 
