@@ -213,9 +213,14 @@
         ;; [(hash-of khash)
         ;;  (clean-union-find union-find)]))))
 
-
+        
 (defn combined-pairs-fn [kb]
-  (let [query-pat `((?/ice1 skos/exactMatch ?/ice2))]
+  (let [query-pat `((?/id skos/exactMatch ?/id2)
+                     (?/id rdf/type ?/id_type)
+                     (?/id_type [rdfs/subClassOf *] obo/IAO_0000578 ) ;centrally registered identifier
+                     (?/id2 rdf/type ?id_type2)
+                     (?/id_type2 [rdfs/subClassOf *] obo/IAO_0000578) ;centrally registered identifier
+                     (!= ?/id  ?/id2))]
     (binding [*use-inference* false
               *work-queue-single-threaded* true]
       (println "running pairs query.")
@@ -231,11 +236,11 @@
           (query-reduce-with-logging kb query-pat union-find
             (fn [_ bindings]
               ;(work (fn []
-                      (let [ice1 (get bindings '?/ice1 nil)
-                            ice2 (get bindings '?/ice2 nil)]
-                        (and ice1
-                             ice2
-                             (uf-union union-find ice1 ice2)))
+                      (let [id (get bindings '?/id nil)
+                            id2 (get bindings '?/id2 nil)]
+                        (and id
+                             id2
+                             (uf-union union-find id id2)))
                       nil));)))
         union-find))))
 

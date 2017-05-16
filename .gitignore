@@ -8,7 +8,7 @@
 .lein-plugins/
 .lein-failures
 .nrepl-port
-
+.idea
 .project
 /.settings/
 

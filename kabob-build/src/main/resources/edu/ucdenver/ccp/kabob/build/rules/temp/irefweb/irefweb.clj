@@ -129,7 +129,7 @@
   cataloged by IRefWeb. Unary interactions are indicated by an 'Y' in the 'edge type' column of
   IRefWeb records. For each unary interaction, this rule creates a subclass of the
   'interaction type' (MI Ontology concept), and that subclass is restricted using ro:has_participant
-  to the single `interacting` protein. It is important to note that this these are intra-molecular
+  to the single 'interacting' protein. It is important to note that this these are intra-molecular
   interactions (one protein molecule interacting with itself), and not for example interactions
   that form a dimer using two identical molecules of the same protein. The rule also places a
   cardinality restriction of 1 on the interaction subclass for the ro:has_participant property."
