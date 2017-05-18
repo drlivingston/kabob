@@ -42,7 +42,7 @@ fi
 
 PATH_TO_ME=`pwd`
 
-mvn -e -f scripts/download/pom-flatten-ontology.xml exec:exec \
+mvn -e -f scripts/download/support-scripts_process-ontologies/pom-flatten-ontology.xml exec:exec \
         -DontologyFile=$ONT_FILE \
         -DoutputFile=$OUTPUT_FILE \
         -DlaunchDir=$PATH_TO_ME
