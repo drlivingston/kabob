@@ -7,20 +7,20 @@
          (?/record obo/BFO_0000051 ?/id_field_value) ; has part
          (?/id_field_value rdf/type ccp/IAO_EXT_0000194) ; id field value
          (?/id_field_value rdf/type ?/id) ; ontology concept identifier
-         (?/id_field_value rdfs/label ?/id_string)
-         ;(?/record obo/BFO_0000051 ?/definition_field_value) ; has part
-         ;(?/definition_field_value rdf/type ccp/IAO_EXT_0000195) ; ontology concept record definition field value
-         ;(?/definition_field_value rdfs/label ?/definition)
+         (?/id_field_value rdfs/label ?/bound_id_string)
+         (?/record obo/BFO_0000051 ?/definition_field_value) ; has part
+         (?/definition_field_value rdf/type ccp/IAO_EXT_0000195) ; ontology concept record definition field value
+         (?/definition_field_value rdfs/label ?/bound_definition)
          (?/record obo/BFO_0000051 ?/label_field_value)
          (?/label_field_value rdf/type ccp/IAO_EXT_0000196) ; ontology concept record label field value
-         (?/label_field_value rdfs/label ?/label))
+         (?/label_field_value rdfs/label ?/bound_label))
   :reify ([?/record {:ln (:sha-1 ?/id)
                     :ns "ccp" :prefix "R_" :suffix ""}]
            [?/id_field_value {:ln (:sha-1 ?/id)
                :ns "ccp" :prefix "F_" :suffix ""}]
-           ;[?/definition_field_value {:ln (:sha-1 ?/definition)
-               ;:ns "ccp" :prefix "F_" :suffix ""}]
-           [?/label_field_value {:ln (:sha-1 ?/label)
+           [?/definition_field_value {:ln (:sha-1 ?/bound_definition)
+               :ns "ccp" :prefix "F_" :suffix ""}]
+           [?/label_field_value {:ln (:sha-1 ?/bound_label)
                :ns "ccp" :prefix "F_" :suffix ""}])
   :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
