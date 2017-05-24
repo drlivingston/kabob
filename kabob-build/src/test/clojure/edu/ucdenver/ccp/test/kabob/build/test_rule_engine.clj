@@ -17,7 +17,7 @@
 
 ;;(defonce ^:dynamic *rcon* nil)
 
-(def rule-test-path "edu/ucdenver/ccp/kabob/build/rules/bio_to_ice/")
+;;(def rule-test-path "edu/ucdenver/ccp/kabob/build/rules/pre-identifier-merge/step_a-ontology_to_ice/step_a/")
 
 ;;; --------------------------------------------------------
 ;;; functions
@@ -38,11 +38,11 @@
   ;;(pprint (classpath-seq))
   (is (< 5 (count (classpath-seq)))))
 
-(deftest verify-specific-rule-file-readable
-  (is (< 1 
-         (count 
-          (edu.ucdenver.ccp.kabob.rule/kabob-load-rules-from-classpath 
-           rule-test-path)))))
+;;(deftest verify-specific-rule-file-readable
+;;  (is (< 1 
+;;         (count 
+;;          (edu.ucdenver.ccp.kabob.rule/kabob-load-rules-from-classpath 
+;;           rule-test-path)))))
 
 
 
