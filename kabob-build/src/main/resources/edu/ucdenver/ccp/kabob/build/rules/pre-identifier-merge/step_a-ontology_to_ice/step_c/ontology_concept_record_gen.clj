@@ -3,6 +3,9 @@
 ;; -----------------------------------------------
 ;; creates ontology concept record for every ontology concept
 `{:name "ontology-concept-record-gen"
+  :description "This rule generates an instance of an Ontology Concept
+  Record (IAO_EXT_0000191) for each ontology concept, including field
+  values for the concept identifier, definition, and label."
   :head ((?/record rdf/type ccp/IAO_EXT_0000191) ; ontology concept record
          (?/record obo/BFO_0000051 ?/id_field_value) ; has part
          (?/id_field_value rdf/type ccp/IAO_EXT_0000194) ; id field value
