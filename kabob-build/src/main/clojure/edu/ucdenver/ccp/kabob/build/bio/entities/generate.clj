@@ -16,7 +16,7 @@
 ;;; id types
 ;;;-------------------------------------------------------------------
 
-(def bio-namespace "kbio")
+(def bio-namespace "ccp")
 
 (def types '[[kiao/DNAIdentifier-Set     "DNA"     obo/SO_0000704]
              [kiao/ProteinIdentifier-Set "Protein" obo/CHEBI_36080]
@@ -67,11 +67,11 @@
 (defn ids-in-set [kb id-set]
   (query-template kb
                   '?/id
-                  `((~id-set kro/hasMember ?/id))))
+                  `((~id-set obo/RO_0002351 ?/id)))) ;; obo:has_member
   ;; (prn id-set)
   ;; (let [ids (query-template kb
   ;;                           '?/id
-  ;;                           `((~id-set kro/hasMember ?/id)))]
+  ;;                           `((~id-set obo/RO_0002351 ?/id)))]
   ;;   (prn ids)
   ;;   ids))
 
@@ -116,8 +116,8 @@
   (let [new-ids (query-template source-kb
                                 '?/id
                                 `((_/set obo/IAO_0000142 ~entity)
-                                  (_/set kro/hasMember ~id)
-                                  (_/set kro/hasMember ?/id)))]
+                                  (_/set obo/RO_0002351 ~id)
+                                  (_/set obo/RO_0002351 ?/id)))]
     (reduce (fn [seen new-id]
               (cond
                (nil? seen)   nil
@@ -322,7 +322,7 @@
                                    triples (denotes-triples id id-set type)]
                                (blocking-write-triples write-agent triples)))))
                    `((?/idset rdf/type ~id-set-type)
-                     (?/idset kro/hasMember ?/id))))
+                     (?/idset obo/RO_0002351 ?/id))))
     (await write-agent)))
 
 (defn generate-denotes-triples [kb output-dir

@@ -50,7 +50,7 @@
 
 (defn generic-id-set-sym [hash-code]
   (symbol *id-set-ns*
-          (str "KaBOB-ID-Set-" hash-code)))
+          (str "IDs-" hash-code)))
 
 (defn hash-long-names [ids]
   (let [long-names (sort
@@ -87,7 +87,7 @@
 
 (defn generic-id-set-triples [ids]
   (let [set-sym (derive-generic-id-set-sym ids)
-        type-sym (symbol *id-set-ns* "ID-Set")]
+        type-sym (symbol *id-set-ns* "IAO_EXT_0000316")] ;; ccp:identifier set
     (conj (map (fn [id]
                  `(~set-sym obo/RO_0002351 ~id))
                ids)

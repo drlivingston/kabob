@@ -1,19 +1,16 @@
-;; <http://kabob.ucdenver.edu/iao/KaBOB-ID-Set-aWMnMcT47Ppv2-iyaSV56GAeMAQ> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kabob.ucdenver.edu/iao/ID-Set> .
-;; <http://kabob.ucdenver.edu/iao/KaBOB-ID-Set-aWMnMcT47Ppv2-iyaSV56GAeMAQ> <http://kabob.ucdenver.edu/ro/hasMember> <http://kabob.ucdenver.edu/iao/refseq/REFSEQ_YP_003325284_ICE> .
-
 
 ;;converts ID sets into reified entities
 `{:name "idset-mentions-entity"
-  :head ((?/idset obo/IAO_0000142 ?/entity)) ; mentions
-  :body ((?/idset rdf/type kiao/ID-Set))
-  :reify ([?/entity {:ln (:md5 ?/idset)
-                     :ns "kbio" :prefix "BIO_" :suffix ""}])}
+  :head ((?/idset obo/IAO_0000142 ?/entity)) ;; obo:mentions
+  :body ((?/idset rdf/type ccp/IAO_EXT_0000316)) ;; ccp:identifier set
+  :reify ([?/entity {:ln (:sha-1 ?/idset)
+                     :ns "ccp" :prefix "B_" :suffix ""}])}
 
 
 `{:name "ice-denotes-entity"
-  :head ((?/ice obo/IAO_0000219 ?/entity)) ; mentions
-  :body ((?/idset rdf/type kiao/ID-Set)
-         (?/idset kro/hasMember ?/ice))
-  :reify ([?/entity {:ln (:md5 ?/idset)
-                     :ns "kbio" :prefix "BIO_" :suffix ""}])}
+  :head ((?/id obo/IAO_0000219 ?/entity)) ;; obo:mentions
+  :body ((?/idset rdf/type ccp/IAO_EXT_0000316) ;; ccp:identifier set
+         (?/idset obo/RO_0002351 ?/id)) ;; obo:has_member
+  :reify ([?/entity {:ln (:sha-1 ?/idset)
+                     :ns "ccp" :prefix "B_" :suffix ""}])}
 
