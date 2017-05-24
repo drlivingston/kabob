@@ -11,6 +11,6 @@
 		  ?root rdf:type owl:Class .
 		  minus{?root rdfs:subClassOf ?class}
 		  minus{?root owl:deprecated true} 
-		  filter(!contains(str(?root), "/bnode/")) 
+		  filter(!contains(str(?root), '/bnode/')) 
 		}"
 }
