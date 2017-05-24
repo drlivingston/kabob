@@ -10,5 +10,6 @@
   :sparql-string "select ?root {
 		  ?root rdf:type owl:Class .
 		  minus{?root rdfs:subClassOf ?class}
-		minus{?root owl:deprecated true}  "
+		minus{?root owl:deprecated true}  
+		}"
 }
