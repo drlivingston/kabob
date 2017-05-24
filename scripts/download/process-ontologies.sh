@@ -12,6 +12,11 @@ then
     exit 1
 fi
 
+if ! [[ -e README.md ]]; then
+    echo "Please run from the root of the project."
+    exit 1
+fi
+
 ONTOLOGY_DIR=$1
 
 # download the ontology files that will be used by kabob
