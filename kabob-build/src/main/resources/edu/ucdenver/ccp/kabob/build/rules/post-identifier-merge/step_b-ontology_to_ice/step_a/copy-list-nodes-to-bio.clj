@@ -1,7 +1,7 @@
 `{:name "copy-list-nodes-to-bio"
   :description "This rule makes a copy of all rdf:List instances and connects the copy to a generated List Record (ccp:IAO_EXT_0000317) instance."
   :head ((?/list_record obo/IAO_0000219 ?/listmember) ;; obo:denotes
-        (?/list_record rdf/type obo/IAO_EXT_0000317) ;; ccp:RDF list record
+        (?/list_record rdf/type ccp/IAO_EXT_0000317) ;; ccp:RDF list record
         (?/list_record obo/IAO_0000219 ?/bio_listmember) ;; obo:denotes
         (?/bio_listmember rdf/Type rdf/List))
   :reify ([?/list_record {:ln (:sha-1 ?/listmember)
