@@ -9,5 +9,6 @@
           [?/bio_adc {:ln (:sha-1 ?/adc)
                   :ns "ccp" :prefix "ADC_"}])
   :sparql-string "select ?adc {
-                    ?adc rdf:type owl:AllDisjointClasses ."
+                    ?adc rdf:type owl:AllDisjointClasses .
+                   }"
   }
