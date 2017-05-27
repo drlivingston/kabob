@@ -13,7 +13,7 @@ fi
 RULE_PAT=$1
 
 $SCRIPT_DIR/run-rules.sh \
-              $MAVEN \
+              $LEININGEN \
               $KB_URL \
               $KB_NAME \
               $KB_USER $KB_PASS \
