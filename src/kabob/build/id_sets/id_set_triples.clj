@@ -1,6 +1,6 @@
 (ns kabob.build.id-sets.id-set-triples
   (use kabob.build.id-sets.id-sets
-       kabob.util.union-find
+       kabob.core.util.union-find
        
        clojure.pprint
        clojure.stacktrace
