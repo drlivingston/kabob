@@ -25,6 +25,7 @@ $AG_BIN/agload \
     --verbose \
     --supersede \
     --bulk \
+    --duplicates delete \
     --graph :source \
     --with-indices $AG_INDICES \
     --port $AG_PORT \
@@ -37,8 +38,3 @@ $AG_BIN/agload \
 #              being loaded.
 # --graph: The default graph; `:source` indicates that the filename should be
 #          used.
-
-# TODO: Why is this being done as a separate step, and not as part of the
-# initial load?  agload's `--duplicates` option would seem to suggest that this
-# is possible.
-$SCRIPT_DIR/remove-duplicates.sh $AG_BIN $AG_PORT $AG_INDICES $KB_NAME

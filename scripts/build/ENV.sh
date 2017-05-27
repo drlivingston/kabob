@@ -8,8 +8,8 @@ echo Sourcing default variables
 ## Set variables for build environment and installation.                     ##
 ## ------------------------------------------------------------------------- ##
 
-# We use Maven as a Java execution engine ):
-MAVEN=${PLATFORM_MAVEN:?}
+# We use Leiningen as a Java/Clojure execution engine
+LEININGEN=${PLATFORM_LEININGEN:?}
 
 # The build expects to be co-located with an Allegrograph installation.
 AG_HOME=${PLATFORM_ALLEGROGRAPH_HOME:?}

@@ -20,4 +20,10 @@
   				 [commons-codec/commons-codec "1.6"]]
   ;:main ^:skip-aot my-stuff.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :main-a {:main kabob.build.run_rules
+                      :jvm-opts ["-d64" "-Xmx2g"]}
+             :main-b {:main kabob.build.id_sets.generate
+             	      :jvm-opts ["-d64" "-Xmx24g"]}}
+  :aliases {"run-rules" ["with-profile" "main-a" "run"]
+            "generate-id-sets" ["with-profile" "main-b" "run"]})
