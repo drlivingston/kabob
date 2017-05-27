@@ -90,7 +90,7 @@ ssh agraph@localhost "$AGRAPH_CMD"
 ./scripts/RUN_RULES_AND_LOAD.sh rules/id_mapping/skos_exact
 
 # Create the ID sets
-$LEININGEN generate-id-sets "$KB_URL $KB_NAME $KB_USER $KB_PASS $KB_DATA_DIR/id_sets/exact/ $KB_DATA_DIR/id_sets/graph_dbs/"
+$LEININGEN generate-id-sets $KB_URL $KB_NAME $KB_USER $KB_PASS $KB_DATA_DIR/id_sets/exact/ $KB_DATA_DIR/id_sets/graph_dbs/
                #-Dclojure.vmargs="-d64 -Xmx24G -XX:MaxPermSize=8G -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:-UseGCOverheadLimit" \
 find $KB_DATA_DIR -type d -exec chmod 0755 {} \;
 
