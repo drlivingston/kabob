@@ -1,10 +1,10 @@
 (ns kabob.core.staged-rule
-  (use edu.ucdenver.ccp.kr.variable
-       edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.unify
-       edu.ucdenver.ccp.kr.rule
-       edu.ucdenver.ccp.kr.forward-rule
+  (use kr.core.variable
+       kr.core.kb
+       kr.core.rdf
+       kr.core.unify
+       kr.core.rule
+       kr.core.forward-rule
        kabob.core.staged-query
        kabob.core.parallel-utils
        clojure.pprint))

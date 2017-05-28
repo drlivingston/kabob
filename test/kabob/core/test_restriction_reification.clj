@@ -3,16 +3,15 @@
 
        kabob.core.util.hashing
        kabob.core.rule
-       edu.ucdenver.ccp.kr.forward-rule
+       kr.core.forward-rule
        
        kabob.core.namespace
-       edu.ucdenver.ccp.kr.sesame.kb
+       kr.sesame.kb
 
-       edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sparql
-       
-       edu.ucdenver.ccp.utils
+       kr.core.kb
+       kr.core.rdf
+       kr.core.sparql
+       kr.core.utils
        )
   (require ;;kabob.core.kabob
            clojure.string))

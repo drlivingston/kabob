@@ -1,14 +1,14 @@
 (ns kabob.build.forward-rule-test
   (use clojure.test
-        edu.ucdenver.ccp.kr.sesame.kb
-        edu.ucdenver.ccp.kr.sesame.sparql
-        edu.ucdenver.ccp.kr.sesame.rdf
+        kr.sesame.kb
+        kr.sesame.sparql
+        kr.sesame.rdf
         )
   (:require  [kabob.build.run-rules :refer [query-variables run-forward-rule]]
-             [edu.ucdenver.ccp.kr.forward-rule :refer [add-reify-fns]]
-             [edu.ucdenver.ccp.kr.sparql :refer [sparql-select-query query]]
-             [edu.ucdenver.ccp.kr.rdf :refer [register-namespaces synch-ns-mappings add!]]
-             [edu.ucdenver.ccp.kr.kb :refer [kb open close]]
+             [kr.core.forward-rule :refer [add-reify-fns]]
+             [kr.core.sparql :refer [sparql-select-query query]]
+             [kr.core.rdf :refer [register-namespaces synch-ns-mappings add!]]
+             [kr.core.kb :refer [kb open close]]
              [kabob.core.namespace :refer [*namespaces*]]
              [kabob.core.rule :refer [kabob-load-rules-from-classpath]]
              [kabob.build.output-kb :refer [output-kb]]

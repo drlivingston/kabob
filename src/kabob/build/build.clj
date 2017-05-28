@@ -1,10 +1,10 @@
 (ns kabob.build.build
-  (use edu.ucdenver.ccp.kr.variable
-       edu.ucdenver.ccp.kr.unify
-       edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sparql
-       edu.ucdenver.ccp.kr.rule
+  (use kr.core.variable
+       kr.core.unify
+       kr.core.kb
+       kr.core.rdf
+       kr.core.sparql
+       kr.core.rule
        
        ;;kabob.build.post-process
        )
@@ -26,7 +26,7 @@
 
 ;; EXAMPLE CALL to get KB connection:
 ;; (let [rootdir "/temp/kabob/kb/"]
-;;   (edu.ucdenver.ccp.kabob.build.kb-connection/builder-kb
+;;   (kabob.build.kb-connection/builder-kb
 ;;    {:properties (str rootdir "bigdata/RWStore.properties")
 ;;     :journal (str rootdir "bigdata/kaboblt.RW.jnl")
 ;;     :store-name "kaboblt"}))

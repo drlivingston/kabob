@@ -1,12 +1,12 @@
 (ns kabob.core.staged-query
-  (use edu.ucdenver.ccp.utils
-       edu.ucdenver.ccp.kr.variable
-       edu.ucdenver.ccp.kr.unify
-       edu.ucdenver.ccp.kr.rule
-       edu.ucdenver.ccp.kr.forward-rule
+  (use kr.core.utils
+       kr.core.variable
+       kr.core.unify
+       kr.core.rule
+       kr.core.forward-rule
 
-       edu.ucdenver.ccp.kr.rdf
-       [edu.ucdenver.ccp.kr.sparql :exclude (query-visit)]
+       kr.core.rdf
+       [kr.core.sparql :exclude (query-visit)]
 
        kabob.core.parallel-utils
 
@@ -153,7 +153,7 @@
 (defn query-visit [kb binding-fn pat other]
   (let [visit-counter (atom 0)
         t (atom (.getTime (java.util.Date.)))]
-    (edu.ucdenver.ccp.kr.sparql/query-visit
+    (kr.core.sparql/query-visit
      kb
      (fn [bindings]
        (swap! visit-counter inc)

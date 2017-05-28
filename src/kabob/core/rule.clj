@@ -1,8 +1,8 @@
 (ns kabob.core.rule
-  (use edu.ucdenver.ccp.utils
-       edu.ucdenver.ccp.kr.variable
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.rule)
+  (use kr.core.utils
+       kr.core.variable
+       kr.core.rdf
+       kr.core.rule)
   (require kabob.core.reification-extensions))
 
 ;; this needs to be an atom so that it can be mutated?

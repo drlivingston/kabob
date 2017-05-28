@@ -1,9 +1,9 @@
 (ns kabob.core.reification-extensions
   (use kabob.core.util.hashing
-       edu.ucdenver.ccp.kr.reify
-       edu.ucdenver.ccp.kr.unify
-       edu.ucdenver.ccp.kr.forward-rule
-       edu.ucdenver.ccp.kr.variable))
+       kr.core.reify
+       kr.core.unify
+       kr.core.forward-rule
+       kr.core.variable))
 
 ;;;-------------------------------------------------------------------
 ;;; restriction helper

@@ -5,7 +5,7 @@
   (:import [java.io File])
   (use kabob.build.id-sets.kabob-id-sets
        kabob.build.id-sets.id-set-triples
-       edu.ucdenver.ccp.kr.kb
+       kr.core.kb
        kabob.build.input-kb
        clojure.pprint
        clojure.stacktrace)
@@ -58,7 +58,7 @@
 ;     (generate-id-set-internal source-kb temp-db-dir output-base-dir id-type))))
 
 ;; (defn generate-all-id-sets [source-kb temp-db-base-dir output-base-dir]
-;;   (binding [edu.ucdenver.ccp.kr.sparql/*force-prefixes*
+;;   (binding [kr.core.sparql/*force-prefixes*
 ;;             [;["franzOption_queryEngine" "franz:sparql-1.0"]
 ;;              ["franzOption_memoryLimit" "franz:85g"]
 ;;              ["franzOption_memoryExhaustionWarningPercentage" "franz:95"]
@@ -107,7 +107,7 @@
 
         
 (defn generate-all-id-sets [source-kb temp-db-base-dir output-base-dir]
-  (binding [edu.ucdenver.ccp.kr.sparql/*force-prefixes*
+  (binding [kr.core.sparql/*force-prefixes*
             [;["franzOption_queryEngine" "franz:sparql-1.0"]
              ["franzOption_memoryLimit" "franz:85g"]
              ["franzOption_memoryExhaustionWarningPercentage" "franz:95"]

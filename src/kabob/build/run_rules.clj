@@ -10,18 +10,18 @@
 ;; The rule-set-names variable holds the names of rule files available in
 ;; src/main/resources. Below we map over each rule set name, opening an
 ;; InputStreamReader to read the rule set file, and pass the open reader to
-;; edu.ucdenver.ccp.kr.rule/load-rules-from-file
+;; kr.core.rule/load-rules-from-file
 
 (ns kabob.build.run-rules
   (:gen-class)
-  (use edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
+  (use kr.core.kb
+       kr.core.rdf
        kabob.core.rule
-       [edu.ucdenver.ccp.kr.forward-rule :exclude (run-forward-rule)]
-       edu.ucdenver.ccp.kr.sparql
-       edu.ucdenver.ccp.kr.variable
-       edu.ucdenver.ccp.kr.reify
-       edu.ucdenver.ccp.kr.unify
+       [kr.core.forward-rule :exclude (run-forward-rule)]
+       kr.core.sparql
+       kr.core.variable
+       kr.core.reify
+       kr.core.unify
        kabob.core.staged-rule
        kabob.core.parallel-utils
        clojure.pprint
@@ -199,7 +199,7 @@
 (defn requested-rule-inference [rule]
   (let [requested-inference (get (get rule :options {})
                                  :inference
-                                 edu.ucdenver.ccp.kr.rdf/*use-inference*)]
+                                 kr.core.rdf/*use-inference*)]
     ;; This probably needs to be a more interesting cond, but for now this
     ;; works
     (if requested-inference
@@ -222,13 +222,13 @@
 ;; ["franzOption_clauseReorderer" "franz:identity"]
 
 (defn primary-process-rule [args rule]
-  (binding [edu.ucdenver.ccp.kr.sparql/*force-prefixes*
+  (binding [kr.core.sparql/*force-prefixes*
             (add-magic-prefixes
              [["franzOption_memoryLimit" "franz:85g"]
               ["franzOption_memoryExhaustionWarningPercentage" "franz:95"]]
              rule)
-            edu.ucdenver.ccp.kr.rdf/*use-inference* false]
-    (binding [edu.ucdenver.ccp.kr.rdf/*use-inference*
+            kr.core.rdf/*use-inference* false]
+    (binding [kr.core.rdf/*use-inference*
               (requested-rule-inference rule)]
       (prn (str "Processing rule: " (:name rule)))
       (let [source-connection (source-kb args)
@@ -241,8 +241,8 @@
                       (close source-connection)))))))
 
 (defn process-forward-rules [args rules]
-  (println "select limit (before bound): " edu.ucdenver.ccp.kr.sparql/*select-limit* )
-  (binding [edu.ucdenver.ccp.kr.sparql/*select-limit* (:sparql-limit args)]
+  (println "select limit (before bound): " kr.core.sparql/*select-limit* )
+  (binding [kr.core.sparql/*select-limit* (:sparql-limit args)]
     (dorun ;; Switch to a parallel work queue?
      (map (fn [rule] (time (primary-process-rule args rule)))
           rules))))

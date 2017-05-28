@@ -1,10 +1,10 @@
 (ns kabob.core.parallel-utils
-  (use edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sparql
-       edu.ucdenver.ccp.kr.sesame.writer-kb
+  (use kr.core.kb
+       kr.core.rdf
+       kr.core.sparql
+       kr.sesame.writer-kb
+       kr.core.utils
 
-       edu.ucdenver.ccp.utils
        clojure.stacktrace
        clojure.pprint)
   (import java.util.concurrent.ThreadPoolExecutor

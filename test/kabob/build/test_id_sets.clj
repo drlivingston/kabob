@@ -2,7 +2,7 @@
   (use clojure.test
        kabob.build.id-sets.id-sets))
        ;;arguably we should test the neo4j bindings too
-       ;;edu.ucdenver.ccp.kabob.build.util.neo4j-util
+       ;;kabob.build.util.neo4j-util
 
 ;;;-------------------------------------------------------------------
 ;;; globals

@@ -2,8 +2,8 @@
   (use clojure.test
        clojure.pprint
 
-       edu.ucdenver.ccp.utils
-       edu.ucdenver.ccp.kr.rule
+       kr.core.utils
+       kr.core.rule
        kabob.core.rule
 
        kabob.core.namespace)
@@ -16,7 +16,7 @@
 
 ;;(defonce ^:dynamic *rcon* nil)
 
-;;(def rule-test-path "edu/ucdenver/ccp/kabob/build/rules/pre-identifier-merge/step_a-ontology_to_ice/step_a/")
+;;(def rule-test-path "resources/rules/pre-identifier-merge/step_a-ontology_to_ice/step_a/")
 
 ;;; --------------------------------------------------------
 ;;; functions
@@ -40,7 +40,7 @@
 ;;(deftest verify-specific-rule-file-readable
 ;;  (is (< 1 
 ;;         (count 
-;;          (edu.ucdenver.ccp.kabob.rule/kabob-load-rules-from-classpath 
+;;          (kabob.core.rule/kabob-load-rules-from-classpath
 ;;           rule-test-path)))))
 
 

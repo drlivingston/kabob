@@ -2,9 +2,9 @@
   (use clojure.test
        clojure.pprint
 
-       edu.ucdenver.ccp.utils
-       edu.ucdenver.ccp.kr.rule
-       edu.ucdenver.ccp.kr.forward-rule
+       kr.core.utils
+       kr.core.rule
+       kr.core.forward-rule
        kabob.core.rule
        kabob.build.live-test-utils
 

@@ -1,7 +1,7 @@
 (ns kabob.build.id-sets.kabob-id-sets
-  (use edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sparql
+  (use kr.core.kb
+       kr.core.rdf
+       kr.core.sparql
        kabob.core.namespace
 
        kabob.core.util.union-find

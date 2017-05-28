@@ -1,7 +1,7 @@
 (ns kabob.core.kb
-  (use edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sesame.kb
+  (use kr.core.kb
+       kr.core.rdf
+       kr.core.sesame.kb
        kabob.core.namespace)
   (import org.openrdf.rio.RDFFormat
           org.openrdf.query.resultio.TupleQueryResultFormat))

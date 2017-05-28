@@ -1,6 +1,6 @@
 (ns kabob.core.namespace
-  (use edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf))
+  (use kr.core.kb
+       kr.core.rdf))
 
 (def ^:dynamic *namespaces*
      '(;;standard namespaces

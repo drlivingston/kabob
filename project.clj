@@ -6,10 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
   				 [org.clojure/core.cache "0.6.4"]
   				 [cheshire/cheshire "5.2.0"]
-  				 [edu.ucdenver.ccp/kr-core "1.4.20-SNAPSHOT"]
-  				 [edu.ucdenver.ccp/kr-core "1.4.20-SNAPSHOT" :classifier "tests"]
-  				 [edu.ucdenver.ccp/kr-sesame-core "1.4.20-SNAPSHOT"]
-  				 [edu.ucdenver.ccp/kr-sesame-core "1.4.20-SNAPSHOT" :classifier "tests"]
+  				 [edu.ucdenver.ccp/kr "1.5.0-SNAPSHOT"]
   				 [org.clojure/core.memoize "0.5.6"]
   				 [aysylu/loom "0.5.0"]
   				 [org.clojure/data.csv "0.1.2"]
@@ -28,3 +25,4 @@
              	      :jvm-opts ["-d64" "-Xmx24g"]}}
   :aliases {"run-rules" ["with-profile" "main-a" "run"]
             "generate-id-sets" ["with-profile" "main-b" "run"]})
+

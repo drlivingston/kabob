@@ -1,10 +1,10 @@
 
 (ns kabob.build.input-kb
-  (:require [edu.ucdenver.ccp.kr.kb
+  (:require [kr.core.kb
              :refer [connection kb]]
-            [edu.ucdenver.ccp.kr.rdf
+            [kr.core.rdf
              :refer [register-namespaces synch-ns-mappings]]
-            [edu.ucdenver.ccp.kr.sesame.kb
+            [kr.sesame.kb
              :refer [*default-server* *repository-name* *username* *password*]]
             [kabob.core.namespace
              :refer [*namespaces*]])

@@ -1,10 +1,10 @@
 (ns kabob.build.output-kb
-  (use edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sesame.kb
+  (use kr.core.kb
+       kr.core.rdf
+       kr.sesame.kb
        kabob.core.namespace
        [clojure.java.io :only (output-stream)])
-  (require edu.ucdenver.ccp.kr.sesame.writer-kb)
+  (require kr.sesame.writer-kb)
   (import java.util.zip.GZIPOutputStream))
 
 ;;; --------------------------------------------------------
@@ -16,7 +16,7 @@
   (let [output (output-stream out)] ;this should be redundant
     (connection
      (register-namespaces
-      (edu.ucdenver.ccp.kr.sesame.writer-kb/new-sesame-writer-kb output)
+      (kr.sesame.writer-kb/new-sesame-writer-kb output)
       *namespaces*))))
 
 
@@ -27,7 +27,7 @@
         zipped (GZIPOutputStream. output)]
     (connection
      (register-namespaces
-      (edu.ucdenver.ccp.kr.sesame.writer-kb/new-sesame-writer-kb zipped)
+      (kr.sesame.writer-kb/new-sesame-writer-kb zipped)
       *namespaces*))))
 
 ;;; --------------------------------------------------------

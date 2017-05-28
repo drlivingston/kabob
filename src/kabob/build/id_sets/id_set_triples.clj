@@ -5,9 +5,9 @@
        clojure.pprint
        clojure.stacktrace
 
-       edu.ucdenver.ccp.kr.kb
-       edu.ucdenver.ccp.kr.rdf
-       edu.ucdenver.ccp.kr.sparql
+       kr.core.kb
+       kr.core.rdf
+       kr.core.sparql
        kabob.core.util.hashing
        kabob.core.namespace
        kabob.build.output-kb
