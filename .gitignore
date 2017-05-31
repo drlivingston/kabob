@@ -17,3 +17,5 @@ test-output/
 *~
 
 *.iml
+
+pom.xml
