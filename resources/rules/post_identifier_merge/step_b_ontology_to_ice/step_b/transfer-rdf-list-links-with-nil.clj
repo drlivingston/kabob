@@ -1,4 +1,4 @@
-`{:name "transfer-rdf-list-links-with-nil"
+`{:name "transfer-rdf-list-links-to-nil"
   :description "This rule transfers links to rdf:nil from list members to bio world. These links are
   predominantly '?x rdf:rest rdf/nil'."
   :head ((?/bio_list_member ?/p rdf/nil))
