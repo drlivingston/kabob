@@ -29,6 +29,11 @@
 
        ;;("iao" "http://purl.obolibrary.org/obo/")
        ("ccp" "http://ccp.ucdenver.edu/obo/ext/")
+
+       ;; workaround for http:/ bug as documented here: https://trello.com/c/6adKzKOB
+        ("bnode" "http://ccp.ucdenver.edu/bnode/")
+
+
        ("kiao" "http://kabob.ucdenver.edu/iao/")
        ("kabob" "http://kabob.ucdenver.edu/")
        ("kbio" "http://kabob.ucdenver.edu/bio/")
