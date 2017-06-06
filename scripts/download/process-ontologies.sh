@@ -19,6 +19,8 @@ fi
 
 ONTOLOGY_DIR=$1
 
+mkdir -p $ONTOLOGY_DIR
+
 # download the ontology files that will be used by kabob
 scripts/download/support-scripts_process-ontologies/download-ontologies.sh $ONTOLOGY_DIR/dload.log $ONTOLOGY_DIR
 

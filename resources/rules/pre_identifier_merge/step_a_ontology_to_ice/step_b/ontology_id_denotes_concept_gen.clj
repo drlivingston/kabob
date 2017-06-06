@@ -15,6 +15,7 @@
                   ?root_id obo:IAO_0000219 ?root_class . # obo:denotes
                   ?ontology_concept rdfs:subClassOf* ?root_class .
                   minus {?ontology_concept owl:deprecated true} .
-                  minus {?ontology_concept rdf:type ccp:IAO_EXT_0000190} # ccp:ontology root concept identifier
+                  minus {?ontology_concept rdf:type ccp:IAO_EXT_0000190} . # ccp:ontology root concept identifier
+                  filter (!contains(str(?ontology_concept), \"http://ccp.ucdenver.edu/obo/ext/B_\")) # ignore explicit blank nodes as don't need to be denoted by an id
                   }"
   }
