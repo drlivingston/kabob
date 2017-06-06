@@ -1,7 +1,7 @@
 ;; --------------------------------------------------------
 ;; --------- Top-Level Object Property Assignment ---------
 ;; --------------------------------------------------------
-`{:name "top-level-property-identifier-gen"
+`{:name "root-property-identifier-gen"
   :description "This rule creates an identifier for each top-level object property and types it as a top-level object property identifier (IAO_EXT_0000308)"
   :head ((?/id rdf/type ccp/IAO_EXT_0000308) ;; ccp:top-level object property identifer
          (?/id obo/IAO_0000219 ?/top_level_property)) ;; obo:denotes
@@ -14,5 +14,9 @@
   minus{?top_level_property owl:deprecated true}
   # exclude the oboInOwl:ObsoleteProperty property
   filter (?top_level_property != oboInOwl:ObsoleteProperty)
+  # exclude ICE world properties (IAO, CCP extension ontology, OA ontology)
+  filter (!contains (str(?object_property), 'ext/IAO_'))
+  filter (!contains (str(?object_property), 'obo/IAO_'))
+  filter (!contains (str(?object_property), 'http://www.w3.org/ns/oa#'))
   }"
 }
