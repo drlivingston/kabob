@@ -14,7 +14,7 @@ function print_usage {
     echo "  [-m <maven>]: MUST BE ABSOLUTE PATH. The path to the mvn command."
 }
 
-while getopts "i:o:" OPTION; do
+while getopts "i:o:m:h" OPTION; do
     case $OPTION in
         # The input ontology file
         i) ONT_FILE=$OPTARG
