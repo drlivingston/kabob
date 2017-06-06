@@ -15,5 +15,9 @@
                   ?object_property rdfs:subPropertyOf* ?top_level_property .
                   minus {?object_property owl:deprecated true} .
                   minus {?object_property rdf:type ccp:IAO_EXT_0000308} # ccp:top-level object property identifier
+                  # exclude ICE world properties (IAO, CCP extension ontology, OA ontology)
+                  filter (!contains (str(?object_property), 'ext/IAO_'))
+                  filter (!contains (str(?object_property), 'obo/IAO_'))
+                  filter (!contains (str(?object_property), 'http://www.w3.org/ns/oa#'))
                   }"
   }
