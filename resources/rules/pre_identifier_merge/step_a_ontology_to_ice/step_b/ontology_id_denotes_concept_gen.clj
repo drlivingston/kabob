@@ -16,5 +16,9 @@
                   ?ontology_concept rdfs:subClassOf* ?root_class .
                   minus {?ontology_concept owl:deprecated true} .
                   minus {?ontology_concept rdf:type ccp:IAO_EXT_0000190} . # ccp:ontology root concept identifier
+                  # exclude ICE world concepts (IAO, CCP extension ontology, OA ontology)
+                  filter (!contains (str(?ontology_concept), 'ext/IAO_'))
+                  filter (!contains (str(?ontology_concept), 'obo/IAO_'))
+                  filter (!contains (str(?ontology_concept), 'http://www.w3.org/ns/oa#'))
                   }"
   }
