@@ -11,6 +11,7 @@ function print_usage {
     echo "$(basename $0) [OPTIONS]"
     echo "  [-i <ontology file>]: MUST BE ABSOLUTE PATH. The ontology file to process. All imports for this ontology will be recursively downloaded and merged."
     echo "  [-o <output file>]: MUST BE ABSOLUTE PATH. The file into which to place merged/flattened version of the ontology."
+    echo "  [-m <maven>]: MUST BE ABSOLUTE PATH. The path to the mvn command."
 }
 
 while getopts "i:o:" OPTION; do
@@ -21,16 +22,20 @@ while getopts "i:o:" OPTION; do
         # The output file (will contain input ontology + content of all imports)
         o) OUTPUT_FILE=$OPTARG
            ;;
+        # The path to the Apache Maven command
+        m) MAVEN=$OPTARG
+           ;;
         # HELP!
         h) print_usage; exit 0
            ;;
     esac
 done
 
-if [[ -z $ONT_FILE || -z $OUTPUT_FILE ]]; then
+if [[ -z $ONT_FILE || -z $OUTPUT_FILE || -z $MAVEN ]]; then
 	echo "missing input arguments!!!!!"
 	echo $ONT_FILE
 	echo $OUTPUT_FILE
+	echo $MAVEN
     print_usage
     exit 1
 fi
