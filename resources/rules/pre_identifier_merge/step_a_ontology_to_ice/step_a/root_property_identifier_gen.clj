@@ -7,9 +7,12 @@
          (?/id obo/IAO_0000219 ?/top_level_property)) ;; obo:denotes
   :reify ([?/id {:ln (:localname ?/top_level_property)
                  :ns "ccp" :prefix "" :suffix ""}])
-  :sparql-string "select ?top_level_property {
-		  ?top_level_property rdf:type owl:ObjectProperty .
-		  minus{?top_level_property rdfs:subPropertyOf ?class}
-		  minus{?top_level_property owl:deprecated true} 
-		}"
+  :sparql-string "prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
+  select ?top_level_property {
+  ?top_level_property rdf:type owl:ObjectProperty .
+  minus{?top_level_property rdfs:subPropertyOf ?class}
+  minus{?top_level_property owl:deprecated true}
+  # exclude the oboInOwl:ObsoleteProperty property
+  filter (?top_level_property != oboInOwl:ObsoleteProperty)
+  }"
 }
