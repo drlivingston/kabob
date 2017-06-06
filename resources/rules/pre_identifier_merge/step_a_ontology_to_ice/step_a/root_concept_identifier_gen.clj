@@ -18,5 +18,9 @@
   filter (!contains(str(?root), '/bnode/'))
   # exclude the oboInOwl:ObsoleteClass class
   filter (?root != oboInOwl:ObsoleteClass)
+  # exclude ICE world concepts (IAO, CCP extension ontology, OA ontology)
+  filter (!contains (str(?root), 'ext/IAO_'))
+  filter (!contains (str(?root), 'obo/IAO_'))
+  filter (!contains (str(?root), 'http://www.w3.org/ns/oa#'))
   }"
 }
