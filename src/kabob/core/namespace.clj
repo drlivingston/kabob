@@ -36,11 +36,11 @@
         ;; be removed once the 'http:/' bug is resolved.
         ;; ---------------------------------------------------------------------------
         ("bnode" "http://ccp.ucdenver.edu/bnode/")
-        ("bird_pr","http://birdgenenames.org/cgnc/GeneReport?id=")
-        ("rgd_pr","http://rgd.mcw.edu/rgdweb/report/gene/main.html?id=")
-        ("tair_pr","http://www.arabidopsis.org/servlets/TairObject?type=")
-        ("hgnc_pr","http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=")
-        ("yeast_pr","http://www.yeastgenome.org/cgi-bin/locus.fpl?dbid=")
+        ("bird_pr","http://birdgenenames.org/cgnc/")
+        ("rgd_pr","http://rgd.mcw.edu/rgdweb/report/gene/")
+        ("tair_pr","http://www.arabidopsis.org/servlets/")
+        ("hgnc_pr","http://www.genenames.org/cgi-bin/")
+        ("yeast_pr","http://www.yeastgenome.org/cgi-bin/")
         ("flybase_pr","http://flybase.org/reports/")
         ("eco_pr","http://www.ecogene.org/gene/")
         ("pombase_pr","http://www.pombase.org/spombe/result/")
