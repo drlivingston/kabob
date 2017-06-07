@@ -10,5 +10,6 @@
                   select ?id {
                   ?id rdf:type ccp:IAO_EXT_0000088 .
                   ?id obo:IAO_0000219 ?c .
-                  ?c oboInOwl:hasOBONamespace 'bfo'}" 
+                  ?c rdfs:isDefinedBy obo:bfo.owl
+                  }"
   }
