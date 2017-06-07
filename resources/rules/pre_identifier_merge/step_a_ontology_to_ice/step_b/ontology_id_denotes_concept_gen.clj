@@ -6,8 +6,8 @@
   :description "This rule generates an ontology concept identifier for every non-root ontology concept."
   :head ((?/id obo/IAO_0000219 ?/ontology_concept) ; denotes
          (?/id rdf/type ccp/IAO_EXT_0000088)) ; ontology concept identifier
-  :reify ([?/id {:ln (:localname ?/ontology_concept)
-                 :ns "ccp" :prefix "" :suffix ""}])
+  :reify ([?/id {:ln (:sha-1 ?/ontology_concept)
+                 :ns "ccp" :prefix "O_" :suffix ""}])
   :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select ?ontology_concept {
