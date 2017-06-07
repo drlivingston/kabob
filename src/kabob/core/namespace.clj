@@ -30,9 +30,23 @@
        ;;("iao" "http://purl.obolibrary.org/obo/")
        ("ccp" "http://ccp.ucdenver.edu/obo/ext/")
 
-       ;; workaround for http:/ bug as documented here: https://trello.com/c/6adKzKOB
+        ;; ---------------------------------------------------------------------------
+        ;; the following namespaces are each a workaround for the 'http:/' bug as
+        ;; documented here: https://trello.com/c/6adKzKOB. These namespaces can/should
+        ;; be removed once the 'http:/' bug is resolved.
+        ;; ---------------------------------------------------------------------------
         ("bnode" "http://ccp.ucdenver.edu/bnode/")
-
+        ("bird_pr","http:/birdgenenames.org/cgnc/GeneReport?id=")
+        ("rgd_pr","http:/rgd.mcw.edu/rgdweb/report/gene/main.html?id=")
+        ("tair_pr","http:/www.arabidopsis.org/servlets/TairObject?type=")
+        ("hgnc_pr","http:/www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=")
+        ("yeast_pr","http:/www.yeastgenome.org/cgi-bin/locus.fpl?dbid=")
+        ("flybase_pr","http:/flybase.org/reports/")
+        ("eco_pr","http:/www.ecogene.org/gene/")
+        ("pombase_pr","http:/www.pombase.org/spombe/result/")
+        ("wormbase_pr","http:/www.wormbase.org/species/c_elegans/gene/")
+        ("zfin_pr","http:/zfin.org/action/marker/view/")
+        ;; ---------------------------------------------------------------------------
 
        ("kiao" "http://kabob.ucdenver.edu/iao/")
        ("kabob" "http://kabob.ucdenver.edu/")
