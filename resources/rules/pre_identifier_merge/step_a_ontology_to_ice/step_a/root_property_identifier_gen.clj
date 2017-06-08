@@ -15,6 +15,8 @@
   # exclude the oboInOwl:ObsoleteProperty property
   filter (?top_level_property != oboInOwl:ObsoleteProperty)
   # exclude ICE world properties (IAO, CCP extension ontology, OA ontology)
+  filter (!contains (str(?top_level_property), 'http://www.w3.org/2000/01/rdf-schema#member'))
+  filter (!contains (str(?top_level_property), ' http://www.w3.org/ns/prov'))
   filter (!contains (str(?top_level_property), 'ext/IAO_'))
   filter (!contains (str(?top_level_property), 'obo/IAO_'))
   filter (!contains (str(?top_level_property), 'http://www.w3.org/ns/oa#'))
