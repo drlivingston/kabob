@@ -113,10 +113,10 @@
                          (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
         timestamp (.format dateformatter (java.util.Date. time-at-run))
         date-at-run `[~timestamp xsd/dateTime]]
-    (add! target-kb `(~metadata-uri rdf/type ccp/KabobRuleMetadata))
+    (add! target-kb `(~metadata-uri rdf/type ccp/IAO_EXT_0000321)) ;; data about a forward-chaining rule
     (add! target-kb `(~metadata-uri dc/title ~rule-name))
-    (add! target-kb `(~metadata-uri ccp/triple-count ~triple-count))
-    (add! target-kb `(~metadata-uri ccp/time-at-run ~date-at-run))
+    (add! target-kb `(~metadata-uri ccp/IAO_EXT_0000320 ~triple-count)) ;; ccp:query hit count
+    (add! target-kb `(~metadata-uri dc/date ~date-at-run))
     ))
 
 (defn run-forward-rule [source-kb target-kb rule]
@@ -182,7 +182,9 @@
                                              (reify-bindings reify
                                                              bindings))))))
                     sparql-string)
-      (println "final count: " @visit-counter))))
+      (println "final count: " @visit-counter)
+      (let [new-t (.getTime (java.util.Date.))]
+        (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t))))))
 
 
 
