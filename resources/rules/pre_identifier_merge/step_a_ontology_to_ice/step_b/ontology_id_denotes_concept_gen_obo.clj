@@ -23,5 +23,7 @@
                   filter (contains (str(?ontology_concept), 'http://purl.obolibrary.org/obo/'))
                   # exclude ICE world concepts (IAO, CCP extension ontology, OA ontology)
                   filter (!contains (str(?ontology_concept), 'obo/IAO_'))
+                  # exclude DictyBase IDs. They use the OBO namespace but are handled by a separate rule
+                  filter (!contains (str(?ontology_concept), 'http://ccp.ucdenver.edu/obo/ext/dictyBase'))
                   }"
   }
