@@ -49,6 +49,9 @@
                           (mgi_pr/MGI:101757 rdfs/subClassOf obo/CHEBI_1234)
                           (mgi_pr/MGI:101757 oboInOwl/id "MGI:101757")
 
+                          (obo/dictyBase#_DDB_G0349043 rdfs/subClassOf obo/CHEBI_1234)
+                          (obo/dictyBase#_DDB_G0349043 oboInOwl/id "dictyBase:DDB_G0349043")
+
                           ;; not sure how to test ncbi gene id gen b/c symbols can't start with numbers in clojure
                           ;(~http://www.ncbi.nlm.nih.gov/gene/380481 rdfs/subClassOf obo/CHEBI_1234)
                           ;(~http://www.ncbi.nlm.nih.gov/gene/380481 oboInOwl/id "NCBIGene:380481")
@@ -96,6 +99,8 @@
                               (kabob-load-rules-from-classpath "rules/pre_identifier_merge/step_a_ontology_to_ice/step_b")))
         rule13 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-ncbi")
                               (kabob-load-rules-from-classpath "rules/pre_identifier_merge/step_a_ontology_to_ice/step_b")))
+        rule14 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-dictybase")
+                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/step_a_ontology_to_ice/step_b")))
         source-kb (test-kb sample-kb-triples)]
 
     (run-forward-rule-sparql-string source-kb source-kb rule1)
@@ -111,6 +116,7 @@
     (run-forward-rule-sparql-string source-kb source-kb rule11)
     (run-forward-rule-sparql-string source-kb source-kb rule12)
     (run-forward-rule-sparql-string source-kb source-kb rule13)
+    (run-forward-rule-sparql-string source-kb source-kb rule14)
 
     ;; there should be 2 new triples list_recored instances
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 obo/CHEBI_7890)
@@ -170,6 +176,10 @@
                                             (?/id rdf/type ccp/IAO_EXT_0000088)
                                             (= ?/id ccp/MGI_101757))))))
 
+    (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 obo/dictyBase#_DDB_G0349043)
+                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (= ?/id ccp/DICTYBASE_DDB_G0349043))))))
+
 
         ;; The code fragment below is useful for debugging as it writes
     ;; triples to a local file.
@@ -190,5 +200,6 @@
       (run-forward-rule-sparql-string source-kb log-kb rule11)
       (run-forward-rule-sparql-string source-kb log-kb rule12)
       (run-forward-rule-sparql-string source-kb log-kb rule13)
+      (run-forward-rule-sparql-string source-kb log-kb rule14)
       (close log-kb))
     ))
