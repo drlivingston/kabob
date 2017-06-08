@@ -10,7 +10,8 @@
          (?/id rdf/type ccp/IAO_EXT_0000088)) ; ontology concept identifier
   :reify ([?/id {:ln (:localname ?/ontology_concept)
                  :ns "ccp" :prefix "" :suffix ""}])
-  :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+                  prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select ?ontology_concept {
                   ?root_id rdf:type ccp:IAO_EXT_0000190 . # ccp:ontology root concept identifier
