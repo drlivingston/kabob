@@ -1,15 +1,17 @@
 ;; ------------------------------------------------------------
 ;; ---------  relation consolidation via shared label ---------
 ;; ------------------------------------------------------------
-`{:name          "relation_consolidation_by_shared_label"
-  :title         "creates exactMatch mappings between relations that share the same exact label"
-  :head          ((?/p1 skos/exactMatch ?/p2))
+`{:name          "object-property-consolidation-by-shared_label"
+  :title         "creates exactMatch mappings between ObjectProperty identifiers whose properties share the same exact label"
+  :head          ((?/id1 skos/exactMatch ?/id2))
   :sparql-string "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    select distinct ?p1 ?p2 {
+    select distinct ?id1 ?id2 {
                              ?p1 rdf:type owl:ObjectProperty .
                              ?p1 rdfs:label ?label1 .
                              ?p2 rdf:type owl:ObjectProperty .
                              ?p2 rdfs:label ?label2 .
                              FILTER (?p1 != ?p2 && str(?label1) = str(?label2) && STR(IRI(?p1)) < STR(IRI(?p2)))
+                             ?id1 obo:IAO_0000219 ?p1 .
+                             ?id2 obo:IAO_0000219 ?p2 .
                              }"
   }
