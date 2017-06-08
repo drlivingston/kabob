@@ -5,8 +5,8 @@
   :description "This rule generates an object property identifier for every non-top-level object property."
   :head ((?/id obo/IAO_0000219 ?/object_property) ;; obo:denotes
          (?/id rdf/type ccp/IAO_EXT_0000306)) ;; ccp:object property identifier
-  :reify ([?/id {:ln (:sha-1 ?/object_property)
-                 :ns "ccp" :prefix "O_" :suffix ""}])
+  :reify ([?/id {:ln (:localname ?/object_property)
+                 :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select ?object_property {
