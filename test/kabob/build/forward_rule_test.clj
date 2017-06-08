@@ -52,18 +52,18 @@
     ;; there should be 4 instances of ex/sc
     (is (= 4 (count (query target-kb '((?/s ex/sc ?/o))))))
 
-    ;; there should be 9 triples total
-    (is (= 9 (count (query target-kb '((?/s ?/p ?/o))))))
+    ;; there should be 8 triples total
+    (is (= 8 (count (query target-kb '((?/s ?/p ?/o))))))
 
-    ;; one of the 9 triples should contain the triple count
-    (is (= 1 (count (query target-kb '((?/s kiao/triple-count ?/o))))))
+    ;; one of the 8 triples should contain the triple count
+    (is (= 1 (count (query target-kb '((?/s ccp/triple-count ?/o))))))
     
 ;; The code fragment below is useful for debugging as it writes
     ;; triples to a local file.
-;    (let [log-kb (output-kb "/tmp/triples.nt")]
-      ;; add sample triples to the log kb
-;      (dorun (map (partial add! log-kb) sample-kb-triples))     
-;      (run-forward-rule source-kb log-kb rule)
-;      (close log-kb))
+    ;(let [log-kb (output-kb "/tmp/triples.nt")]
+    ;  ;; add sample triples to the log kb
+    ;  ;(dorun (map (partial add! log-kb) sample-kb-triples))
+    ;  (run-forward-rule source-kb log-kb rule)
+    ;  (close log-kb))
     
     ))

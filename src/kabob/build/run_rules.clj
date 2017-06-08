@@ -22,7 +22,7 @@
        kr.core.variable
        kr.core.reify
        kr.core.unify
-       kabob.core.staged-rule
+       ;kabob.core.staged-rule
        kabob.core.parallel-utils
        clojure.pprint
        kabob.build.input-kb
@@ -105,7 +105,7 @@
 ;; that were generated, the time it took to run the rule, and the name
 ;; of the rule.
 (defn add-rule-metadata [target-kb rule-name time-at-run triple-count elapsed-time-in-ms]
-  (let [metadata-uri (symbol (binding [*reify-ns* "kiao"
+  (let [metadata-uri (symbol (binding [*reify-ns* "ccp"
                                 *reify-prefix* "RULEMETA_"
                                 *reify-suffix* ""]
                                (reify-sha-1 rule-name time-at-run)))
@@ -113,11 +113,10 @@
                          (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
         timestamp (.format dateformatter (java.util.Date. time-at-run))
         date-at-run `[~timestamp xsd/dateTime]]
-    (add! target-kb `(~metadata-uri rdf/type kiao/KabobRuleMetadata))
+    (add! target-kb `(~metadata-uri rdf/type ccp/KabobRuleMetadata))
     (add! target-kb `(~metadata-uri dc/title ~rule-name))
-    (add! target-kb `(~metadata-uri kiao/triple-count ~triple-count))
-    (add! target-kb `(~metadata-uri kiao/time-at-run ~date-at-run))
-    (add! target-kb `(~metadata-uri kiao/elapsed-time-in-ms ~elapsed-time-in-ms))
+    (add! target-kb `(~metadata-uri ccp/triple-count ~triple-count))
+    (add! target-kb `(~metadata-uri ccp/time-at-run ~date-at-run))
     ))
 
 (defn run-forward-rule [source-kb target-kb rule]
