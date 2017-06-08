@@ -56,7 +56,7 @@
     (is (= 8 (count (query target-kb '((?/s ?/p ?/o))))))
 
     ;; one of the 8 triples should contain the triple count
-    (is (= 1 (count (query target-kb '((?/s ccp/IAO_EXT_0000320 ?/o)))))) ;; ccp:query hit count
+    (is (= 1 (count (query target-kb '((?/s ccp/IAO_EXT_0000328 ?/o)))))) ;; ccp:query hit count
     
 ;; The code fragment below is useful for debugging as it writes
     ;; triples to a local file.
