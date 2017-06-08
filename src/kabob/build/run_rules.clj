@@ -113,9 +113,9 @@
                          (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
         timestamp (.format dateformatter (java.util.Date. time-at-run))
         date-at-run `[~timestamp xsd/dateTime]]
-    (add! target-kb `(~metadata-uri rdf/type ccp/IAO_EXT_0000321)) ;; data about a forward-chaining rule
+    (add! target-kb `(~metadata-uri rdf/type ccp/IAO_EXT_0000329)) ;; data about a forward-chaining rule
     (add! target-kb `(~metadata-uri dc/title ~rule-name))
-    (add! target-kb `(~metadata-uri ccp/IAO_EXT_0000320 ~triple-count)) ;; ccp:query hit count
+    (add! target-kb `(~metadata-uri ccp/IAO_EXT_0000328 ~triple-count)) ;; ccp:query hit count
     (add! target-kb `(~metadata-uri dc/date ~date-at-run))
     ))
 
