@@ -5,8 +5,8 @@
   :description "This rule creates an identifier for each root ontology class and types it as a root concept identifier (IAO_EXT_0000190)"
   :head ((?/id rdf/type ccp/IAO_EXT_0000190) ;; ccp:ontology root concept identifer
          (?/id obo/IAO_0000219 ?/root)) ;; obo:denotes
-  :reify ([?/id {:ln (:sha-1 ?/root)
-                 :ns "ccp" :prefix "O_" :suffix ""}])
+  :reify ([?/id {:ln (:localname ?/root)
+                 :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
   select ?root {
                 ?root rdf:type owl:Class .
