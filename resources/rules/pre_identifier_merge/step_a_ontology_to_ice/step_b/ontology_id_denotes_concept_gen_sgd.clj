@@ -5,7 +5,8 @@
 `{:name "ontology-id-denotes-concept-gen-sgd"
   :description "This rule generates an ontology concept identifier for every non-root ontology concept with the SGD namespace."
   :head ((?/id obo/IAO_0000219 ?/ontology_concept) ; denotes
-         (?/id rdf/type ccp/IAO_EXT_0000088)) ; ontology concept identifier
+         (?/id rdf/type ccp/IAO_EXT_0000088) ; ontology concept identifier
+         (?/id rdf/type ccp/IAO_EXT_0000333)) ; ccp:SGD gene identifier
   :reify ([?/id {:ln (:regex ":" "_" ?/concept_id)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>

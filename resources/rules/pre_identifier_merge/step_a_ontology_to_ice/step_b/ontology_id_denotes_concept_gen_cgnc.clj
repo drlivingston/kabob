@@ -5,7 +5,8 @@
 `{:name "ontology-id-denotes-concept-gen-cgnc"
   :description "This rule generates an ontology concept identifier for every non-root ontology concept with the CGNC namespace."
   :head ((?/id obo/IAO_0000219 ?/ontology_concept) ; denotes
-          (?/id rdf/type ccp/IAO_EXT_0000088)) ; ontology concept identifier
+          (?/id rdf/type ccp/IAO_EXT_0000088) ; ontology concept identifier
+          (?/id rdf/type ccp/IAO_EXT_0000330)) ; ccp:CGNC gene identifier
   :reify ([?/id {:ln (:regex ":" "_" ?/concept_id)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>

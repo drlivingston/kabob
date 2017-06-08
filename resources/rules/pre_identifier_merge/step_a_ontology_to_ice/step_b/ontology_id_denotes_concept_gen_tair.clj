@@ -5,7 +5,8 @@
 `{:name "ontology-id-denotes-concept-gen-tair"
   :description "This rule generates an ontology concept identifier for every non-root ontology concept with the TAIR namespace."
   :head ((?/id obo/IAO_0000219 ?/ontology_concept) ; denotes
-         (?/id rdf/type ccp/IAO_EXT_0000088)) ; ontology concept identifier
+         (?/id rdf/type ccp/IAO_EXT_0000088) ; ontology concept identifier
+         (?/id rdf/type ccp/IAO_EXT_0000332)) ; ccp:TAIR gene identifier
   :reify ([?/id {:ln (:regex "TAIR:locus:" "TAIR_LOCUS_" ?/concept_id)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
