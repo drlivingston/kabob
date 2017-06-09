@@ -38,7 +38,7 @@
                        ?id1 obo:IAO_0000219 ?c1 .
                        ?id2 obo:IAO_0000219 ?c2 .
                        # exclude any links between different GGPV identifiers
-                       minus {?id1 rdfs:subClassOf* IAO_EXT_0000083}  # ccp:gene_or_gene_product_or_variant_identifier
-                       minus {?id2 rdfs:subClassOf* IAO_EXT_0000083}  # ccp:gene_or_gene_product_or_variant_identifier
+                       minus {?id1 rdf:type/rdfs:subClassOf* ccp:IAO_EXT_0000083}  # ccp:gene_or_gene_product_or_variant_identifier
+                       minus {?id2 rdf:type/rdfs:subClassOf* ccp:IAO_EXT_0000083}  # ccp:gene_or_gene_product_or_variant_identifier
                        }"
   }
