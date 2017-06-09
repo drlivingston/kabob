@@ -13,7 +13,7 @@
   				 [log4j/log4j "1.2.17"]
   				 [org.slf4j/slf4j-log4j12 "1.7.2"]
   				 [potemkin/potemkin "0.1.2"]
-  				 [org.neo4j/neo4j "1.8.1"]
+  				 ;[org.neo4j/neo4j "1.8.1"]
   				 [commons-codec/commons-codec "1.6"]]
   ;:main ^:skip-aot my-stuff.core
   :main nil
