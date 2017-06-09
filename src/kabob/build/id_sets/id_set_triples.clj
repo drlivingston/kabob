@@ -226,7 +226,7 @@
   (let [query-pat `((?/id skos/exactMatch ?/id2)
                      (?/id rdf/type ?/id_type)
                      (?/id_type [rdfs/subClassOf *] obo/IAO_0000578 ) ;centrally registered identifier
-                     (?/id2 rdf/type ?id_type2)
+                     (?/id2 rdf/type ?/id_type2)
                      (?/id_type2 [rdfs/subClassOf *] obo/IAO_0000578) ;centrally registered identifier
                      (!= ?/id  ?/id2))]
     (binding [*use-inference* false
