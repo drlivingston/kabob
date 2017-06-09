@@ -126,7 +126,7 @@
     (println "timing count:")
     (let [query-body
           (str "where {
-                ?id_type rdfs:subClassOf* obo:IAO_0000578 .
+                ?id_type rdfs:subClassOf* ccp:IAO_EXT_0000342 .
   				?id rdf:type ?id_type .
                 MINUS { {?id2 skos:exactMatch ?id . }
                         UNION
@@ -225,9 +225,9 @@
 (defn combined-pairs-fn [kb]
   (let [query-pat `((?/id skos/exactMatch ?/id2)
                      (?/id rdf/type ?/id_type)
-                     (?/id_type [rdfs/subClassOf *] obo/IAO_0000578 ) ;centrally registered identifier
+                     (?/id_type [rdfs/subClassOf *] ccp/IAO_EXT_0000342 ) ; ccp:identifier of a biological entity
                      (?/id2 rdf/type ?/id_type2)
-                     (?/id_type2 [rdfs/subClassOf *] obo/IAO_0000578) ;centrally registered identifier
+                     (?/id_type2 [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
                      (!= ?/id  ?/id2))]
     (binding [*use-inference* false
               *work-queue-single-threaded* true]
