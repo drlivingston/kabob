@@ -1,4 +1,5 @@
-`{:name "ice-denotes-entity"
+`{:name "identifier-denotes-bioentity"
+  :description "links identifiers to bioentities using iao:denotes"
   :head ((?/id obo/IAO_0000219 ?/entity)) ;; obo:mentions
   :body ((?/idset rdf/type ccp/IAO_EXT_0000316) ;; ccp:identifier set
          (?/idset obo/RO_0002351 ?/id)) ;; obo:has_member
