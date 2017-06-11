@@ -22,14 +22,14 @@
 (def ^:dynamic *id-set-ns* "ccp")
 
 (def magic-prefixes
-  (str "PREFIX franzOption_memoryLimit: <franz:85g> \n"
+  (str "prefix franzOption_clauseReorderer: <franz:identity> \n"
+       "prefix franzOption_chunkProcessingAllowed: <franz:yes> \n"
+       "PREFIX franzOption_memoryLimit: <franz:85g> \n"
        "PREFIX franzOption_memoryExhaustionWarningPercentage: <franz:95> \n"
        "PREFIX franzOption_logQuery: <franz:yes> \n "
        "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n"
        "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
        "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/> \n"
-       ;; "PREFIX franzOption_chunkProcessingAllowed: <franz:yes> \n"
-       ;; "PREFIX franzOption_chunkProcessingSize: <franz:500000> \n"
        ))
 
 ;;;-------------------------------------------------------------------
@@ -127,13 +127,13 @@
     (let [query-body
           (str "where {
                 ?id_type rdfs:subClassOf* ccp:IAO_EXT_0000342 .
-  				?id rdf:type ?id_type .
+  				      ?id rdf:type ?id_type .
                 MINUS { {?id2 skos:exactMatch ?id . }
                         UNION
                         { ?id skos:exactMatch ?id2 . } }}")
           count-query (str magic-prefixes
-                           " select (count(?id) as ?count) " query-body)
-          singles-query (str magic-prefixes " select ?id " query-body)
+                           " select (count( distinct ?id) as ?count) " query-body)
+          singles-query (str magic-prefixes " select distinct ?id " query-body)
           num-pairs (time
                      (second (first (first (query-sparql source-kb
                                                          count-query)))))
