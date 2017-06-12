@@ -9,6 +9,9 @@
 
                   select ?bio1 ?bound_p ?bio2 {
                                                 ?id1 obo:IAO_0000219 ?thing1 .
+                                                # transfer of the ObjectProperty hierarchy is handled by a different rule so we exclude it here.
+                                                # thing2 below is not excluded from being an ObjectProperty however so that the owl:onProperty links can be transferred.
+                                                minus {?thing1 rdf:type owl:ObjectProperty .}
                                                 ?field_value_1 rdf:type ?id1 .
                                                 ?record_1 obo:BFO_0000051 ?field_value_1 .
                                                 ?record_1 rdf:type ?record_type_1 .
