@@ -16,7 +16,9 @@
 															:ns "ccp" :prefix "F_" :suffix ""}]
 					 [?/id {:ln (:sha-1 ?/adc)
 									:ns "ccp" :prefix "ID_" :suffix ""}])
-  :sparql-string "select ?adc {
+  :sparql-string "prefix owl: <http://www.w3.org/2002/07/owl#>
+                  prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                  select ?adc {
                     ?adc rdf:type owl:AllDisjointClasses .
                    }"
   }

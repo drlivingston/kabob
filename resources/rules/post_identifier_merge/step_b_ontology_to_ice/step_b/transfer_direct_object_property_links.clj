@@ -6,6 +6,7 @@
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix owl: <http://www.w3.org/2002/07/owl#>
                   prefix obo: <http://purl.obolibrary.org/obo/>
+                  prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
 
                   select ?bio_p1 ?bound_p ?bio_p2 {
                                  ?p1 rdf:type owl:ObjectProperty .
