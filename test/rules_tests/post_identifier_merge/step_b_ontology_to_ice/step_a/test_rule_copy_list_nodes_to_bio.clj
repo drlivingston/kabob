@@ -50,11 +50,17 @@
 
 
 (deftest test-rule
-  (let [rule (first (filter #(= (:name %) "copy-list-nodes-to-bio")
+  (let [rule1 (first (filter #(= (:name %) "copy-list-nodes-to-bio")
                               (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_ice/step_a")))
+        rule2 (first (filter #(= (:name %) "copy-owl-restriction-to-bio")
+                             (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_ice/step_a")))
+        rule3 (first (filter #(= (:name %) "copy-owl-alldisjointclasses-to-bio")
+                             (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_ice/step_a")))
         source-kb (test-kb sample-kb-triples)] ;; source kb contains sample triples
 
-    (run-forward-rule-sparql-string source-kb source-kb rule)
+    (run-forward-rule-sparql-string source-kb source-kb rule1)
+    (run-forward-rule-sparql-string source-kb source-kb rule2)
+    (run-forward-rule-sparql-string source-kb source-kb rule3)
 
     ;; there should be 3 list_recored instances
     (is (= 3 (count (query source-kb '((?/list_record rdf/type ccp/IAO_EXT_0000317)))))) ;; ccp:RDF list record
@@ -70,12 +76,20 @@
                                         (ccp/ID_aPvFdJzcE7zuZolQo-0bfXOLsnA obo/IAO_0000219 ccp/L_aPvFdJzcE7zuZolQo-0bfXOLsnA) ;; obo:denotes
                                         (ccp/L_aPvFdJzcE7zuZolQo-0bfXOLsnA rdf/type rdf/List))))))
 
+
+    (is (= 1 (count (query source-kb '((?/list_record rdf/type ccp/IAO_EXT_0000347)))))) ;; ccp:AllDisjointClasses record
+    (is (= 3 (count (query source-kb '((?/list_record rdf/type ccp/IAO_EXT_0000305)))))) ;; ccp:OWL restriction record
+
+
+
     ;;; The code fragment below is useful for debugging as it writes
     ;;; triples to a local file.
     (let [log-kb (output-kb "/tmp/triples.nt")]
       ;; add sample triples to the log kb
       ;;(dorun (map (partial add! log-kb) sample-kb-triples))
 
-      (run-forward-rule-sparql-string source-kb log-kb rule)
+      (run-forward-rule-sparql-string source-kb log-kb rule1)
+      (run-forward-rule-sparql-string source-kb log-kb rule2)
+      (run-forward-rule-sparql-string source-kb log-kb rule3)
       (close log-kb))
     ))
