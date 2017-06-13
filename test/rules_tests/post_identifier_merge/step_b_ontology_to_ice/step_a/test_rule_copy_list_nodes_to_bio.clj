@@ -60,17 +60,22 @@
     (is (= 3 (count (query source-kb '((?/list_record rdf/type ccp/IAO_EXT_0000317)))))) ;; ccp:RDF list record
 
     ;; test the complete existence of one of the expected list_records
-    (is (= 1 (count (query source-kb '((?/list_record obo/IAO_0000219 bnode/cl_genid20409)
-                                        (?/list_record rdf/type ccp/IAO_EXT_0000317) ;; ccp:RDF list record
-                                        (?/list_record obo/IAO_0000219 ?/bio_listmember) ;; obo:denotes
-                                        (?/bio_listmember rdf/Type rdf/List))))))
+    ;; return 2 instead of 1 b/c the iao:denotes
+    (is (= 1 (count (query source-kb '((?/list_record rdf/type ccp/IAO_EXT_0000317)
+                                        (?/list_record obo/BFO_0000051 ccp/F_6M_Y8o9Ro7Q4xt6jKcLSUsZ-D8g)
+                                        (ccp/F_6M_Y8o9Ro7Q4xt6jKcLSUsZ-D8g rdf/type ccp/IAO_EXT_0000346) ;; ccp:RDF list identifier field value
+                                        (ccp/F_6M_Y8o9Ro7Q4xt6jKcLSUsZ-D8g rdf/type ccp/ID_aPvFdJzcE7zuZolQo-0bfXOLsnA)
+                                        (ccp/ID_aPvFdJzcE7zuZolQo-0bfXOLsnA rdf/type ccp/IAO_EXT_0000354)
+                                        (ccp/ID_aPvFdJzcE7zuZolQo-0bfXOLsnA obo/IAO_0000219 bnode/cl_genid20409)
+                                        (ccp/ID_aPvFdJzcE7zuZolQo-0bfXOLsnA obo/IAO_0000219 ccp/L_aPvFdJzcE7zuZolQo-0bfXOLsnA) ;; obo:denotes
+                                        (ccp/L_aPvFdJzcE7zuZolQo-0bfXOLsnA rdf/type rdf/List))))))
 
     ;;; The code fragment below is useful for debugging as it writes
     ;;; triples to a local file.
-    ;(let [log-kb (output-kb "/tmp/triples.nt")]
-    ;  ;; add sample triples to the log kb
-    ;  ;;(dorun (map (partial add! log-kb) sample-kb-triples))
-    ;
-    ;  (run-forward-rule-sparql-string source-kb log-kb rule)
-    ;  (close log-kb))
+    (let [log-kb (output-kb "/tmp/triples.nt")]
+      ;; add sample triples to the log kb
+      ;;(dorun (map (partial add! log-kb) sample-kb-triples))
+
+      (run-forward-rule-sparql-string source-kb log-kb rule)
+      (close log-kb))
     ))
