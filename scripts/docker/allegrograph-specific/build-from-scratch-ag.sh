@@ -1,33 +1,13 @@
 #!/bin/bash
 #
 
-
-function print_usage {
-    echo "Usage:"
-    echo "$(basename $0) [OPTIONS]"
-    echo "  [-n <kb-name>]: the name of the AG repository that will hold KaBOB"
-}
-
-while getopts "n:h" OPTION; do
-    case ${OPTION} in
-        # the name of the AG repository that will hold KaBOB
-        n) KB_INSTANCE_NAME=$OPTARG
-           ;;
-        # HELP!
-        h) print_usage; exit 0
-           ;;
-    esac
-done
-
-if [[ -z ${KB_INSTANCE_NAME} ]]; then
-    print_usage
-    exit 1
-fi
-
 SCRIPT_DIR=/kabob.git/scripts/docker
 chmod -R 755 ${SCRIPT_DIR}
 
+# This script takes a single argument specifying the repository name to use/construct
+export KB_INSTANCE_NAME=$1
 export DOCKER_ENV=${SCRIPT_DIR}/allegrograph-specific/docker-env.sh
+
 source ${DOCKER_ENV}
 source ${SCRIPT_DIR}/common-scripts/ENV.sh
 
