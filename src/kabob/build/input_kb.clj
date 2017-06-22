@@ -19,7 +19,7 @@
 (defn virtuoso-kb [args]
   ;;Init source KB connection
   (println "forcing a virtuoso connection")
-  (let [kb (kb (VirtuosoRepository. "jdbc:virtuoso://localhost:1111","dba","dba"))]
+  (let [kb (kb (VirtuosoRepository. "jdbc:virtuoso://virtuoso-prod:1111","dba","dba"))]
     (initialize-kb kb)))
 
 (defn open-kb [args]
