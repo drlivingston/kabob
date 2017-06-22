@@ -16,19 +16,20 @@
 (defn initialize-kb [kb]
   (register-namespaces (synch-ns-mappings (connection kb)) *namespaces*))
 
-(defn open-kb [args]
-  (binding [*default-server* (:server-url args)
-            *repository-name* (:repo-name args)
-            *username* (:username args)
-            *password* (:password args)]
-    (initialize-kb (kb HTTPRepository))))
-
 (defn virtuoso-kb [args]
   ;;Init source KB connection
   (println "forcing a virtuoso connection")
   (let [kb (kb (VirtuosoRepository. "jdbc:virtuoso://localhost:1111","dba","dba"))]
     (initialize-kb kb)))
 
-(def source-kb [args]
-  (if (= "true" (:is-virtuoso args)) virtuoso-kb open-kb))
+(defn open-kb [args]
+  (binding [*default-server* (:server-url args)
+            *repository-name* (:repo-name args)
+            *username* (:username args)
+            *password* (:password args)]
+    (if (= "true" (:is-virtuoso args))
+      (virtuoso-kb args)
+      (initialize-kb (kb HTTPRepository)))))
+
+(def source-kb open-kb)
 
