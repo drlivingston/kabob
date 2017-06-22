@@ -64,6 +64,7 @@ ${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifie
 #${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
 #
 #### Create the ID sets
+#LEIN_ROOT=true
 #${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/
 #${SCRIPT_DIR}/allegrograph-specific/LOAD-AG.sh id_sets/exact
 #

@@ -24,6 +24,7 @@ RULES_RES_DIR=resources/${RULETYPE}/
 
 echo Running rules
 mkdir -p ${OUTPUTDIR}
+LEIN_ROOT=true
 $LEININGEN run-rules ${KB_URL} ${KB} ${KB_USER} ${KB_PASS} ${OUTPUTDIR} ${RULES_RES_DIR}
 
 # Ensure that all subdirectoes implicit in the `RULETYPE` are accessible to
