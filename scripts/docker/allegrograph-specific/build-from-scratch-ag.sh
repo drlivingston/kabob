@@ -29,14 +29,14 @@ mkdir -p ${KB_DATA_DIR}
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
 ### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-  "ntriples"
+#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+#  "ntriples"
 
 ## create ICE records for all ontology concepts
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
+${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
 #${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
 #${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
 #
