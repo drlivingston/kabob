@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-source $SCRIPT_DIR/INIT.sh
+source ${SCRIPT_DIR}/common-scripts/INIT.sh
 echo Sourcing default variables
 
 ## ------------------------------------------------------------------------- ##
