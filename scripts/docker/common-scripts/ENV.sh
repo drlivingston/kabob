@@ -8,11 +8,11 @@ echo Sourcing default variables
 ## Set variables for build environment and installation.                     ##
 ## ------------------------------------------------------------------------- ##
 
-# We use Maven as a Java execution engine ):
-MAVEN=${PLATFORM_MAVEN:?}
+# We use Leiningen as a Java execution engine :-)
+LEININGEN=${PLATFORM_LEININGEN:?}
 
 # The build requires the port with which to connect to AllegroGraph
-AG_PORT=${PLATFORM_ALLEGROGRAPH_PORT:?}
+KB_PORT=${PLATFORM_KB_PORT:?}
 
 # The URL by which to connect to the knowledgebase when generating the rules.
 KB_URL=${KB_INSTANCE_URL:?}

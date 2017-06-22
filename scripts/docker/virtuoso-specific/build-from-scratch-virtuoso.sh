@@ -12,7 +12,7 @@ source $SCRIPT_DIR/docker-env.sh
 source $SCRIPT_DIR/ENV.sh
 
 echo "MAVEN=$MAVEN"
-echo "AG_PORT=$AG_PORT"
+echo "KB_PORT=$KB_PORT"
 echo "KB_URL=$KB_URL"
 echo "KB_USER=$KB_USER"
 echo "KB_PASS=$KB_PASS"
@@ -30,7 +30,7 @@ $SCRIPT_DIR/generate-rdf-file-lists.sh $KB_NAME
 
 ### create a new KB and load the ontologies
 $SCRIPT_DIR/new-kb.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/owl-files.$KB_NAME.list \
   "rdfxml"
@@ -40,24 +40,24 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/bio_to_ice/hp
 
 ### load the ICE schema RDF ...
 $SCRIPT_DIR/load-list-file.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/schema-files.$KB_NAME.list
 
 ### ... and then the ICE RDF
 $SCRIPT_DIR/load-list-file.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/ice-files.$KB_NAME.list
 
 $SCRIPT_DIR/load-list-file.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME \
   $KB_DATA_DIR/file-lists/large-ice-files.$KB_NAME.list
 
 ### Index optimization
 $SCRIPT_DIR/optimize.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME
 
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/id_typing
@@ -81,7 +81,7 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/entity/abstraction
 
 ### Index optimization
 $SCRIPT_DIR/optimize.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME
 
 ### this should be in ice_to_bio now... something wrong with this rule (file
@@ -111,6 +111,6 @@ $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/bio_labels
 $SCRIPT_DIR/RUN_RULES_AND_LOAD.sh rules/temp/hp
 
 $SCRIPT_DIR/optimize.sh \
-  $AG_PORT \
+  $KB_PORT \
   $KB_NAME
 
