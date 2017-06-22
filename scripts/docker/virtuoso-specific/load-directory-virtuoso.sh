@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-source ${SCRIPT_DIR}/allegrograph-specific/docker-env.sh
+source ${SCRIPT_DIR}/virtuoso-specific/docker-env.sh
 source ${SCRIPT_DIR}/common-scripts/ENV.sh
 
 if [ $# -lt 4 ] || [ $# -gt 5 ]
@@ -21,7 +21,7 @@ LIST_FILE=$(mktemp)
 ls -1 ${LOAD_DIR}/* > $LIST_FILE
 
 echo Loading directory: ${LOAD_DIR}
-${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
     ${KB_PORT} \
     ${KB_NAME} \
     ${LIST_FILE} \

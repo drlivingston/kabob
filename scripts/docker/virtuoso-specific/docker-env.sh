@@ -2,7 +2,7 @@
 
 export LOAD_REQUEST_DIRECTORY=/virtuoso-load-requests
 
-# retrieve the AllegroGraph port being used from $LOAD_REQUEST_DIRECTORY/agraph.port
+# retrieve the Virtuoso port being used from $LOAD_REQUEST_DIRECTORY/virtuoso.port
 export PLATFORM_KB_PORT=$(cat "${LOAD_REQUEST_DIRECTORY}/virtuoso.port")
 
 export PLATFORM_LEININGEN=/usr/local/bin/lein
