@@ -35,7 +35,7 @@ http://purl.obolibrary.org/obo/uberon/ext.owl
 http://purl.obolibrary.org/obo/mi.owl
 http://purl.obolibrary.org/obo/hp.owl
 http://purl.obolibrary.org/obo/nbo.owl
-https://github.com/UCDenver-ccp/ccp-extension-ontology/releases/download/v0.1/ccp-extensions.owl
+https://raw.githubusercontent.com/UCDenver-ccp/ccp-extension-ontology/master/src/ontology/ccp-extensions.owl
 http://www.openannotation.org/spec/core/20130208/oa.owl
 "
 
