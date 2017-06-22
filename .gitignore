@@ -19,3 +19,5 @@ test-output/
 *.iml
 
 pom.xml
+
+mvn-local-repository/

@@ -66,7 +66,8 @@ ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identif
 #
 #### Create the ID sets
 #export LEIN_ROOT=true
-#cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ; cd - ; }
+#IS_VIRTUOSO=true
+#cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${IS_VIRTUOSO} ; cd - ; }
 #${SCRIPT_DIR}/virtuoso-specific/LOAD-VIRTUOSO.sh id_sets/exact
 #
 ##  create bioentity for each id set

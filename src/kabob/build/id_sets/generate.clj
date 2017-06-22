@@ -70,7 +70,10 @@
    ;; Names of the rule sets to use (must point to files available on the 
    ;; classpath; NOTE that it should not start with a forward slash)
    ;;e.g. edu/ucdenver/ccp/kabob/build/id_typing/entrez_gene_id_typing_rules.clj
-   :graph-db-dir (nth original-args 5)})
+   :graph-db-dir (nth original-args 5)
+
+   :is-virtuoso (nth original-args 6)
+   })
 
 
 ;;;-------------------------------------------------------------------

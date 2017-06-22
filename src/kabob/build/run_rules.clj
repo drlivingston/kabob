@@ -25,7 +25,7 @@
        ;kabob.core.staged-rule
        kabob.core.parallel-utils
        clojure.pprint
-       kabob.build.input-kb
+       [kabob.build.input-kb :refer [source-kb]]
        kabob.build.output-kb
        [kabob.core.reification-extensions :refer [reify-sha-1]])
   (require [clojure.set :as set]
@@ -51,11 +51,13 @@
    ;; The output directory where generated triple files will be placed. 
    ;; IMPORTANT: The output directory path must end with a forward slash.
    :output-directory (nth original-args 4)
+
+   :is-virtuoso (nth original-args 5)
    
    ;; Names of the rule sets to use (must point to files available on the 
    ;; classpath; NOTE that it should not start with a forward slash)
    ;;e.g. edu/ucdenver/ccp/kabob/build/id_typing/entrez_gene_id_typing_rules.clj
-   :rule-set-names (drop 5 original-args)})
+   :rule-set-names (drop 6 original-args)})
 
 (defn logging-header [args]
   (prn "Serializing rule output for: " (:rule-set-names args))
@@ -63,7 +65,9 @@
   (prn (str "Server URL: " (:server-url args)))
   (prn (str "Repo name: " (:repo-name args)))
   (prn (str "Passed in select limit: " (:sparql-limit args)))
-  (prn (str "Output directory: " (:output-directory args))))
+  (prn (str "Output directory: " (:output-directory args)))
+  (prn (str "Is Virtuoso?: " (:is-virtuoso args)))
+  )
 
 (defn logging-rules [rules]
   (println "RULES:")

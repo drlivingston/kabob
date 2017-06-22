@@ -10,7 +10,8 @@
              :refer [*namespaces*]])
   (:import [org.openrdf.rio RDFFormat]
            [org.openrdf.query.resultio TupleQueryResultFormat]
-           [org.openrdf.repository.http HTTPRepository]))
+           [org.openrdf.repository.http HTTPRepository]
+           [virtuoso.sesame2.driver VirtuosoRepository]))
 
 (defn initialize-kb [kb]
   (register-namespaces (synch-ns-mappings (connection kb)) *namespaces*))
@@ -22,4 +23,12 @@
             *password* (:password args)]
     (initialize-kb (kb HTTPRepository))))
 
-(def source-kb open-kb)
+(defn virtuoso-kb [args]
+  ;;Init source KB connection
+  (println "forcing a virtuoso connection")
+  (let [kb (kb (VirtuosoRepository. "jdbc:virtuoso://localhost:1111","dba","dba"))]
+    (initialize-kb kb)))
+
+(def source-kb [args]
+  (if (= "true" (:is-virtuoso args)) virtuoso-kb open-kb))
+
