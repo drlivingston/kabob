@@ -51,11 +51,11 @@
 
 (deftest test-rule
   (let [rule1 (first (filter #(= (:name %) "copy-list-nodes-to-bio")
-                              (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_ice/step_a")))
+                              (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_bio/step_a")))
         rule2 (first (filter #(= (:name %) "copy-owl-restriction-to-bio")
-                             (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_ice/step_a")))
+                             (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_bio/step_a")))
         rule3 (first (filter #(= (:name %) "copy-owl-alldisjointclasses-to-bio")
-                             (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_ice/step_a")))
+                             (kabob-load-rules-from-classpath "rules/post_identifier_merge/step_b_ontology_to_bio/step_a")))
         source-kb (test-kb sample-kb-triples)] ;; source kb contains sample triples
 
     (run-forward-rule-sparql-string source-kb source-kb rule1)
