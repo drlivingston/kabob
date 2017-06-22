@@ -44,7 +44,7 @@ cp ${LIST_FILE} ${LOAD_REQUEST_DIRECTORY}
 
 # the wait-for-load script requires as input the name of the list file (without path)
 
-source ${SCRIPT_DIR}/wait-for-load.sh ${LOAD_REQUEST_DIRECTORY} ${LIST_FILE_NAME}
+source ${SCRIPT_DIR}/common-scripts/wait-for-load.sh ${LOAD_REQUEST_DIRECTORY} ${LIST_FILE_NAME}
 
 # a non-zero exit code indicates a load failure and the load log should be checked
  if [[ $? != 0 ]]

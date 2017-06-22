@@ -13,7 +13,7 @@ fi
 DIR_PAT=${1:?}
 FORMAT=${2:-"ntriples"}
 
-${SCRIPT_DIR}/load-directory-ag.sh \
+${SCRIPT_DIR}/allegrograph-specific/load-directory-ag.sh \
   ${KB_PORT} \
   ${KB_NAME} \
   ${KB_DATA_DIR} \
