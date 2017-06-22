@@ -28,13 +28,13 @@ mkdir -p ${KB_DATA_DIR}
 ### generate lists of RDF files that will be loaded in subsequent steps
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
-#### Load the ontologies
-#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-#  "rdfxml"
-#
+### Load the ontologies
+${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+  "rdfxml"
+
 ## create ICE records for all ontology concepts
 #${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
 #${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
