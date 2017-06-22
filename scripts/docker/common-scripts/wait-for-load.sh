@@ -17,7 +17,7 @@ main() {
     # created. Also created is a file named $filename.log which
     # contains the load log (useful for debugging if there is a load
     # failure).
-    inotifywait -m $load_request_dir -e create |
+    inotifywait -m ${load_request_dir} -e create |
 	while read path action file; do
 	    case "${file}" in
 		"${filename}.success")
