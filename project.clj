@@ -14,7 +14,7 @@
   				       [org.slf4j/slf4j-log4j12 "1.7.2"]
   				       [potemkin/potemkin "0.1.2"]
   				       [commons-codec/commons-codec "1.6"]
-								 [virtuoso/jdbc "3.0.0"]
+								 [virtuoso/jdbc "4.0.0"]
 								 [virtuoso/sesame "2.7.0"]]
 	:repositories {"local" "file:mvn-local-repository"}
   ;:main ^:skip-aot my-stuff.core
