@@ -28,60 +28,60 @@ mkdir -p ${KB_DATA_DIR}
 ### generate lists of RDF files that will be loaded in subsequent steps
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
-### Load the ontologies
-${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-  "rdfxml"
-
-# create ICE records for all ontology concepts
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
-
-### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
-${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
-
-${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
-  "rdfxml"
-
-### Index optimization -- not currently implemented
-#${SCRIPT_DIR}/optimize.sh \
+#### Load the ontologies
+#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
 #  ${KB_PORT} \
-#  ${KB_NAME}
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+#  "rdfxml"
+#
+## create ICE records for all ontology concepts
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
+#
+#### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
+#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
+#
+#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
+#  "rdfxml"
+#
+#### Index optimization -- not currently implemented
+##${SCRIPT_DIR}/optimize.sh \
+##  ${KB_PORT} \
+##  ${KB_NAME}
+#
+#### create skos:exactMatch links between equivalent identifiers
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
+#
+#### Create the ID sets
+#${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/
+#${SCRIPT_DIR}/allegrograph-specific/LOAD-AG.sh id_sets/exact
+#
+##  create bioentity for each id set
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_a_entity_generation/reify
+#
+## connect bioentities based on ontology hierarchies
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c
+#
 
-### create skos:exactMatch links between equivalent identifiers
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
-
-### Create the ID sets
-${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/
-${SCRIPT_DIR}/allegrograph-specific/LOAD-AG.sh id_sets/exact
 
 
-#${MAVEN} -e -f /kabob.git/kabob-build/pom.xml \
-#               -Dclojure.vmargs="-d64 -Xmx24G -XX:MaxPermSize=8G -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:-UseGCOverheadLimit" \
-#               -Dclojure.mainClass="edu.ucdenver.ccp.kabob.build.id_sets.generate" \
-#               -Dclojure.args="${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/" \
-#               clojure:run
-#find ${KB_DATA_DIR} -type d -exec chmod 0755 {} \;
 
-#  create bioentity for each id set
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_a_entity_generation/reify
 
-# connect bioentities based on ontology hierarchies
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c
+# ============================================================================================ #
+
 
 
 ###########
