@@ -21,3 +21,4 @@ test-output/
 pom.xml
 
 mvn-local-repository/
+/bin/
