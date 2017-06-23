@@ -4,14 +4,14 @@
              :refer [connection kb]]
             [kr.core.rdf
              :refer [register-namespaces synch-ns-mappings]]
-            [kr.sesame.kb
+            [kr.rdf4j.kb
              :refer [*default-server* *repository-name* *username* *password*]]
             [kabob.core.namespace
              :refer [*namespaces*]])
-  (:import [org.openrdf.rio RDFFormat]
-           [org.openrdf.query.resultio TupleQueryResultFormat]
-           [org.openrdf.repository.http HTTPRepository]
-           [virtuoso.sesame2.driver VirtuosoRepository]))
+  (:import [org.eclipse.rdf4j.rio RDFFormat]
+           [org.eclipse.rdf4j.query.resultio TupleQueryResultFormat]
+           [org.eclipse.rdf4j.repository.http HTTPRepository]
+           [virtuoso.rdf4j.driver VirtuosoRepository]))
 
 (defn initialize-kb [kb]
   (register-namespaces (synch-ns-mappings (connection kb)) *namespaces*))

@@ -1,10 +1,10 @@
 (ns kabob.build.output-kb
   (use kr.core.kb
        kr.core.rdf
-       kr.sesame.kb
+       kr.rdf4j.kb
        kabob.core.namespace
        [clojure.java.io :only (output-stream)])
-  (require kr.sesame.writer-kb)
+  (require kr.rdf4j.writer-kb)
   (import java.util.zip.GZIPOutputStream))
 
 ;;; --------------------------------------------------------
@@ -16,7 +16,7 @@
   (let [output (output-stream out)] ;this should be redundant
     (connection
      (register-namespaces
-      (kr.sesame.writer-kb/new-sesame-writer-kb output)
+      (kr.rdf4j.writer-kb/new-rdf4j-writer-kb output)
       *namespaces*))))
 
 
@@ -27,7 +27,7 @@
         zipped (GZIPOutputStream. output)]
     (connection
      (register-namespaces
-      (kr.sesame.writer-kb/new-sesame-writer-kb zipped)
+      (kr.rdf4j.writer-kb/new-rdf4j-writer-kb zipped)
       *namespaces*))))
 
 ;;; --------------------------------------------------------

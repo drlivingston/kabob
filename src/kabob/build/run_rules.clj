@@ -39,7 +39,7 @@
 ;; NOTE why didn't I just use destructuring here?
 
 (defn command-line-args [original-args]
-  {;; The URL to the Sesame server to query
+  {;; The URL to the Rdf4j server to query
    :server-url (nth original-args 0)
    ;; The name of the repository to connect to
    :repo-name (nth original-args 1)

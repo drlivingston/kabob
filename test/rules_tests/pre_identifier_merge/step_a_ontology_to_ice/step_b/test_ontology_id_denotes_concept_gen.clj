@@ -1,8 +1,8 @@
 (ns rules-tests.pre-identifier-merge.step-a-ontology-to-ice.step-b.test-ontology-id-denotes-concept-gen
   (use clojure.test
-       kr.sesame.kb
-       kr.sesame.sparql
-       kr.sesame.rdf
+       kr.rdf4j.kb
+       kr.rdf4j.sparql
+       kr.rdf4j.rdf
        )
   (:require  [kabob.build.run-rules :refer [query-variables run-forward-rule-sparql-string]]
              [kr.core.forward-rule :refer [add-reify-fns]]
@@ -65,7 +65,7 @@
 
 (defn test-kb [triples]
   "initializes an empty kb"
-  (let [kb (register-namespaces (synch-ns-mappings (open (kb :sesame-mem)))
+  (let [kb (register-namespaces (synch-ns-mappings (open (kb :rdf4j-mem)))
                                 *namespaces*)]
     (dorun (map (partial add! kb) triples))
     kb))

@@ -2,7 +2,7 @@
   (use kr.core.kb
        kr.core.rdf
        kr.core.sparql
-       kr.sesame.writer-kb
+       kr.rdf4j.writer-kb
        kr.core.utils
 
        clojure.stacktrace

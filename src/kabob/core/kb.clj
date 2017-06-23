@@ -1,17 +1,17 @@
 (ns kabob.core.kb
   (use kr.core.kb
        kr.core.rdf
-       kr.core.sesame.kb
+       kr.core.rdf4j.kb
        kabob.core.namespace)
-  (import org.openrdf.rio.RDFFormat
-          org.openrdf.query.resultio.TupleQueryResultFormat))
+  (import org.eclipse.rdf4j.rio.RDFFormat
+          org.eclipse.rdf4j.query.resultio.TupleQueryResultFormat))
 
 ;;; --------------------------------------------------------
 ;;; kabob source kbs
 ;;; --------------------------------------------------------
 
 (defn binary-kb []
-  (let [kb (kb org.openrdf.repository.http.HTTPRepository)]
+  (let [kb (kb org.eclipse.rdf4j.repository.http.HTTPRepository)]
     (.setPreferredRDFFormat (:server kb) RDFFormat/BINARY)
     (.setPreferredTupleQueryResultFormat (:server kb)
                                          TupleQueryResultFormat/BINARY)
