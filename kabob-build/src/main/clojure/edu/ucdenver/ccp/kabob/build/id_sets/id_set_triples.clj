@@ -20,14 +20,15 @@
 
 ;;(def ^:dynamic *graph-db-path* "/temp/kabob/neo4j/idsets/")
 
-(def ^:dynamic *id-set-ns* "kiao")
+(def ^:dynamic *id-set-ns* "ccp")
 
 (def magic-prefixes
   (str "PREFIX franzOption_memoryLimit: <franz:85g> \n"
        "PREFIX franzOption_memoryExhaustionWarningPercentage: <franz:95> \n"
        "PREFIX franzOption_logQuery: <franz:yes> \n "
-       "PREFIX kiao: <http://kabob.ucdenver.edu/iao/> \n"
        "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n"
+       "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
+       "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/> \n"
        ;; "PREFIX franzOption_chunkProcessingAllowed: <franz:yes> \n"
        ;; "PREFIX franzOption_chunkProcessingSize: <franz:500000> \n"
        ))
@@ -79,7 +80,7 @@
   (let [set-sym (derive-id-set-sym id-type ids)
         type-sym (symbol *id-set-ns* (str (name id-type) "-Set"))]
     (conj (map (fn [id]
-                 `(~set-sym kro/hasMember ~id))
+                 `(~set-sym obo/RO_0002351 ~id))
                ids)
           `(~set-sym rdf/type ~type-sym))))
 
@@ -88,7 +89,7 @@
   (let [set-sym (derive-generic-id-set-sym ids)
         type-sym (symbol *id-set-ns* "ID-Set")]
     (conj (map (fn [id]
-                 `(~set-sym kro/hasMember ~id))
+                 `(~set-sym obo/RO_0002351 ~id))
                ids)
           `(~set-sym rdf/type ~type-sym))))
 
@@ -116,28 +117,28 @@
             (empty? (rest set)))))
   
 
-(defn produce-id-set-triples [uf output-kb id-type]
-  (let [count (atom 0)
-        t (atom (.getTime (java.util.Date.)))]
-    (println "building set triples")
-    (time
-     (dorun
-      (map (fn [n-ids]
-             (swap! count inc)
-             (when (= 0 (mod @count 10000))
-               (System/gc))
-             (when (= 0 (mod @count 250000))
-               (let [new-t (.getTime (java.util.Date.))]
-                 (println @count " in " (- new-t @t) "ms")
-                 (reset! t new-t)))
-             (let [eset (translate-equivalence-set uf n-ids)]
-               (when (good-set? eset)
-                 (dorun
-                  (map (partial add! output-kb)
-                       (id-set-triples id-type eset)))))
-             nil)
-           (n-clean-union-find uf))))
-    nil))
+;(defn produce-id-set-triples [uf output-kb id-type]
+;  (let [count (atom 0)
+;        t (atom (.getTime (java.util.Date.)))]
+;    (println "building set triples")
+;    (time
+;     (dorun
+;      (map (fn [n-ids]
+;             (swap! count inc)
+;             (when (= 0 (mod @count 10000))
+;               (System/gc))
+;             (when (= 0 (mod @count 250000))
+;               (let [new-t (.getTime (java.util.Date.))]
+;                 (println @count " in " (- new-t @t) "ms")
+;                 (reset! t new-t)))
+;             (let [eset (translate-equivalence-set uf n-ids)]
+;               (when (good-set? eset)
+;                 (dorun
+;                  (map (partial add! output-kb)
+;                       (id-set-triples id-type eset)))))
+;             nil)
+;           (n-clean-union-find uf))))
+;    nil))
 
 (defn produce-generic-id-set-triples [uf output-kb]
   (let [count (atom 0)
@@ -201,14 +202,15 @@
     (println "running singles query.")
     (println "timing count:")
     (let [query-body
-          (str " where {
-                ?ice kiao:denotesSubClassOf ?class .  
-                MINUS { {?ice2 skos:exactMatch ?ice . }
+          (str "where {
+                ?id_type rdfs:subClassOf* obo:IAO_0000578 .
+  				?id rdf:type ?id_type .
+                MINUS { {?id2 skos:exactMatch ?id . }
                         UNION
-                        { ?ice skos:exactMatch ?ice2 . } }}")
+                        { ?id skos:exactMatch ?id2 . } }}")
           count-query (str magic-prefixes
-                           " select (count(?ice) as ?count) " query-body)
-          singles-query (str magic-prefixes " select ?ice " query-body)
+                           " select (count(?id) as ?count) " query-body)
+          singles-query (str magic-prefixes " select ?id " query-body)
           num-pairs (time
                      (second (first (first (query-sparql source-kb
                                                          count-query)))))
@@ -233,7 +235,7 @@
                      (dorun
                       (map (partial add! output-kb)
                            (doall
-                            (let [id (get bindings '?/ice nil)]
+                            (let [id (get bindings '?/id nil)]
                               (generic-id-set-triples (list id)))))))
                    singles-query ;need to add reify find clauses on optionally
                    ))))
@@ -265,73 +267,73 @@
 ;;                                                (list id))))))))
 
 
-(defn produce-generic-single-set-triples [source-kb output-kb id-type]
-  (binding [*use-inference* false]
-    (println "running singles query.")
-    (println "timing count:")
-    (let [query-pat `((?/ice1 rdf/type ~id-type))
-          query-body
-          (str " where {
-                ?ice rdf:type " (namespace id-type) ":" (name id-type) " .
-                MINUS { {?ice2 skos:exactMatch ?ice . }
-                        UNION
-                        { ?ice skos:exactMatch ?ice2 . } }}")
-          count-query (str magic-prefixes
-                           " select (count(*) as ?count) " query-body)
-          singles-query (str magic-prefixes " select ?ice " query-body)
-          num-pairs (time
-                     (second (first (first (query-sparql source-kb
-                                                         count-query)))))]
-      (println "expected count:" num-pairs)
-      (parallel-triple-creation-sparql source-kb
-                                       output-kb
-                                       singles-query
-                                       (fn [bindings]
-                                         (let [id (get bindings '?/ice nil)]
-                                           (generic-id-set-triples
-                                            (list id))))))))
+;(defn produce-generic-single-set-triples [source-kb output-kb id-type]
+;  (binding [*use-inference* false]
+;    (println "running singles query.")
+;    (println "timing count:")
+;    (let [query-pat `((?/ice1 rdf/type ~id-type))
+;          query-body
+;          (str " where {
+;                ?ice rdf:type " (namespace id-type) ":" (name id-type) " .
+;                MINUS { {?ice2 skos:exactMatch ?ice . }
+;                        UNION
+;                        { ?ice skos:exactMatch ?ice2 . } }}")
+;          count-query (str magic-prefixes
+;                           " select (count(*) as ?count) " query-body)
+;          singles-query (str magic-prefixes " select ?ice " query-body)
+;          num-pairs (time
+;                     (second (first (first (query-sparql source-kb
+;                                                         count-query)))))]
+;      (println "expected count:" num-pairs)
+;      (parallel-triple-creation-sparql source-kb
+;                                       output-kb
+;                                       singles-query
+;                                       (fn [bindings]
+;                                         (let [id (get bindings '?/ice nil)]
+;                                           (generic-id-set-triples
+;                                            (list id))))))))
+
+;
+;(defn produce-single-set-triples [source-kb output-kb id-type]
+;  (binding [*use-inference* false]
+;    (println "running singles query.")
+;    (println "timing count:")
+;    (let [query-pat `((?/ice1 rdf/type ~id-type))
+;          query-body
+;          (str " where {
+;                ?ice rdf:type " (namespace id-type) ":" (name id-type) " .
+;                MINUS { {?ice2 skos:exactMatch ?ice . }
+;                        UNION
+;                        { ?ice skos:exactMatch ?ice2 . } }}")
+;          count-query (str magic-prefixes
+;                           " select (count(*) as ?count) " query-body)
+;          singles-query (str magic-prefixes " select ?ice " query-body)
+;          num-pairs (time
+;                     (second (first (first (query-sparql source-kb
+;                                                         count-query)))))]
+;      (println "expected count:" num-pairs)
+;      (parallel-triple-creation-sparql source-kb
+;                                       output-kb
+;                                       singles-query
+;                                       (fn [bindings]
+;                                         (let [id (get bindings '?/ice nil)]
+;                                           (id-set-triples id-type
+;                                                           (list id))))))))
 
 
-(defn produce-single-set-triples [source-kb output-kb id-type]
-  (binding [*use-inference* false]
-    (println "running singles query.")
-    (println "timing count:")
-    (let [query-pat `((?/ice1 rdf/type ~id-type))
-          query-body
-          (str " where {
-                ?ice rdf:type " (namespace id-type) ":" (name id-type) " .
-                MINUS { {?ice2 skos:exactMatch ?ice . }
-                        UNION
-                        { ?ice skos:exactMatch ?ice2 . } }}")
-          count-query (str magic-prefixes
-                           " select (count(*) as ?count) " query-body)
-          singles-query (str magic-prefixes " select ?ice " query-body)
-          num-pairs (time
-                     (second (first (first (query-sparql source-kb
-                                                         count-query)))))]
-      (println "expected count:" num-pairs)
-      (parallel-triple-creation-sparql source-kb
-                                       output-kb
-                                       singles-query
-                                       (fn [bindings]
-                                         (let [id (get bindings '?/ice nil)]
-                                           (id-set-triples id-type
-                                                           (list id))))))))
-
-
-(defn write-id-set-triples [id-graph id-sets source-kb output-kb id-type]
+;(defn write-id-set-triples [id-graph id-sets source-kb output-kb id-type]
 ;;  (binding [*parallel-query-logging-frequency* 25000]
-  ;;(let [output-kb (open-output-kb output-dir (name id-type))]
-      (try
-        (println "first graph:")
-        (pprint (first id-graph))
-        (println "first set:")
-        (pprint (first id-sets))
-        
-        (produce-id-set-triples id-sets output-kb id-type)
-        (produce-single-set-triples id-graph source-kb output-kb id-type)
-        
-        (catch Exception e (print-cause-trace e))))
+;  ;;(let [output-kb (open-output-kb output-dir (name id-type))]
+;      (try
+;        (println "first graph:")
+;        (pprint (first id-graph))
+;        (println "first set:")
+;        (pprint (first id-sets))
+;        
+;        (produce-id-set-triples id-sets output-kb id-type)
+;        (produce-single-set-triples id-graph source-kb output-kb id-type)
+;        
+;        (catch Exception e (print-cause-trace e))))
     ;;    (finally (close output-kb)))));;)
 
 ;; (defn write-id-set-triples [id-graph id-sets single-fn output-dir id-type]

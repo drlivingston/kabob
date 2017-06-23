@@ -1,5 +1,9 @@
 {:name "drug-labels-DrugBank"
 
+ ;; The form of the new triples that will be constructed.
+ :head
+ '((?/bio rdfs/label ?/drug_name))
+
  ;; The query pattern used to retrieve the data that will be used to construct
  ;; the new triples.
  :body
@@ -18,10 +22,6 @@
    (_/drugbank_id_field obo/IAO_0000219 _/ice)
    (_/ice kiao/denotesSubClassOf obo/CHEBI_23888) ;; CHEBI:drug
    (_/ice obo/IAO_0000219 ?/bio))
-
- ;; The form of the new triples that will be constructed.
- :head
- '((?/bio rdfs/label ?/drug_name))
 
  ;; In this case no `:reify` entry is required, since all of the data required
  ;; to form the new triples already exist.

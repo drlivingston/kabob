@@ -15,47 +15,47 @@
 ;;; id types
 ;;;-------------------------------------------------------------------
 
-(def id-types '(kiao/DrugIdentifier
-                kiao/DNAIdentifier
-                kiao/ProteinIdentifier
-                kiao/DiseaseIdentifier
-                kiao/RNAIdentifier
-                kiao/mRNAIdentifier))
+;(def id-types '(kiao/DrugIdentifier
+;                kiao/DNAIdentifier
+;                kiao/ProteinIdentifier
+;                kiao/DiseaseIdentifier
+;                kiao/RNAIdentifier
+;                kiao/mRNAIdentifier))
 
 ;;;-------------------------------------------------------------------
 ;;; extract ids from source kb, group in temp graph db, output to file
 ;;;-------------------------------------------------------------------
 
-(defn generate-id-set-internal [source-kb temp-db-dir output-dir id-type]
-  (let [output-kb (open-output-kb output-dir (name id-type))]
-    (try
-      (println "initializing id graph for: " id-type)
-      (let [uf ;;[id-map id-sets]
-            (time
-             (initialize-id-sets source-kb id-type))]
-        (println "generating set triples for: " id-type)
-        (time
-         (produce-id-set-triples uf output-kb id-type))
-        
-         ;; (write-id-set-triples id-sets
-         ;;                       source-kb
-         ;;                       output-kb
-        ;;                       id-type)))
-        (println "gc")
-        (System/gc)
-        (System/gc)
+;(defn generate-id-set-internal [source-kb temp-db-dir output-dir id-type]
+;  (let [output-kb (open-output-kb output-dir (name id-type))]
+;    (try
+;      (println "initializing id graph for: " id-type)
+;      (let [uf ;;[id-map id-sets]
+;            (time
+;             (initialize-id-sets source-kb id-type))]
+;        (println "generating set triples for: " id-type)
+;        (time
+;         (produce-id-set-triples uf output-kb id-type))
+;        
+;         ;; (write-id-set-triples id-sets
+;         ;;                       source-kb
+;         ;;                       output-kb
+;        ;;                       id-type)))
+;        (println "gc")
+;        (System/gc)
+;        (System/gc)
+;
+;        (time
+;         (produce-single-set-triples source-kb output-kb id-type)))
+;        
+;        (catch Exception e (print-cause-trace e))
+;        (finally (close output-kb)))))
 
-        (time
-         (produce-single-set-triples source-kb output-kb id-type)))
-        
-        (catch Exception e (print-cause-trace e))
-        (finally (close output-kb)))))
 
-
-(defn generate-id-set [source-kb temp-db-base-dir output-base-dir id-type]
-  (let [temp-db-dir (str temp-db-base-dir id-type)]
-    (time
-     (generate-id-set-internal source-kb temp-db-dir output-base-dir id-type))))
+;(defn generate-id-set [source-kb temp-db-base-dir output-base-dir id-type]
+;  (let [temp-db-dir (str temp-db-base-dir id-type)]
+;    (time
+;     (generate-id-set-internal source-kb temp-db-dir output-base-dir id-type))))
 
 ;; (defn generate-all-id-sets [source-kb temp-db-base-dir output-base-dir]
 ;;   (binding [edu.ucdenver.ccp.kr.sparql/*force-prefixes*
@@ -95,15 +95,15 @@
       (catch Exception e (print-cause-trace e))
       (finally (close output-kb)))))
 
-(defn generate-generic-id-set-type [source-kb output-dir id-type]
-  (let [output-kb (open-output-kb output-dir (str "generic-"
-                                                  (name id-type)))]
-    (try
-      (println "generating set triples for: " id-type)
-      (time
-       (produce-generic-single-set-triples source-kb output-kb id-type))
-      (catch Exception e (print-cause-trace e))
-      (finally (close output-kb)))))
+;(defn generate-generic-id-set-type [source-kb output-dir id-type]
+;  (let [output-kb (open-output-kb output-dir (str "generic-"
+;                                                  (name id-type)))]
+;    (try
+;      (println "generating set triples for: " id-type)
+;      (time
+;       (produce-generic-single-set-triples source-kb output-kb id-type))
+;      (catch Exception e (print-cause-trace e))
+;      (finally (close output-kb)))))
 
         
 (defn generate-all-id-sets [source-kb temp-db-base-dir output-base-dir]
@@ -155,9 +155,9 @@
   (prn "Clojure version: " *clojure-version*)
   (prn "Server URL: " (:server-url args))
   (prn "Repo name: " (:repo-name args))
-  (prn "Output directory: " (:output-directory args))
-  (prn "ID types: ")
-  (pprint id-types))
+  (prn "Output directory: " (:output-directory args)))
+;  (prn "ID types: ")
+;  (pprint id-types))
 
 ;; (defn source-kb [args]
 ;;   ;; Init source KB connection
