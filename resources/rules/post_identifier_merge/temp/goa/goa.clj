@@ -35,7 +35,7 @@
           (:optional
            ((?/record obo/BFO_0000051 ?/qualifier_fv) ; BFO:has_part
             (?/qualifier_fv rdf/type ccp/IAO_EXT_0000013) ; ccp:GAF_qualifier_field_value
-            (?/qualifier_fv rdfs/label ?/qualifier))) ; IAO:denotes
+            (?/qualifier_fv rdfs/label ?/qualifier)))
           (:or (:not (:bound ?/qualifier))
                (:not (:regex ?/qualifier "^NOT" "i")))
          )
@@ -43,7 +43,7 @@
   :reify ([?/process_sc {:ln (:sha-1 ?/process ?/participation_restriction)
                  :ns "ccp" :prefix "BP_"}]
           [?/bioentity_sc {:ln (:sha-1 ?/process ?/participating_bioentity)
-                    :ns "ccp" :prefix "BE_"}]
+                    :ns "ccp" :prefix "B_"}]
           [?/participation_restriction {:ln (:restriction)
                  :ns "ccp" :prefix "R_"}])
 
@@ -94,7 +94,7 @@
           (:optional
            ((?/record obo/BFO_0000051 ?/qualifier_fv) ; BFO:has_part
             (?/qualifier_fv rdf/type ccp/IAO_EXT_0000013) ; ccp:GAF_qualifier_field_value
-            (?/qualifier_fv rdfs/label ?/qualifier))) ; IAO:denotes
+            (?/qualifier_fv rdfs/label ?/qualifier)))
           (:or (:not (:bound ?/qualifier))
                (:not (:regex ?/qualifier "^NOT" "i")))
 
@@ -106,7 +106,7 @@
           [?/target_end_restriction {:ln (:restriction)
                  :ns "ccp" :prefix "R_"}]
           [?/bioentity_sc {:ln (:sha-1 ?/go_cc ?/bioentity)
-                     :ns "kbio" :prefix "BE_"}]
+                     :ns "kbio" :prefix "B_"}]
           [?/component_sc {:ln (:sha-1 ?/go_cc ?/bioentity)
                     :ns "kbio" :prefix "CC_"}]
           )
