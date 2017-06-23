@@ -28,7 +28,7 @@
          ;; retrieve the process participant identifier
          (?/record obo/BFO_0000051 ?/bioentity_field_value) ; BFO:has_part
          (?/bioentity_field_value rdf/type ccp/IAO_EXT_0000010) ; ccp:database_object_identifier_field_value
-         (?/bioentity_field_value rdf/type ?/bioentity_ice_id) ; ccp:database_object_identifier_field_value
+         (?/bioentity_field_value rdf/type ?/bioentity_ice_id) 
          (?/bioentity_ice_id obo/IAO_0000219 ?/participating_bioentity) ; IAO:denotes
 
          ;;filter out the negations
