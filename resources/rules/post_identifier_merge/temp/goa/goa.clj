@@ -18,15 +18,17 @@
          ;; provenance: connect the record to the process subclass
          (?/record obo/IAO_0000219 ?/process_sc)) ; IAO:denotes
     
-  :body ((?/go_ice_id rdf:type ccp/IAO_EXT_0000103) ; ccp:GO_BP_concept_identifier
+  :body ((?/go_ice_id rdfs/subClassOf ccp/IAO_EXT_0000103) ; ccp:GO_BP_concept_identifier
          (?/go_ice_id obo/IAO_0000219 ?/process) ; IAO:denotes
-         (?/record obo/BFO_0000051 ?/go_ice_id) ; BFO:has_part
+         (?/id_field_value rdf/type ?/go_ice_id)
+         (?/id_field_value rdf/type ccp/IAO_EXT_0000014) ; ccp:GAF_ontology_identifier_field_value
+         (?/record obo/BFO_0000051 ?/id_field_value) ; BFO:has_part
          (?/record rdf/type ccp/IAO_EXT_0000007) ; ccp:GAF_record_v2.0
-         (?/go_ice_id rdf/type ccp/IAO_EXT_0000014) ; ccp:GAF_ontology_identifier_field_value
 
          ;; retrieve the process participant identifier
-         (?/record obo/BFO_0000051 ?/bioentity_ice_id) ; BFO:has_part
-         (?/bioentity_ice_id rdf/type ccp/IAO_EXT_0000010) ; ccp:database_object_identifier_field_value
+         (?/record obo/BFO_0000051 ?/bioentity_field_value) ; BFO:has_part
+         (?/bioentity_field_value rdf/type ccp/IAO_EXT_0000010) ; ccp:database_object_identifier_field_value
+         (?/bioentity_field_value rdf/type ?/bioentity_ice_id) ; ccp:database_object_identifier_field_value
          (?/bioentity_ice_id obo/IAO_0000219 ?/participating_bioentity) ; IAO:denotes
 
          ;;filter out the negations
