@@ -1,6 +1,8 @@
-;;;; Rules to generate bio constructs from GOA
-
+;; -----------------------------------------------------------------------
+;; --------- Generate Bio Concepts for Gene Ontology Annotations ---------
+;; -----------------------------------------------------------------------
 `{:name "goa-bp"
+  :description "This rule creates a subclass of every biological process and types it as a GO BP concept identifier (IAO_EXT_0000103)"
   :head (
          ;; create a subclass of the biological process
          (?/process_sc rdfs/subClassOf ?/process)
@@ -52,6 +54,7 @@
 
 
 `{:name "goa-cc"
+  :description "This rule creates a subclass of every cellular component and types it as a GO CC concept identifier (IAO_EXT_0000200)"
   :head (
          ;; create a subclass of GO localization
           (?/localization_sc rdfs/subClassOf obo/GO_0051179) ; GO:localization
