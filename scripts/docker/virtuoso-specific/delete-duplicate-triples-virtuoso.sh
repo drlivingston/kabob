@@ -2,13 +2,7 @@
 #
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-chmod -R 755 ${SCRIPT_DIR}
-
-# This script takes a single argument specifying the repository name to use/construct
-export KB_INSTANCE_NAME=$1
-export DOCKER_ENV=${SCRIPT_DIR}/virtuoso-specific/docker-env.sh
-
-source ${DOCKER_ENV}
+source ${SCRIPT_DIR}/virtuoso-specific/docker-env.sh
 source ${SCRIPT_DIR}/common-scripts/ENV.sh
 
 echo "LEININGEN=${LEININGEN}"
