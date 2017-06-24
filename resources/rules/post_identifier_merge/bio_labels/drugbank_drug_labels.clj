@@ -4,7 +4,7 @@
 `{:name "drugbank-drug-labels"
   :description "This rule creates a label for every drug record and types it as (IAO_EXT_0000367)"
   :head (
-          ;; create a label for the drug
+         ;; create a label for the drug
          (?/drug rdfs/label ?/drug_name))
 
   :body ((?/record rdf/type ccp/IAO_EXT_0000426) ; ccp:DrugBank_drug_record
