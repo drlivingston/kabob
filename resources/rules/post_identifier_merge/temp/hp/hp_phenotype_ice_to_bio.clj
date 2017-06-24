@@ -10,7 +10,7 @@
          (?/phenotype_sc rdfs/label ?/human_phenotype_label)
          
          ;; create a sublcass of the participating bioentity
-         (?/bioentity_sc rdfs/subClassOf ?/bioentity)
+         (?/bioentity_sc rdfs/subClassOf ?/participating_bioentity)
          ;; create a label for the bioentity subclass
          (?/bioentity_sc rdfs/label ?/bioentity_sc_label)
          
@@ -38,7 +38,7 @@
          (?/bioentity_field_value rdf/type ?/bioentity_ice_id) 
          (?/bioentity_ice_id obo/IAO_0000219 ?/participating_bioentity)) ; IAO:denotes
 
-  :reify ([?/phenotype_sc {:ln (:sha-1 ?/human_phenotype ?/participation_restriction) 
+  :reify ([?/phenotype_sc {:ln (:sha-1 ?/human_phenotype ?/participating_bioentity) 
                  :ns "ccp" :prefix "PHENO_"}]
           [?/bioentity_sc {:ln (:sha-1 ?/human_phenotype ?/participating_bioentity)
                     :ns "ccp" :prefix "B_"}]
