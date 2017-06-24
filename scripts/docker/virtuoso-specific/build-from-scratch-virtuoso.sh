@@ -36,6 +36,8 @@ ${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
   ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
   "ntriples"
 
+${SCRIPT_DIR}/virtuoso-specific/delete-dupilcate-triples-virtuoso.sh
+
 ## create ICE records for all ontology concepts
 ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
 #${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
@@ -52,6 +54,8 @@ ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identif
 #  ${KB_NAME} \
 #  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
 #  "rdfxml"
+#
+# ${SCRIPT_DIR}/virtuoso-specific/delete-dupilcate-triples-virtuoso.sh
 #
 #### Index optimization -- not currently implemented
 ##${SCRIPT_DIR}/optimize.sh \

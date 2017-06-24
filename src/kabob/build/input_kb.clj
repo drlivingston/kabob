@@ -19,7 +19,16 @@
 (defn virtuoso-kb [args]
   ;;Init source KB connection
   (println "forcing a virtuoso connection")
-  (let [kb (kb (VirtuosoRepository. "jdbc:virtuoso://virtuoso-prod:1111","dba","dba"))]
+
+  (let [server-url (:server-url args)
+        server-url-nohttp (if (.startsWith server-url "http://")
+                            (.substring server-url 7)
+                            server-url)
+        virtuoso-connection-str (str "jdbc:virtuoso://" server-url-nohttp)
+        user (:username args)
+        password (:password args)
+        kb (kb (VirtuosoRepository. virtuoso-connection-str, user, password))]
+    ;kb (kb (VirtuosoRepository. "jdbc:virtuoso://virtuoso-prod:1111","dba","dba"))]
     (initialize-kb kb)))
 
 (defn open-kb [args]

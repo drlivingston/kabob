@@ -26,3 +26,5 @@ ${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
     ${KB_NAME} \
     ${LIST_FILE} \
     ${FORMAT}
+
+${SCRIPT_DIR}/virtuoso-specific/delete-dupilcate-triples-virtuoso.sh

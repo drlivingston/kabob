@@ -24,7 +24,10 @@
              :main-a {:main kabob.build.run-rules
                       :jvm-opts ["-d64" "-Xmx2g"]}
              :main-b {:main kabob.build.id-sets.generate
-             	      :jvm-opts ["-d64" "-Xmx24g"]}}
+             	      :jvm-opts ["-d64" "-Xmx24g"]}
+						 :main-c {:main kabob.build.eval-sparql
+											:jvm-opts ["-d64" "-Xmx2g"]}}
   :aliases {"run-rules" ["with-profile" "main-a" "run"]
-            "generate-id-sets" ["with-profile" "main-b" "run"]})
+            "generate-id-sets" ["with-profile" "main-b" "run"]
+						"eval-sparql" ["with-profile" "main-c" "run"]})
 
