@@ -42,7 +42,7 @@
                (:not (:regex ?/qualifier "^NOT" "i")))
          )
   
-  :reify ([?/process_sc {:ln (:sha-1 ?/process ?/participation_restriction)
+  :reify ([?/process_sc {:ln (:sha-1 ?/process ?/participating_bioentity)
                  :ns "ccp" :prefix "BP_"}]
           [?/bioentity_sc {:ln (:sha-1 ?/process ?/participating_bioentity)
                     :ns "ccp" :prefix "B_"}]
