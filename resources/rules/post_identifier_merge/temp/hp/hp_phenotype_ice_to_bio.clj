@@ -32,7 +32,7 @@
          (?/record obo/BFO_0000051 ?/human_phenotype_field_value) ; BFO:has_part
          (?/record rdf/type ccp/IAO_EXT_0000029) ; ccp:HPO_annotation_record
 
-         ;; retrieve the process participant identifier
+         ;; retrieve the bioentity participant identifier
          (?/record obo/BFO_0000051 ?/bioentity_field_value) ; BFO:has_part
          (?/bioentity_field_value rdf/type ccp/IAO_EXT_0000698) ; ccp:HPO_annotation_record__gene_identifier_field_value
          (?/bioentity_field_value rdf/type ?/bioentity_ice_id) 
