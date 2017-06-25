@@ -6,7 +6,7 @@
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix franzOption_memoryLimit: <franz:85g>
                   delete { graph ?g1 {?s ?p ?o}} where {
-                               select ?s ?p ?o  {
+                               select ?g1 ?s ?p ?o  {
                                    graph ?g1 {
                                         ?s ?p ?o
                                    }
