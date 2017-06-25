@@ -3,10 +3,7 @@
 ;; -------------------------------------------------------
 `{:name "uniprot-protein-entrez-gene-mapping"
    :description "This rule maps uniprot proteins to entrez genes"
-   :head (
-          ;; map proteins to genes
-          (?/protein obo/pr#has_gene_template ?/gene) ; PR:has_gene_template
-         
+   :head (         
           ;; create has indirect template restriction
           (?/indirect_template_restriction rdf/type owl/Restriction)
           (?/indirect_template_restriction owl/onProperty obo/pr#has_gene_template) ; PR:has_gene_template
@@ -25,7 +22,7 @@
            (?/field_2_field_value rdf/type ?/field_2_ice_id)
            (?/field_2_ice_id obo/IAO_0000219 ?/gene)) ; IAO:denotes
 
-    :reify ([?/indirect_template_restriction1 {:ln (:restriction)
+    :reify ([?/indirect_template_restriction {:ln (:restriction)
                    :ns "ccp" :prefix "R_"}])
    
     :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
