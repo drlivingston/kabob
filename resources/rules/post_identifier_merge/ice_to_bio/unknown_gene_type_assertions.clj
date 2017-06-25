@@ -3,7 +3,7 @@
 ;; -----------------------------------------------
 `{:name "unknown-gene-type-assertion"
   :description "This rule asserts unknown gene type"
- :head ((?/gene rdfs/subClassOf obo/XXXXXXXXX)) ; unknown maps to kso:DNA_Sequence 
+ :head ((?/gene rdfs/subClassOf obo/SO_0000704)) ; SO:gene 
  
  :body ((?/record rdf/type ccp/IAO_EXT_0000681) ; ccp:NCBI_gene_info_record
        (?/record obo/BFO_0000051 ?/dna_field_value) ; BFO:has_part
