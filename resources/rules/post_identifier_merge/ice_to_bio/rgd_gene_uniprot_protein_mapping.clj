@@ -5,11 +5,11 @@
    :description "This rule maps rgd genes to uniprot proteins"
    :head (
           ;; map proteins to genes
-          (?/protein kso/has_indirect_template ?/gene)
+          (?/protein obo/pr#has_gene_template ?/gene) ; PR:has_gene_template
          
           ;; create has indirect template restriction
           (?/indirect_template_restriction rdf/type owl/Restriction)
-          (?/indirect_template_restriction owl/onProperty kso/has_indirect_template)
+          (?/indirect_template_restriction owl/onProperty obo/pr#has_gene_template) ; PR:has_gene_template
           (?/indirect_template_restriction owl/someValuesFrom ?/gene)
           (?/protein rdfs/subClassOf ?/indirect_template_restriction))
 
