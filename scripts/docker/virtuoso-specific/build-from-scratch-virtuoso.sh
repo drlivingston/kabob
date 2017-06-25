@@ -36,7 +36,7 @@ ${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
   ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
   "ntriples"
 
-${SCRIPT_DIR}/virtuoso-specific/delete-duplicate-triples-virtuoso.sh
+#${SCRIPT_DIR}/virtuoso-specific/delete-duplicate-triples-virtuoso.sh
 
 ## create ICE records for all ontology concepts
 ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
