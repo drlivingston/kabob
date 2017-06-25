@@ -17,7 +17,7 @@
          (?/type_field_value rdf/type ccp/IAO_EXT_0000884) ; ccp:NCBI_gene_info_record__type_of_gene_field_value
          (?/type_field_value rdf/type ?/type_ice_id)
          (?/type_ice_id obo/IAO_0000219 ?/type) ; IAO:denotes
-          
+         
          (!= ?/type "pseudo")
          (!= ?/type "unknown")
          (!= ?/type "other"))
