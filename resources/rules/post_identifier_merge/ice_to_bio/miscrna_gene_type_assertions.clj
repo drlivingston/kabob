@@ -3,8 +3,8 @@
 ;; -----------------------------------------------
 `{:name "miscrna-gene-type-assertion"
   :description "This rule asserts miscRNA gene type"
-  ;; miscRNA maps to SO: (so:)
-  :head ((?/egKabobDna rdfs/subClassOf obo/SO_XXXXXX))
+  :head ((?/gene rdfs/subClassOf obo/SO_XXXXXX))   ; miscRNA maps to SO: (so:)
+  
   :body ((?/record rdf/type ccp/IAO_EXT_0000681) ; ccp:NCBI_gene_info_record
          (?/record obo/BFO_0000051 ?/dna_field_value) ; BFO:has_part
          (?/gene_field_value rdf/type ccp/IAO_EXT_0000876) ; ccp:NCBI_gene_info_record__gene_identifier_field_value
