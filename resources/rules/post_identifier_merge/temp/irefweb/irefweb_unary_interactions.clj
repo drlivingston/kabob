@@ -44,6 +44,7 @@
          (?/edge_type_ice_id obo/IAO_0000219 ?/unique_interaction_id) ; IAO:denotes
    
          ;; get the interaction type name and ID
+         (?/interaction_record obo/BFO_0000051 ?/interaction_type_record) ; BFO:has_part
          (?/interaction_type_record rdf/type ccp/IAO_EXT_0000716) ; ccp:IRefWeb_interaction_type_record
          (?/interaction_type_record obo/BFO_0000051 ?/int_type_id_field) ; BFO:has_part
          (?/int_type_id_field rdf/type ccp/IAO_EXT_0000753) ; ccp:IRefWeb_interaction_type_record__interaction_type_identifier_field_value
@@ -84,7 +85,7 @@
          (!= ?/id1 ?/unique_interaction_id)
          
          ;; get the protein label
-         (?/protein1 rdfs:label ?/protein1_label))
+         (?/protein1 rdfs/label ?/protein1_label))
   
   :reify ([?/interaction {:ln (:sha-1 ?/unique_interaction_id)
                           :ns "ccp" :prefix "I_"}]
