@@ -47,6 +47,18 @@ def SpecialChar(trip_list):
     return mod_trip
 
 
+def RuleSplitter(rule, start, stop):
+    '''
+    function takes a string as well as two sub-strings and returns the string between the sub-strings
+    :param rule: string representing a rule
+    :param start: sub-string that is present in rule
+    :param stop: sub-string that is present in rule
+    :return: sub-string from rule that was between the start and stop sub-strings
+    '''
+    result = re.search(str(start) + '(.*)' + str(stop), rule)
+    return result.group(1)
+
+
 def TripleMaker(rule):
     '''
     function takes a list of of text, composed of parts of triples, from a Clojure rule and performs some string
@@ -86,12 +98,19 @@ def TripleMaker_SS(rule):
     '''
     if 'select' in rule: # accounts for sparql-string formatting
         mod_triples = []
+
+        if 'optional' in rule:
+            rule = rule.split('optional')[0]
+
         if 'bind' in rule.lower():
             triple = [y for y in
                       filter(None, [x.strip('"') for x in rule.lower().split('bind')[:-1][0].split(',') if 'select' not in x.lower()])
                       if '?' in y]
+            triple = [x.split("#")[0].strip(' .') for x in triple if not 'filter' in x and "'" not in x and '&&' not in x]
         else:
             triple = [y for y in filter(None, [x.strip('"') for x in rule.split(',') if 'select' not in x.lower()]) if '?' in y]
+            triple = [x.split("#")[0].strip(' .') for x in triple if not 'filter' in x and "'" not in x and '&&' not in x]
+
         for i in triple:
             if 'minus' in i:
                 trip = i.split('{')[-1].rstrip().strip('}').split(' ')
@@ -107,7 +126,7 @@ def TripleMaker_SS(rule):
 
         return mod_triples
 
-    if '(' in rule: 
+    if '(' in rule:
         r_set = []
         for i in rule.split(')'):
             if '/' in i and '@' not in i:
@@ -130,18 +149,6 @@ def TripleMaker_SS(rule):
         return mod_triples2
 
 
-def RuleSplitter(rule, start, stop):
-    '''
-    function takes a string as well as two sub-strings and returns the string between the sub-strings
-    :param rule: string representing a rule
-    :param start: sub-string that is present in rule
-    :param stop: sub-string that is present in rule
-    :return: sub-string from rule that was between the start and stop sub-strings
-    '''
-    result = re.search(str(start) + '(.*)' + str(stop), rule)
-    return result.group(1)
-
-
 def RulesDict(rule_set):
     '''
     function takes a list of rule lists as inputs, processes the rules in an effort to isolate the specific parts that
@@ -158,10 +165,12 @@ def RulesDict(rule_set):
     for rule in rule_set:
         if [x for x in rule.split(':') if x.startswith('name')]:
             key = [i for i in [x.strip('name').replace('"', '').strip() for x in rule.split(':') if x.startswith('name')] if x][0].strip(',')
+
             rules_dict[key] = {}
-            rules_dict[key]['head'] = []; rules_dict[key]['body'] = []
+            rules_dict[key]['head'] = []; rules_dict[key]['body'] = []; rules_dict[key]['description'] = []
             rules_dict[key]['head'] += TripleMaker([x.strip('head') for x in rule.split(':') if x.startswith('head')])
             rules_dict[key]['body'] += TripleMaker([x.strip('body') for x in rule.split(':') if x.startswith('body')])
+            rules_dict[key]['description'] = [x.split('"')[1] for x in rule.split(':') if x.startswith('description')][0]
 
     return rules_dict
 
@@ -181,10 +190,12 @@ def RulesDict_SS(rule_set):
     for rule in rule_set:
         if 'name' in rule:
             key = re.sub('[", ]', '', RuleSplitter(rule, ':name', ':')).split(':')[0]
+
             rules_dict[key] = {}
-            rules_dict[key]['head'] = []; rules_dict[key]['sparql-string'] = []
+            rules_dict[key]['head'] = []; rules_dict[key]['sparql-string'] = []; rules_dict[key]['description'] = []
             rules_dict[key]['head'] += TripleMaker_SS(RuleSplitter(rule, ':head', ':sparql-string').split(':reify')[0].strip())
             rules_dict[key]['sparql-string'] += [x for x in TripleMaker_SS(RuleSplitter(rule, ':sparql-string', '"')) if ':reify' not in x]
+            rules_dict[key]['description'] = [x.split('"')[1] for x in rule.split(':') if x.startswith('description')][0]
 
     return rules_dict
 
@@ -225,18 +236,21 @@ def GraphMaker(triple_dict):
             for trip in value['body']: #body of rule - set node and edge attributes
                 if str(trip[0]).startswith('?') or str(trip[0]).startswith('['):
                     graph.add_node(str(trip[0]),shape='box', label=str(trip[0]), style='filled', color='gray65')
-                else:
+                if not str(trip[0]).startswith('=') and not (str(trip[0]).startswith('?') or str(trip[0]).startswith('[')):
                     graph.add_node(str(trip[0]), label=str(trip[0]), shape='ellipse', color='gray30')
                 if str(trip[2]).startswith('?') or str(trip[2]).startswith('['):
                     graph.add_node(str(trip[2]),  shape='box', label=str(trip[2]), style='filled', color='gray65')
                 else:
                     graph.add_node(str(trip[2]), label=str(trip[2]), shape='ellipse', color='gray30')
 
+
                 # set edges and edge attributes
                 if 'subClass' in str(trip[1]): #gives subClassOf relations a different a different arrowhead type
                     graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='gray65', arrowhead='onormal', arrowsize=1.5)
                 elif '!=' in str(trip[1]):
-                    graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='red', arrowhead='tee', arrowsize=1.0)
+                    graph.add_edge(str(trip[0]), str(trip[2]), label='!equal', color='red', arrowhead='tee', arrowsize=1.0)
+                elif '=' in str(trip[0]):
+                    graph.add_edge(str(trip[1]), str(trip[2]), label='equal', color='gray65', arrowhead='tee', arrowsize=1.0)
                 else:
                     graph.add_edge(str(trip[0]), str(trip[2]), label=str(trip[1]), color='gray65', arrowhead='normal', arrowsize=1.0)
 
@@ -322,7 +336,7 @@ def GraphMaker(triple_dict):
         graph.add_node('?var{OPTION}', shape='box', style='filled', label='?var{OPTION}', color='green')
         graph.add_edge('?var{OPTION}', 'Constant', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
 
-        graph_dict[key] = graph
+        graph_dict[(key, value['description'])] = graph
 
     return graph_dict
 
@@ -339,10 +353,8 @@ def GraphViewer(graph_dict, output):
     '''
 
     for key, graph in graph_dict.items():
-        title = key.strip(',')
-
         A = nx.nx_agraph.to_agraph(graph)
-        A.graph_attr['label'] = str(title) + ' Rule'
+        A.graph_attr['label'] = str(key[0]) + ' rule'
         A.graph_attr['labelfontsize'] = 80.0
         A.graph_attr['fontname'] = 'Arial'
         A.node_attr['fontname'] = 'Arial'
@@ -350,7 +362,7 @@ def GraphViewer(graph_dict, output):
         A.edge_attr['fontsize'] = 9.0
         A.node_attr['fontsize'] = 9.0
 
-        A.draw(str(output) + '/' + str(title) + '_Rules_figure.png', prog='dot')
+        A.draw(str(output) + '/' + str(key[0]) + '_Rules_figure.png', prog='dot')
 
     return
 
@@ -362,16 +374,18 @@ def main():
     args = parser.parse_args()
 
     # iterate over all files in a directory
-    # root = "/Users/tiffanycallahan/Dropbox/GraduateSchool/PhD/LabWork/KaBOB/KaBOB_Dev/kabob/kabob-build/src/main/resources/edu/ucdenver/ccp/kabob/build/rules/bio_to_ice/step_a"
+    # root = "/Users/tiffanycallahan/Dropbox/GraduateSchool/PhD/LabWork/KaBOB/KaBOB_Dev/kabob/resources/rules"
     # files = os.listdir(root)
     for root, dirs, files in os.walk(args.input):
         for file in files:
-            if file.endswith(".clj"):
+            if 'deprecated' not in os.path.join(root, file) and file.endswith(".clj"):
                 rule_file = (os.path.join(root, file))
                 rules = []
+
                 for line in open(rule_file).readlines():
                     line = re.sub(r'\s*;.*', '', line)
                     rules.append(line.strip())
+
                 if any([x for x in rules if ':sparql-string' in x]): # sparql-string
                     rules_mod = [x for x in [x.strip() for x in re.split('`', ','.join(rules))] if x] #split data into list of rules
                     rules_mod = filter(None, [rule for rule in rules_mod if '@' not in rule]) #not making figures for rules with macros - REMOVE THIS ONCE RULES UPDATED1
