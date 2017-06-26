@@ -22,7 +22,7 @@ RULETYPE=${7:?}
 OUTPUTDIR=${KB_DATA_DIR}/${RULETYPE}/
 RULES_RES_DIR=resources/${RULETYPE}/
 
-IS_VIRTUOSO=true
+IS_VIRTUOSO=false
 
 echo Running rules
 mkdir -p ${OUTPUTDIR}
