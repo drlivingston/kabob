@@ -21,25 +21,25 @@ echo "DATASOURCE_OWL_DIR=${DATASOURCE_OWL_DIR}"
 echo "DATASOURCE_ICE_DIR=${DATASOURCE_ICE_DIR}"
 echo "KB_DATA_DIR=${KB_DATA_DIR}"
 
-### Clean out the directory in which we're going to place our artifacts.
-rm -rvf ${KB_DATA_DIR}
-mkdir -p ${KB_DATA_DIR}
-
-### create a new Stardog database
-${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
-
-### generate lists of RDF files that will be loaded in subsequent steps
-${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
-
-## Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-  "ntriples"
+#### Clean out the directory in which we're going to place our artifacts.
+#rm -rvf ${KB_DATA_DIR}
+#mkdir -p ${KB_DATA_DIR}
+#
+#### create a new Stardog database
+#${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
+#
+#### generate lists of RDF files that will be loaded in subsequent steps
+#${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
+#
+### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+#  "ntriples"
 
 ## create ICE records for all ontology concepts
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
 #${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
 #${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
 
