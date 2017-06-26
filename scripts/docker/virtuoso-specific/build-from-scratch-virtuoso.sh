@@ -28,21 +28,21 @@ mkdir -p ${KB_DATA_DIR}
 ### generate lists of RDF files that will be loaded in subsequent steps
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
-#### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-#### TODO: only the list file name is used in the arguments below. Refactor to remove other arguments.
-#${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-#  "ntriples"
+### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
+### TODO: only the list file name is used in the arguments below. Refactor to remove other arguments.
+${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+  "ntriples"
 
 ${SCRIPT_DIR}/virtuoso-specific/delete-duplicate-triples-virtuoso.sh
 
-## create ICE records for all ontology concepts
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
-#
+# create ICE records for all ontology concepts
+${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
+${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
+${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
+
 #### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
 #${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
 #  ${KB_PORT} \
