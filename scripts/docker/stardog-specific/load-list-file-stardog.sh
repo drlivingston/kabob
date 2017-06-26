@@ -17,8 +17,7 @@ KB_NAME=${2:?}
 LIST_FILE=${3:?}
 FORMAT=${4:-"ntriples"}
 
-#TMP_LIST_FILE="${LIST_FILE}.port_${KB_PORT}.repo_${KB_NAME}.format_${FORMAT}.load"
-TMP_LIST_FILE="${LIST_FILE}.load"
+TMP_LIST_FILE="${LIST_FILE}.port_${KB_PORT}.repo_${KB_NAME}.format_${FORMAT}.load"
 
 mv ${LIST_FILE} ${TMP_LIST_FILE}
 LIST_FILE=${TMP_LIST_FILE}
