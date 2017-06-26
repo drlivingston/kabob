@@ -1,18 +1,21 @@
-
+;; -----------------------------------------
+;; --------- IRefWeb Protein Mapping -------
+;; -----------------------------------------
 `{:name "irefweb-protein-exact-match"
- :head ((?/irefice skos/exactMatch ?/otherice))
+  :description "This rule asserts an exact match relation between irefweb proteins and other proteins"
+  :head ((?/irefice skos/exactMatch ?/otherice))
 
- :body ((_/idfv kiao/hasTemplate iaoirefweb/IRefWebInteractor_irogidDataField1)
-        (_/idfv obo/IAO_0000219 ?/irefice) ; denotes
-        (?/irefice kiao/denotesSubClassOf obo/CHEBI_36080) ;protein)
+  :body ((?/idfv kiao/hasTemplate iaoirefweb/IRefWebInteractor_irogidDataField1)
+         (?/idfv obo/IAO_0000219 ?/irefice) ; IAO:denotes
+         (?/irefice kiao/denotesSubClassOf obo/CHEBI_36080) ; CHEBI:protein)
 
-        (_/interactorrec obo/BFO_0000051 _/idfv) ; has_part
-        (_/interactorrec obo/BFO_0000051 _/otheridfv) ; has_part
+         (?/interactorrec obo/BFO_0000051 ?/idfv) ; BFO:has_part
+         (?/interactorrec obo/BFO_0000051 ?/otheridfv) ; BFO:has_part
 
-        (_/otheridfv kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
-        (_/otheridfv obo/IAO_0000219 ?/otherice) ; denotes
-        ;;this should be redundant but just to be sure
-        (?/otherice kiao/denotesSubClassOf obo/CHEBI_36080)) ;protein
+         (?/otheridfv kiao/hasTemplate iaoirefweb/IRefWebInteractor_uniqueIdDataField1)
+         (?/otheridfv obo/IAO_0000219 ?/otherice) ; IAO:denotes
+         ;;this should be redundant but just to be sure
+         (?/otherice kiao/denotesSubClassOf obo/CHEBI_36080)) ; CHEBI:protein
 
   :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
 }

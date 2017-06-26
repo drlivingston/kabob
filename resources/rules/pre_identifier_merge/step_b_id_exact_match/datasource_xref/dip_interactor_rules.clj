@@ -1,15 +1,10 @@
-
-;; DIP ID ICE skos:exactMatch other protein ICE
+;; ----------------------------------
+;; --------- DIP Interactor ---------
+;; ----------------------------------
 `{:name "dip-id-exact-mapping-assertions"
+  :description "This rule asserts an exact match between dip and other protein ids"
   :head ((?/dipInteractorIce skos/exactMatch ?/proteinIce))
-  :body
-  (;;(_/record kiao/hasTemplate iaodip/dipDipInteractorSchema1)
-   ~@(kabob/rtv _/record
-                iaodip/DipInteractor_interactorIDDataField1 ?/dipInteractorIce
-                iaodip/DipInteractor_dbXReferenceIDsDataField1 ?/proteinIce)
-   (?/proteinIce kiao/denotesSubClassOf obo/CHEBI_36080))} ;protein
-
-
-
-
-       
+  :body ((?/record iaodip/DipInteractor_interactorIDDataField1 ?/dipInteractorIce)
+         (?/record iaodip/DipInteractor_dbXReferenceIDsDataField1 ?/proteinIce)
+         (?/proteinIce kiao/denotesSubClassOf obo/CHEBI_36080)) ; CHEBI:protein
+  } 

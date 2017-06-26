@@ -1,18 +1,13 @@
-;; The UniProt idmapping_selected.tab file contains a variety of identifier mappings. Here we link
-;; mappings among protein identifiers using the skos:exactMatch predicate
-
-
-;; uniport to refseq
+;; ---------------------------------------------
+;; --------- RefSeq to Uniprot Mapping ---------
+;; ---------------------------------------------
 `{:name "refseq-uniprot-exact-mapping-assertion"
- :head ((?/uniprot skos/exactMatch ?/refseq))
-  :body
-  (~@(kabob/rtv _/record
-      iaoeg/EntrezGeneRefSeqUniprotKbCollabFileData_uniprotIdDataField1
-                                                              ?/uniprot
-      iaoeg/EntrezGeneRefSeqUniprotKbCollabFileData_refSeqProteinIdDataField1
-                                                              ?/refseq)
-   (?/refseq kiao/denotesSubClassOf obo/CHEBI_36080))} ;protein
-             ;;rdf/type kiao/ProteinIdentifier))} ; is this triple redundant?
+  :description "This rule links mappings among protein identifiers using the skos:exactMatch predicat"
+  :head ((?/uniprot skos/exactMatch ?/refseq))
+  :body ((?/record iaoeg/EntrezGeneRefSeqUniprotKbCollabFileData_uniprotIdDataField1 ?/uniprot)
+         (?/record iaoeg/EntrezGeneRefSeqUniprotKbCollabFileData_refSeqProteinIdDataField1 ?/refseq)
+         (?/refseq kiao/denotesSubClassOf obo/CHEBI_36080)) ; CHEBI:protein
+  }
 
 
 

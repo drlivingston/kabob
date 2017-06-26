@@ -1,10 +1,10 @@
-;; EG gene id to other gene id mappings
+;; --------------------------------
+;; --------- EG Gene Info ---------
+;; --------------------------------
 `{:name "eg-gene-exact-mapping-assertion"
- :head ((?/geneid skos/exactMatch ?/otherice))
-  :body
-  (~@(kabob/rtv _/record
-      iaoeg/EntrezGeneInfoFileData_geneIDDataField1 ?/geneid
-      iaoeg/EntrezGeneInfoFileData_dbXrefsDataField1 ?/otherice)
-   (?/otherice kiao/denotesSubClassOf obo/SO_0000352))} ;dna
-    ;;rdf/type kiao/DNAIdentifier))}
-
+  :description "This rule asserts an exact match between eg genes and other gene ids"
+  :head ((?/geneid skos/exactMatch ?/otherice))
+  :body ((?/record iaoeg/EntrezGeneInfoFileData_geneIDDataField1 ?/geneid)
+         (?/record iaoeg/EntrezGeneInfoFileData_dbXrefsDataField1 ?/otherice)
+         (?/otherice kiao/denotesSubClassOf obo/SO_0000352)) ; SO:dna
+  }
