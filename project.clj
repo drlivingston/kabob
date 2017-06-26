@@ -9,6 +9,7 @@
   				       [edu.ucdenver.ccp/kr "1.5.0-SNAPSHOT"]
 								 [org.openrdf.sesame/sesame-util "4.1.2"]
 								 [org.openrdf.sesame/sesame-query "4.1.2"]
+								 [org.apache.httpcomponents/httpclient "4.5.3"]
   				       [org.clojure/core.memoize "0.5.6"]
   				       [aysylu/loom "0.5.0"]
   				       [org.clojure/data.csv "0.1.2"]
