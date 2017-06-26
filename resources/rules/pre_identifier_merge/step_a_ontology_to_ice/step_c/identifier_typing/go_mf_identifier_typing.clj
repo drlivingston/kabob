@@ -1,14 +1,14 @@
 ;; -----------------------------------------------
 ;; --------- go-mf identifier typing ---------
 ;; -----------------------------------------------
-;; specifically types the ontology identifiers
 `{:name "go-mf-identifier-typing"
-  :head ((?/id rdf/type ccp/IAO_EXT_0000199)) ; go-molecular function ontology identifier
+  :description "This rule specifically the GO molecular function identifier"
+  :head ((?/id rdf/type ccp/IAO_EXT_0000199)) ; CCP:go_molecular_function_ontology_identifier
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?id {
-                  ?id rdf:type ccp:IAO_EXT_0000088 .
-                  ?id obo:IAO_0000219 ?c .
+                  ?id rdf:type ccp:IAO_EXT_0000088 . # CCP:ontology_concept_identifier
+                  ?id obo:IAO_0000219 ?c . # IAO:denotes
                   ?c oboInOwl:hasOBONamespace 'molecular_function'}" 
   }
