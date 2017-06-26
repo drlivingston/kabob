@@ -40,7 +40,7 @@ echo "KB_DATA_DIR=${KB_DATA_DIR}"
 
 ## create ICE records for all ontology concepts
 #${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
-${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
 ${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
 
 ### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
