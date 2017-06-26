@@ -22,7 +22,8 @@ RULETYPE=${7:?}
 OUTPUTDIR=${KB_DATA_DIR}/${RULETYPE}/
 RULES_RES_DIR=resources/${RULETYPE}/
 
-IS_VIRTUOSO=false
+# this flag is being used to indicate a stardog usage in this branch
+IS_VIRTUOSO=true
 
 echo Running rules
 mkdir -p ${OUTPUTDIR}
