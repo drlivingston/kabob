@@ -14,8 +14,8 @@ fi
 
 KB_NAME=${1:?}
 
-REQUEST_FILE="db_create_request.repo_${KB_NAME}.create"
-
+REQUEST_FILE="/tmp/dbCreateRequest.repo_${KB_NAME}.create"
+touch $REQUEST_FILE
 echo "New Stardog DB Creation Request: ${REQUEST_FILE}"
 
 # delete the file if it is already in the load-request directory
