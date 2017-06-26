@@ -27,7 +27,7 @@
           repository-name (:repo-name args)
           user (:username args)
           password (:password args)
-          kb (kb (StardogRepository. (.credentials user password (.server server-url (ConnectionConfiguration/to repository-name)))))]
+          kb (kb (StardogRepository. (.credentials (.server (ConnectionConfiguration/to repository-name) server-url) user password)))]
       ;kb (kb (VirtuosoRepository. "jdbc:virtuoso://virtuoso-prod:1111","dba","dba"))]
       (initialize-kb kb)))
 
