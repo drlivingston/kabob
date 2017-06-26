@@ -47,8 +47,10 @@
         
         ;; select the other interactor
         (?/super_record obo/BFO_0000051 ?/interactor_record1) ; BFO:has_part
+        (?/super_record obo/BFO_0000051 ?/interactor_record2) ; BFO:has_part
 
         ;; get the bioentity (protein) corresponding to interactor 1
+        (?/interaction_record obo/BFO_0000051 ?/interaction_record1) ; BFO:has_part
         (?/interaction_record1 rdf/type ccp/IAO_EXT_0000065) ; ccp:IRefWeb_interactor_record
         (?/interaction_record1 obo/BFO_0000051 ?/id_field1) ; BFO:has_part
         (?/id_field1 rdf/type ccp/IAO_EXT_0000755) ; ccp:IRefWeb_interactor_record__unique_identifier_field_value
@@ -56,6 +58,7 @@
         (?/id1 obo/IAO_0000219 ?/protein1) ; IAO:denotes
 
         ;; get the bioentity (protein) corresponding to interactor 2
+        (?/interaction_record obo/BFO_0000051 ?/interaction_record2) ; BFO:has_part
         (?/interaction_record2 rdf/type ccp/IAO_EXT_0000065) ; ccp:IRefWeb_interactor_record
         (?/interaction_record2 obo/BFO_0000051 ?/id_field2) ; BFO:has_part
         (?/id_field2 rdf/type ccp/IAO_EXT_0000755) ; ccp:IRefWeb_interactor_record__unique_identifier_field_value
@@ -69,6 +72,7 @@
         (?/edge_type_ice_id obo/IAO_0000219 ?/unique_interaction_id) ; IAO:denotes
    
         ;; get the interaction type name and ID
+        (?/interaction_record obo/BFO_0000051 ?/interaction_type_record) ; BFO:has_part
         (?/interaction_type_record rdf/type ccp/IAO_EXT_0000716) ; ccp:IRefWeb_interaction_type_record
         (?/interaction_type_record obo/BFO_0000051 ?/int_type_id_field) ; BFO:has_part
         (?/int_type_id_field rdf/type ccp/IAO_EXT_0000753) ; ccp:IRefWeb_interaction_type_record__interaction_type_identifier_field_value
