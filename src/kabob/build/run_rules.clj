@@ -83,8 +83,10 @@
 
 ;;TODO change this to default to gzip files
 (defn rule-output-kb [base-dir rule]
-  (let [output-file (str base-dir (:name rule) ".nt.gz")]
-    (zipped-output-kb output-file)))
+  (let [output-file (str base-dir (:name rule) ".nt")]
+    (output-kb output-file)))
+  ;(let [output-file (str base-dir (:name rule) ".nt.gz")]
+  ;  (zipped-output-kb output-file)))
 
 ;;; --------------------------------------------------------
 ;;; rules
