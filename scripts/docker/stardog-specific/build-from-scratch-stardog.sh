@@ -29,24 +29,24 @@ mkdir -p ${KB_DATA_DIR}
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
 ## Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-${SCRIPT_DIR}/stardog-specific/load-list-file-ag.sh \
+${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
   ${KB_PORT} \
   ${KB_NAME} \
   ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
   "ntriples"
 
 ## create ICE records for all ontology concepts
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
 
 ### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
-#${SCRIPT_DIR}/stardog-specific/load-list-file-ag.sh \
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
 #  ${KB_PORT} \
 #  ${KB_NAME} \
 #  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
 #
-#${SCRIPT_DIR}/stardog-specific/load-list-file-ag.sh \
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
 #  ${KB_PORT} \
 #  ${KB_NAME} \
 #  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
@@ -58,24 +58,24 @@ ${SCRIPT_DIR}/stardog-specific/load-list-file-ag.sh \
 ##  ${KB_NAME}
 #
 #### create skos:exactMatch links between equivalent identifiers
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
 #
 #### Create the ID sets
 #export LEIN_ROOT=true
 #IS_VIRTUOSO=false
 #cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${IS_VIRTUOSO} ; cd - ; }
-#${SCRIPT_DIR}/stardog-specific/LOAD-AG.sh id_sets/exact
+#${SCRIPT_DIR}/stardog-specific/LOAD-STARDOG.sh id_sets/exact
 #
 ##  create bioentity for each id set
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_a_entity_generation/reify
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_a_entity_generation/reify
 #
 ## connect bioentities based on ontology hierarchies
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c
 #
 
 
