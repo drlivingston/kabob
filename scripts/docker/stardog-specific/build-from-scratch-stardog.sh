@@ -25,6 +25,9 @@ echo "KB_DATA_DIR=${KB_DATA_DIR}"
 rm -rvf ${KB_DATA_DIR}
 mkdir -p ${KB_DATA_DIR}
 
+### create a new Stardog database
+${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
+
 ### generate lists of RDF files that will be loaded in subsequent steps
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
