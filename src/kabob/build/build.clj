@@ -8,8 +8,8 @@
   ;;what of the following is actaully needed?
   (:import java.io.FileOutputStream
           java.nio.charset.Charset
-           [org.eclipse.rdf4j.rio Rio RDFFormat RDFWriter RDFWriterFactory]
-           org.eclipse.rdf4j.rio.ntriples.NTriplesWriterFactory))
+           [org.openrdf.rio Rio RDFFormat RDFWriter RDFWriterFactory]
+           org.openrdf.rio.ntriples.NTriplesWriterFactory))
 
 
 (def ^:dynamic *output-dir* (str "/temp/"))

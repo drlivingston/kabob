@@ -7,6 +7,8 @@
   				       [org.clojure/core.cache "0.6.4"]
   			      	 [cheshire/cheshire "5.2.0"]
   				       [edu.ucdenver.ccp/kr "1.5.0-SNAPSHOT"]
+								 [org.openrdf.sesame/sesame-util "4.1.2"]
+								 [org.openrdf.sesame/sesame-query "4.1.2"]
   				       [org.clojure/core.memoize "0.5.6"]
   				       [aysylu/loom "0.5.0"]
   				       [org.clojure/data.csv "0.1.2"]
@@ -14,9 +16,11 @@
   				       [org.slf4j/slf4j-log4j12 "1.7.2"]
   				       [potemkin/potemkin "0.1.2"]
   				       [commons-codec/commons-codec "1.6"]
+								 [com.complexible.stardog.sesame/stardog-sesame-core "5.0"]
 								 [virtuoso/virtuoso-jdbc "4.2"]
 								 [virtuoso/virtuoso-rdf4j "2.x"]]
-	:repositories {"local" "file:mvn-local-repository"}
+	:repositories {"local" "file:mvn-local-repository"
+								 "stardog-public" "http://maven.stardog.com"}
   ;:main ^:skip-aot my-stuff.core
   :main nil
   :target-path "target/%s"

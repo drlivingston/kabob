@@ -1,8 +1,8 @@
 (ns kabob.build.forward-rule-test
   (use clojure.test
-        kr.rdf4j.kb
-        kr.rdf4j.sparql
-        kr.rdf4j.rdf
+        kr.sesame.kb
+        kr.sesame.sparql
+        kr.sesame.rdf
         )
   (:require  [kabob.build.run-rules :refer [query-variables run-forward-rule]]
              [kr.core.forward-rule :refer [add-reify-fns]]
@@ -37,7 +37,7 @@
 
 (defn test-kb [triples]
   "initializes an empty kb"
-  (let [kb (register-namespaces (synch-ns-mappings (open (kb :rdf4j-mem)))
+  (let [kb (register-namespaces (synch-ns-mappings (open (kb :sesame-mem)))
                                 *namespaces*)]
     (dorun (map (partial add! kb) triples))
     kb))

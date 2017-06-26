@@ -6,7 +6,7 @@
        kr.core.forward-rule
        
        kabob.core.namespace
-       kr.rdf4j.kb
+       kr.sesame.kb
 
        kr.core.kb
        kr.core.rdf
@@ -82,7 +82,7 @@
 ;;; --------------------------------------------------------
 
 (defn test-kb [triples]
-  (let [kb (register-namespaces (synch-ns-mappings (open (kb :rdf4j-mem)))
+  (let [kb (register-namespaces (synch-ns-mappings (open (kb :sesame-mem)))
                                 *namespaces*)]
     (dorun (map (partial add! kb) triples))
     kb))
