@@ -1,7 +1,7 @@
 ;; -------------------------------------------------------
 ;; --------- refseq mRNA identifier typing ---------------
 ;; -------------------------------------------------------
-`{:name          "refseq-genomic-identifier-typing"
+`{:name          "refseq-mrna-identifier-typing"
   :description   "This rule specifically the basic formal ontology identifier"
   :head          ((?/refseq_identifier rdf/type ccp/IAO_EXT_0001642)) ; CCP:refseq_mrna_identifier
   :reify ()

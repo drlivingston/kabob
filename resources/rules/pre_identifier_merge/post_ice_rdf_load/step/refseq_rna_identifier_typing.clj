@@ -1,7 +1,7 @@
 ;; ----------------------------------------------------------
 ;; --------- refseq genomic identifier typing ---------------
 ;; ----------------------------------------------------------
-`{:name          "refseq-genomic-identifier-typing"
+`{:name          "refseq-rna-identifier-typing"
   :description   "This rule specifically the basic formal ontology identifier"
   :head          ((?/refseq_identifier rdf/type ccp/IAO_EXT_0001641)) ; CCP:refseq_rna_identifier
   :reify ()
