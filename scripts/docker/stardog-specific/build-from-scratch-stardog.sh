@@ -29,7 +29,7 @@ echo "KB_DATA_DIR=${KB_DATA_DIR}"
 #${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
 #
 #### generate lists of RDF files that will be loaded in subsequent steps
-#${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
+${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 #
 ### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
 #${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
