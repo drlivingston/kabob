@@ -4,6 +4,7 @@ refseq_genomic_identifier_typing.clj;; -----------------------------------------
 `{:name          "refseq-genomic-identifier-typing"
   :description   "This rule specifically the basic formal ontology identifier"
   :head          ((?/refseq_identifier rdf/type ccp/IAO_EXT_0001638)) ; CCP:refseq_protein_identifier
+  :reify ()
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
