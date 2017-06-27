@@ -3,8 +3,8 @@
 ;; -------------------------------------------
 `{:name "root-concept-identifier-gen"
   :description "This rule creates an identifier for each root ontology class and types it as a root concept identifier (IAO_EXT_0000190)"
-  :head ((?/id rdf/type ccp/IAO_EXT_0000190) ;; ccp:ontology root concept identifer
-          (?/id obo/IAO_0000219 ?/root)) ;; obo:denotes
+  :head ((?/id rdf/type ccp/IAO_EXT_0000190) ; CCP:ontology_root_concept_identifer
+         (?/id obo/IAO_0000219 ?/root)) ; IAO:denotes
   :reify ([?/id {:ln (:localname ?/root)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>

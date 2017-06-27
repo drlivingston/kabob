@@ -1,4 +1,7 @@
 
+
+;; 06/25/17 -- when updating this rule need to ensure formatting changes are added (1 file per rule; heading; :description; and labeing classes and properties)
+
 ;; Connects KABOB_DNA entities with Entrez Gene IDs to KABOB_DNA with
 ;; genomic RefSeq identifiers via the ro:proper_part_of predicate.
 ;; The KABOB_DNA entities with EG identifiers are subclassed under
@@ -51,10 +54,10 @@
 ;;        (_/f4 obo/IAO_0000219 ?/endPosition))}
 
 
-;; Adds kro:has_direct_template links between KABOB_RNA/mRNA and KABOB_DNA 
+;; Adds obo/pr#has_gene_template links between KABOB_RNA/mRNA and KABOB_DNA 
 ;; entities based on the gene2refseq data
-;;`{:name "i2b1-kabobRna-has_direct_template-kabobDna-basedon-gene2refseq-assertions"
-;;  :head ((?/refseqKabobRna kro/has_direct_template ?/egKabobDna))
+;;`{:name "i2b1-kabobRna-has_dgene_template-kabobDna-basedon-gene2refseq-assertions"
+;;  :head ((?/refseqKabobRna obo/pr#has_gene_template ?/egKabobDna)) ; PR:has_gene_template
 ;;  :body ((_/record kiao/hasTemplate iaoeg/egEntrezGene2RefseqFileDataSchema1)
 ;;          ~@(kabob/rtv _/record
 ;;              iaoeg/eggeneIDDataField1 _/egIce
@@ -62,10 +65,10 @@
 ;;          (_/refseqRnaIce obo/denotes ?/refseqKabobRna)
 ;;          (_/egIce obo/denotes ?/egKabobDna))}
    
-;; Adds kro:has_direct_template links between KABOB_PROTEIN and KABOB_mRNA 
+;; Adds obo/pr#has_gene_template links between KABOB_PROTEIN and KABOB_mRNA 
 ;; entites based on the gene2refseq data
-;;`{:name "i2b2-kabobProtein-has_direct_template-kabobMrna-basedon-gene2refseq-assertions"
-;; :head ((?/refseqKabobProtein kro/has_direct_template ?/refseqKabobRna))
+;;`{:name "i2b2-kabobProtein-has_gene_template-kabobMrna-basedon-gene2refseq-assertions"
+;; :head ((?/refseqKabobProtein obo/pr#has_gene_template ?/refseqKabobRna)) ; PR:has_gene_template
 ;; :body ((_/record kiao/hasTemplate iaoeg/egEntrezGene2RefseqFileDataSchema1)
 ;;         ~@(kabob/rtv _/record
 ;;                      iaoeg/egRNA_nucleotide_accession_dot_versionDataField1 _/refseqRnaIce
@@ -73,10 +76,10 @@
 ;;         (_/refseqRnaIce obo/denotes ?/refseqKabobRna)
 ;;         (_/refseqProteinIce obo/denotes ?/refseqKabobProtein))}
         
-;; Adds kro:has_indirect_template links between KABOB_PROTEIN and KABOB_DNA if 
+;; Adds obo/pr#has_gene_template links between KABOB_PROTEIN and KABOB_DNA if 
 ;; there is a KABOB_mRNA entity that connects them based on the gene2refseq data
-;;`{:name "i2b3-kabobProtein-has_indirect_template-kabobDna-basedon-gene2refseq-assertions"
-;;  :head ((?/refseqKabobProtein kro/has_indirect_template ?/egKabobDna))
+;;`{:name "i2b3-kabobProtein-has_gene_template-kabobDna-basedon-gene2refseq-assertions"
+;;  :head ((?/refseqKabobProtein obo/pr#has_gene_template ?/egKabobDna)) ; PR:has_gene_template
 ;;  :body ((_/record kiao/hasTemplate iaoeg/egEntrezGene2RefseqFileDataSchema1)
 ;;          ~@(kabob/rtv _/record
 ;;                       iaoeg/eggeneIDDataField1 _/egIce
@@ -85,10 +88,10 @@
 ;;          (_/egIce obo/denotes ?/egKabobDna)
 ;;          (_/refseqProteinIce obo/denotes ?/refseqKabobProtein))}
 
-;; Adds kro:has_indirect_template links between KABOB_PROTEIN and KABOB_DNA 
+;; Adds obo/pr#has_gene_template links between KABOB_PROTEIN and KABOB_DNA 
 ;; based on the UniProt ID Mapping data. No check for an intervening mRNA is made.
-;;`{:name "i2b4-kabobProtein-has_indirect_template-kabobDna-basedon-uniprot-id-mapping-assertions"
-;;  :head ((?/kabobProtein kro/has_indirect_template ?/kabobDna))
+;;`{:name "i2b4-kabobProtein-has_gene_template-kabobDna-basedon-uniprot-id-mapping-assertions"
+;;  :head ((?/kabobProtein obo/pr#has_gene_template ?/kabobDna)) ; PR:has_gene_template
 ;;  :body ((_/record kiao/hasTemplate iaouniprot/uniprotUniProtIDMappingFileDataSchema1)
 ;;          ~@(kabob/rtv _/record
 ;;                       iaouniprot/uniprotuniProtAccessionIDDataField1 _/uniprotIce

@@ -9,7 +9,7 @@
           (?/id_field_value rdf/type ?/id)
           (?/id rdf/type ccp/IAO_EXT_0000352)
           (?/id obo/IAO_0000219 ?/obo_restriction)
-          (?/id obo/IAO_0000219 ?/bio_restriction) ;; obo:denotes
+          (?/id obo/IAO_0000219 ?/bio_restriction) ; IAO:denotes
           (?/bio_restriction rdf/type owl/Restriction))
   :reify ([?/bio_restriction {:ln (:restriction)
                      :ns "ccp" :prefix "RS_"}]

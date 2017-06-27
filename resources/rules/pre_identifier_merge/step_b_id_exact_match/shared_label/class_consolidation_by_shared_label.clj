@@ -1,8 +1,8 @@
 ;; ------------------------------------------------------------
 ;; ---------  relation consolidation via shared label ---------
 ;; ------------------------------------------------------------
-`{:name          "class-consolidation-by-shared_label"
-  :title         "creates exactMatch mappings between Class identifiers whose classes share the same exact label"
+`{:name "class-consolidation-by-shared_label"
+  :description "creates exactMatch mappings between Class identifiers whose classes share the same exact label"
   :head          ((?/id1 skos/exactMatch ?/id2))
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -20,7 +20,7 @@
                   #   NCBITaxon: matches appear to be spurious
                   #   UBERON: so as not to incorrectly collapse species-specific anatomy
                   #   PO: also so as not to incorrectly collapse plant anatomy with other things
-                  FILTER (?c1 != ?c2 && STR(IRI(?c1)) < STR(IRI(?c2))
+                  filter (?c1 != ?c2 && STR(IRI(?c1)) < STR(IRI(?c2))
                               && !contains(str(?c1), 'obo/PR_')
                               && !contains(str(?c2), 'obo/PR_')
                               && !contains(str(?c1), 'obo/UBERON_')
@@ -34,11 +34,10 @@
                               && ?label != 'probe'
                               && ?label != 'direct'
                               )
-                  ?id1 obo:IAO_0000219 ?c1 .
-                  ?id2 obo:IAO_0000219 ?c2 .
+                  ?id1 obo:IAO_0000219 ?c1 . # IAO:denotes
+                  ?id2 obo:IAO_0000219 ?c2 . # IAO:denotes
                   # exclude any links between different GGPV identifiers
                   # ideally the lines below would use rdf:type/rdfs:subClassOf*, but the * appears to be quite detrimental to execution time
-                  minus {?id1 rdf:type/rdfs:subClassOf/rdfs:subClassOf ccp:IAO_EXT_0000083}  # ccp:gene_or_gene_product_or_variant_identifier
-                  minus {?id2 rdf:type/rdfs:subClassOf/rdfs:subClassOf ccp:IAO_EXT_0000083}  # ccp:gene_or_gene_product_or_variant_identifier
-                  }"
+                  minus {?id1 rdf:type/rdfs:subClassOf/rdfs:subClassOf ccp:IAO_EXT_0000083}  # CCP:gene_or_gene_product_or_variant_identifier
+                  minus {?id2 rdf:type/rdfs:subClassOf/rdfs:subClassOf ccp:IAO_EXT_0000083}  # CCP:gene_or_gene_product_or_variant_identifier}"
   }

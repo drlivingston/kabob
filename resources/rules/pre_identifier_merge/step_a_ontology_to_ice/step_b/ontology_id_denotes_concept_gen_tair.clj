@@ -1,12 +1,11 @@
 ;; ------------------------------------------------------------------------
 ;; --------- Ontology Concept Identifier Denotes Ontology Concept ---------
 ;; ------------------------------------------------------------------------
-;; create id denotes concept triple for every ontology concept; this rule handles the TAIR URIs used by pr.owl
 `{:name "ontology-id-denotes-concept-gen-tair"
   :description "This rule generates an ontology concept identifier for every non-root ontology concept with the TAIR namespace."
-  :head ((?/id obo/IAO_0000219 ?/ontology_concept) ; denotes
-         (?/id rdf/type ccp/IAO_EXT_0000088) ; ontology concept identifier
-         (?/id rdf/type ccp/IAO_EXT_0000332)) ; ccp:TAIR gene identifier
+  :head ((?/id obo/IAO_0000219 ?/ontology_concept) ; IAO:denotes
+         (?/id rdf/type ccp/IAO_EXT_0000088) ; CCP:ontology_concept_identifier
+         (?/id rdf/type ccp/IAO_EXT_0000332)) ; CCP:TAIR_gene_identifier
   :reify ([?/id {:ln (:regex "TAIR:locus:" "TAIR_LOCUS_" ?/concept_id)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
@@ -18,9 +17,8 @@
                   # include only concepts with the TAIR namespace
                   filter (contains (str(?ontology_concept), 'http://www.arabidopsis.org/servlets/TairObject?type=locus'))
                   minus {?ontology_concept owl:deprecated true} .
-                  minus {?ontology_concept rdf:type ccp:IAO_EXT_0000190} . #ccp:ontology root concept identifier
+                  minus {?ontology_concept rdf:type ccp:IAO_EXT_0000190} . # CCP:ontology_root_concept_identifier
                   ?ontology_concept rdfs:subClassOf* ?root_class .
-                  ?root_id obo:IAO_0000219 ?root_class . #obo:denotes
-                  ?root_id rdf:type ccp:IAO_EXT_0000190 . #ccp:ontology root concept identifier
-  }"
+                  ?root_id obo:IAO_0000219 ?root_class . # IAO:denotes
+                  ?root_id rdf:type ccp:IAO_EXT_0000190 . #CCP:ontology_root_concept_identifier}"
   }
