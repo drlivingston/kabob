@@ -30,9 +30,7 @@ echo "ORIGINAL LOAD FILE: ${LIST_FILE}"
 echo "NON-GZ LOAD FILE: ${UPDATED_LIST_FILE}"
 while read f; do
    echo "checking for .gz: ${f}"
-   path=$(dirname ${f})
-   file=$(basename ${f})
-   if [[ '${f}' == *gz ]]
+   if [[ ${f} == *.gz ]]
    then
       out_file=${f%.gz}
       echo "decompressing to; ${out_file}"
