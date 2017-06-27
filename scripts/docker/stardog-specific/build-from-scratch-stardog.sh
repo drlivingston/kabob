@@ -44,26 +44,21 @@ ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 #${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
 
 ## Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
-${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
-
-${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
-  "rdfxml"
-
-#### Index optimization -- not currently implemented
-##${SCRIPT_DIR}/optimize.sh \
-##  ${KB_PORT} \
-##  ${KB_NAME}
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
 #
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
+#  "rdfxml"
+
 #### create skos:exactMatch links between equivalent identifiers
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
 #${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
 #
 #### Create the ID sets
