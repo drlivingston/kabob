@@ -26,19 +26,27 @@ if [[ -e ${UPDATED_LIST_FILE} ]]; then
     rm ${UPDATED_LIST_FILE}
 fi
 touch ${UPDATED_LIST_FILE}
+echo "ORIGINAL LOAD FILE: ${LIST_FILE}"
+echo "NON-GZ LOAD FILE: ${UPDATED_LIST_FILE}"
 while read f; do
+   echo "checking for .gz: ${f}"
    path=$(dirname ${f})
    file=$(basename ${f})
    if [[ '${f}' == *gz ]]
    then
       out_file=${f%.gz}
+      echo "decompressing to; ${out_file}"
       gunzip -v -c ${f} > ${out_file}
       echo ${out_file} >> ${UPDATED_LIST_FILE}
    else
+      echo "File is not a .gz file. Passing through untouched: ${f}"
       echo ${f} >> ${UPDATED_LIST_FILE}
    fi
 done < ${LIST_FILE}
 
+
+echo "CONTENTS OF UPDATED_LIST_FILE:"
+cat ${UPDATED_LIST_FILE}
 
 TMP_LIST_FILE="${UPDATED_LIST_FILE}.port_${KB_PORT}.repo_${KB_NAME}.format_${FORMAT}.load"
 
