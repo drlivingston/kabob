@@ -8,7 +8,7 @@
   :reify ([?/id {:ln (:localname ?/top_level_property)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
-                  rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                  prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                   prefix owl: <http://www.w3.org/2002/07/owl#>
   select ?top_level_property {
