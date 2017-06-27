@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-source ${SCRIPT_DIR}/virtuoso-specific/docker-env.sh
+source ${SCRIPT_DIR}/stardog-specific/docker-env.sh
 source ${SCRIPT_DIR}/common-scripts/ENV.sh
 
 if [ $# -lt 4 ] || [ $# -gt 5 ]
@@ -21,10 +21,10 @@ LIST_FILE=$(mktemp)
 ls -1 ${LOAD_DIR}/* > $LIST_FILE
 
 echo Loading directory: ${LOAD_DIR}
-${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
+${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
     ${KB_PORT} \
     ${KB_NAME} \
     ${LIST_FILE} \
     ${FORMAT}
 
-#${SCRIPT_DIR}/virtuoso-specific/delete-duplicate-triples-virtuoso.sh
+#${SCRIPT_DIR}/stardog-specific/delete-duplicate-triples-stardog.sh

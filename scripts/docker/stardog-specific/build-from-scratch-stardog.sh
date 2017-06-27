@@ -6,7 +6,7 @@ chmod -R 755 ${SCRIPT_DIR}
 
 # This script takes a single argument specifying the repository name to use/construct
 export KB_INSTANCE_NAME=$1
-export DOCKER_ENV=${SCRIPT_DIR}/allegrograph-specific/docker-env.sh
+export DOCKER_ENV=${SCRIPT_DIR}/stardog-specific/docker-env.sh
 
 source ${DOCKER_ENV}
 source ${SCRIPT_DIR}/common-scripts/ENV.sh
@@ -21,61 +21,59 @@ echo "DATASOURCE_OWL_DIR=${DATASOURCE_OWL_DIR}"
 echo "DATASOURCE_ICE_DIR=${DATASOURCE_ICE_DIR}"
 echo "KB_DATA_DIR=${KB_DATA_DIR}"
 
-### Clean out the directory in which we're going to place our artifacts.
-rm -rvf ${KB_DATA_DIR}
-mkdir -p ${KB_DATA_DIR}
-
-### generate lists of RDF files that will be loaded in subsequent steps
+#### Clean out the directory in which we're going to place our artifacts.
+#rm -rvf ${KB_DATA_DIR}
+#mkdir -p ${KB_DATA_DIR}
+#
+#### create a new Stardog database
+#${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
+#
+#### generate lists of RDF files that will be loaded in subsequent steps
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
-
-## Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-  ${KB_PORT} \
-  ${KB_NAME} \
-  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-  "ntriples"
+#
+### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+#  ${KB_PORT} \
+#  ${KB_NAME} \
+#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+#  "ntriples"
 
 ## create ICE records for all ontology concepts
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a_ontology_root_identifier_gen
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c_ontology_ice_record_gen
 
-### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
-#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+## Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
 #  ${KB_PORT} \
 #  ${KB_NAME} \
 #  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
 #
-#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
 #  ${KB_PORT} \
 #  ${KB_NAME} \
 #  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
 #  "rdfxml"
-#
-#### Index optimization -- not currently implemented
-##${SCRIPT_DIR}/optimize.sh \
-##  ${KB_PORT} \
-##  ${KB_NAME}
-#
+
 #### create skos:exactMatch links between equivalent identifiers
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/chebi
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/shared_label
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/datasource_xref
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/chebi
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/equivalent_class
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/shared_label
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/datasource_xref
 #
 #### Create the ID sets
 #export LEIN_ROOT=true
 #IS_VIRTUOSO=false
 #cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${IS_VIRTUOSO} ; cd - ; }
-#${SCRIPT_DIR}/allegrograph-specific/LOAD-AG.sh id_sets/exact
+#${SCRIPT_DIR}/stardog-specific/LOAD-STARDOG.sh id_sets/exact
 #
 ##  create bioentity for each id set
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_a_entity_generation/reify
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_a_entity_generation/reify
 #
 ## connect bioentities based on ontology hierarchies
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a_ontology_root_identifier_gen
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b_ontology_id_denotes_concept
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c_ontology_ice_record_gen
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a_ontology_root_identifier_gen
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b_ontology_id_denotes_concept
+#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c_ontology_ice_record_gen
 #
 
 

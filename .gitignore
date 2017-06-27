@@ -22,3 +22,5 @@ pom.xml
 
 mvn-local-repository/
 /bin/
+
+.classpath

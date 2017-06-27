@@ -4,22 +4,12 @@
        kr.core.kb
        kr.core.rdf
        kr.core.sparql
-       kr.core.rule
-       
-       ;;kabob.build.post-process
-       )
-
+       kr.core.rule)
   ;;what of the following is actaully needed?
-  (import (java.io FileOutputStream)
-                   ;BufferedWriter
-                   ;OutputStreamWriter)
+  (:import java.io.FileOutputStream
           java.nio.charset.Charset
-          (org.openrdf.rio Rio
-                           RDFFormat
-                           RDFWriter
-                           RDFWriterFactory)
-          org.openrdf.rio.ntriples.NTriplesWriterFactory)
-)
+           [org.openrdf.rio Rio RDFFormat RDFWriter RDFWriterFactory]
+           org.openrdf.rio.ntriples.NTriplesWriterFactory))
 
 
 (def ^:dynamic *output-dir* (str "/temp/"))
