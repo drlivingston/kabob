@@ -20,5 +20,6 @@
                   minus {?ontology_concept rdf:type ccp:IAO_EXT_0000190} . # CCP:ontology_root_concept_identifier
                   ?ontology_concept rdfs:subClassOf* ?root_class .
                   ?root_id obo:IAO_0000219 ?root_class . # IAO:denotes
-                  ?root_id rdf:type ccp:IAO_EXT_0000190 . # CCP:ontology_root_concept_identifier}"
+                  ?root_id rdf:type ccp:IAO_EXT_0000190 . # CCP:ontology_root_concept_identifier
+                  }"
   }

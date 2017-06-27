@@ -18,5 +18,6 @@
                   # exclude ICE world properties (IAO, CCP extension ontology, OA ontology)
                   filter (!contains (str(?object_property), 'ext/IAO_'))
                   filter (!contains (str(?object_property), 'obo/IAO_'))
-                  filter (!contains (str(?object_property), 'http://www.w3.org/ns/oa#'))}"
+                  filter (!contains (str(?object_property), 'http://www.w3.org/ns/oa#'))
+                  }"
   }

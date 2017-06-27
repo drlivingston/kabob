@@ -58,10 +58,10 @@ ${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifie
 ##  ${KB_NAME}
 #
 #### create skos:exactMatch links between equivalent identifiers
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/chebi
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/equivalent_class
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/shared_label
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/datasource_xref
 #
 #### Create the ID sets
 #export LEIN_ROOT=true
@@ -73,9 +73,9 @@ ${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifie
 #${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_a_entity_generation/reify
 #
 ## connect bioentities based on ontology hierarchies
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a_ontology_root_identifier_gen
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b_ontology_id_denotes_concept
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c_ontology_ice_record_gen
 #
 
 
