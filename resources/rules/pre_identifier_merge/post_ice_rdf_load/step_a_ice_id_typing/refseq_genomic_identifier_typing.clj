@@ -2,7 +2,7 @@
 ;; --------- refseq genomic identifier typing ---------------
 ;; ----------------------------------------------------------
 `{:name "refseq-genomic-identifier-typing"
-  :description "This rule specifically the basic formal ontology identifier"
+  :description "This rule types RefSeq identifiers that are genomic identifiers to the more specific ccp:IAO_EXT_0001640 (RefSeq genomic identifier) type "
   :head ((?/refseq_identifier rdf/type ccp/IAO_EXT_0001640)) ; CCP:refseq_genomic_identifier
   :reify ()
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
