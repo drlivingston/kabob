@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# find the path to KaBOB rules directory
+# find the path to KaBOB rules directory (run script from root 'kabob')
 path+="resources/rules"
 echo $path
 

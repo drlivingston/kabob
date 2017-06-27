@@ -1,9 +1,9 @@
-;; -------------------------------------------
-;; --------- chebi drugbank id mappings ---------
-;; -------------------------------------------
+;; ----------------------------------------------
+;; --------- CHEBI DrugBank id mappings ---------
+;; ----------------------------------------------
 ;; create chemical id to drugbank id to mappings
 `{:name "chebi-drugbank-idmappings"
-  :title "create chemical id to drugbank id to mappings"
+  :description "This rule creates chemical id to drugbank id to mappings"
   :head ((?/chebi_id skos/exactMatch ?/db_id))
   :reify ([?/db_id {:ln (:localname ?/drug_bank_id)
                   :ns "ccp" :prefix "DRUGBANK_" :suffix ""}])
@@ -12,7 +12,7 @@
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?chebi_id ?xref ?drug_bank_id {
-                  ?chebi_id rdf:type ccp:IAO_EXT_0000198 . #type, chebi ontology identifier
+                  ?chebi_id rdf:type ccp:IAO_EXT_0000198 . # CCP:chebi_ontology_identifier
                   ?chebi_id obo:IAO_0000219 ?chebi_class .
                   ?chebi_class oboInOwl:hasDbXref ?xref .
                   filter regex(?xref, '^DrugBank:') .

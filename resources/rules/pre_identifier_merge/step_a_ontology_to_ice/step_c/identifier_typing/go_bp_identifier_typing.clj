@@ -1,9 +1,9 @@
 ;; -----------------------------------------------
 ;; --------- go-bp identifier typing ---------
 ;; -----------------------------------------------
-;; specifically types the ontology identifiers
 `{:name "go-bp-identifier-typing"
-  :head ((?/id rdf/type ccp/IAO_EXT_0000103)) ; go-biological process ontology identifier
+  :description "This rule specifically the GO biological process identifier"
+  :head ((?/id rdf/type ccp/IAO_EXT_0000103)) ; CCP:go_biological_process_ontology_identifier
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>

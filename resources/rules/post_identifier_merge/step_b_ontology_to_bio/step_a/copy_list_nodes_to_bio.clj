@@ -6,7 +6,7 @@
           (?/id_field_value rdf/type ?/id)
           (?/id rdf/type ccp/IAO_EXT_0000354)
           (?/id obo/IAO_0000219 ?/listmember)
-          (?/id obo/IAO_0000219 ?/bio_listmember) ;; obo:denotes
+          (?/id obo/IAO_0000219 ?/bio_listmember) ; IAO:denotes
           (?/bio_listmember rdf/type rdf/List))
   :reify ([?/list_record {:ln (:sha-1 ?/listmember)
                            :ns "ccp" :prefix "R_"}]
