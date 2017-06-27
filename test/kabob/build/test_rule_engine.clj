@@ -16,7 +16,7 @@
 
 ;;(defonce ^:dynamic *rcon* nil)
 
-;;(def rule-test-path "resources/rules/pre-identifier-merge/step_a-ontology_to_ice/step_a/")
+;;(def rule-test-path "resources/rules/pre-identifier-merge/step_a_ontology_root_identifier_gen-ontology_to_ice/step_a_ontology_root_identifier_gen/")
 
 ;;; --------------------------------------------------------
 ;;; functions

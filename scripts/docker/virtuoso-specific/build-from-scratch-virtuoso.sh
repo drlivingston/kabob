@@ -28,19 +28,21 @@ mkdir -p ${KB_DATA_DIR}
 ### generate lists of RDF files that will be loaded in subsequent steps
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
-#### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-#### TODO: only the list file name is used in the arguments below. Refactor to remove other arguments.
-#${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-#  "ntriples"
+### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
+### TODO: only the list file name is used in the arguments below. Refactor to remove other arguments.
+${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+  "ntriples"
 
-## create ICE records for all ontology concepts
+${SCRIPT_DIR}/virtuoso-specific/delete-duplicate-triples-virtuoso.sh
+
+# create ICE records for all ontology concepts
 ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_a
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
-#
+${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_b
+${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_a_ontology_to_ice/step_c
+
 #### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
 #${SCRIPT_DIR}/virtuoso-specific/load-list-file-virtuoso.sh \
 #  ${KB_PORT} \
@@ -53,16 +55,18 @@ ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identif
 #  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
 #  "rdfxml"
 #
+# ${SCRIPT_DIR}/virtuoso-specific/delete-duplicate-triples-virtuoso.sh
+#
 #### Index optimization -- not currently implemented
 ##${SCRIPT_DIR}/optimize.sh \
 ##  ${KB_PORT} \
 ##  ${KB_NAME}
 #
 #### create skos:exactMatch links between equivalent identifiers
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_id_exact_match/chebi
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_id_exact_match/shared_label
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_id_exact_match/datasource_xref
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/chebi
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/equivalent_class
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/shared_label
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/datasource_xref
 #
 #### Create the ID sets
 #export LEIN_ROOT=true
@@ -74,9 +78,9 @@ ${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/pre_identif
 #${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_a_entity_generation/reify
 #
 ## connect bioentities based on ontology hierarchies
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b
-#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_a_ontology_root_identifier_gen
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_b_ontology_id_denotes_concept
+#${SCRIPT_DIR}/virtuoso-specific/RUN_RULES_AND_LOAD-VIRTUOSO.sh rules/post_identifier_merge/step_b_ontology_to_bio/step_c_ontology_ice_record_gen
 #
 
 

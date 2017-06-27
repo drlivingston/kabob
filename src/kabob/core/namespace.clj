@@ -173,38 +173,3 @@
        ("iaohan" "http://kabob.ucdenver.edu/iao/hanalyzer/")
        ))
 
-
-;;this is now part of KR core
-;; (defn register-namespaces [kb]
-;;   (synch-ns-mappings kb)
-;;   (dorun
-;;    (map (fn [[short long]]
-;;           (update-ns-mapping kb short long))
-;;         *namespaces*))
-;;   (synch-ns-mappings kb)
-;;   kb)
-
-;; register print util prefixes - this need to be done differently / dynamically
-;; (import 'com.hp.hpl.jena.util.PrintUtil)
-;; (PrintUtil/registerPrefixMap (.getNsPrefixMap (get-default-model)))
-
-;;;; standard prefixs can be acquired with:
-;; (import 'com.hp.hpl.jena.shared.PrefixMapping)
-;; PrefixMapping/Standard
-;; PrefixMapping/Extended
-;; (.getNsPrefixMap PrefixMapping/Extended)
-;; (into {} *1)
-;; (map (fn [[k v]] (list k v)) *1)
-
-
-;; (declare get-default-model)
-;; (defn fix-jena-rule-reader []
-;;   (import 'com.hp.hpl.jena.util.PrintUtil)
-;;   (PrintUtil/registerPrefixMap (.getNsPrefixMap (get-default-model))))
-
-;; (defn get-default-model []
-;;   (.getDefaultModel
-;;    (JenaSesame/createDataset
-;;     (:connection *rcon*))))
-
-
