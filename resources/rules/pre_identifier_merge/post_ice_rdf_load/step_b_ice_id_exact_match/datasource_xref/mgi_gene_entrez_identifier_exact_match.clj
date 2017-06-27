@@ -1,6 +1,7 @@
 ;; --------------------------------------------------------
 ;; --------- MGI Gene Entrez Identifier Exact Match -------
 ;; --------------------------------------------------------
+;; TODO: use IAO_EXT_ concepts
 `{:name "mgi-gene-entrez-identifier-exact-match"
   :description "This rule file asserts skos:exactMatch between each pair of mgi and entrez gene identifiers"
   :head ((?/mgiIce skos/exactMatch ?/egIce))
