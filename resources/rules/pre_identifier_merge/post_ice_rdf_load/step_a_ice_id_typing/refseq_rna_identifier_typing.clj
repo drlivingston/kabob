@@ -10,7 +10,7 @@
                   select ?refseq_identifier {
                      ?record rdf:type ccp:IAO_EXT_0000792 . # CCP:refseq_catalog_record
                      ?record obo:BFO_0000051 ?molecule_type_field_value .
-                     ?molecule_type_field_value rdf:type ccp:IAO_EXT_0000805 .
+                     ?molecule_type_field_value rdf:type ccp:IAO_EXT_0000805 . # CCP:refseq_catalog_record_molecule_type_field_value
                      ?molecule_type_field_value rdfs:label 'RNA'@en .
                      ?record obo:BFO_0000051 ?refseq_identifier_field_value .
                      ?refseq_identifier_field_value rdf:type ccp:IAO_EXT_0000800 . # CCP:refseq_catalog_record_refseq_identifier_field_value
