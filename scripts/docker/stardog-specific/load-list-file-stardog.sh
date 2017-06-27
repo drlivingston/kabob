@@ -21,6 +21,7 @@ FORMAT=${4:-"ntriples"}
 # Here we check the input $LIST_FILE for .gz files and create
 # uncompressed versions, and adjust the $LIST_FILE content accordingly.
 UPDATED_LIST_FILE=${LIST_FILE}.nogz
+
 if [[ -e ${UPDATED_LIST_FILE} ]]; then
     rm ${UPDATED_LIST_FILE}
 fi
@@ -28,7 +29,7 @@ touch ${UPDATED_LIST_FILE}
 while read f; do
    path=$(dirname ${f})
    file=$(basename ${f})
-   if [[ "$file" == *gz ]]
+   if [[ '${f}' == *gz ]]
    then
       out_file=${f%.gz}
       gunzip -v -c ${f} > ${out_file}
