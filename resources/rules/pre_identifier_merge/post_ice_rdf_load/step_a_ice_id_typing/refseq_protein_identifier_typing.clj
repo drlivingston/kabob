@@ -1,5 +1,5 @@
-refseq_genomic_identifier_typing.clj;; ----------------------------------------------------------
-;; --------- refseq genomic identifier typing ---------------
+;; ----------------------------------------------------------
+;; --------- refseq protein identifier typing ---------------
 ;; ----------------------------------------------------------
 `{:name          "refseq-protein-identifier-typing"
   :description   "This rule specifically the basic formal ontology identifier"
