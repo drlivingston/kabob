@@ -333,10 +333,10 @@ def GraphMaker(triple_dict):
         graph.add_node('?var{MINUS}', shape='box', style='filled', label='?var{MINUS}', color='red')
         graph.add_edge('?var{MINUS}', 'bodyConstant', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
         # option
-        graph.add_node('Constant', shape='ellipse', label='Constant', color='green')
-        graph.add_edge('bodyConstant', 'Constant', label='!equal', color='red', arrowhead='tee', arrowsize=1.0)
-        graph.add_node('?var{OPTION}', shape='box', style='filled', label='?var{OPTION}', color='green')
-        graph.add_edge('?var{OPTION}', 'Constant', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
+        graph.add_node('?bodyVar', shape='box', style='filled', label='?bodyVar', color='gray65')
+        graph.add_edge('bodyConstant', '?bodyVar', label='!equal', color='red', arrowhead='tee', arrowsize=1.0)
+        # graph.add_node('?var{OPTION}', shape='box', style='filled', label='?var{OPTION}', color='green')
+        # graph.add_edge('?var{OPTION}', 'Constant', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
 
         graph_dict[(key, value['description'])] = graph
 
