@@ -101,6 +101,8 @@ def TripleMaker_SS(rule):
 
         if 'optional' in rule:
             rule = rule.split('optional')[0]
+        if 'contains' in rule:
+            rule = rule.split('contains')[0]
 
         if 'bind' in rule.lower():
             triple = [y for y in
@@ -331,10 +333,10 @@ def GraphMaker(triple_dict):
         graph.add_node('?var{MINUS}', shape='box', style='filled', label='?var{MINUS}', color='red')
         graph.add_edge('?var{MINUS}', 'bodyConstant', label='!subClassOf', color='red', arrowhead='normal', arrowsize=1.0)
         # option
-        graph.add_node('Constant', shape='ellipse', label='Constant', color='green')
-        graph.add_edge('bodyConstant', 'Constant', label='!equal', color='red', arrowhead='tee', arrowsize=1.0)
-        graph.add_node('?var{OPTION}', shape='box', style='filled', label='?var{OPTION}', color='green')
-        graph.add_edge('?var{OPTION}', 'Constant', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
+        graph.add_node('?bodyVar', shape='box', style='filled', label='?bodyVar', color='gray65')
+        graph.add_edge('bodyConstant', '?bodyVar', label='!equal', color='red', arrowhead='tee', arrowsize=1.0)
+        # graph.add_node('?var{OPTION}', shape='box', style='filled', label='?var{OPTION}', color='green')
+        # graph.add_edge('?var{OPTION}', 'Constant', label='subClassOf', color='green', arrowhead='onormal', arrowsize=1.5)
 
         graph_dict[(key, value['description'])] = graph
 
@@ -342,14 +344,15 @@ def GraphMaker(triple_dict):
 
 
 
-def GraphViewer(graph_dict, output):
+def GraphViewer(graph_dict, output, file_name):
     '''
     function takes a dictionary, keyed by rule name, where the keys are a Networkx graph generator as input and returns
     a graphical representation of the rule. The file is named after the individual rules and output to the location of
     the Clojure rule file
     :param graph_dict: dictionary, keyed by rule name, where the keys are a Networkx graph generator
     :param output: a string containing the file pathway information for outputting the graphical representations
-    :return: saves a ng file containing the graphical figure for each rule
+    :param file_name: a string containing the name file
+    :return: saves a png file containing the graphical figure for each rule
     '''
 
     for key, graph in graph_dict.items():
@@ -362,7 +365,7 @@ def GraphViewer(graph_dict, output):
         A.edge_attr['fontsize'] = 9.0
         A.node_attr['fontsize'] = 9.0
 
-        A.draw(str(output) + '/' + str(key[0]) + '_Rules_figure.png', prog='dot')
+        A.draw(str(output) + '/' + str(file_name) + '.png', prog='dot')
 
     return
 
@@ -388,17 +391,17 @@ def main():
 
                 if any([x for x in rules if ':sparql-string' in x]): # sparql-string
                     rules_mod = [x for x in [x.strip() for x in re.split('`', ','.join(rules))] if x] #split data into list of rules
-                    rules_mod = filter(None, [rule for rule in rules_mod if '@' not in rule]) #not making figures for rules with macros - REMOVE THIS ONCE RULES UPDATED1
                     rules_dict = RulesDict_SS(rules_mod) #create dictionary to store triples by rule
                     graphs = GraphMaker(rules_dict) #create a graph for each rule - saves to a dictionary
-                    GraphViewer(graphs, root) #create a visualization for each rule graph
+                    GraphViewer(graphs, root, file.split('.')[0]) #create a visualization for each rule graph
+                    # print "sparql-string: " + str(rule_file)
 
                 if any([x for x in rules if ':body' in x]): # body
                     rules_mod = [x for x in [x.strip() for x in re.split('{', ','.join(rules))] if x]  # split data into list of rules
-                    rules_mod = [rule for rule in rules_mod if '@' not in rule]  # not making figures for rules with macros - REMOVE THIS ONCE RULES UPDATED1
                     rules_dict = RulesDict(rules_mod) #create dictionary to store triples by rule
                     graphs = GraphMaker(rules_dict) #create a graph for each rule - saves to a dictionary
-                    GraphViewer(graphs, root) #create a visualization for each rule graph
+                    GraphViewer(graphs, root, file.split('.')[0]) #create a visualization for each rule graph
+                    # print "body: " + str(rule_file)
 
                 print 'Created Graphical Representation of Rule: ' + str(rule_file)
 
