@@ -5,8 +5,8 @@
 `{:name "transfac-gene-entrez-identifier-exact-match"
   :description "This rule asserts an exact match between transfec and entrez gene"
   :head ((?/tfIce skos/exactMatch ?/egIce))
-  :body ((?/record iaotransfac/TransfacGeneDatFileData_transfacGeneIDDataField1 ?/tfIce)
-         (?/record iaotransfac/TransfacGeneDatFileData_mgiDatabaseReferenceIDDataField1 ?/egIce))
+  :body ((?/record ccp/TransfacGeneDatFileData_transfacGeneIDDataField1 ?/tfIce)
+         (?/record ccp/TransfacGeneDatFileData_mgiDatabaseReferenceIDDataField1 ?/egIce))
   }
 
 

@@ -5,8 +5,8 @@
 `{:name "mgi-gene-entrez-identifier-exact-match"
   :description "This rule file asserts skos:exactMatch between each pair of mgi and entrez gene identifiers"
   :head ((?/mgiIce skos/exactMatch ?/egIce))
-  :body ((?/record iaomgi/MGIEntrezGeneFileData_mgiAccessionIDDataField1 ?/mgiIce)
-         (?/record iaomgi/MGIEntrezGeneFileData_entrezGeneIDDataField1 ?/egIce))
+  :body ((?/record ccp/MGIEntrezGeneFileData_mgiAccessionIDDataField1 ?/mgiIce)
+         (?/record ccp/MGIEntrezGeneFileData_entrezGeneIDDataField1 ?/egIce))
   }
 
 ;; MGI_Accession skos:???Match Secondary_MGI_Accession

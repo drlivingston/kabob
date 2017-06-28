@@ -29,39 +29,44 @@ mkdir -p ${KB_DATA_DIR}
 ${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
 
 ### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-#  "ntriples"
+${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+  "ntriples"
 
-## create ICE records for all ontology concepts
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_a
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b
-${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_c
+#### create ICE records for all ontology concepts
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_a_ontology_root_identifier_gen
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_c_ontology_ice_record_gen
 
+#### create skos:exactMatch links between equivalent ontology identifiers
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/chebi
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/equivalent_class
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/shared_label
+#
+#
 ### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
-#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
+${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
+
+${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
+  "rdfxml"
 #
-#${SCRIPT_DIR}/allegrograph-specific/load-list-file-ag.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
-#  "rdfxml"
+##### Index optimization -- not currently implemented
+###${SCRIPT_DIR}/optimize.sh \
+###  ${KB_PORT} \
+###  ${KB_NAME}
+##
 #
-#### Index optimization -- not currently implemented
-##${SCRIPT_DIR}/optimize.sh \
-##  ${KB_PORT} \
-##  ${KB_NAME}
-#
-#### create skos:exactMatch links between equivalent identifiers
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/chebi
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/shared_label
-#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/step_b_ontology_id_exact_match/datasource_xref
+#### create skos:exactMatch links between equivalent ICE identifiers
+#${SCRIPT_DIR}/allegrograph-specific/RUN_RULES_AND_LOAD-AG.sh rules/pre_identifier_merge/post_ice_rdf_load/step_a_ice_id_typing
+##${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/post_ice_rdf_load/step_b_ice_id_exact_match
 #
 #### Create the ID sets
 #export LEIN_ROOT=true

@@ -21,46 +21,46 @@ echo "DATASOURCE_OWL_DIR=${DATASOURCE_OWL_DIR}"
 echo "DATASOURCE_ICE_DIR=${DATASOURCE_ICE_DIR}"
 echo "KB_DATA_DIR=${KB_DATA_DIR}"
 
-#### Clean out the directory in which we're going to place our artifacts.
-#rm -rvf ${KB_DATA_DIR}
-#mkdir -p ${KB_DATA_DIR}
-#
-#### create a new Stardog database
-#${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
-#
-#### generate lists of RDF files that will be loaded in subsequent steps
-#${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
-#
+### Clean out the directory in which we're going to place our artifacts.
+rm -rvf ${KB_DATA_DIR}
+mkdir -p ${KB_DATA_DIR}
+
+### create a new Stardog database
+${SCRIPT_DIR}/stardog-specific/create-new-database-stardog.sh ${KB_NAME}
+
+### generate lists of RDF files that will be loaded in subsequent steps
+${SCRIPT_DIR}/common-scripts/generate-rdf-file-lists.sh ${KB_NAME} ${DOCKER_ENV}
+
 ### Load the ontologies (note: they will have been converted from OWL to n-triples prior to loading)
-#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
-#  "ntriples"
+${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/owl-files.${KB_NAME}.list \
+  "ntriples"
 
-## create ICE records for all ontology concepts
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_a_ontology_root_identifier_gen
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_c_ontology_ice_record_gen
+### create ICE records for all ontology concepts
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_a_ontology_root_identifier_gen
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_c_ontology_ice_record_gen
 
-#### create skos:exactMatch links between equivalent ontology identifiers
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/chebi
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/equivalent_class
-#${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/shared_label
+### create skos:exactMatch links between equivalent ontology identifiers
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/chebi
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/equivalent_class
+${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/shared_label
 
-## Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
-#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
-#
-#${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
-#  ${KB_PORT} \
-#  ${KB_NAME} \
-#  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
-#  "rdfxml"
+### Load the ICE RDF - the rules above process the ontologies only, so we have waited to load the ICE RDF until this point
+${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/ice-nt-files.${KB_NAME}.list
 
-#### create skos:exactMatch links between equivalent ICE identifiers
+${SCRIPT_DIR}/stardog-specific/load-list-file-stardog.sh \
+  ${KB_PORT} \
+  ${KB_NAME} \
+  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
+  "rdfxml"
+
+### create skos:exactMatch links between equivalent ICE identifiers
 ${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/post_ice_rdf_load/step_a_ice_id_typing
 #${SCRIPT_DIR}/stardog-specific/RUN_RULES_AND_LOAD-STARDOG.sh rules/pre_identifier_merge/post_ice_rdf_load/step_b_ice_id_exact_match
 
