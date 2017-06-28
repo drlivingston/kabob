@@ -20,6 +20,7 @@
        ("dc" "http://purl.org/dc/elements/1.1/")
        ("dcterms" "http://purl.org/dc/terms/")
        ("oboInOwl" "http://www.geneontology.org/formats/oboInOwl#")
+       ("foaf" "http://xmlns.com/foaf/0.1/")
 
        ("ja" "http://jena.hpl.hp.com/2005/11/Assembler#")
 

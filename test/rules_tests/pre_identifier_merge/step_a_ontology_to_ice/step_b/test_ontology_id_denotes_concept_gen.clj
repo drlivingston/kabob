@@ -74,33 +74,33 @@
 
 (deftest test-rule
   (let [rule1 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-obo")
-                            (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                            (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule2 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-hgnc")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule3 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-pombase")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule4 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-cgnc")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule5 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-rgd")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule6 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-tair")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule7 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-sgd")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule8 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-flybase")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule9 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-zfin")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule10 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-wormbase")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule11 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-eco")
-                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                             (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule12 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-mgi")
-                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule13 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-ncbi")
-                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         rule14 (first (filter #(= (:name %) "ontology-id-denotes-concept-gen-dictybase")
-                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_b_ontology_id_denotes_concept")))
+                              (kabob-load-rules-from-classpath "rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept")))
         source-kb (test-kb sample-kb-triples)]
 
     (run-forward-rule-sparql-string source-kb source-kb rule1)
@@ -120,64 +120,64 @@
 
     ;; there should be 2 new triples list_recored instances
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 obo/CHEBI_7890)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/CHEBI_7890)))))) ;; ccp:ontology concept identifier
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 hgnc_pr/gene_symbol_report?hgnc_id=26222)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/HGNC_26222)))))) ;; ccp:ontology concept identifier
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 pombase_pr/SPMIT.11)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/POMBASE_SPMIT.11))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 cgnc_pr/GeneReport?id=10114)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/CGNC_10114))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 rgd_pr/main.html?id=7676737)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/RGD_7676737))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 tair_pr/TairObject?type=locus&name=locus:6530298248)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/TAIR_LOCUS_6530298248))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 sgd_pr/locus.fpl?dbid=S000122558)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/SGD_S000122558))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 flybase_pr/FBgn0000014)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/FLYBASE_FBgn0000014))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 zfin_pr/ZDB-GENE-991213-3)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/ZFIN_ZDB-GENE-991213-3))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 wormbase_pr/WBGene00185048)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/WORMBASE_WBGene00185048))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 eco_pr/EG10001)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/ECOGENE_EG10001))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 eco_pr/EG10001)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/ECOGENE_EG10001))))))
 
     ;; not sure how to test ncbi gene id gen b/c symbols can't start with numbers in clojure
     ;(is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 ~http://www.ncbi.nlm.nih.gov/gene/380481)
-    ;                                    (?/id rdf/type ccp/IAO_EXT_0000088)
+    ;                                    (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
     ;                                    (= ?/id ccp/NCBI_GENE_380481)))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 mgi_pr/MGI:101757)
-                                            (?/id rdf/type ccp/IAO_EXT_0000088)
+                                            (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                             (= ?/id ccp/MGI_101757))))))
 
     (is (= 1 (count (query source-kb '((?/id obo/IAO_0000219 obo/dictyBase#_DDB_G0349043)
-                                        (?/id rdf/type ccp/IAO_EXT_0000088)
+                                        (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)
                                         (= ?/id ccp/DICTYBASE_DDB_G0349043))))))
 
 

@@ -43,11 +43,8 @@
 
 (deftest test-rule
   (let [rules (kabob-load-rules-from-classpath
-                "rules/pre_identifier_merge/post_ice_rdf_load/step_b_ice_id_exact_match/datasource_xref")]
+                "rules/post_identifier_merge/step_c_ice_to_bio/step_b_bioentity_linking/irefweb")]
 
-    ;(prn (str "OYOYOYOOYOOOYOY"))
-    ;(prn (str "# rules: " (count rules)))
-    ;(prn-str rules)
     (doall (map rr rules))
 
     ))

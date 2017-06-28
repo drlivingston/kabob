@@ -26,6 +26,8 @@
   :main nil
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
+						 :dev {:dependencies [[test-with-files "0.1.1"]]
+									 :resource-paths ["test/resources"]}
              :main-a {:main kabob.build.run-rules
                       :jvm-opts ["-d64" "-Xmx2g"]}
              :main-b {:main kabob.build.id-sets.generate
