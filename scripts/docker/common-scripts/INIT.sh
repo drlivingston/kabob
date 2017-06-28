@@ -10,6 +10,6 @@
 ## this case the environment in which the script execution was started is lost.
 ## ------------------------------------------------------------------------- ##
 
-set -e
-set -x
-export SHELLOPTS
+#set -e
+#set -x
+#export SHELLOPTS
