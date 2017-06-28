@@ -13,9 +13,4 @@
           (?/uniprot_identifier_field_value rdf/type ccp/IAO_EXT_0000243) ; CCP:uniprot_identifier_mapping_record_uniprot_accession_identifier_field_value
           (?/uniprot_identifier_field_value rdf/type ?/uniprot_identifier)
           (?/uniprot_identifier rdfs/subClassOf ccp/IAO_EXT_0001638)) ; CCP:refseq_protein_identifier
-
-
-          (?/record iaouniprot/UniProtIDMappingFileData_uniProtAccessionIDDataField1 ?/uniprot)
-         (?/record iaouniprot/UniProtIDMappingFileData_refseqIdsDataField1 ?/refseq)
-         (?/refseq kiao/denotesSubClassOf obo/CHEBI_36080)) ; CHEBI:protein
   }

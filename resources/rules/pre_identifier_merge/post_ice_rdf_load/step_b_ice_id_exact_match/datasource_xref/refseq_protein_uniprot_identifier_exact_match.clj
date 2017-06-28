@@ -8,7 +8,7 @@
           (?/record obo/BFO_0000051 ?/refseq_protein_identifier_field_value)
           (?/refseq_protein_identifier_field_value rdf/type ccp/IAO_EXT_0000927) ; CCP:ncbi_gene_refseq_uniprotkb_collaboration_record_refseq_protein_identifier_field_value
           (?/refseq_protein_identifier_field_value rdf/type ?/refseq_identifier)
-          (?/refseq_identifier rdfs/subClassOf ccp/IAO_EXT_0001638)) ; CCP:refseq_protein_identifier
+          (?/refseq_identifier rdfs/subClassOf ccp/IAO_EXT_0001638) ; CCP:refseq_protein_identifier
           (?/record obo/BFO_0000051 ?/uniprot_identifier_field_value)
           (?/uniprot_identifier_field_value rdf/type ccp/IAO_EXT_0000928) ; CCP:ncbi_gene_refseq_uniprotkb_collaboration_record_uniprot_identifier_field_value
           (?/uniprot_identifier_field_value rdf/type ?/uniprot_identifier)
