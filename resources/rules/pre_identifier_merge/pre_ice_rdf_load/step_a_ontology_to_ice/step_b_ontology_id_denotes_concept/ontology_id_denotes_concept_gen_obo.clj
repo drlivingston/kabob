@@ -9,6 +9,7 @@
   :reify ([?/id {:ln (:localname ?/ontology_concept)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+                  prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select ?ontology_concept {

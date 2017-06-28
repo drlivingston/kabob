@@ -13,4 +13,6 @@
           (?/ncbi_gene_identifier_field_value rdf/type ccp/IAO_EXT_0000675) ; CCP:HGNC_gene_record_entrez_gene_identifier_field_value
           (?/ncbi_gene_identifier_field_value rdf/type ?/ncbi_gene_identifier)
           (?/ncbi_gene_identifier rdfs/subClassOf ccp/IAO_EXT_0000084)) ; ccp:NCBI_gene_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }

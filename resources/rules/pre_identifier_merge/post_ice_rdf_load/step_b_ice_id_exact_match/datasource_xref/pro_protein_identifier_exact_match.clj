@@ -16,4 +16,6 @@
           (?/target_record_identifier_field_value rdf/type ccp/IAO_EXT_0001023) ; CCP:PharmGKB_gene_record_entrez_gene_field value
           (?/target_record_identifier_field_value rdf/type ?/other_protein_identifier)
           (?/other_protein_identifier [rdfs/subClassOf *] ccp/IAO_EXT_0000183)) ; CCP:gene_product_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
  }

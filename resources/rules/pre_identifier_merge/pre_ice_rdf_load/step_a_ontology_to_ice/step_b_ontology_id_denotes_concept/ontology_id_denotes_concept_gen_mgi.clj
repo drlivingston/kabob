@@ -9,6 +9,7 @@
   :reify ([?/id {:ln (:regex ":" "_" ?/concept_id)
                  :ns "ccp" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
+                  prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>

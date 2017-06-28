@@ -13,4 +13,6 @@
            (?/unique_identifier_field_value rdf/type ccp/IAO_EXT_0001016) ; CCP:PharmGKB_drug_record_cross_references_field value
            (?/unique_identifier_field_value rdf/type ?/xref_identifier)
            (?/xref_identifier [rdfs/subClassOf *] ccp/IAO_EXT_0000342)) ; CCP:identifier_of_a_biological_entity
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }

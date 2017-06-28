@@ -15,5 +15,6 @@
           (?/external_identifiers_field_value rdf/type ?/other_identifier)
           ; when the ccp identifier hierarchy is more mature, add more specific constraints such that the identifiers must be of similar types
           (?/other_identifier [rdfs/subClassOf *] ccp/IAO_EXT_0000342)) ; CCP:identifier_of_a_biological_entity
-    :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
+    :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                               ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
 }

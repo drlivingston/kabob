@@ -15,7 +15,8 @@
           (?/unique_identifier_field_value rdf/type ?/other_gene_product_identifier)
           (?/other_gene_product_identifier [rdfs/subClassOf *] ccp/IAO_EXT_0000183)) ; ccp:gene_product_identifier
 
-  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
 }
 
 ;;TODO replicate the above for Complexes

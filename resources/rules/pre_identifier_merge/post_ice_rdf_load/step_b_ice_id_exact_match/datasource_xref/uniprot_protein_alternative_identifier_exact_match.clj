@@ -13,4 +13,6 @@
           (?/accession_field_value rdf/type ccp/IAO_EXT_0000931) ; CCP:uniprot_protein_record_accession_field_value
           (?/accession_field_value rdf/type ?/secondary_uniprot_identifier)
           (?/secondary_uniprot_identifier rdfs/subClassOf ccp/IAO_EXT_0000184)) ; CCP:uniprot_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }

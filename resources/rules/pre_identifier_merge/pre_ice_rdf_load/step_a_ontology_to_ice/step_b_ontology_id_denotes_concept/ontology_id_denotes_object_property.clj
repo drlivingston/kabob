@@ -7,7 +7,8 @@
          (?/id rdf/type ccp/IAO_EXT_0000306)) ; CCP:object_property_identifier
   :reify ([?/id {:ln (:localname ?/object_property)
                  :ns "ccp" :prefix "" :suffix ""}])
-  :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+                  prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select ?object_property {
                   ?property_id rdf:type ccp:IAO_EXT_0000308 . # CCP:top-level_object_property_identifier

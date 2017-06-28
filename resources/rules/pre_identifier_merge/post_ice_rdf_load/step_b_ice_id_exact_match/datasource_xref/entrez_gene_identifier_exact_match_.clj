@@ -13,4 +13,6 @@
         (?/db_xref_field_value rdf/type ccp/IAO_EXT_0000880) ; CCP:NCBI_gene_info_record__database_cross_reference_field_value
         (?/db_xref_field_value rdf/type ?/other_identifier)
         (?/other_identifier [rdfs/subClassOf *] ccp/IAO_EXT_0000182)) ; ccp:DNA_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }

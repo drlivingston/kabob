@@ -13,6 +13,8 @@
           (?/uniprot_identifier_field_value rdf/type ccp/IAO_EXT_0000928) ; CCP:ncbi_gene_refseq_uniprotkb_collaboration_record_uniprot_identifier_field_value
           (?/uniprot_identifier_field_value rdf/type ?/uniprot_identifier)
           (?/uniprot_identifier [rdfs/subClassOf *] ccp/IAO_EXT_0000184)) ; CCP:uniprot_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }
 
 

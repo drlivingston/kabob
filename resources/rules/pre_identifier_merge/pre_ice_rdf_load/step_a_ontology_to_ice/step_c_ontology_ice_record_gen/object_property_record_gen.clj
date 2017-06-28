@@ -22,7 +22,8 @@
                :ns "ccp" :prefix "F_" :suffix ""}]
            [?/label_field_value {:ln (:sha-1 ?/bound_label)
                :ns "ccp" :prefix "F_" :suffix ""}])
-  :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+                  prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?id ?property ?bound_definition ?bound_label ?bound_id_string {

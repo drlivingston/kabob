@@ -13,4 +13,6 @@
           (?/refseq_gene_identifier_field_value rdf/type ccp/IAO_EXT_0000157) ; CCP:HGNC_gene_record_refseq_identifier_field_value
           (?/refseq_gene_identifier_field_value rdf/type ?/refseq_identifier)
           (?/refseq_identifier rdfs/subClassOf ccp/IAO_EXT_0000263)) ; ccp:REFSEQ_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }

@@ -13,4 +13,6 @@
           (?/hgnc_gene_identifier_field_value rdf/type ccp/IAO_EXT_0000041) ; CCP:HGNC_gene_record_hgnc_identifier_field_value
           (?/hgnc_gene_identifier_field_value rdf/type ?/hgnc_gene_identifier)
           (?/hgnc_gene_identifier rdfs/subClassOf ccp/IAO_EXT_0000185)) ; ccp:HGNC_gene_identifier
+  :options {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]
+                             ["franzOption_chunkProcessingAllowed:" "franz:yes"]]}
   }
