@@ -15,16 +15,16 @@
                    ;; TODO: bioentity labels have not been assigned yet (step hc needs to be swapped with step hb)
                    ;;(?/bioentity_sc rdfs/label ?/bioentity_sc_label)
 
-                   ;; create a has_participant restriction
+                   ;; create a cause_or_contributes_to restriction
                    (?/cause_restriction rdf/type owl/Restriction)
                    (?/cause_restriction owl/onProperty ?/cause_or_contributes_to_condition)
-                   (?/cause_restriction owl/someValuesFrom ?/bioentity_sc)
+                   (?/cause_restriction owl/someValuesFrom ?/phenotype_sc)
 
                    ;; connect the human phenotype subclass to the participation restriction
-                   (?/phenotype_sc rdfs/subClassOf ?/cause_restriction)
+                   (?/bioentity_sc rdfs/subClassOf ?/cause_restriction)
 
                    ;; provenance: connect the record to the human phenotype subclass
-                   (?/record obo/IAO_0000219 ?/phenotype_sc)) ; IAO_denotes
+                   (?/record obo/IAO_0000219 ?/bioentity_sc)) ; IAO_denotes
 
   :reify         ([?/phenotype_sc {:ln (:sha-1 ?/human_phenotype ?/causal_bioentity "pheno")
                                    :ns "ccp" :prefix "B_"}]
