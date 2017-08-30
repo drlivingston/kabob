@@ -6,7 +6,7 @@
   :head (
          ;; create a taxon restriction
          (?/restriction rdf/type owl/Restriction)
-         (?/restriction owl/onProperty obo/RO_0002160) ; RO:only_in_taxon
+          (?/restriction owl/onProperty ?/only_in_taxon)
          (?/restriction owl/someValuesFrom ?/taxon)
          (?/bioentity rdfs/subClassOf ?/restriction))
   :reify ([?/restriction {:ln (:restriction)
@@ -14,7 +14,7 @@
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT ?taxon ?bioentity
+    SELECT ?taxon ?bioentity ?only_in_taxon
   WHERE {  ?record rdf:type ccp:IAO_EXT_0000987 . # ccp:sparse_UniProt_protein_record
     ?record obo:BFO_0000051 ?primary_accession_field_value . # BFO:has_part
     ?primary_accession_field_value rdf:type ccp:IAO_EXT_0000989 . # ccp:sparse_UniProt_protein_record__primary_accession_field_value
@@ -32,5 +32,11 @@
     ?taxon_id obo:IAO_0000219 ?taxon . # IAO:denotes
     # ensure it's a kabob bioentity (not an obo bioentity)
          filter (contains (str(?taxon), 'http://ccp.ucdenver.edu/obo/ext/'))
-         }"
+         {
+                             select ?only_in_taxon {
+                                                    ccp:RO_0002160 obo:IAO_0000219 ?only_in_taxon .
+                                                    filter (?only_in_taxon != obo:RO_0002160) .
+                                                    }
+                             }
+  }"
    }
