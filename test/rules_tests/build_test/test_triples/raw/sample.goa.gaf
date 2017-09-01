@@ -1,0 +1,14 @@
+!gaf-version: 2.1
+!
+!The set of protein accessions included in this file is based on UniProt reference proteomes, which provide one protein per gene.
+!They include the protein sequences annotated in Swiss-Prot or the longest TrEMBL transcript if there is no Swiss-Prot record.
+!If a particular protein accession is not annotated with GO, then it will not appear in this file.
+!
+!Note that the annotation set in this file is filtered in order to reduce redundancy; the full, unfiltered set can be found in
+!ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_all.gz
+!
+!Generated: 2017-07-03 09:14
+!GO-version: http://purl.obolibrary.org/obo/go/releases/2017-07-01/go.owl
+!
+UniProtKB	P37173	TGFBR2		GO:0019226	GO_REF:0000024	ISS	UniProtKB:Q62312	P	TGF-beta receptor type-2	TGFR2_HUMAN|TGFBR2	protein	taxon:9606	20160601	BHF-UCL	occurs_in(UBERON:0008307)	
+UniProtKB	P37173	TGFBR2		GO:0005623	PMID:25893292	IDA		C	TGF-beta receptor type-2	TGFR2_HUMAN|TGFBR2	protein	taxon:9606	20160112	UniProt		
