@@ -15,3 +15,12 @@
 test-rule-on-modelorgs.sh
 test-output/
 *~
+
+*.iml
+
+pom.xml
+
+mvn-local-repository/
+/bin/
+
+.classpath
