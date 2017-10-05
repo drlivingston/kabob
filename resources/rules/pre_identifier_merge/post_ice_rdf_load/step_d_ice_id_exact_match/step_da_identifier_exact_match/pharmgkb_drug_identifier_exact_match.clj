@@ -13,7 +13,7 @@ WHERE {  ?record rdf:type ccp:IAO_EXT_0000821 . # CCP:PharmGKB_drug_record
 ?record obo:BFO_0000051 ?accession_identifier_field_value .
 ?accession_identifier_field_value rdf:type ccp:IAO_EXT_0001010 . # CCP:PharmGKB_drug_record_accession_identifier_field value
 ?accession_identifier_field_value rdf:type ?pharmgkb_drug_identifier .
-?pharmgkb_drug_identifier rdfs:subClassOf ccp:IAO_EXT_0001429 . # CCP:PharmGKB_identifier
+?pharmgkb_drug_identifier rdfs:subClassOf ccp:IAO_EXT_0001724 . # CCP:PharmGKB_drug_identifier
 ?record obo:BFO_0000051 ?cross_references_field_value .
 ?cross_references_field_value rdf:type ccp:IAO_EXT_0001016 . # CCP:PharmGKB_drug_record_cross_references_field value
 ?cross_references_field_value rdf:type ?xref_identifier .

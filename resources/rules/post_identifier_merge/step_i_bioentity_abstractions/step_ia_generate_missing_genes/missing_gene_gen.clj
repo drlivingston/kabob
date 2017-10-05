@@ -23,7 +23,7 @@
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     select distinct ?protein_missing_gene ?has_gene_template ?protein_coding_gene_bioentity ?only_in_taxon ?taxon {
-         ?protein_missing_gene rdfs:subClassOf* ?protein .
+         ?protein_missing_gene rdfs:subClassOf+ ?protein .
          # to keep from climbing the protein hierarchy too high we require the protein to have a taxon
          ?protein_missing_gene rdfs:subClassOf ?taxon_r .
          ?taxon_r rdf:type owl:Restriction .
