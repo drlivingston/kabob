@@ -92,23 +92,6 @@
 
 
 
-;;;
-;;; rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/hgnc_gene_symbol_supplied_entrez_identifier_exact_match
-;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
-;;;
-(deftest step-da-hgnc-symbol-to-supplied-ncbi-gene-identifier-exact-match
-  (let [source-kb (test-kb initial-plus-ice-triples)
-        target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 3)
-
-    (is (ask target-kb '((ccp/HGNC_TGFBR2 skos/exactMatch ccp/NCBI_GENE_7048))))
-
-    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
-    (is (= 5 (count (query target-kb '((?/s ?/p ?/o))))))
-    ))
 
 
 ;;;;
@@ -189,7 +172,7 @@
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
     (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 4)
+    (run-build-rule source-kb target-kb build-rules-step-da 3)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -209,7 +192,7 @@
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
     (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 5)
+    (run-build-rule source-kb target-kb build-rules-step-da 4)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -228,7 +211,7 @@
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
     (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 6)
+    (run-build-rule source-kb target-kb build-rules-step-da 5)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -262,7 +245,7 @@
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
     (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 7)
+    (run-build-rule source-kb target-kb build-rules-step-da 6)
 
     (is (ask target-kb '((ccp/UNIPROT_P37173-2 skos/exactMatch ccp/REFSEQ_NP_001020018))))
     (is (ask target-kb '((ccp/UNIPROT_P37173-1 skos/exactMatch ccp/REFSEQ_NP_003233))))
@@ -277,7 +260,7 @@
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
     (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 8)
+    (run-build-rule source-kb target-kb build-rules-step-da 7)
 
     (is (ask target-kb '((ccp/UNIPROT_P37173 skos/exactMatch ccp/UNIPROTENTRYNAME_TGFR2_HUMAN))))
     (is (ask target-kb '((ccp/UNIPROT_P62258 skos/exactMatch ccp/UNIPROTENTRYNAME_1433E_HUMAN))))

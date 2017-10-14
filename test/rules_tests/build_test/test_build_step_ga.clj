@@ -111,7 +111,7 @@
                           (?/r_id obo/IAO_0000219 ?/r)
                           (?/r_id obo/IAO_0000219 ?/bio_r)
                           (?/bio_r rdf/type owl/Restriction)
-                          (!= ?/r ?/bio_r)
+                          (:filter (!= ?/r ?/bio_r))
                           )))
 
 
@@ -122,7 +122,7 @@
                           (?/r_id obo/IAO_0000219 ?/r)
                           (?/r_id obo/IAO_0000219 ?/bio_r)
                           (?/bio_r rdf/type owl/Restriction)
-                          (!= ?/r ?/bio_r)
+                          (:filter (!= ?/r ?/bio_r))
                           )))
 
     ;; there are 15 restriction instances in the input_data, however only 10 of them
@@ -130,9 +130,9 @@
     ;; of unique URIs.
     (is (= 10 (count (query target-kb '((?/record rdf/type ccp/IAO_EXT_0000305))))))
 
-    ;(let [log-kb (output-kb "/tmp/triples.nt")]
-    ;  (run-build-rule source-kb log-kb build-rules-step-ga 2)
-    ;  (close log-kb))
+    (let [log-kb (output-kb "/tmp/triples.nt")]
+      (run-build-rule source-kb log-kb build-rules-step-ga 2)
+      (close log-kb))
 
     ))
 
@@ -165,14 +165,14 @@
     (is (ask source-kb '((obo/PR_P37173 owl/equivalentClass ?/blank_node)
                           (?/id obo/IAO_0000219 ?/blank_node)
                           (?/id obo/IAO_0000219 ?/bio_blank_node)
-                          (!= ?/blank_node ?/bio_blank_node)
+                          (:filter (!= ?/blank_node ?/bio_blank_node))
                           (?/id rdf/type ccp/IAO_EXT_0001710)
                           )))
 
     (is (ask source-kb '((obo/GO_0022402 owl/equivalentClass ?/blank_node)
                           (?/id obo/IAO_0000219 ?/blank_node)
                           (?/id obo/IAO_0000219 ?/bio_blank_node)
-                          (!= ?/blank_node ?/bio_blank_node)
+                          (:filter (!= ?/blank_node ?/bio_blank_node))
                           (?/id rdf/type ccp/IAO_EXT_0001710)
                           )))
 
