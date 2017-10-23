@@ -18,8 +18,5 @@
                   # include only concepts with the CGNC namespace
                   filter (contains (str(?ontology_concept), 'http://birdgenenames.org/cgnc/GeneReport'))
                   minus {?ontology_concept owl:deprecated true} .
-                  ?ontology_concept rdfs:subClassOf* ?root_class .
-                  ?root_id obo:IAO_0000219 ?root_class . # IAO:denotes
-                  ?root_id rdf:type ccp:IAO_EXT_0000190 . # CCP:ontology_root_concept_identifier
   }"
   }

@@ -1,7 +1,7 @@
 ;; ------------------------------------------------------------------------
 ;; --------- Copy Owl Restriction to Bio ---------
 ;; ------------------------------------------------------------------------
-`{:name          "copy-owl-restriction-to-bio-uberon"
+`{:name          "copy-owl-restriction-to-bio"
   :description   "This rule makes a copy of all owl:Restriction instances and connects the copy to a generated Restriction Record instance."
   :head          ((?/restriction_record rdf/type ccp/IAO_EXT_0000305) ; ccp:OWL restriction record
                    (?/restriction_record obo/BFO_0000051 ?/id_field_value) ; has part
@@ -24,10 +24,8 @@
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix owl: <http://www.w3.org/2002/07/owl#>
                   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                  select distinct ?obo_restriction {
-                    ?ccp_id rdfs:subClassOf* ccp:IAO_EXT_0000201 . # ccp:uberon_ontology_identifier
-                    ?ccp_id obo:IAO_0000219 ?obo_id . # obo:denotes
-                    ?obo_id (owl:equivalentClass|owl:intersectionOf|rdf:first|rdf:rest|owl:propertyChainAxiom|owl:someValuesFrom|rdfs:subClassOf)* ?obo_restriction .
-                    ?obo_restriction rdf:type owl:Restriction .
+                  select ?obo_restriction {
+                       ?obo_restriction rdf:type owl:Restriction .
+                       filter (contains (str (?obo_restriction), \"bnode\"))
                   }"
   }

@@ -9,7 +9,7 @@
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   select ?bioentity ?drug_bioentity {
-    ?id rdfs:subClassOf ccp:IAO_EXT_0001429 . # CCP:pharmgkb_identifier
+    ?id rdfs:subClassOf ccp:IAO_EXT_0001724 . # CCP:pharmgkb_drug_identifier
     # make sure it is a pharmgkb drug id (this distinction should eventually be made in the file parsing code)
     ?id_field rdf:type ?id .
     ?id_field rdf:type ccp:IAO_EXT_0001010 . # ccp:pharmgkb_drug_record___accession_identifier_field_value

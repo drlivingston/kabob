@@ -24,7 +24,7 @@ URLS="http://purl.obolibrary.org/obo/bfo.owl
 http://purl.obolibrary.org/obo/chebi.owl
 http://purl.obolibrary.org/obo/cl.owl
 http://purl.obolibrary.org/obo/doid.owl
-http://purl.obolibrary.org/obo/go.owl
+http://purl.obolibrary.org/obo/go/extensions/go-plus.owl
 http://purl.obolibrary.org/obo/mop.owl
 http://purl.obolibrary.org/obo/ncbitaxon.owl
 http://purl.obolibrary.org/obo/pato.owl
