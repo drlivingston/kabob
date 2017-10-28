@@ -180,24 +180,41 @@
                            "rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/equivalent_class"
                            "rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/shared_label"))
 
-(def build-rules-step-c '("rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_genomic_identifier_typing"
-                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_mrna_identifier_typing"
-                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_protein_identifier_typing"
-                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_rna_identifier_typing"
-                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/obsolete_uniprot_identifier_typing"))
 
-(def build-rules-step-da '(
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/drugbank_drug_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/hgnc_gene_symbol_entrez_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/hgnc_gene_symbol_hgnc_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/pharmgkb_drug_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/pharmgkb_gene_entrez_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/pro_protein_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/uniprot_isoform_to_refseq_identifier_exact_match"
-                            "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match/uniprot_primary_accession_to_uniprot_entry_name_exact_match"
-                            ))
 
-(def build-rules-step-db '("rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_db_more_identifier_exact_match/refseq_protein_uniprot_identifier_exact_match"))
+(def build-rules-step-ca '("rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_ca_reactome_biopax2ice/reactome_protein_record_gen_create_base_records"))
+
+(def build-rules-step-cb '("rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_cellular_location_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_displayname_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_located_modification_feature_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_member_physical_entity_reference_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_name_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_removed_fragment_feature_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_uniprot_identifier_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_uniprot_isoform_identifier_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice/reactome_protein_record_gen_add_unlocated_protein_modification_feature_field"))
+
+(def build-rules-step-cc '("rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cc_reactome_biopax2ice/reactome_protein_record_gen_add_display_names_from_protein_references_field"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cc_reactome_biopax2ice/reactome_protein_record_gen_add_names_from_protein_references_field"))
+
+
+(def build-rules-step-da '("rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing/refseq_genomic_identifier_typing"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing/refseq_mrna_identifier_typing"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing/refseq_protein_identifier_typing"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing/refseq_rna_identifier_typing"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing/obsolete_uniprot_identifier_typing"))
+
+(def build-rules-step-db '("rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/drugbank_drug_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/hgnc_gene_symbol_entrez_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/hgnc_gene_symbol_hgnc_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/pharmgkb_drug_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/pharmgkb_gene_entrez_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/pro_protein_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/uniprot_isoform_to_refseq_identifier_exact_match"
+                           "rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match/uniprot_primary_accession_to_uniprot_entry_name_exact_match"))
+
+
+(def build-rules-step-dc '("rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match/refseq_protein_uniprot_identifier_exact_match"))
 
 (def build-rules-step-fa '("rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links/identifier_denotes_bioentity"
                             "rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links/idset_mentions_bioentity"))
@@ -230,28 +247,12 @@
 
 (def build-rules-step-hc-central-dogma '("rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/central_dogma/uniprot_protein_entrez_gene_mapping"))
 
-(def build-rules-step-hc-goa '("rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/goa/goa_biological_process_ice_to_bio"
-                                "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/goa/goa_cellular_component_ice_to_bio"
-                                "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/goa/goa_molecular_function_ice_to_bio"))
 
-(def build-rules-step-hc-reactome-biopax2ice-step-a '("rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_a/reactome_protein_record_gen_create_base_records.clj"))
+(def build-rules-step-hc-goa '("rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa/goa_biological_process_ice_to_bio"
+                                "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa/goa_cellular_component_ice_to_bio"
+                                "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa/goa_molecular_function_ice_to_bio"))
 
-(def build-rules-step-hc-reactome-biopax2ice-step-b '("rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_cellular_location_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_displayname_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_located_modification_feature_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_member_physical_entity_reference_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_name_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_removed_fragment_feature_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_uniprot_identifier_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_uniprot_isoform_identifier_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b/reactome_protein_record_gen_add_unlocated_protein_modification_feature_field.clj"))
-
-(def build-rules-step-hc-reactome-biopax2ice-step-c '("rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_c/reactome_protein_record_gen_add_display_names_from_protein_references_field.clj"
-                                                       "rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_c/reactome_protein_record_gen_add_names_from_protein_references_field.clj"))
-
-
-
-(def build-rules-step-ia '("rules/post_identifier_merge/step_i_bioentity_abstractions/step_ia_generate_missing_genes/missing_gene_gen."))
+(def build-rules-step-ia '("rules/post_identifier_merge/step_i_bioentity_abstractions/step_ia_generate_missing_genes/missing_gene_gen"))
 
 (def build-rules-step-ib '("rules/post_identifier_merge/step_i_bioentity_abstractions/step_ib_generate_gene_abstractions/gene_abstraction_gen"))
 

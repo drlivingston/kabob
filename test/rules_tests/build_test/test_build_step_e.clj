@@ -15,7 +15,8 @@
             [clojure.pprint :refer [pprint]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
-                                                            build-rules-step-c build-rules-step-da build-rules-step-db
+                                                            build-rules-step-ca build-rules-step-cb build-rules-step-cc
+                                                            build-rules-step-da build-rules-step-db build-rules-step-dc
                                                             concepts object-properties]]
             [test-with-files.core :refer [with-tmp-dir tmp-dir]]
             [kabob.build.id-sets.generate :refer [generate-all-id-sets]]
@@ -39,9 +40,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
       (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
@@ -116,9 +120,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
 
@@ -142,9 +149,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
@@ -221,9 +231,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))

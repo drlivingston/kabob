@@ -82,14 +82,22 @@ echo "KB_DATA_DIR=${KB_DATA_DIR}"
 #  ${KB_DATA_DIR}/file-lists/ice-owl-files.${KB_NAME}.list \
 #  "rdfxml"
 ####
-######### create skos:exactMatch links between equivalent ICE identifiers
-##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing
-####
-##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_da_identifier_exact_match
-##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_db_more_identifier_exact_match
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/step_db_more_identifier_exact_match
+#
+######### generate other ICE RDF
+# ${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_ca_reactome_biopax2ice
+# ${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_ca_reactome_biopax2ice
+# ${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice
+# ${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cb_reactome_biopax2ice
+# ${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cc_reactome_biopax2ice
+# ${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cc_reactome_biopax2ice
+
+######### process ICE identifiers
+##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing
+##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
+##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
 ####
 ######
 ######
@@ -153,14 +161,8 @@ echo "KB_DATA_DIR=${KB_DATA_DIR}"
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/pharmgkb
 
 
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_a
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_a
 
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_b
 
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_c
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/reactome/biopax2ice/step_c
 
 #
 #

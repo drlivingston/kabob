@@ -15,8 +15,9 @@
             [clojure.pprint :refer [pprint]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
-                                                            build-rules-step-c build-rules-step-da build-rules-step-db build-rules-step-fa
-                                                            build-rules-step-fb
+                                                            build-rules-step-ca build-rules-step-cb build-rules-step-cc
+                                                            build-rules-step-da build-rules-step-db build-rules-step-dc
+                                                            build-rules-step-fa build-rules-step-fb
                                                             concepts object-properties ice-identifiers obsolete-ice-identifiers]]
             [test-with-files.core :refer [with-tmp-dir tmp-dir]]
             [kabob.build.id-sets.generate :refer [generate-all-id-sets]]
@@ -40,9 +41,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -93,9 +97,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -161,9 +168,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
