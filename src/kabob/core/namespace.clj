@@ -49,7 +49,13 @@
         ("zfin_pr","http://zfin.org/action/marker/view/")
         ("mgi_pr","http://www.informatics.jax.org/marker/")
         ("ncbi_pr","http://www.ncbi.nlm.nih.gov/")
+        ("bp_base", "http://www.reactome.org/biopax/62/48887#")
+        ("reactome_download", "http://www.reactome.org/download/current/")
         ;; ---------------------------------------------------------------------------
+
+        ;; the bp namespace is a convenience for working with biopax data
+        ("bp" "http://www.biopax.org/release/biopax-level3.owl#")
+
 
        ;("kiao" "http://kabob.ucdenver.edu/iao/")
        ;("kabob" "http://kabob.ucdenver.edu/")

@@ -15,7 +15,9 @@
             [clojure.pprint :refer [pprint]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
-                                                            build-rules-step-c build-rules-step-da build-rules-step-db build-rules-step-fa
+                                                            build-rules-step-ca build-rules-step-cb build-rules-step-cc
+                                                            build-rules-step-da build-rules-step-db build-rules-step-dc
+                                                            build-rules-step-fa
                                                             build-rules-step-fb
                                                             build-rules-step-ga
                                                             expected-subpropertyof-links expected-inverseof-links
@@ -44,9 +46,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -83,9 +88,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -111,7 +119,7 @@
                           (?/r_id obo/IAO_0000219 ?/r)
                           (?/r_id obo/IAO_0000219 ?/bio_r)
                           (?/bio_r rdf/type owl/Restriction)
-                          (!= ?/r ?/bio_r)
+                          (:filter (!= ?/r ?/bio_r))
                           )))
 
 
@@ -122,7 +130,7 @@
                           (?/r_id obo/IAO_0000219 ?/r)
                           (?/r_id obo/IAO_0000219 ?/bio_r)
                           (?/bio_r rdf/type owl/Restriction)
-                          (!= ?/r ?/bio_r)
+                          (:filter (!= ?/r ?/bio_r))
                           )))
 
     ;; there are 15 restriction instances in the input_data, however only 10 of them
@@ -130,9 +138,9 @@
     ;; of unique URIs.
     (is (= 10 (count (query target-kb '((?/record rdf/type ccp/IAO_EXT_0000305))))))
 
-    ;(let [log-kb (output-kb "/tmp/triples.nt")]
-    ;  (run-build-rule source-kb log-kb build-rules-step-ga 2)
-    ;  (close log-kb))
+    (let [log-kb (output-kb "/tmp/triples.nt")]
+      (run-build-rule source-kb log-kb build-rules-step-ga 2)
+      (close log-kb))
 
     ))
 
@@ -143,9 +151,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -165,14 +176,14 @@
     (is (ask source-kb '((obo/PR_P37173 owl/equivalentClass ?/blank_node)
                           (?/id obo/IAO_0000219 ?/blank_node)
                           (?/id obo/IAO_0000219 ?/bio_blank_node)
-                          (!= ?/blank_node ?/bio_blank_node)
+                          (:filter (!= ?/blank_node ?/bio_blank_node))
                           (?/id rdf/type ccp/IAO_EXT_0001710)
                           )))
 
     (is (ask source-kb '((obo/GO_0022402 owl/equivalentClass ?/blank_node)
                           (?/id obo/IAO_0000219 ?/blank_node)
                           (?/id obo/IAO_0000219 ?/bio_blank_node)
-                          (!= ?/blank_node ?/bio_blank_node)
+                          (:filter (!= ?/blank_node ?/bio_blank_node))
                           (?/id rdf/type ccp/IAO_EXT_0001710)
                           )))
 

@@ -15,7 +15,9 @@
             [clojure.pprint :refer [pprint]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
-                                                            build-rules-step-c build-rules-step-da build-rules-step-db build-rules-step-fa
+                                                            build-rules-step-ca build-rules-step-cb build-rules-step-cc
+                                                            build-rules-step-da build-rules-step-db build-rules-step-dc
+                                                            build-rules-step-fa
                                                             build-rules-step-fb
                                                             build-rules-step-ga build-rules-step-gb
                                                             object-properties concepts
@@ -43,9 +45,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -82,7 +87,7 @@
                                  obo-id (symbol "obo" prop)]
                              (is (ask source-kb `((~ccp-id obo/IAO_0000219 ~obo-id)
                                                    (~ccp-id obo/IAO_0000219 ?/biorelation)
-                                                   (!= ?/biorelation ~obo-id)
+                                                   (:filter (!= ?/biorelation ~obo-id))
                                                    (~obo-id rdfs/label ?/label)
                                                    (?/biorelation rdfs/label ?/label)
                                                    )))))
@@ -93,7 +98,7 @@
                                     obo-id (symbol "obo" concept)]
                                 (is (ask source-kb `((~ccp-id obo/IAO_0000219 ~obo-id)
                                                       (~ccp-id obo/IAO_0000219 ?/bioconcept)
-                                                      (!= ?/bioconcept ~obo-id)
+                                                      (:filter (!= ?/bioconcept ~obo-id))
                                                       (~obo-id rdfs/label ?/label)
                                                       (?/bioconcept rdfs/label ?/label)
                                                       )))))

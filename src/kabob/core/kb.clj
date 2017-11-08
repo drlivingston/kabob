@@ -1,7 +1,7 @@
 (ns kabob.core.kb
   (use kr.core.kb
        kr.core.rdf
-       kr.core.sesame.kb
+       kr.sesame.kb
        kabob.core.namespace)
   (import org.openrdf.rio.RDFFormat
           org.openrdf.query.resultio.TupleQueryResultFormat))

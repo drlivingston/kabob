@@ -17,7 +17,7 @@
                                                             go-bp-concepts go-cc-concepts cl-concepts pr-concepts chebi-concepts
                                                             gaz-concepts hgnc-concepts concepts object-properties so-concepts mi-concepts
                                                             ncbitaxon-concepts obi-concepts pato-concepts bfo-concepts uberon-concepts
-                                                            root-concepts root-object-properties]]))
+                                                            ]]))
 
 ;;;
 ;;; pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_aa_ontology_root_identifier
@@ -25,27 +25,26 @@
 ;;;
 (deftest pre-ice-load-step-aa
   (let [source-kb (test-kb initial-triples)
-        target-kb (test-kb '())]
+        target-kb (test-kb '())
+        concepts-only-hgnc (filter #(contains? hgnc-concepts %) concepts)]
 
     (run-build-rule source-kb target-kb build-rules-step-a 0)
 
-    ;; there should be 2 triples for each root concept
-    (doall (map (fn [concept] (let [ccp-id (symbol "ccp" concept)
-                                    obo-id (symbol "obo" concept)]
-                                (is (ask target-kb `((~ccp-id rdf/type ccp/IAO_EXT_0000190) ;; ccp:ontology_root_concept_identifier
-                                                      (~ccp-id obo/IAO_0000219 ~obo-id))))))
-                root-concepts))
 
-    (doall (map (fn [prop] (let [ccp-id (symbol "ccp" prop)
-                                 obo-id (symbol "obo" prop)]
-                             (is (ask target-kb `((~ccp-id rdf/type ccp/IAO_EXT_0000308) ;; ccp:top_level_object_property_identifier
-                                                   (~ccp-id obo/IAO_0000219 ~obo-id))))))
-                root-object-properties))
+    (is (ask target-kb '((ccp/HGNC_11773 rdfs/subClassOf ccp/IAO_EXT_0000088) ;; ccp:ontology_concept_identifier
+                          (ccp/HGNC_11773 rdfs/subClassOf ccp/IAO_EXT_0000185) ;; ccp:hgnc_gene_identifier
+                          (ccp/HGNC_11773 obo/IAO_0000219 hgnc_pr/gene_symbol_report?hgnc_id=11773))))
 
+    ;;; there should be two triples for each ontology concept
+    ;(doall (map (fn [concept] (let [ccp-id (symbol "ccp" concept)
+    ;                                obo-id (symbol "hgnc_pr" (str "gene_symbol_report?hgnc_id=" (clojure.string/replace concept #"HGNC_" "")))]
+    ;                            (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0000088) ;; ccp:ontology_concept_identifier
+    ;                                                  (~ccp-id rdfs/subClassOf ccp/IAO_EXT_0000185)
+    ;                                                  (~ccp-id obo/IAO_0000219 ~obo-id))))))
+    ;            concepts-only-hgnc))
 
-    ;; there are 4 metadata triples for each rule run, so 8 metadata triples and 14 rule output triples for the root
-    ;; classes and 12 rule output triples for the rule properties expected here
-    (is (= (+ 8 (* 2 (count (concat root-concepts root-object-properties))))
+    ;; there are 4 metadata triples for each rule run, so 4*13 metadata triples and 3 rule output triples per non-obo concept
+    (is (= (+ (* 4 13) (* 3 (count concepts-only-hgnc)))
            (count (query target-kb '((?/s ?/p ?/o))))))
 
     (let [log-kb (output-kb "/tmp/triples.nt")
@@ -76,21 +75,27 @@
                                                       (~ccp-id obo/IAO_0000219 ~obo-id))))))
                 concepts-minus-hgnc))
 
-    (is (ask target-kb '((ccp/HGNC_11773 rdfs/subClassOf ccp/IAO_EXT_0000088) ;; ccp:ontology_concept_identifier
-                          (ccp/HGNC_11773 rdfs/subClassOf ccp/IAO_EXT_0000185) ;; ccp:hgnc_gene_identifier
-                          (ccp/HGNC_11773 obo/IAO_0000219 hgnc_pr/gene_symbol_report?hgnc_id=11773))))
-
     (doall (map (fn [prop] (let [ccp-id (symbol "ccp" prop)
                                  obo-id (symbol "obo" prop)]
                              (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0000306) ;; ccp:object_property_identifier
                                                    (~ccp-id obo/IAO_0000219 ~obo-id))))))
                 object-properties))
 
-    ;; there are 4 metadata triples for each rule run so 15*4=60 metadata triples and 75+82=157 rule output triples for the
+    (prn (str "======================CONCEPT COUNT: " (count concepts-minus-hgnc)))
+    (prn (str "======================PROPERTY COUNT: " (count object-properties)))
+
+    ;; there are 4 metadata triples for each rule run so 2*4=8 metadata triples and 75+82=157 rule output triples for the
     ;; concepts and 50 rule output triples for the object properties expected here
-    (is (= (+ 60 3 (* 2 (count concepts-minus-hgnc)) (* 2 (count object-properties)))
+    (is (= (+ 8 (* 2 (count concepts-minus-hgnc)) (* 2 (count object-properties)))
            (count (query target-kb '((?/s ?/p ?/o))))
            ))
+
+
+
+    (let [log-kb (output-kb "/tmp/triples.nt")
+          src-kb (test-kb initial-triples)]
+      (run-build-rule source-kb log-kb build-rules-step-a 1)
+      (close log-kb))
 
     ;(let [log-kb (output-kb "/tmp/triples.nt")
     ;      src-kb (test-kb initial-triples)]

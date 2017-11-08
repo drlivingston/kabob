@@ -15,7 +15,9 @@
             [clojure.pprint :refer [pprint]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
-                                                            build-rules-step-c build-rules-step-da build-rules-step-db build-rules-step-fa
+                                                            build-rules-step-ca build-rules-step-cb build-rules-step-cc
+                                                            build-rules-step-da build-rules-step-db build-rules-step-dc
+                                                            build-rules-step-fa
                                                             build-rules-step-fb
                                                             build-rules-step-ga build-rules-step-gb build-rules-step-gc
                                                             expected-subpropertyof-links expected-inverseof-links
@@ -45,9 +47,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb
@@ -71,7 +76,7 @@
                                  parent-concept-id (symbol "ccp" (last link))]
                              (is (ask source-kb `((~child-concept-id-ccp obo/IAO_0000219 ~child-concept-id-obo)
                                                    (~child-concept-id-ccp obo/IAO_0000219 ?/bioentity1)
-                                                   (!= ?/bioentity1 ~child-concept-id-obo)
+                                                   (:filter (!= ?/bioentity1 ~child-concept-id-obo))
                                                    (?/bioentity1 rdfs/subClassOf ?/bioentity2)
                                                    (~parent-concept-id obo/IAO_0000219 ?/bioentity2))))))
                 (filter #(not= % '("HGNC_11773" "SO_0001217")) expected-subclassof-links)))
@@ -79,7 +84,7 @@
     ;; separate out the expected HGNC_11773 subclass relation b/c of hgnc_pr namespace usage
     (is (ask source-kb `((ccp/HGNC_11773 obo/IAO_0000219 hgnc_pr/gene_symbol_report?hgnc_id=11773)
                           (ccp/HGNC_11773 obo/IAO_0000219 ?/bioentity1)
-                          (!= ?/bioentity1 hgnc_pr/gene_symbol_report?hgnc_id=11773)
+                          (:filter (!= ?/bioentity1 hgnc_pr/gene_symbol_report?hgnc_id=11773))
                           (?/bioentity1 rdfs/subClassOf ?/bioentity2)
                           (ccp/SO_0001217 obo/IAO_0000219 ?/bioentity2))))
 
@@ -89,7 +94,7 @@
                                  parent-concept-id (symbol "ccp" (last link))]
                              (is (ask source-kb `((~child-concept-id-ccp obo/IAO_0000219 ~child-concept-id-obo)
                                                    (~child-concept-id-ccp obo/IAO_0000219 ?/bioentity1)
-                                                   (!= ?/bioentity1 ~child-concept-id-obo)
+                                                   (:filter (!= ?/bioentity1 ~child-concept-id-obo))
                                                    (?/bioentity1 owl/disjointWith ?/bioentity2)
                                                    (~parent-concept-id obo/IAO_0000219 ?/bioentity2))))))
                 expected-disjointwith-links))
@@ -100,7 +105,7 @@
                                  parent-concept-id (symbol "ccp" (last link))]
                              (is (ask source-kb `((~child-concept-id-ccp obo/IAO_0000219 ~child-concept-id-obo)
                                                    (~child-concept-id-ccp obo/IAO_0000219 ?/bioentity1)
-                                                   (!= ?/bioentity1 ~child-concept-id-obo)
+                                                   (:filter (!= ?/bioentity1 ~child-concept-id-obo))
                                                    (?/bioentity1 owl/equivalentClass ?/bioentity2)
                                                    (~parent-concept-id obo/IAO_0000219 ?/bioentity2))))))
                 expected-equivalent-class-links))
@@ -112,7 +117,9 @@
                                  cls-id (symbol "ccp" (last link))]
                              (is (ask source-kb `((~prop-id-ccp obo/IAO_0000219 ~prop-id-obo)
                                                    (~prop-id-ccp obo/IAO_0000219 ?/bioprop)
-                                                   (!= ?/bioprop ~prop-id-obo)
+                                                   (:filter (!= ?/bioprop ~prop-id-obo))
+
+
                                                    (?/bioprop rdfs/domain ?/biodomain)
                                                    (~cls-id obo/IAO_0000219 ?/biodomain))))))
                 expected-rdfs-domain-links))
@@ -123,7 +130,7 @@
                                  cls-id (symbol "ccp" (last link))]
                              (is (ask source-kb `((~prop-id-ccp obo/IAO_0000219 ~prop-id-obo)
                                                    (~prop-id-ccp obo/IAO_0000219 ?/bioprop)
-                                                   (!= ?/bioprop ~prop-id-obo)
+                                                   (:filter (!= ?/bioprop ~prop-id-obo))
                                                    (?/bioprop rdfs/range ?/biodomain)
                                                    (~cls-id obo/IAO_0000219 ?/biodomain))))))
                 expected-rdfs-range-links))
@@ -134,7 +141,7 @@
                                   parent-prop-id (symbol "ccp" (last props))]
                               (is (ask source-kb `((~child-prop-id-ccp obo/IAO_0000219 ~child-prop-id-obo)
                                                     (~child-prop-id-ccp obo/IAO_0000219 ?/biorelation1)
-                                                    (!= ?/biorelation1 ~child-prop-id-obo)
+                                                    (:filter (!= ?/biorelation1 ~child-prop-id-obo))
                                                     (?/biorelation1 rdfs/subPropertyOf ?/biorelation2)
                                                     (~parent-prop-id obo/IAO_0000219 ?/biorelation2))))))
                 expected-subpropertyof-links))
@@ -144,7 +151,7 @@
                                   parent-prop-id (symbol "ccp" (last props))]
                               (is (ask source-kb `((~child-prop-id-ccp obo/IAO_0000219 ~child-prop-id-obo)
                                                     (~child-prop-id-ccp obo/IAO_0000219 ?/biorelation1)
-                                                    (!= ?/biorelation1 ~child-prop-id-obo)
+                                                    (:filter (!= ?/biorelation1 ~child-prop-id-obo))
                                                     (?/biorelation1 owl/inverseOf ?/biorelation2)
                                                     (~parent-prop-id obo/IAO_0000219 ?/biorelation2))))))
                 expected-inverseof-links))
@@ -281,9 +288,12 @@
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
     (run-build-rules source-kb build-rules-step-db)
+    (run-build-rules source-kb build-rules-step-dc)
 
     (with-tmp-dir
       ;; generate identifier set ntriple files and load into the source-kb

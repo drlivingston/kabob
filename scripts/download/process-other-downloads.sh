@@ -20,6 +20,10 @@ cd /kabob_data/raw/irefweb && { wget -c -t 0 --timeout 60 --waitretry 10 http://
 mkdir -p /kabob_data/raw/reactome
 cd /kabob_data/raw/reactome && { wget -c -t 0 --timeout 60 --waitretry 10 http://www.reactome.org/download/current/biopax.zip ; unzip -o biopax.zip ; cd - ; }
 /kabob.git/scripts/download/create-metadata-file.sh /kabob_data/raw/reactome/Homo_sapiens.owl  http://www.reactome.org/download/current/biopax.zip
+/kabob.git/scripts/download/create-metadata-rdf.sh /kabob_data/raw/reactome/Homo_sapiens.owl REACTOME http://www.reactome.org/download/current/biopax.zip
 mkdir -p /kabob_data/rdf/reactome
 # copy the human reactome OWL file to the /kabob_data/rdf/reactome directory so that it will be loaded automatically
 cp /kabob_data/raw/reactome/Homo_sapiens.owl /kabob_data/rdf/reactome/Homo_sapiens.owl
+# copy the human reactome OWL metadata RDF file to the /kabob_data/rdf/reactome directory so that it will be loaded automatically
+cp /kabob_data/raw/reactome/Homo_sapiens.owl.ready.nt /kabob_data/rdf/reactome/Homo_sapiens.owl.ready.nt
+gzip /kabob_data/rdf/reactome/Homo_sapiens.owl.ready.nt

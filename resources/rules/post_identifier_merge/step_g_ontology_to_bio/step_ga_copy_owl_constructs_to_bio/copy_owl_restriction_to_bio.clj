@@ -26,6 +26,10 @@
                   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                   select ?obo_restriction {
                        ?obo_restriction rdf:type owl:Restriction .
-                       filter (contains (str (?obo_restriction), \"bnode\"))
+                       # exclude restrictions from the IAO
+                       minus {
+                         ?cls (rdfs:subClassOf|owl:equivalentClass|owl:intersectionOf|rdf:first|rdf:rest|owl:someValuesFrom)+ ?obo_restriction .
+                         filter (contains (str (?cls), \"obo/IAO\"))
+                       }
                   }"
   }

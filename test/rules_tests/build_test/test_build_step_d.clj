@@ -15,8 +15,210 @@
             [clojure.pprint :refer [pprint]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
-                                                            build-rules-step-c build-rules-step-da build-rules-step-db]]))
+                                                            build-rules-step-ca build-rules-step-cb build-rules-step-cc
+                                                            build-rules-step-da build-rules-step-db build-rules-step-dc]]))
 
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_protein_identifier_typing
+;;; Test that refseq protein identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-protein
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 2)
+
+    (is (ask target-kb '((ccp/REFSEQ_NP_001020018 rdfs/subClassOf ccp/IAO_EXT_0001638)))) ;; ccp:refseq_protein_identifier
+    (is (ask target-kb '((ccp/REFSEQ_NP_003233 rdfs/subClassOf ccp/IAO_EXT_0001638)))) ;; ccp:refseq_protein_identifier
+    (is (ask target-kb '((ccp/REFSEQ_NP_006752 rdfs/subClassOf ccp/IAO_EXT_0001638)))) ;; ccp:refseq_protein_identifier
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 3 rule output triples expected here
+    (is (= 7 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_genomic_identifier_typing
+;;; Test that refseq genomic identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-genomic
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 0)
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
+    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_mrna_identifier_typing
+;;; Test that refseq genomic identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-mrna
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 1)
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
+    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_rna_identifier_typing
+;;; Test that refseq genomic identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-rna
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 3)
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
+    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/uniprot_protein_alternative_identifier_exact_match
+;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
+;;;
+(deftest step-da-obsolete-uniprot-identifier-typing
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 4)
+
+    (is (ask target-kb '((ccp/UNIPROT_B4DTV5 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+    (is (ask target-kb '((ccp/UNIPROT_Q15580 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+    (is (ask target-kb '((ccp/UNIPROT_Q6DKT6 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+    (is (ask target-kb '((ccp/UNIPROT_Q99474 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 4 rule output triples expected here
+    (is (= 8 (count (query target-kb '((?/s ?/p ?/o))))))
+    ))
+
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_protein_identifier_typing
+;;; Test that refseq protein identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-protein
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 2)
+
+    (is (ask target-kb '((ccp/REFSEQ_NP_001020018 rdfs/subClassOf ccp/IAO_EXT_0001638)))) ;; ccp:refseq_protein_identifier
+    (is (ask target-kb '((ccp/REFSEQ_NP_003233 rdfs/subClassOf ccp/IAO_EXT_0001638)))) ;; ccp:refseq_protein_identifier
+    (is (ask target-kb '((ccp/REFSEQ_NP_006752 rdfs/subClassOf ccp/IAO_EXT_0001638)))) ;; ccp:refseq_protein_identifier
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 3 rule output triples expected here
+    (is (= 7 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_genomic_identifier_typing
+;;; Test that refseq genomic identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-genomic
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 0)
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
+    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_mrna_identifier_typing
+;;; Test that refseq genomic identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-mrna
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 1)
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
+    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_c_ice_id_typing/refseq_rna_identifier_typing
+;;; Test that refseq genomic identifiers get appropriately typed (or subclassed in this case).
+;;;
+(deftest step-da-refseq-rna
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 3)
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
+    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
+
+
+;;;
+;;; rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/uniprot_protein_alternative_identifier_exact_match
+;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
+;;;
+(deftest step-da-obsolete-uniprot-identifier-typing
+  (let [source-kb (test-kb initial-plus-ice-triples)
+        target-kb (test-kb '())]
+    (run-build-rules source-kb build-rules-step-a)
+    (run-build-rules source-kb build-rules-step-b)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rule source-kb target-kb build-rules-step-da 4)
+
+    (is (ask target-kb '((ccp/UNIPROT_B4DTV5 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+    (is (ask target-kb '((ccp/UNIPROT_Q15580 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+    (is (ask target-kb '((ccp/UNIPROT_Q6DKT6 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+    (is (ask target-kb '((ccp/UNIPROT_Q99474 rdf/type ccp/IAO_EXT_0001711)))) ;; ccp:obsolete_identifier
+
+    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 4 rule output triples expected here
+    (is (= 8 (count (query target-kb '((?/s ?/p ?/o))))))
+    ))
 
 
 
@@ -25,13 +227,16 @@
 ;;; Test the generation of skos:exactMatch links to DrugBank identifiers based on the DrugBank data source
 ;;;
 ;;; TODO: add DrugBank ICE triples to the input_data to test this rule.
-(deftest step-da-drugbank-identifier-exact-match
+(deftest step-db-drugbank-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 0)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 0)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))))
@@ -40,13 +245,16 @@
 ;;; rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/hgnc_gene_symbol_entrez_identifier_exact_match
 ;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
 ;;;
-(deftest step-da-hgnc-symbol-to-ncbi-gene-identifier-exact-match
+(deftest step-db-hgnc-symbol-to-ncbi-gene-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 1)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 1)
 
     (is (ask target-kb '((ccp/HGNC_TGFBR2 skos/exactMatch ccp/NCBI_GENE_7048))))
 
@@ -58,13 +266,16 @@
 ;;; rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/hgnc_gene_symbol_hgnc_identifier_exact_match
 ;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
 ;;;
-(deftest step-da-hgnc-symbol-to-hgnc-gene-identifier-exact-match
+(deftest step-db-hgnc-symbol-to-hgnc-gene-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 2)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 2)
 
     (is (ask target-kb '((ccp/HGNC_TGFBR2 skos/exactMatch ccp/HGNC_11773))))
 
@@ -81,8 +292,11 @@
 ;        target-kb (test-kb '())]
 ;    (run-build-rules source-kb build-rules-step-a)
 ;    (run-build-rules source-kb build-rules-step-b)
-;    (run-build-rules source-kb build-rules-step-c)
-;    (run-build-rule source-kb target-kb build-rules-step-da 3)
+;(run-build-rules source-kb build-rules-step-ca)
+;(run-build-rules source-kb build-rules-step-cb)
+;(run-build-rules source-kb build-rules-step-cc)
+;(run-build-rules source-kb build-rules-step-da)
+;    (run-build-rule source-kb target-kb build-rules-step-db 3)
 ;
 ;    ;;(is (ask target-kb '((ccp/HGNC_TGFBR2 skos/exactMatch ccp/HGNC_11773))))
 ;
@@ -92,23 +306,6 @@
 
 
 
-;;;
-;;; rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_exact_match/hgnc_gene_symbol_supplied_entrez_identifier_exact_match
-;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
-;;;
-(deftest step-da-hgnc-symbol-to-supplied-ncbi-gene-identifier-exact-match
-  (let [source-kb (test-kb initial-plus-ice-triples)
-        target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 3)
-
-    (is (ask target-kb '((ccp/HGNC_TGFBR2 skos/exactMatch ccp/NCBI_GENE_7048))))
-
-    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
-    (is (= 5 (count (query target-kb '((?/s ?/p ?/o))))))
-    ))
 
 
 ;;;;
@@ -120,8 +317,11 @@
 ;        target-kb (test-kb '())]
 ;    (run-build-rules source-kb build-rules-step-a)
 ;    (run-build-rules source-kb build-rules-step-b)
-;    (run-build-rules source-kb build-rules-step-c)
-;    (run-build-rule source-kb target-kb build-rules-step-da 6)
+;(run-build-rules source-kb build-rules-step-ca)
+;(run-build-rules source-kb build-rules-step-cb)
+;(run-build-rules source-kb build-rules-step-cc)
+;(run-build-rules source-kb build-rules-step-da)
+;    (run-build-rule source-kb target-kb build-rules-step-db 6)
 ;
 ;    ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
 ;    (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -139,7 +339,7 @@
 ;    ;(run-build-rules source-kb build-rules-step-a 3)
 ;    ;(run-build-rules source-kb build-rules-step-b 2)
 ;    ;(run-build-rules source-kb build-rules-step-c 3)
-;    ;(run-build-rule source-kb target-kb build-rules-step-da 10)
+;    ;(run-build-rule source-kb target-kb build-rules-step-db 10)
 ;    ;
 ;    ;;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
 ;    ;(is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -155,8 +355,11 @@
 ;        target-kb (test-kb '())]
 ;    (run-build-rules source-kb build-rules-step-a)
 ;    (run-build-rules source-kb build-rules-step-b)
-;    (run-build-rules source-kb build-rules-step-c)
-;    (run-build-rule source-kb target-kb build-rules-step-da 11)
+;(run-build-rules source-kb build-rules-step-ca)
+;(run-build-rules source-kb build-rules-step-cb)
+;(run-build-rules source-kb build-rules-step-cc)
+;(run-build-rules source-kb build-rules-step-da)
+;    (run-build-rule source-kb target-kb build-rules-step-db 11)
 ;
 ;    (is (ask target-kb '((ccp/NCBI_GENE_7048 skos/exactMatch ccp/HGNC_11773))))
 ;
@@ -171,7 +374,7 @@
 ;    ;  (run-build-rules src-kb build-rules-step-a)
 ;    ;  (run-build-rules src-kb build-rules-step-b)
 ;    ;  (run-build-rules src-kb build-rules-step-c)
-;    ;  (run-build-rule src-kb log-kb build-rules-step-da 11)
+;    ;  (run-build-rule src-kb log-kb build-rules-step-db 11)
 ;    ;  (close log-kb))
 ;
 ;    ))
@@ -183,13 +386,16 @@
 ;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
 ;;;
 ;;; TODO: add test triples to input_data to test this rule
-(deftest step-da-pharmgkb-drug-to-other-identifier-exact-match
+(deftest step-db-pharmgkb-drug-to-other-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 4)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 3)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -203,13 +409,16 @@
 ;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
 ;;;
 ;;; TODO: add test triples to input_data to test this rule
-(deftest step-da-pharmgkb-gene-to-ncbi-gene-identifier-exact-match
+(deftest step-db-pharmgkb-gene-to-ncbi-gene-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 5)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 4)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -222,13 +431,16 @@
 ;;; Test the generation of skos:exactMatch links between HGNC symbols and NCBI gene identifiers based on the HGNC data source
 ;;;
 ;;; TODO: add 'exact' info to the record in order to test this rule
-(deftest step-da-pr-to-other-identifier-exact-match
+(deftest step-db-pr-to-other-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 6)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 5)
 
     ;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
     (is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -248,7 +460,7 @@
 ;    ;(run-build-rules source-kb build-rules-step-a 3)
 ;    ;(run-build-rules source-kb build-rules-step-b 2)
 ;    ;(run-build-rules source-kb build-rules-step-c 3)
-;    ;(run-build-rule source-kb target-kb build-rules-step-da 16)
+;    ;(run-build-rule source-kb target-kb build-rules-step-db 16)
 ;    ;
 ;    ;;; there are 4 metadata triples for each rule run, so 4 metadata triples and 0 rule output triples expected here
 ;    ;(is (= 4 (count (query target-kb '((?/s ?/p ?/o))))))
@@ -256,13 +468,16 @@
 
 
 
-(deftest step-da-uniprot-isoform-to-refseq-identifier-exact-match
+(deftest step-db-uniprot-isoform-to-refseq-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 7)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 6)
 
     (is (ask target-kb '((ccp/UNIPROT_P37173-2 skos/exactMatch ccp/REFSEQ_NP_001020018))))
     (is (ask target-kb '((ccp/UNIPROT_P37173-1 skos/exactMatch ccp/REFSEQ_NP_003233))))
@@ -271,13 +486,16 @@
     (is (= 6 (count (query target-kb '((?/s ?/p ?/o))))))))
 
 
-(deftest step-da-uniprot-primary-accession-to-entry-name-exact-match
+(deftest step-db-uniprot-primary-accession-to-entry-name-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
-    (run-build-rule source-kb target-kb build-rules-step-da 8)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
+    (run-build-rules source-kb build-rules-step-da)
+    (run-build-rule source-kb target-kb build-rules-step-db 7)
 
     (is (ask target-kb '((ccp/UNIPROT_P37173 skos/exactMatch ccp/UNIPROTENTRYNAME_TGFR2_HUMAN))))
     (is (ask target-kb '((ccp/UNIPROT_P62258 skos/exactMatch ccp/UNIPROTENTRYNAME_1433E_HUMAN))))
@@ -353,14 +571,17 @@
 
 
 
-(deftest step-db-uniprot-to-refseq-identifier-exact-match
+(deftest step-dc-uniprot-to-refseq-identifier-exact-match
   (let [source-kb (test-kb initial-plus-ice-triples)
         target-kb (test-kb '())]
     (run-build-rules source-kb build-rules-step-a)
     (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-c)
+    (run-build-rules source-kb build-rules-step-ca)
+    (run-build-rules source-kb build-rules-step-cb)
+    (run-build-rules source-kb build-rules-step-cc)
     (run-build-rules source-kb build-rules-step-da)
-    (run-build-rule source-kb target-kb build-rules-step-db 0)
+    (run-build-rules source-kb build-rules-step-db)
+    (run-build-rule source-kb target-kb build-rules-step-dc 0)
 
     (is (ask target-kb '((ccp/REFSEQ_NP_006752 skos/exactMatch ccp/UNIPROT_P62258))))
 
@@ -368,7 +589,7 @@
     (is (= 5 (count (query target-kb '((?/s ?/p ?/o))))))
 
     (let [log-kb (output-kb "/tmp/triples.nt")]
-      (run-build-rule source-kb log-kb build-rules-step-db 0)
+      (run-build-rule source-kb log-kb build-rules-step-dc 0)
       (close log-kb))
 
 

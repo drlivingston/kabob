@@ -354,7 +354,7 @@
   (let [query-pat `((?/id skos/exactMatch ?/id2)
                      (?/id [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
                      (?/id2 [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
-                     (!= ?/id ?/id2))]
+                     (:filter (!= ?/id ?/id2)))]
     (binding [*use-inference* false
               *work-queue-single-threaded* true]
       (println "running pairs query.")
@@ -382,7 +382,7 @@
   (let [query-pat `((?/id skos/exactMatch ?/id2)
                      (?/id [rdfs/subClassOf *] ccp/IAO_EXT_0000306) ; ccp:identifier of a biological entity
                      (?/id2 [rdfs/subClassOf *] ccp/IAO_EXT_0000306) ; ccp:identifier of a biological entity
-                     (!= ?/id ?/id2))]
+                     (:filter (!= ?/id ?/id2)))]
     (binding [*use-inference* false
               *work-queue-single-threaded* true]
       (println "running pairs query.")

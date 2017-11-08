@@ -20,9 +20,12 @@
                        minus { ?identifier obo:IAO_0000219 ?ontology_concept }
                        # exclude blank nodes - we want concepts with identifiers here
                        filter (!contains(str(?ontology_concept), '/bnode/'))
+                       # exclude concepts that are subclass of information content entity
+                       minus { ?ontology_concept rdfs:subClassOf* obo:IAO_0000030 }
                        # exclude the oboInOwl:ObsoleteClass class
                        filter (?ontology_concept != oboInOwl:ObsoleteClass)
                        # exclude ICE world concepts (IAO, CCP extension ontology, OA ontology)
+                       filter (!contains (str(?ontology_concept), 'oboInOwl'))
                        filter (!contains (str(?ontology_concept), 'ext/IAO_'))
                        filter (!contains (str(?ontology_concept), 'obo/IAO_'))
                        filter (!contains (str(?ontology_concept), 'http://www.w3.org/ns/oa#'))
