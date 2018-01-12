@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=/kabob.git/scripts/docker
-source ${SCRIPT_DIR}/allegrograph-specific/docker-env.sh
+source ${SCRIPT_DIR}/blazegraph-specific/docker-env.sh
 source ${SCRIPT_DIR}/common-scripts/ENV.sh
 
 if [ $# -ne 7 ]
@@ -22,7 +22,7 @@ RULETYPE=${7:?}
 OUTPUTDIR=${KB_DATA_DIR}/${RULETYPE}/
 RULES_RES_DIR=resources/${RULETYPE}/
 
-SERVER_IMPL="default"
+SERVER_IMPL="blazegraph"
 
 echo Running rules
 mkdir -p ${OUTPUTDIR}

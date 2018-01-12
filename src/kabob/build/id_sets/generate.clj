@@ -115,7 +115,8 @@
    ;;e.g. edu/ucdenver/ccp/kabob/build/id_typing/entrez_gene_id_typing_rules.clj
    :graph-db-dir     (nth original-args 5)
 
-   :is-virtuoso      (nth original-args 6)
+   ;; name of the server implementation, e.g. stardog, blazegraph. Defaults to 'http'
+   :server-impl      (nth original-args 6)
    })
 
 
@@ -128,6 +129,7 @@
   (let [{out-dir :output-directory :as args}
         (command-line-args args)]
     (make-parents (str/join File/separator [out-dir "file"]))
+    ;; TODO: does the source kb connection get closed??
     (generate-all-id-sets (source-kb args) out-dir))
   (System/exit 0))
 

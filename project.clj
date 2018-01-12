@@ -19,7 +19,8 @@
   				       [commons-codec/commons-codec "1.6"]
 								 [com.complexible.stardog.sesame/stardog-sesame-core "5.0"]
 								 [virtuoso/virtuoso-jdbc "4.2"]
-								 [virtuoso/virtuoso-rdf4j "2.x"]]
+								 [virtuoso/virtuoso-rdf4j "2.x"]
+								 [com.blazegraph/bigdata-core "2.1.4"]]
 	:repositories {"local" "file:mvn-local-repository"
 								 "stardog-public" "http://maven.stardog.com"}
   ;:main ^:skip-aot my-stuff.core

@@ -52,7 +52,8 @@
    ;; IMPORTANT: The output directory path must end with a forward slash.
    :output-directory (nth original-args 4)
 
-   :is-virtuoso (nth original-args 5)
+   ;; name of the server implementation, e.g. stardog, blazegraph. Defaults to 'http'
+   :server-impl (nth original-args 5)
    
    ;; Names of the rule sets to use (must point to files available on the 
    ;; classpath; NOTE that it should not start with a forward slash)
@@ -66,7 +67,7 @@
   (prn (str "Repo name: " (:repo-name args)))
   (prn (str "Passed in select limit: " (:sparql-limit args)))
   (prn (str "Output directory: " (:output-directory args)))
-  (prn (str "Is Virtuoso?: " (:is-virtuoso args)))
+  (prn (str "Server implementation: " (:server-impl args)))
   )
 
 (defn logging-rules [rules]

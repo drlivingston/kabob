@@ -16,5 +16,5 @@ echo "DATASOURCE_ICE_DIR=${DATASOURCE_ICE_DIR}"
 echo "KB_DATA_DIR=${KB_DATA_DIR}"
 
 export LEIN_ROOT=true
-IS_VIRTUOSO=true
-cd /kabob.git && { ${LEININGEN} eval-sparql ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${IS_VIRTUOSO} directives/duplicates ; cd - ; }
+SERVER_IMPL="virtuoso"
+cd /kabob.git && { ${LEININGEN} eval-sparql ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${SERVER_IMPL} directives/duplicates ; cd - ; }
