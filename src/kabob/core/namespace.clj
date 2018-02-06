@@ -49,7 +49,7 @@
         ("zfin_pr","http://zfin.org/action/marker/view/")
         ("mgi_pr","http://www.informatics.jax.org/marker/")
         ("ncbi_pr","http://www.ncbi.nlm.nih.gov/")
-        ("bp_base", "http://www.reactome.org/biopax/62/48887#")
+        ("bp_base", "http://www.reactome.org/biopax/63/48887#")
         ("reactome_download", "http://www.reactome.org/download/current/")
         ;; ---------------------------------------------------------------------------
 
