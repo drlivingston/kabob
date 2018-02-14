@@ -130,6 +130,8 @@
                                                              ?id1 skos:exactMatch ?id2 .
                                                              ?id1 rdfs:subClassOf ?idtype1 .
                                                              ?id2 rdfs:subClassOf ?idtype2 .
+                                                             filter (?idtype1 != ccp:IAO_EXT_0000342)
+                                                             filter (?idtype2 != ccp:IAO_EXT_0000342)
                                                              minus {?idtype1 rdfs:subClassOf* ccp:IAO_EXT_0000307}
                                                              minus {?idtype2 rdfs:subClassOf* ccp:IAO_EXT_0000307}
                                                              }")]
@@ -352,8 +354,8 @@
 
 (defn combined-pairs-concepts-fn [kb]
   (let [query-pat `((?/id skos/exactMatch ?/id2)
-                     (?/id [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
-                     (?/id2 [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
+                     (?/id rdfs/subClassOf ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
+                     (?/id2 rdfs/subClassOf ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
                      (:filter (!= ?/id ?/id2)))]
     (binding [*use-inference* false
               *work-queue-single-threaded* true]
