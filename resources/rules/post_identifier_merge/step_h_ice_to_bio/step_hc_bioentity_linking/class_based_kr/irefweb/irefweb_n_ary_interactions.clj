@@ -6,7 +6,6 @@
   :head (
          ;; create subclasses of interaction type and id
          (?/interaction rdfs/subClassOf ?/interaction_type) ;interaction
-         (?/interaction rdfs/label ?/interaction_type_label) ; transfer label to the subclass
 
          ;; create subclasses of the proteins
          (?/bioentity_sc rdfs/subClassOf ?/bioentity)
@@ -36,7 +35,11 @@
                            :ns "ccp" :prefix "B_"}])
 
   :sparql-string
-  "SELECT ?bioentity ?interaction_irig_identifier ?interactor_a_identifier ?interaction_type ?interaction_type_label ?super_record ?has_participant
+  "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  PREFIX obo: <http://purl.obolibrary.org/obo/>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  SELECT ?bioentity ?interaction_irig_identifier ?interactor_a_identifier ?interaction_type ?interaction_type_label ?super_record ?has_participant
   WHERE {
          # get binary interaction records
                       ?interaction_record rdf:type ccp:IAO_EXT_0000064 . # CCP:IRefWeb_interaction_record
@@ -49,30 +52,42 @@
          ?super_record obo:BFO_0000051 ?interaction_record .
          ?super_record rdf:type ccp:IAO_EXT_0000722 . # ccp:IRefWeb PSI-MITAB 2_6 record
          ?super_record obo:BFO_0000051 ?interactor_record_a .
-         ?interactor_record_a rdf:type ccp:IAO_EXT_0000788 . # ccp:irefweb_record___interactor_a_field_value
-                          ?interactor_record_a rdf:type ccp:IAO_EXT_0000065 . # CCP:IRefWeb_interactor_record
-                          ?interactor_record_a obo:BFO_0000051 ?final_ref_field_a .
+         #?interactor_record_a rdf:type ccp:IAO_EXT_0000788 . # ccp:irefweb_record___interactor_a_field_value
+    ?interactor_record_a rdf:type ccp:IAO_EXT_0000065 . # CCP:IRefWeb_interactor_record
+    ?interactor_record_a obo:BFO_0000051 ?final_ref_field_a .
          ?final_ref_field_a rdf:type ccp:IAO_EXT_0000769 . # ccp:irefweb_interactor_record___final_reference_field_value
-                          ?final_ref_field_a rdf:type ?interactor_a_identifier .
+    ?final_ref_field_a rdf:type ?interactor_a_identifier .
          ?interactor_a_identifier obo:IAO_0000219 ?bioentity .
 
          # get the unique interaction identifier
          ?interaction_record obo:BFO_0000051 ?irig_identifier_field_value .
          ?irig_identifier_field_value rdf:type ccp:IAO_EXT_0000737 . # ccp:IRefWeb_interaction_record__integer_RID_identifier_field_value
-                          ?irig_identifier_field_value rdf:type ?interaction_irig_identifier .
+    ?irig_identifier_field_value rdf:type ?interaction_irig_identifier .
          ?interaction_irig_identifier rdfs:subClassOf ccp:IAO_EXT_0001376 . # IRefWeb_interaction_RIG_identifier
 
-                          # get the interaction type name and ID
-         ?interaction_record obo:BFO_0000051 ?interaction_type_record .
-         ?interaction_type_record rdf:type ccp:IAO_EXT_0000716 . # ccp:IRefWeb_interaction_type_record
-                          ?interaction_type_record obo:BFO_0000051 ?interaction_type_identifier_field_value .
-         ?interaction_type_identifier_field_value rdf:type ccp:IAO_EXT_0000753 . # ccp:IRefWeb_interaction_type_record__interaction_type_identifier_field_value
-                          ?interaction_type_identifier_field_value rdf:type ?interaction_type_identifier .
-         ?interaction_type_identifier obo:IAO_0000219 ?interaction_type .
-         # make sure ?interaction_type is a bioentity
-         ?id_set obo:IAO_0000142 ?interaction_type . # obo:mentions
-    ?id_set rdf:type ccp:IAO_EXT_0000316 . # ccp:identifier_set
-    ?interaction_type rdfs:label ?interaction_type_label .
+    # get the interaction type name and ID
+         optional {
+                   ?interaction_record obo:BFO_0000051 ?interaction_type_record .
+                   ?interaction_type_record rdf:type ccp:IAO_EXT_0000716 . # ccp:IRefWeb_interaction_type_record
+    ?interaction_type_record obo:BFO_0000051 ?interaction_type_identifier_field_value .
+                   ?interaction_type_identifier_field_value rdf:type ccp:IAO_EXT_0000753 . # ccp:IRefWeb_interaction_type_record__interaction_type_identifier_field_value
+    ?interaction_type_identifier_field_value rdf:type ?interaction_type_identifier .
+                   filter (?interaction_type_identifier != ccp:IAO_EXT_0000753)
+                   ?interaction_type_identifier obo:IAO_0000219 ?inter_type .
+                   # make sure ?interaction_type is a bioentity
+                   ?id_set obo:IAO_0000142 ?inter_type . # obo:mentions
+                                           ?id_set rdf:type ccp:IAO_EXT_0000316 . # ccp:identifier_set
+                                           ?inter_type rdfs:label ?inter_type_label .
+                   }
+
+         {
+          select ?bio_interaction {
+                                   ccp:MI_0000 obo:IAO_0000219 ?bio_interaction .
+                                   filter (?bio_interaction != obo:MI_0000) .
+                                   }
+          }
+
+         bind(coalesce(?inter_type, ?bio_interaction) as ?interaction_type)
 
          {
           select ?has_participant {
