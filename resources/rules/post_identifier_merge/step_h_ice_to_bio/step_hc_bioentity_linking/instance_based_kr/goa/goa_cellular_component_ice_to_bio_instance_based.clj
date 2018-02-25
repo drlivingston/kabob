@@ -19,7 +19,7 @@
          ;; provenance: connect the record to the localization instance
          (?/record obo/IAO_0000219 ?/localization_instance)) ; IAO:denotes
 
-  :reify ([?/localization_instance {:ln (:sha-1 obo/GO_0051179 ?/trans_main_loc_restriction ?/target_end_restriction "instance")
+  :reify ([?/localization_instance {:ln (:sha-1 obo/GO_0051179 ?/localized_bioentity ?/cellular_component "instance")
                                :ns "ccp" :prefix "B_"}]
            [?/bioentity_instance {:ln (:sha-1 ?/cellular_component ?/localized_bioentity "instance")
                             :ns "ccp" :prefix "B_"}]

@@ -155,29 +155,29 @@ ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc
 #
 #
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/goa
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/goa
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/goa
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/goa
 #
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/hp
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/hp
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/hp
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/hp
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/hp
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/hp
 #
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/drugbank
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/drugbank
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/drugbank
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/drugbank
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/drugbank
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/drugbank
 
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/irefweb
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/irefweb
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/irefweb
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/irefweb
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/irefweb
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/irefweb
 
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/pharmgkb
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/pharmgkb
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/pharmgkb
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/pharmgkb
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/pharmgkb
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/pharmgkb
 
 
 ###### bioentity abstractions
