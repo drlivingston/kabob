@@ -28,15 +28,15 @@
           (?/record obo/IAO_0000219 ?/interaction))
 
   :reify         ([?/interaction {:ln (:sha-1 ?/bioentity1 ?/bioentity2 "pharmgkb-relation")
-                                  :ns "ccp" :prefix "B_"}]
+                                  :ns "kbio" :prefix "B_"}]
                    [?/bioentity1_sc_restriction {:ln (:restriction)
-                                                 :ns "ccp" :prefix "RS_"}]
+                                                 :ns "kbio" :prefix "RS_"}]
                    [?/bioentity2_sc_restriction {:ln (:restriction)
-                                                 :ns "ccp" :prefix "RS_"}]
+                                                 :ns "kbio" :prefix "RS_"}]
                    [?/bioentity1_sc {:ln (:sha-1 ?/interaction ?/bioentity1)
-                                     :ns "ccp" :prefix "B_"}]
+                                     :ns "kbio" :prefix "B_"}]
                    [?/bioentity2_sc {:ln (:sha-1 ?/interaction ?/bioentity2)
-                                     :ns "ccp" :prefix "B_"}])
+                                     :ns "kbio" :prefix "B_"}])
 
   :sparql-string
      "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

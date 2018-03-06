@@ -10,7 +10,7 @@
           (?/indirect_template_restriction owl/someValuesFrom ?/gene)
           (?/protein rdfs/subClassOf ?/indirect_template_restriction))
   :reify ([?/indirect_template_restriction {:ln (:restriction)
-                                            :ns "ccp" :prefix "RS_"}])
+                                            :ns "kbio" :prefix "RS_"}])
   :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

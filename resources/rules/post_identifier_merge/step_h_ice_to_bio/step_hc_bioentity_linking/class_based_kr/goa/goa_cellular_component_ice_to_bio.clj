@@ -31,15 +31,15 @@
          (?/record obo/IAO_0000219 ?/localization_sc)) ; IAO:denotes
 
   :reify ([?/trans_main_loc_restriction {:ln (:restriction)
-                                          :ns "ccp" :prefix "RS_"}]
+                                          :ns "kbio" :prefix "RS_"}]
            [?/target_end_restriction {:ln (:restriction)
-                                      :ns "ccp" :prefix "RS_"}]
+                                      :ns "kbio" :prefix "RS_"}]
            [?/localization_sc {:ln (:sha-1 obo/GO_0051179 ?/trans_main_loc_restriction ?/target_end_restriction)
-                               :ns "ccp" :prefix "B_"}]
+                               :ns "kbio" :prefix "B_"}]
            [?/bioentity_sc {:ln (:sha-1 ?/cellular_component ?/localized_bioentity)
-                            :ns "ccp" :prefix "B_"}]
+                            :ns "kbio" :prefix "B_"}]
            [?/cellular_component_sc {:ln (:sha-1 ?/cellular_component ?/localized_bioentity "cc")
-                                     :ns "ccp" :prefix "B_"}]
+                                     :ns "kbio" :prefix "B_"}]
            )
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

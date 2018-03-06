@@ -14,9 +14,9 @@
 
           (?/super_record obo/IAO_0000219 ?/interaction))
   :reify ([?/interaction {:ln (:sha-1 ?/unique_interaction_id)
-                          :ns "ccp" :prefix "B_"}]
+                          :ns "kbio" :prefix "B_"}]
            [?/bioentity_instance {:ln (:sha-1 ?/interaction ?/bioentity)
-                           :ns "ccp" :prefix "B_"}])
+                           :ns "kbio" :prefix "B_"}])
 
   :sparql-string
   "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

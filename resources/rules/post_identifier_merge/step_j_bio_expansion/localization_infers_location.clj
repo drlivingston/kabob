@@ -12,11 +12,11 @@
                  (?/bioentity_sc rdfs/subClassOf ?/located_in_restriction))
 
   :reify       ([?/location_sc {:ln (:sha-1 ?/parent_location "inferred-location")
-                                :ns "ccp" :prefix "B_"}]
+                                :ns "kbio" :prefix "B_"}]
                  [?/located_in_restriction {:ln (:restriction)
-                                            :ns "ccp" :prefix "RS_"}]
+                                            :ns "kbio" :prefix "RS_"}]
                  [?/bioentity_sc {:ln (:sha-1 ?/parent_bioentity ?/parent_location "inferred-location")
-                                  :ns "ccp" :prefix "B_"}])
+                                  :ns "kbio" :prefix "B_"}])
 
   :sparql-string
                "SELECT ?parent_bioentity ?parent_location ?located_in

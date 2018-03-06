@@ -11,7 +11,7 @@
   :reify ([?/list_record {:ln (:sha-1 ?/listmember)
                            :ns "ccp" :prefix "R_"}]
            [?/bio_listmember {:ln (:sha-1 ?/listmember)
-                              :ns "ccp" :prefix "L_"}]
+                              :ns "kbio" :prefix "L_"}]
            [?/id_field_value {:ln (:sha-1 ?/id)
                               :ns "ccp" :prefix "F_" :suffix ""}]
            [?/id {:ln (:sha-1 ?/listmember)

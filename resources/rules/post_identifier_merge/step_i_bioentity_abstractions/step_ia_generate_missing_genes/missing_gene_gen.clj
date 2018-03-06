@@ -13,11 +13,11 @@
           (?/has_gene_template_r owl/someValuesFrom ?/protein_coding_gene)
           (?/protein_missing_gene rdfs/subClassOf ?/has_gene_template_r))
   :reify ([?/taxon_r {:ln (:restriction)
-                          :ns "ccp" :prefix "RS_"}]
+                          :ns "kbio" :prefix "RS_"}]
            [?/has_gene_template_r {:ln (:restriction)
-                                            :ns "ccp" :prefix "RS_"}]
+                                            :ns "kbio" :prefix "RS_"}]
            [?/protein_coding_gene {:ln (:sha-1 ?/protein_missing_gene "missing")
-                             :ns "ccp" :prefix "B_"}])
+                             :ns "kbio" :prefix "B_"}])
   :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

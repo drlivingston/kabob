@@ -30,19 +30,19 @@
                    (?/vgp_abstraction rdfs/subClassOf ccp/IAO_EXT_0001719)) ;; ccp:variant_gene_product_abstraction
 
   :reify         ([?/ggp_abstraction {:ln (:localname ?/g)
-                          :ns "ccp" :prefix "GGP_" :suffix ""}]
+                          :ns "kbio" :prefix "GGP_" :suffix ""}]
                    [?/gp_abstraction {:ln (:localname ?/g)
-                          :ns "ccp" :prefix "GP_" :suffix ""}]
+                          :ns "kbio" :prefix "GP_" :suffix ""}]
                    [?/vgp_abstraction {:ln (:localname ?/g)
-                           :ns "ccp" :prefix "VGP_" :suffix ""}]
+                           :ns "kbio" :prefix "VGP_" :suffix ""}]
                    [?/vg_abstraction {:ln (:localname ?/g)
-                          :ns "ccp" :prefix "VG_" :suffix ""}]
+                          :ns "kbio" :prefix "VG_" :suffix ""}]
                    [?/ggpv_abstraction {:ln (:localname ?/g)
-                            :ns "ccp" :prefix "GGPV_" :suffix ""}]
+                            :ns "kbio" :prefix "GGPV_" :suffix ""}]
                    [?/ggv_abstraction {:ln (:localname ?/g)
-                            :ns "ccp" :prefix "GGV_" :suffix ""}]
+                            :ns "kbio" :prefix "GGV_" :suffix ""}]
                    [?/gpgpv_abstraction {:ln (:localname ?/g)
-                            :ns "ccp" :prefix "GPGPV_" :suffix ""}])
+                            :ns "kbio" :prefix "GPGPV_" :suffix ""}])
   :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

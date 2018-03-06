@@ -11,7 +11,7 @@
                    (?/id obo/IAO_0000219 ?/blank_node)
                    (?/id obo/IAO_0000219 ?/bio_blank_node)) ; IAO:denotes
   :reify         ([?/bio_blank_node {:ln (:localname ?/blank_node)
-                                      :ns "ccp" :prefix "BN_"}]
+                                      :ns "kbio" :prefix "BN_"}]
                    [?/anon_record {:ln (:sha-1 ?/blank_node)
                                           :ns "ccp" :prefix "R_"}]
                    [?/id_field_value {:ln (:sha-1 ?/id)

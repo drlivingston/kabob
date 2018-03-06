@@ -10,7 +10,7 @@
          (?/restriction owl/someValuesFrom ?/taxon)
          (?/bioentity rdfs/subClassOf ?/restriction))
   :reify ([?/restriction {:ln (:restriction)
-                          :ns "ccp" :prefix "RS_"}])
+                          :ns "kbio" :prefix "RS_"}])
   :sparql-string
   "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>

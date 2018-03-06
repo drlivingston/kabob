@@ -42,21 +42,21 @@
                    (?/interaction rdfs/subClassOf ?/realizes_drug_role_restriction))
 
   :reify         ([?/interaction {:ln (:sha-1 "interaction" ?/target_protein ?/drug)
-                                  :ns "ccp" :prefix "I_"}]
+                                  :ns "kbio" :prefix "I_"}]
                    [?/target_sc {:ln (:sha-1 ?/target_protein ?/drug "target")
-                                 :ns "ccp" :prefix "B_"}]
+                                 :ns "kbio" :prefix "B_"}]
                    [?/drug_sc {:ln (:sha-1 ?/target_protein ?/drug "drug")
-                               :ns "ccp" :prefix "B_"}]
+                               :ns "kbio" :prefix "B_"}]
                    [?/target_participant_restriction {:ln (:restriction)
-                                                      :ns "ccp" :prefix "RS_"}]
+                                                      :ns "kbio" :prefix "RS_"}]
                    [?/drug_participant_restriction {:ln (:restriction)
-                                                    :ns "ccp" :prefix "RS_"}]
+                                                    :ns "kbio" :prefix "RS_"}]
                    [?/realizes_drug_role_restriction {:ln (:restriction)
-                                                      :ns "ccp" :prefix "RS_"}]
+                                                      :ns "kbio" :prefix "RS_"}]
                    [?/inheres_restriction {:ln (:restriction)
-                                           :ns "ccp" :prefix "RS_"}]
+                                           :ns "kbio" :prefix "RS_"}]
                    [?/inheres {:ln (:sha-1 "drugrole" ?/drug)
-                               :ns "ccp" :prefix "B_"}])
+                               :ns "kbio" :prefix "B_"}])
 
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
   prefix franzOption_clauseReorderer: <franz:identity>

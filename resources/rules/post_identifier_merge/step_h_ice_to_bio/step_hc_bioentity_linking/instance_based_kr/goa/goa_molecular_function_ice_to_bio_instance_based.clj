@@ -16,9 +16,9 @@
 
 
   :reify         ([?/molecular_function_instance {:ln (:sha-1 ?/molecular_function ?/participating_bioentity "mf")
-                                            :ns "ccp" :prefix "B_"}]
+                                            :ns "kbio" :prefix "B_"}]
                    [?/bioentity_instance {:ln (:sha-1 ?/molecular_function ?/participating_bioentity)
-                                    :ns "ccp" :prefix "B_"}])
+                                    :ns "kbio" :prefix "B_"}])
 
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                 prefix franzOption_clauseReorderer: <franz:identity>

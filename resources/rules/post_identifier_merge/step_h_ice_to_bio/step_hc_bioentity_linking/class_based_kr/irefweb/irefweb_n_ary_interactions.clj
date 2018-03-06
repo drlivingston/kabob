@@ -26,13 +26,13 @@
          ;(?/interaction rdfs/subClassOf ?/card_restriction)
           (?/super_record obo/IAO_0000219 ?/interaction))
   :reify ([?/interaction {:ln (:sha-1 ?/unique_interaction_id)
-                          :ns "ccp" :prefix "B_"}]
+                          :ns "kbio" :prefix "B_"}]
            [?/restriction {:ln (:restriction)
-                           :ns "ccp" :prefix "RS_"}]
+                           :ns "kbio" :prefix "RS_"}]
            ;[?/card_restriction {:ln (:restriction)
-           ;                     :ns "ccp" :prefix "R_"}]
+           ;                     :ns "kbio" :prefix "R_"}]
            [?/bioentity_sc {:ln (:sha-1 ?/interaction ?/bioentity)
-                           :ns "ccp" :prefix "B_"}])
+                           :ns "kbio" :prefix "B_"}])
 
   :sparql-string
   "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

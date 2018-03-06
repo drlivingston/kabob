@@ -11,7 +11,7 @@
   :reify         ([?/adc_record {:ln (:sha-1 ?/adc)
                                  :ns "ccp" :prefix "R_"}]
                    [?/bio_adc {:ln (:sha-1 ?/adc)
-                               :ns "ccp" :prefix "ADC_"}]
+                               :ns "kbio" :prefix "ADC_"}]
                    [?/id_field_value {:ln (:sha-1 ?/id)
                                       :ns "ccp" :prefix "F_" :suffix ""}]
                    [?/id {:ln (:sha-1 ?/adc)

@@ -12,7 +12,7 @@
                    (?/id obo/IAO_0000219 ?/bio_restriction) ; IAO:denotes
                    (?/bio_restriction rdf/type owl/Restriction))
   :reify         ([?/bio_restriction {:ln (:localname ?/obo_restriction)
-                                      :ns "ccp" :prefix "RS_"}]
+                                      :ns "kbio" :prefix "RS_"}]
                    [?/restriction_record {:ln (:sha-1 ?/obo_restriction)
                                           :ns "ccp" :prefix "R_"}]
                    [?/id_field_value {:ln (:sha-1 ?/id)

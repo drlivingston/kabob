@@ -20,11 +20,11 @@
          (?/record obo/IAO_0000219 ?/localization_instance)) ; IAO:denotes
 
   :reify ([?/localization_instance {:ln (:sha-1 obo/GO_0051179 ?/localized_bioentity ?/cellular_component "instance")
-                               :ns "ccp" :prefix "B_"}]
+                               :ns "kbio" :prefix "B_"}]
            [?/bioentity_instance {:ln (:sha-1 ?/cellular_component ?/localized_bioentity "instance")
-                            :ns "ccp" :prefix "B_"}]
+                            :ns "kbio" :prefix "B_"}]
            [?/cellular_component_instance {:ln (:sha-1 ?/cellular_component ?/localized_bioentity "cc" "instance")
-                                     :ns "ccp" :prefix "B_"}])
+                                     :ns "kbio" :prefix "B_"}])
 
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

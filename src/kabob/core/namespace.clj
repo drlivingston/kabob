@@ -30,6 +30,7 @@
 
        ;;("iao" "http://purl.obolibrary.org/obo/")
        ("ccp" "http://ccp.ucdenver.edu/obo/ext/")
+       ("kbio" "http://ccp.ucdenver.edu/kabob/bio/")
 
         ;; ---------------------------------------------------------------------------
         ;; the following namespaces are each a workaround for the 'http:/' bug as

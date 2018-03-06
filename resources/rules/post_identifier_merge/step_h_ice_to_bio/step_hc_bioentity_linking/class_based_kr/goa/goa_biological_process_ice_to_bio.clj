@@ -21,11 +21,11 @@
                    (?/record obo/IAO_0000219 ?/biological_process_sc)) ; IAO:denotes
 
   :reify         ([?/biological_process_sc {:ln (:sha-1 ?/biological_process ?/participating_bioentity "bp")
-                                            :ns "ccp" :prefix "B_"}]
+                                            :ns "kbio" :prefix "B_"}]
                    [?/bioentity_sc {:ln (:sha-1 ?/biological_process ?/participating_bioentity)
-                                    :ns "ccp" :prefix "B_"}]
+                                    :ns "kbio" :prefix "B_"}]
                    [?/participation_restriction {:ln (:restriction)
-                                                 :ns "ccp" :prefix "RS_"}])
+                                                 :ns "kbio" :prefix "RS_"}])
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                 prefix franzOption_clauseReorderer: <franz:identity>
                 PREFIX obo: <http://purl.obolibrary.org/obo/>

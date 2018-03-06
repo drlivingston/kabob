@@ -22,11 +22,11 @@
 
 
   :reify         ([?/interaction {:ln (:sha-1 "interaction" ?/target_protein ?/drug)
-                                  :ns "ccp" :prefix "I_"}]
+                                  :ns "kbio" :prefix "I_"}]
                    [?/target_instance {:ln (:sha-1 ?/target_protein ?/drug "target")
-                                 :ns "ccp" :prefix "B_"}]
+                                 :ns "kbio" :prefix "B_"}]
                    [?/drug_instance {:ln (:sha-1 ?/target_protein ?/drug "drug")
-                               :ns "ccp" :prefix "B_"}])
+                               :ns "kbio" :prefix "B_"}])
 
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
   prefix franzOption_clauseReorderer: <franz:identity>

@@ -27,11 +27,11 @@
                    (?/record obo/IAO_0000219 ?/bioentity_sc)) ; IAO_denotes
 
   :reify         ([?/phenotype_sc {:ln (:sha-1 ?/human_phenotype ?/causal_bioentity "pheno")
-                                   :ns "ccp" :prefix "B_"}]
+                                   :ns "kbio" :prefix "B_"}]
                    [?/bioentity_sc {:ln (:sha-1 ?/human_phenotype ?/causal_bioentity)
-                                    :ns "ccp" :prefix "B_"}]
+                                    :ns "kbio" :prefix "B_"}]
                    [?/cause_restriction {:ln (:restriction)
-                                         :ns "ccp" :prefix "RS_"}])
+                                         :ns "kbio" :prefix "RS_"}])
 
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
