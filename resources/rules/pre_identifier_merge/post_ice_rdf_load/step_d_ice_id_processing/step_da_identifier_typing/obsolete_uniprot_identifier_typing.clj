@@ -3,7 +3,7 @@
 ;; ----------------------------------------------------
 `{:name "obsolete-uniprot-identifier-typing"
   :description "This rule types all UniProt secondary accession identifiers as obsolete identifiers so that they won't be used in the identifier merging step."
-  :head ((?/secondary_uniprot_identifier rdf/type ccp/IAO_EXT_0001711)) ; CCP:obsolete_identifier
+  :head ((?/secondary_uniprot_identifier rdfs/subClassOf ccp/IAO_EXT_0001711)) ; CCP:obsolete_identifier
   :reify ()
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
