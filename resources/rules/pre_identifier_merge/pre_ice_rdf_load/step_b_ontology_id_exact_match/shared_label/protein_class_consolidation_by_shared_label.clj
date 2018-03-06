@@ -14,8 +14,7 @@
                        ?c1 rdf:type owl:Class .
                        ?c1 rdfs:label ?label1 .
                        filter(str(?label1) = 'protein')
-                       ?c2 rdfs:label ?label2 .
-                       filter(str(?label2) = 'protein')
+                       ?c2 rdfs:label ?label1 .
                        ?c2 oboInOwl:hasOBONamespace ?ns2 .
                        ?c2 rdf:type owl:Class .
                        # the one PR collapse that we know is safe is CHEBI:protein = PR:protein

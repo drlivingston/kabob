@@ -27,3 +27,12 @@ cp /kabob_data/raw/reactome/Homo_sapiens.owl /kabob_data/rdf/reactome/Homo_sapie
 # copy the human reactome OWL metadata RDF file to the /kabob_data/rdf/reactome directory so that it will be loaded automatically
 cp /kabob_data/raw/reactome/Homo_sapiens.owl.ready.nt /kabob_data/rdf/reactome/Homo_sapiens.owl.ready.nt
 gzip /kabob_data/rdf/reactome/Homo_sapiens.owl.ready.nt
+
+
+# get the bioGRID files
+mkdir -p /kabob_data/raw/biogrid
+cd /kabob_data/raw/biogrid && { wget -c -t 0 --timeout 60 --waitretry 10 https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-ALL-LATEST.tab2.zip ; unzip -o BIOGRID-ALL-LATEST.tab2.zip ; mv BIOGRID-ALL-*.tab2.txt BIOGRID-ALL-LATEST.tab2.txt ; wget -c -t 0 --timeout 60 --waitretry 10 https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-CHEMICALS-LATEST.chemtab.zip ; unzip -o BIOGRID-CHEMICALS-LATEST.chemtab.zip ; mv BIOGRID-CHEMICALS-*.chemtab.txt BIOGRID-CHEMICALS-LATEST.chemtab.txt ; wget -c -t 0 --timeout 60 --waitretry 10 https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-MV-Physical-LATEST.tab2.zip ; unzip -o BIOGRID-MV-Physical-LATEST.tab2.zip ; mv BIOGRID-MV-Physical-*.tab2.txt BIOGRID-MV-Physical-LATEST.tab2.txt ; cd - ; }
+/kabob.git/scripts/download/create-metadata-file.sh /kabob_data/raw/biogrid/BIOGRID-MV-Physical-LATEST.tab2.txt  https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-MV-Physical-LATEST.tab2.zip
+/kabob.git/scripts/download/create-metadata-file.sh /kabob_data/raw/biogrid/BIOGRID-ALL-LATEST.tab2.txt  https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-ALL-LATEST.tab2.zip
+/kabob.git/scripts/download/create-metadata-file.sh /kabob_data/raw/biogrid/BIOGRID-CHEMICALS-LATEST.chemtab.txt  https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-CHEMICALS-LATEST.chemtab.zip
+
