@@ -82,12 +82,16 @@
 
          {
           select ?bio_interaction {
-                                   ccp:MI_0000 obo:IAO_0000219 ?bio_interaction .
-                                   filter (?bio_interaction != obo:MI_0000) .
+                                   ccp:INO_0000002 obo:IAO_0000219 ?bio_interaction .
+                                   filter (?bio_interaction != obo:INO_0000002) .
                                    }
           }
 
-         bind(coalesce(?inter_type, ?bio_interaction) as ?interaction_type)
+
+  # if no interaction type was specified then bind to INO_0000002 (interaction)
+  bind(coalesce(?inter_type, ?bio_interaction) as ?updated_inter_type)
+  # if the specified interaction type is MI_0000, then change it to INO_0000002
+  bind(if(?updated_inter_type = ccp:MI_0000,?bio_interaction,?updated_inter_type) as ?interaction_type)
 
          {
           select ?has_participant {

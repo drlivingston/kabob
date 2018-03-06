@@ -62,12 +62,12 @@
                               }
             }
 
-            # TODO: Perhaps there is a better class to use other than MI_0000?
+
             {
              select ?abstract_interaction ?abstract_interaction_label {
-                              ccp:MI_0000 obo:IAO_0000219 ?abstract_interaction .
+                              ccp:INO_0000002 obo:IAO_0000219 ?abstract_interaction .
                               ?abstract_interaction rdfs:label ?abstract_interaction_label .
-                              filter (?abstract_interaction != obo:MI_0000) .
+                              filter (?abstract_interaction != obo:INO_0000002) .
              }
           }
 
