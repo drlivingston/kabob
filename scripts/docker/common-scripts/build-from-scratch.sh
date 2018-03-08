@@ -100,36 +100,36 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 #${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
 #${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
-${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
+#######
+#########
+#########
+########## ============================================================================================ #
+########## ============================   END PRE IDENTIFIER MERGE RULES   ============================ #
+########## ============================================================================================ #
+#########
+#########
+########### Create the ID sets (step e)
+#export LEIN_ROOT=true
+#cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${SERVER_IMPL} ; cd - ; }
+#${BASE_SCRIPT_DIR}/LOAD.sh id_sets/exact
+#####
 ######
-########
-########
-######### ============================================================================================ #
-######### ============================   END PRE IDENTIFIER MERGE RULES   ============================ #
-######### ============================================================================================ #
-########
-########
-########## Create the ID sets (step e)
-export LEIN_ROOT=true
-cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${SERVER_IMPL} ; cd - ; }
-${BASE_SCRIPT_DIR}/LOAD.sh id_sets/exact
-####
-#####
-###### ============================================================================================ #
-###### =======================   POST IDENTIFIER MERGE RULES ARE RUN BELOW   ====================== #
-###### ============================================================================================ #
+####### ============================================================================================ #
+####### =======================   POST IDENTIFIER MERGE RULES ARE RUN BELOW   ====================== #
+####### ============================================================================================ #
+######
+######
+###########  create bioentity for each id set
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
 #####
 #####
-##########  create bioentity for each id set
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
-####
-####
-######### connect bioentities based on ontology hierarchies
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
+########## connect bioentities based on ontology hierarchies
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
 ${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
 ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
 ${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio

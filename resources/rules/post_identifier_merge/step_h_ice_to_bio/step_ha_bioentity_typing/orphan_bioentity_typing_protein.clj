@@ -12,7 +12,7 @@
     ?id rdfs:subClassOf* ccp:IAO_EXT_0000188 . # CCP:protein identifier
     ?id obo:IAO_0000219 ?bioentity . # OBO:denotes
     # ensure it's a kabob bioentity (not an obo bioentity)
-    filter (contains (str(?bioentity), 'http://ccp.ucdenver.edu/obo/ext/'))
+    filter (contains (str(?bioentity), 'http://ccp.ucdenver.edu/kabob/bio/'))
     # if it already has a subClassOf relation, then it's already part of a hierarchy so we exclude it
     minus {?bioentity rdfs:subClassOf ?x}
     {

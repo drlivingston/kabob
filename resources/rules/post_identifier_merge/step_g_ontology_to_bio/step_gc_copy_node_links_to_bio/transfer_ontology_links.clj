@@ -11,12 +11,12 @@
                   select ?bio_concept ?p ?bio_other {
                       ?concept_id obo:IAO_0000219 ?concept .
                       ?concept_id obo:IAO_0000219 ?bio_concept .
-                      filter (?concept != ?bio_concept && contains(str(?bio_concept),'http://ccp.ucdenver.edu/obo/ext/'))
+                      filter (?concept != ?bio_concept && contains(str(?bio_concept),'http://ccp.ucdenver.edu/kabob/bio/'))
 
                       ?concept ?p ?other .
 
                       ?other_id obo:IAO_0000219 ?other .
                       ?other_id obo:IAO_0000219 ?bio_other .
-                      filter (?other != ?bio_other && contains(str(?bio_other),'http://ccp.ucdenver.edu/obo/ext/'))
+                      filter (?other != ?bio_other && contains(str(?bio_other),'http://ccp.ucdenver.edu/kabob/bio/'))
                   }"
   }

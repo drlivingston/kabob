@@ -11,5 +11,5 @@
                   ?id obo:IAO_0000219 ?list_member .
                   ?list_member ?p rdf:nil .
                   ?id obo:IAO_0000219 ?bio_list_member .
-                  filter (?list_member != ?bio_list_member && contains(str(?bio_list_member),'http://ccp.ucdenver.edu/obo/ext/'))
+                  filter (?list_member != ?bio_list_member && contains(str(?bio_list_member),'http://ccp.ucdenver.edu/kabob/bio/'))
                   }"}

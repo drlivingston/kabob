@@ -11,7 +11,7 @@
                          ?s rdfs:label ?label .
                          ?id obo:IAO_0000219 ?s .
                          ?id obo:IAO_0000219 ?bioentity .
-                         filter (?s != ?bioentity && contains(str(?bioentity),'http://ccp.ucdenver.edu/obo/ext/'))
+                         filter (?s != ?bioentity && contains(str(?bioentity),'http://ccp.ucdenver.edu/kabob/bio/'))
                   }"
   }
 
