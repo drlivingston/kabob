@@ -95,12 +95,12 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_c_other_ice_gen/step_cc_reactome_biopax2ice
 ##
 ########### process ICE identifiers
-${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing
-${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing
-${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
-${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
-${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
+#${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_da_identifier_typing
+#${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_db_identifier_exact_match
+#${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
+${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_ice_id_processing/step_dc_more_identifier_exact_match
 ######
 ########
 ########
@@ -110,89 +110,89 @@ ${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/post_ice_rdf_load/step_d_
 ########
 ########
 ########## Create the ID sets (step e)
-#export LEIN_ROOT=true
-#cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${SERVER_IMPL} ; cd - ; }
-#${BASE_SCRIPT_DIR}/LOAD.sh id_sets/exact
-######
-######
-####### ============================================================================================ #
-####### =======================   POST IDENTIFIER MERGE RULES ARE RUN BELOW   ====================== #
-####### ============================================================================================ #
-######
-######
-###########  create bioentity for each id set
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
+export LEIN_ROOT=true
+cd /kabob.git && { ${LEININGEN} generate-id-sets ${KB_URL} ${KB_NAME} ${KB_USER} ${KB_PASS} ${KB_DATA_DIR}/id_sets/exact/ ${KB_DATA_DIR}/id_sets/graph_dbs/ ${SERVER_IMPL} ; cd - ; }
+${BASE_SCRIPT_DIR}/LOAD.sh id_sets/exact
+####
+#####
+###### ============================================================================================ #
+###### =======================   POST IDENTIFIER MERGE RULES ARE RUN BELOW   ====================== #
+###### ============================================================================================ #
 #####
 #####
-########## connect bioentities based on ontology hierarchies
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
+##########  create bioentity for each id set
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fa_identifier_bioentity_links
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_f_bioentity_generation/step_fb_obsolete_identifier_bioentity_links
 ####
 ####
-########### ice to bio
-######### typing
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing
-#####
-#####
-######## labeling
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
+######### connect bioentities based on ontology hierarchies
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
+###
+###
+########## ice to bio
+######## typing
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing
 ####
 ####
+####### labeling
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
+###
+###
+###### ggp abstractions
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcb_generate_missing_ggp_entities
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcb_generate_missing_ggp_entities
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcd_generate_gene_abstractions
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcd_generate_gene_abstractions
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions
+##
 ####### linking
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/taxon
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/taxon
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/central_dogma
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/central_dogma
 ##
 #
 ## TODO: add calls for biogrid and bioplex rules here
 ##
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/goa
-##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/goa
-##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/goa
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/goa
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/goa
+##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/goa
+##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/goa
 ##
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/hp
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/hp
-##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/hp
-##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/hp
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/hp
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/hp
+##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/hp
+##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/hp
 ##
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/drugbank
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/drugbank
-##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/drugbank
-##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/drugbank
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/drugbank
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/drugbank
+##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/drugbank
+##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/drugbank
 #
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/irefweb
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/irefweb
-##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/irefweb
-##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/irefweb
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/irefweb
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/irefweb
+##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/irefweb
+##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/irefweb
 #
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/pharmgkb
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/class_based_kr/pharmgkb
-##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/pharmgkb
-##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_bioentity_linking/instance_based_kr/pharmgkb
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/pharmgkb
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/class_based_kr/pharmgkb
+##${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/pharmgkb
+##${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hd_bioentity_linking/instance_based_kr/pharmgkb
 #
 #
-####### bioentity abstractions
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_i_bioentity_abstractions/step_ia_generate_missing_genes
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_i_bioentity_abstractions/step_ia_generate_missing_genes
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_i_bioentity_abstractions/step_ib_generate_gene_abstractions
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_i_bioentity_abstractions/step_ib_generate_gene_abstractions
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_i_bioentity_abstractions/step_ic_link_to_gp_abstractions
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_i_bioentity_abstractions/step_ic_link_to_gp_abstractions
-##
 ##
 ####### bioworld expansion
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_j_bio_expansion
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_j_bio_expansion
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_i_bio_expansion
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_i_bio_expansion
 #
 
