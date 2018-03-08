@@ -56,8 +56,6 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 ############ ============================================================================================ #
 #########
 ########## create ICE records for all ontology concepts
-##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_aa_ontology_id_denotes_concept_non_obo_ns
-#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_aa_ontology_id_denotes_concept_non_obo_ns
 ##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept_obo_ns
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ab_ontology_id_denotes_concept_obo_ns
 ##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ac_ontology_identifier_typing
@@ -66,6 +64,8 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_a_ontology_to_ice/step_ad_ontology_ice_record_gen
 ######
 ############ create skos:exactMatch links between equivalent ontology identifiers
+##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/identifier_normalization
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/identifier_normalization
 ##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/ontology_xref
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/ontology_xref
 ##${BASE_SCRIPT_DIR}/RULES.sh rules/pre_identifier_merge/pre_ice_rdf_load/step_b_ontology_id_exact_match/equivalent_class
