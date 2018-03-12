@@ -130,26 +130,28 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 ########## connect bioentities based on ontology hierarchies
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_ga_copy_owl_constructs_to_bio
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gb_copy_labels_to_bio
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_g_ontology_to_bio/step_gc_copy_node_links_to_bio
 ###
 ###
 ########## ice to bio
 ######## typing
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_gene_type
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_gene_type
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_identifier
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_identifier
 ####
 ####
 ####### labeling
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
-###
-###
-###### ggp abstractions
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb_bioentity_labeling
+####
+####
+####### ggp abstractions
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcb_generate_missing_ggp_entities
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcb_generate_missing_ggp_entities
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon

@@ -1,10 +1,10 @@
 ;; ------------------------------------------------------
 ;; --------- Protein Coding Gene Type Assertion ---------
 ;; ------------------------------------------------------
-`{:name "protein-coding-ncbi-gene-type-assertions"
+`{:name "biological-region-ncbi-gene-type-assertions"
   :description "This rule asserts the protein coding gene type to NCBI genes marked as 'protein-coding', excluding those
                 genes that are already subClassOF SO:protein_coding_gene (as likely asserted by the protein ontology)."
-  :head ((?/gene_bioentity rdfs/subClassOf ?/gene_type)) ; SO:protein_coding_gene
+  :head ((?/gene_bioentity rdfs/subClassOf ?/gene_type))
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

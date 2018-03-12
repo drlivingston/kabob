@@ -1,7 +1,7 @@
 ;; ----------------------------------------------
 ;; --------- Pseudo Gene Type Assertion ---------
 ;; ----------------------------------------------
-`{:name "pseudo-gene-type-assertion"
+`{:name "pseudogene-ncbi-gene-type-assertion"
   :description "This rule asserts the pseudogene type to NCBI genes marked as 'pseudo'."
   :head ((?/gene_bioentity rdfs/subClassOf ?/gene_type)) ; SO:pseudogene
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
@@ -15,7 +15,7 @@
                                      {
                                       select ?gene_type {
                                                          ccp:SO_0000336 obo:IAO_0000219 ?gene_type . # OBO:denotes
-                                         filter (?gene_type != obo:SO_0000336) # OBO:biological_region
+                                         filter (?gene_type != obo:SO_0000336) # OBO:pseudogene
                                          }
                                                          }
                                              ?type_field_value rdf:type ccp:IAO_EXT_0000884 . #ccp:NCBI_gene_info_record__type_of_gene_field_value
