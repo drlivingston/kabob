@@ -31,7 +31,7 @@
                          ?go_identifier_field_value rdf:type ?go_mf_identifier .
                          ?go_identifier_field_value rdf:type ccp:IAO_EXT_0000014 . # ccp:GOA_GAF_v2.0_Annotation_record__ontology_term_identifier_field_value
                          ?go_mf_identifier obo:IAO_0000219 ?molecular_function .
-                         filter (contains(str(?molecular_function),'http://ccp.ucdenver.edu/obo/ext/'))
+                         filter (contains(str(?molecular_function),'http://ccp.ucdenver.edu/kabob/bio/'))
                          ?record obo:BFO_0000051 ?go_identifier_field_value .
                          ?record rdf:type ccp:IAO_EXT_0000007 . # ccp:GOAGAFv2.0AnnotationRecord
                          ?record obo:BFO_0000051 ?bioentity_field_value .

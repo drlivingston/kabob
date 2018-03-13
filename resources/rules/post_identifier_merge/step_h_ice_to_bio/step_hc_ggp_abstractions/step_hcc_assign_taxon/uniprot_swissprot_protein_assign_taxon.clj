@@ -31,7 +31,7 @@
          ?taxon_id rdfs:subClassOf ccp:IAO_EXT_0000204 . # ccp:NCBITaxon_identifier
     ?taxon_id obo:IAO_0000219 ?taxon . # IAO:denotes
     # ensure it's a kabob bioentity (not an obo bioentity)
-         filter (contains (str(?taxon), 'http://ccp.ucdenver.edu/obo/ext/'))
+         filter (contains (str(?taxon), 'http://ccp.ucdenver.edu/kabob/bio/'))
          {
                              select ?only_in_taxon {
                                                     ccp:RO_0002160 obo:IAO_0000219 ?only_in_taxon .

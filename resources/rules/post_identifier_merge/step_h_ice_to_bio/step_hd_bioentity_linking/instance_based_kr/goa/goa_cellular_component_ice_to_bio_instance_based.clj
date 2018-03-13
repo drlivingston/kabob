@@ -34,7 +34,7 @@
                   WHERE {
                     ?go_cc_identifier rdfs:subClassOf ccp:IAO_EXT_0000200 . # CCP:GO_cellular_component_concept_identifier
                     ?go_cc_identifier obo:IAO_0000219 ?cellular_component .
-                    filter (contains(str(?cellular_component),'http://ccp.ucdenver.edu/obo/ext/'))
+                    filter (contains(str(?cellular_component),'http://ccp.ucdenver.edu/kabob/bio/'))
                     ?ontology_identifier_field_value rdf:type ?go_cc_identifier .
                     ?ontology_identifier_field_value rdf:type ccp:IAO_EXT_0000014 . # ccp:GOA_GAF_v2.0_Annotation_record__ontology_term_identifier_field_value
                     ?record obo:BFO_0000051 ?ontology_identifier_field_value .
