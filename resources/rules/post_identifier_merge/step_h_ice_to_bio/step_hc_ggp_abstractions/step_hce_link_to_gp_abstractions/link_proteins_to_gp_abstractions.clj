@@ -26,9 +26,9 @@
 
                          # link from the gene (?g) to its GP abstraction node
                          ?g rdfs:subClassOf ?ggp_abstraction .
-                         ?ggp_abstraction rdf:type ccp:IAO_EXT_0001715 . # ccp:gene_or_gene_product_abstraction
+                         ?ggp_abstraction rdfs:subClassOf ccp:IAO_EXT_0001715 . # ccp:gene_or_gene_product_abstraction
                          ?gp_abstraction rdfs:subClassOf ?ggp_abstraction .
-                         ?gp_abstraction rdf:type ccp:IAO_EXT_0001716 . # ccp:gene_product_abstraction
+                         ?gp_abstraction rdfs:subClassOf ccp:IAO_EXT_0001716 . # ccp:gene_product_abstraction
 
                          {
                           select ?protein {
