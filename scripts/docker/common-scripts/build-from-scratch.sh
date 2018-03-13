@@ -158,8 +158,8 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcd_generate_gene_abstractions
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcd_generate_gene_abstractions
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions
+#${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions
 ##
 ####### linking
 ##
@@ -197,4 +197,7 @@ ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_i_bio_expansion
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_i_bio_expansion
 #
+
+####### validation rules (only rule metadata triples added)
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_z_validation/subclass_hierarchy_checks
 
