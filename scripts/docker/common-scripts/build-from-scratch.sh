@@ -142,6 +142,8 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_gene_type
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_identifier
 #${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_identifier
+${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_parent_class
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_ha_bioentity_typing/by_parent_class
 ####
 ####
 ####### labeling
@@ -199,5 +201,5 @@ echo "BACKEND IMPLEMENTATION=${SERVER_IMPL}"
 #
 
 ####### validation rules (only rule metadata triples added)
-${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_z_validation/subclass_hierarchy_checks
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_z_validation/subclass_hierarchy_checks
 
