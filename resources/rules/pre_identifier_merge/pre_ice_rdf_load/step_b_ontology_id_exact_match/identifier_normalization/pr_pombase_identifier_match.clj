@@ -10,7 +10,7 @@
           (?/id rdfs/subClassOf ccp/IAO_EXT_0000088) ; CCP:ontology_concept_identifier
           (?/id rdfs/subClassOf ccp/IAO_EXT_0000336)) ; CCP:PomBase_gene_identifier
   :reify ([?/id {:ln (:regex "PomBase:" "POMBASE_" ?/concept_id)
-                 :ns "ccp" :prefix "" :suffix ""}])
+                 :ns "kice" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
                   prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>

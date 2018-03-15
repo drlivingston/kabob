@@ -17,13 +17,13 @@
          (?/go_xref_id_field rdf/type ccp/IAO_EXT_0000200)) ;; Gene Ontology cellular component identifier
   
   :reify ([?/cellular_location_record {:ln (:sha-1 "Reactome cellular location vocabulary record" "GENE ONTOLOGY" ?/go_cc_id)
-                          :ns "ccp" :prefix "R_"}]
+                          :ns "kice" :prefix "R_"}]
           [?/go_xref_record {:ln (:sha-1 "Reactome unification xref record" "GENE ONTOLOGY" ?/go_cc_id)
-                          :ns "ccp" :prefix "R_"}]
+                          :ns "kice" :prefix "R_"}]
           [?/go_xref_id_field {:ln (:regex ":" "_" ?/go_cc_id)
-                            :ns "ccp" :prefix ""}]
+                            :ns "kice" :prefix ""}]
           [?/go_xref_db_field {:ln (:sha-1 "Reactome unification xref record db field" "GENE ONTOLOGY")
-                            :ns "ccp" :prefix "F_" :suffix ""}])
+                            :ns "kice" :prefix "F_" :suffix ""}])
   :sparql-string
     "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>
      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

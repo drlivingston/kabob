@@ -21,13 +21,13 @@
           )
 
   :reify ([?/entity_record {:ln (:sha-1 "Reactome protein reference record" "UniProt Isoform" ?/up_id)
-                            :ns "ccp" :prefix "R_"}]
+                            :ns "kice" :prefix "R_"}]
            [?/entity_xref_record {:ln (:sha-1 "Reactome unification xref record" "UniProt Isoform" ?/up_id)
-                                  :ns "ccp" :prefix "R_"}]
+                                  :ns "kice" :prefix "R_"}]
            [?/entity_xref_id_field {:ln (:localname ?/up_id)
-                                    :ns "ccp" :prefix "UNIPROT_"}]
+                                    :ns "kice" :prefix "UNIPROT_"}]
            [?/entity_xref_db_field {:ln (:sha-1 "Reactome unification xref recorddb field" "UniProt Isoform")
-                                    :ns "ccp" :prefix "F_"}])
+                                    :ns "kice" :prefix "F_"}])
   :sparql-string
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>
    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

@@ -13,11 +13,11 @@
   :reify         ([?/bio_blank_node {:ln (:localname ?/blank_node)
                                       :ns "kbio" :prefix "BN_"}]
                    [?/anon_record {:ln (:sha-1 ?/blank_node)
-                                          :ns "ccp" :prefix "R_"}]
+                                          :ns "kice" :prefix "R_"}]
                    [?/id_field_value {:ln (:sha-1 ?/id)
-                                      :ns "ccp" :prefix "F_" :suffix ""}]
+                                      :ns "kice" :prefix "F_" :suffix ""}]
                    [?/id {:ln (:sha-1 ?/blank_node)
-                          :ns "ccp" :prefix "ID_" :suffix ""}])
+                          :ns "kice" :prefix "ID_" :suffix ""}])
   :sparql-string "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>

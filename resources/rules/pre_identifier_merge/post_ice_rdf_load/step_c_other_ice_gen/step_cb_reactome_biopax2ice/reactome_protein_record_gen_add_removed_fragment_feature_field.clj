@@ -30,21 +30,21 @@
 
   
   :reify ([?/fragment_feature_record {:ln (:sha-1 "Reactome fragment feature record" "EQUAL" ?/start "EQUAL" ?/end)
-                                  :ns "ccp" :prefix "R_"}]
+                                  :ns "kice" :prefix "R_"}]
           [?/sequence_interval_record {:ln (:sha-1 "Reactome sequence interval record" "EQUAL" ?/start "EQUAL" ?/end)
-                                  :ns "ccp" :prefix "R_"}]
+                                  :ns "kice" :prefix "R_"}]
           [?/start_sequence_site_record {:ln (:sha-1 "Reactome sequence site record" "EQUAL" ?/start)
-                  :ns "ccp" :prefix "R_"}]
+                  :ns "kice" :prefix "R_"}]
           [?/end_sequence_site_record {:ln (:sha-1 "Reactome sequence site record" "EQUAL" ?/end)
-                  :ns "ccp" :prefix "R_"}]
+                  :ns "kice" :prefix "R_"}]
           [?/start_sequence_position {:ln (:sha-1 "Reactome sequence site record sequence position field" ?/start)
-                  :ns "ccp" :prefix "F_"}]
+                  :ns "kice" :prefix "F_"}]
           [?/start_position_status {:ln (:sha-1 "Reactome sequence site record position status field" "EQUAL")
-                  :ns "ccp" :prefix "F_"}]
+                  :ns "kice" :prefix "F_"}]
           [?/end_sequence_position {:ln (:sha-1 "Reactome sequence site record sequence position field" ?/end)
-                  :ns "ccp" :prefix "F_"}]
+                  :ns "kice" :prefix "F_"}]
           [?/end_position_status {:ln (:sha-1 "Reactome sequence site record position status field" "EQUAL")
-                  :ns "ccp" :prefix "F_"}])
+                  :ns "kice" :prefix "F_"}])
 
   :sparql-string
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>

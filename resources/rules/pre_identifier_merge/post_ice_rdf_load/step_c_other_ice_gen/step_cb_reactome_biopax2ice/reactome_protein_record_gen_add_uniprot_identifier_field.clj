@@ -20,13 +20,13 @@
          (?/entity_xref_id_field rdf/type ccp/IAO_EXT_0000184)) ;; uniprot identifier
 
   :reify ([?/entity_record {:ln (:sha-1 "Reactome protein reference record" "UniProt" ?/up_id)
-                            :ns "ccp" :prefix "R_"}]
+                            :ns "kice" :prefix "R_"}]
           [?/entity_xref_record {:ln (:sha-1 "Reactome unification xref record" "UniProt" ?/up_id)
-                                 :ns "ccp" :prefix "R_"}]
+                                 :ns "kice" :prefix "R_"}]
           [?/entity_xref_id_field {:ln (:localname ?/up_id)
-                                   :ns "ccp" :prefix "UNIPROT_"}]
+                                   :ns "kice" :prefix "UNIPROT_"}]
           [?/entity_xref_db_field {:ln (:sha-1 "Reactome unification xref recorddb field" "UniProt")
-                                   :ns "ccp" :prefix "F_"}])
+                                   :ns "kice" :prefix "F_"}])
 
   :sparql-string
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>

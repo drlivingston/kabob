@@ -6,10 +6,8 @@
   :head ((?/id obo/IAO_0000219 ?/object_property) ; IAO:denotes
          (?/id rdfs/subClassOf ccp/IAO_EXT_0000306)) ; CCP:object_property_identifier
   :reify ([?/id {:ln (:localname ?/object_property)
-                 :ns "ccp" :prefix "" :suffix ""}])
+                 :ns "kice" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
-                  prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
-                  prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?object_property {
                      ?object_property rdf:type owl:ObjectProperty .

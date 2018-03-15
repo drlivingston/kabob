@@ -20,13 +20,13 @@
          (?/xref_id_field rdfs/label ?/react_id))
 
   :reify ([?/prot_record {:ln (:sha-1 "Reactome protein record" ?/react_id)
-                  :ns "ccp" :prefix "R_"}]
+                  :ns "kice" :prefix "R_"}]
           [?/xref_record {:ln (:sha-1 "Reactome unification xref record" "Reactome" ?/react_id)
-                  :ns "ccp" :prefix "R_"}]
+                  :ns "kice" :prefix "R_"}]
           [?/xref_id_field {:ln (:localname ?/react_id)
-                  :ns "ccp" :prefix "REACTOME_"}]
+                  :ns "kice" :prefix "REACTOME_"}]
           [?/xref_db_field {:ln (:sha-1 "Reactome unification xref record db field" "Reactome")
-                   :ns "ccp" :prefix "F_"}])
+                   :ns "kice" :prefix "F_"}])
 
   :sparql-string
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>

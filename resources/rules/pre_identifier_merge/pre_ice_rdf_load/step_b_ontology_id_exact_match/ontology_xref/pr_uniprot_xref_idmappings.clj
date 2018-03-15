@@ -5,7 +5,7 @@
   :description "This rule creates protein ontology id to uniprot id mappings"
   :head ((?/pr_id skos/exactMatch ?/uniprot_id))
   :reify ([?/uniprot_id {:ln (:localname ?/uniprot_identifier)
-                  :ns "ccp" :prefix "UNIPROT_" :suffix ""}])
+                  :ns "kice" :prefix "UNIPROT_" :suffix ""}])
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>

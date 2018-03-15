@@ -21,11 +21,13 @@
     select ?gene_missing_protein ?has_gene_template ?protein {
 
     {
-     select ?has_gene_template {
-                                <http://ccp.ucdenver.edu/obo/ext/pr#has_gene_template> obo:IAO_0000219 ?has_gene_template .
-                                        filter (?has_gene_template != <http://purl.obolibrary.org/obo/pr#has_gene_template>) .
-                                }
-     }
+                       select ?has_gene_template {
+                                                  ?has_gene_template_id obo:IAO_0000219 obo_pr:has_gene_template .
+                                                  ?has_gene_template_id obo:IAO_0000219 ?has_gene_template .
+                                                  # ensure it's a kabob bioentity (not an obo bioentity)
+                                                                        filter (contains (str(?has_gene_template), 'http://ccp.ucdenver.edu/kabob/bio/'))
+                                                  }
+                       }
    {
     select ?protein_coding_gene {
                                  ccp:SO_0001217 obo:IAO_0000219 ?protein_coding_gene .

@@ -15,13 +15,13 @@
          (?/label_field_value rdf/type ccp/IAO_EXT_0000196) ; CCP:ontology_concept_record_label_field_value
          (?/label_field_value rdfs/label ?/bound_label))
   :reify ([?/record {:ln (:sha-1 ?/id)
-                    :ns "ccp" :prefix "R_" :suffix ""}]
+                    :ns "kice" :prefix "R_" :suffix ""}]
            [?/id_field_value {:ln (:sha-1 ?/id)
-               :ns "ccp" :prefix "F_" :suffix ""}]
+               :ns "kice" :prefix "F_" :suffix ""}]
            [?/definition_field_value {:ln (:sha-1 ?/bound_definition)
-               :ns "ccp" :prefix "F_" :suffix ""}]
+               :ns "kice" :prefix "F_" :suffix ""}]
            [?/label_field_value {:ln (:sha-1 ?/bound_label)
-               :ns "ccp" :prefix "F_" :suffix ""}])
+               :ns "kice" :prefix "F_" :suffix ""}])
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>

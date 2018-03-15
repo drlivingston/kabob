@@ -22,15 +22,15 @@
 
 
   :reify ([?/modification_record {:ln (:sha-1 "Reactome modification feature record" "MOD" ?/psi_mod_id )
-                                  :ns "ccp" :prefix "R_"}]
+                                  :ns "kice" :prefix "R_"}]
            [?/modification_type_record {:ln (:sha-1 "Reactome sequence modification vocabulary record" "MOD" ?/psi_mod_id)
-                                        :ns "ccp" :prefix "R_"}]
+                                        :ns "kice" :prefix "R_"}]
            [?/modification_xref_record {:ln (:sha-1 "Reactome unification xref record" "MOD" ?/psi_mod_id)
-                                        :ns "ccp" :prefix "R_"}]
+                                        :ns "kice" :prefix "R_"}]
            [?/modification_xref_db_field {:ln (:sha-1 "Reactome unification xref record db field" "MOD")
-                                          :ns "ccp" :prefix "F_"}]
+                                          :ns "kice" :prefix "F_"}]
            [?/modification_xref_id_field {:ln (:regex ":" "_" ?/psi_mod_id)
-                                          :ns "ccp" :prefix ""}])
+                                          :ns "kice" :prefix ""}])
 
   :sparql-string
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>

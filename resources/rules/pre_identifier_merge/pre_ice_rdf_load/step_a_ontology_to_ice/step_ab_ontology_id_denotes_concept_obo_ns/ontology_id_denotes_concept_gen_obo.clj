@@ -7,9 +7,8 @@
   :head          ((?/id obo/IAO_0000219 ?/ontology_concept) ; IAO:denotes
                    (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)) ; CCP:ontology_concept_identifier
   :reify         ([?/id {:ln (:localname ?/ontology_concept)
-                         :ns "ccp" :prefix "" :suffix ""}])
+                         :ns "kice" :prefix "" :suffix ""}])
   :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
-                  prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?ontology_concept {

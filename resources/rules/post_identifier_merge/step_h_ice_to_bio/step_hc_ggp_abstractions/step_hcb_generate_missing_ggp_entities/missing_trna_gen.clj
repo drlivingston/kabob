@@ -27,11 +27,13 @@
               }
                              }
             {
-             select ?has_gene_template {
-                <http://ccp.ucdenver.edu/obo/ext/pr#has_gene_template> obo:IAO_0000219 ?has_gene_template .
-                filter (?has_gene_template != <http://purl.obolibrary.org/obo/pr#has_gene_template>) .
-                }
-           }
+                               select ?has_gene_template {
+                                                          ?has_gene_template_id obo:IAO_0000219 obo_pr:has_gene_template .
+                                                          ?has_gene_template_id obo:IAO_0000219 ?has_gene_template .
+                                                          # ensure it's a kabob bioentity (not an obo bioentity)
+                                                                                filter (contains (str(?has_gene_template), 'http://ccp.ucdenver.edu/kabob/bio/'))
+                                                          }
+                               }
            ?type_field_value rdf:type ccp:IAO_EXT_0000884 . #ccp:NCBI_gene_info_record__type_of_gene_field_value
            ?type_field_value rdfs:label ?type .
            filter (?type = \"tRNA\"@en)

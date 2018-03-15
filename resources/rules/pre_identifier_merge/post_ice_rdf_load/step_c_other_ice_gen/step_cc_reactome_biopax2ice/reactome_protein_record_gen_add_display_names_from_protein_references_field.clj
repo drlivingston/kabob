@@ -6,7 +6,7 @@
           (?/name_field rdfs/label ?/name))
 
   :reify ([?/name_field {:ln (:sha-1 "Reactome protein reference record display name field" ?/name)
-                         :ns "ccp" :prefix "F_"}])
+                         :ns "kice" :prefix "F_"}])
   
   :sparql-string
   "PREFIX obo: <http://purl.obolibrary.org/obo/>
