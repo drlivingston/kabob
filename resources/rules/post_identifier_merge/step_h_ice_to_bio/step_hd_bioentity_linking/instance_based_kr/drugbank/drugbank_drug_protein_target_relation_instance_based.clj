@@ -33,6 +33,7 @@
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   SELECT ?target_protein ?drug ?binding ?has_participant ?realizes ?inheres_in ?drug_role ?drugbank_drug_record ?direct_interaction
   WHERE {
     ?drugbank_drug_record rdf:type ccp:IAO_EXT_0000426 . # ccp:DrugBank_record
@@ -59,37 +60,37 @@
 
      {
               select ?direct_interaction {
-                                         ccp:MI_0407 obo:IAO_0000219 ?direct_interaction .
+                                         kice:MI_0407 obo:IAO_0000219 ?direct_interaction .
             filter (?direct_interaction != obo:MI_0407) .
                                          }
               }
             {
              select ?binding {
-                              ccp:GO_0005488 obo:IAO_0000219 ?binding .
+                              kice:GO_0005488 obo:IAO_0000219 ?binding .
                               filter (?binding != obo:GO_0005488) .
                               }
              }
              {
               select ?has_participant {
-                                      ccp:RO_0000057 obo:IAO_0000219 ?has_participant .
+                                      kice:RO_0000057 obo:IAO_0000219 ?has_participant .
                                       filter (?has_participant != obo:RO_0000057) .
                                       }
               }
              {
               select ?realizes {
-                               ccp:BFO_0000055 obo:IAO_0000219 ?realizes .
+                               kice:BFO_0000055 obo:IAO_0000219 ?realizes .
                                filter (?realizes != obo:BFO_0000055) .
                                }
              }
              {
               select ?inheres_in {
-                                  ccp:RO_0000052 obo:IAO_0000219 ?inheres_in .
+                                  kice:RO_0000052 obo:IAO_0000219 ?inheres_in .
                                   filter (?inheres_in != obo:RO_0000052) .
                                   }
               }
               {
                select ?drug_role {
-                                 ccp:CHEBI_23888 obo:IAO_0000219 ?drug_role .
+                                 kice:CHEBI_23888 obo:IAO_0000219 ?drug_role .
                                  filter (?drug_role != obo:CHEBI_23888) .
                                  }
                }

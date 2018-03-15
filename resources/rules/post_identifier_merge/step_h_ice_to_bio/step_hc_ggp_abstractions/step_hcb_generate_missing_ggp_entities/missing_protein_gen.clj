@@ -14,6 +14,7 @@
                                    :ns "kbio" :prefix "B_"}])
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
   PREFIX franzOption_chunkProcessingAllowed: <franz:yes>
   PREFIX franzOption_clauseReorderer: <franz:identity>
@@ -30,13 +31,13 @@
                        }
    {
     select ?protein_coding_gene {
-                                 ccp:SO_0001217 obo:IAO_0000219 ?protein_coding_gene .
+                                 kice:SO_0001217 obo:IAO_0000219 ?protein_coding_gene .
                                  filter (?protein_coding_gene != obo:SO_0001217)
                                  }
     }
     {
      select ?protein {
-                      ccp:CHEBI_36080 obo:IAO_0000219 ?protein .
+                      kice:CHEBI_36080 obo:IAO_0000219 ?protein .
                       filter (?protein != obo:CHEBI_36080) .
                       }
      }

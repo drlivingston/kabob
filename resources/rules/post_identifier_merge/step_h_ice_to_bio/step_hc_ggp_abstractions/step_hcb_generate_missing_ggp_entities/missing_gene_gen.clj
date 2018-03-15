@@ -18,7 +18,7 @@
                                             :ns "kbio" :prefix "RS_"}]
            [?/protein_coding_gene {:ln (:sha-1 ?/protein_missing_gene "missing")
                              :ns "kbio" :prefix "B_"}])
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :sparql-string "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -40,14 +40,14 @@
 
          {
           select ?only_in_taxon {
-                                 ccp:RO_0002160 obo:IAO_0000219 ?only_in_taxon .
+                                 kice:RO_0002160 obo:IAO_0000219 ?only_in_taxon .
                                  filter (?only_in_taxon != obo:RO_0002160) .
                                  }
           }
 
                                {
                                 select ?protein {
-                                                 ccp:CHEBI_36080 obo:IAO_0000219 ?protein .
+                                                 kice:CHEBI_36080 obo:IAO_0000219 ?protein .
                                                  filter (?protein != obo:CHEBI_36080) .
                                                  }
                                 }
@@ -63,7 +63,7 @@
                                {
                                 # get the kabob bioentity that corresponds to SO:gene
                                           select ?protein_coding_gene_bioentity {
-                                                                                 ccp:SO_0001217 obo:IAO_0000219 ?protein_coding_gene_bioentity . # OBO:denotes
+                                                                                 kice:SO_0001217 obo:IAO_0000219 ?protein_coding_gene_bioentity . # OBO:denotes
                                    filter (?protein_coding_gene_bioentity != obo:SO_0001217) # OBO:gene
                                    }
                                                                                  }

@@ -6,6 +6,7 @@
   :head ((?/bioentity rdfs/subClassOf ?/mrna_bioentity))
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   select ?bioentity ?mrna_bioentity {
@@ -18,7 +19,7 @@
     {
       # get the kabob bioentity that corresponds to SO:mrna
       select ?mrna_bioentity {
-        ccp:SO_0000234 obo:IAO_0000219 ?mrna_bioentity . # OBO:denotes
+        kice:SO_0000234 obo:IAO_0000219 ?mrna_bioentity . # OBO:denotes
         filter (?mrna_bioentity != obo:SO_0000234)  # OBO:mrna
       }
     }

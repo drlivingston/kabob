@@ -5,6 +5,7 @@
   :description   "This rule connects biogrid records to the ncRNA entities the indirectly refer to using IAO:mentions."
   :head          ((?/record obo/IAO_0000142  ?/bioentity)) ;; obo:mentions
   :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
     PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -19,13 +20,13 @@
                          }
        {
         select ?protein_coding_gene {
-                                     ccp:SO_0001217 obo:IAO_0000219 ?protein_coding_gene .
+                                     kice:SO_0001217 obo:IAO_0000219 ?protein_coding_gene .
                                      filter (?protein_coding_gene != obo:SO_0001217) # OBO:protein_coding_gene
            }
                                      }
                {
                 select ?ncRNA {
-                               ccp:SO_0000655 obo:IAO_0000219 ?ncRNA .
+                               kice:SO_0000655 obo:IAO_0000219 ?ncRNA .
                                filter (?ncRNA != obo:SO_0000655) .
                                }
                 }

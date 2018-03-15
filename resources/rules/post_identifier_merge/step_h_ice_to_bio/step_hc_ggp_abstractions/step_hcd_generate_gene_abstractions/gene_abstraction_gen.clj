@@ -43,7 +43,7 @@
                             :ns "kbio" :prefix "GGV_" :suffix ""}]
                    [?/gpgpv_abstraction {:ln (:localname ?/g)
                             :ns "kbio" :prefix "GPGPV_" :suffix ""}])
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :sparql-string "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -56,7 +56,7 @@
 
                            {
                             select ?gene {
-                                             ccp:SO_0000704 obo:IAO_0000219 ?gene .
+                                             kice:SO_0000704 obo:IAO_0000219 ?gene .
                                              filter (?gene != obo:SO_0000704) .
                                              }
                             }

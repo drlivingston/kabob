@@ -19,7 +19,9 @@
                                   :ns "kbio" :prefix "B_"}])
 
   :sparql-string
-               "SELECT ?parent_bioentity ?parent_location ?located_in
+               "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
+               PREFIX obo: <http://purl.obolibrary.org/obo/>
+               SELECT ?parent_bioentity ?parent_location ?located_in
 
                WHERE {
                       ?localization_process_sc rdfs:subClassOf ?localization_process .
@@ -39,28 +41,28 @@
 
                       {
                        select ?localization_process {
-                                                     ccp:GO_0051179 obo:IAO_0000219 ?localization_process .
+                                                     kice:GO_0051179 obo:IAO_0000219 ?localization_process .
                                                      filter (?localization_process != obo:GO_0051179) .
                                                      }
                        }
 
                       {
                        select ?transports_or_maintains_localization_of {
-                                                                        ccp:RO_0002313 obo:IAO_0000219 ?transports_or_maintains_localization_of .
+                                                                        kice:RO_0002313 obo:IAO_0000219 ?transports_or_maintains_localization_of .
                                                                         filter (?transports_or_maintains_localization_of != obo:RO_0002313) .
                                                                         }
                        }
 
                       {
                        select ?has_target_end_location {
-                                                        ccp:RO_0002339 obo:IAO_0000219 ?has_target_end_location .
+                                                        kice:RO_0002339 obo:IAO_0000219 ?has_target_end_location .
                                                         filter (?has_target_end_location != obo:RO_0002339) .
                                                         }
                        }
 
                       {
                        select ?located_in {
-                                           ccp:RO_0001025 obo:IAO_0000219 ?located_in .
+                                           kice:RO_0001025 obo:IAO_0000219 ?located_in .
                                            filter (?located_in != obo:RO_0001025) .
                                            }
                        }

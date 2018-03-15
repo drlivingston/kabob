@@ -24,6 +24,7 @@
                                      :ns "kbio" :prefix "B_"}])
 
   :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
     PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -83,7 +84,7 @@
 
                    {
                     select ?bio_interaction {
-                                             ccp:INO_0000002 obo:IAO_0000219 ?bio_interaction .
+                                             kice:INO_0000002 obo:IAO_0000219 ?bio_interaction .
                                              filter (?bio_interaction != obo:INO_0000002) .
                                              }
                     }
@@ -91,7 +92,7 @@
       # if no interaction type was specified then bind to INO_0000002 (interaction)
         bind(coalesce(?inter_type, ?bio_interaction) as ?updated_inter_type)
       # if the specified interaction type is MI_0000, then change it to INO_0000002
-        bind(if(?updated_inter_type = ccp:MI_0000,?bio_interaction,?updated_inter_type) as ?interaction_type)
+        bind(if(?updated_inter_type = kice:MI_0000,?bio_interaction,?updated_inter_type) as ?interaction_type)
 
                    # get the unique interaction identifier
                    ?interaction_record obo:BFO_0000051 ?irig_identifier_field_value .
@@ -101,7 +102,7 @@
 
                                            {
                                             select ?has_participant {
-                                                                     ccp:RO_0000057 obo:IAO_0000219 ?has_participant .
+                                                                     kice:RO_0000057 obo:IAO_0000219 ?has_participant .
                                                                      filter (?has_participant != obo:RO_0000057) .
                                                                      }
                                             }

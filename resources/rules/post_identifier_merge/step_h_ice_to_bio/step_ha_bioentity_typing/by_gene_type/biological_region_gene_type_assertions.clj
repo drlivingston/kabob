@@ -7,6 +7,7 @@
   :head ((?/gene_bioentity rdfs/subClassOf ?/gene_type))
   :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+                  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
                   PREFIX franzOption_chunkProcessingAllowed: <franz:yes>
                   PREFIX franzOption_clauseReorderer: <franz:identity>
@@ -15,7 +16,7 @@
 
                           {
                             select ?gene_type {
-                              ccp:SO_0001411 obo:IAO_0000219 ?gene_type . # OBO:denotes
+                              kice:SO_0001411 obo:IAO_0000219 ?gene_type . # OBO:denotes
                               filter (?gene_type != obo:SO_0001411) # OBO:biological_region
                               }
                           }

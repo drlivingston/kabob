@@ -43,6 +43,7 @@
            )
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+                  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                   SELECT ?localized_bioentity ?cellular_component ?record ?localization_process ?transports_or_maintains_localization_of ?has_target_end_location
@@ -67,21 +68,21 @@
 
                   {
                    select ?localization_process {
-                               ccp:GO_0051179 obo:IAO_0000219 ?localization_process .
+                               kice:GO_0051179 obo:IAO_0000219 ?localization_process .
                                filter (?localization_process != obo:GO_0051179) .
                                }
                    }
 
                   {
                    select ?transports_or_maintains_localization_of  {
-                                                  ccp:RO_0002313 obo:IAO_0000219 ?transports_or_maintains_localization_of .
+                                                  kice:RO_0002313 obo:IAO_0000219 ?transports_or_maintains_localization_of .
                                                   filter (?transports_or_maintains_localization_of != obo:RO_0002313) .
                                                   }
                   }
 
                   {
                    select ?has_target_end_location {
-                                 ccp:RO_0002339 obo:IAO_0000219 ?has_target_end_location .
+                                 kice:RO_0002339 obo:IAO_0000219 ?has_target_end_location .
                                  filter (?has_target_end_location != obo:RO_0002339) .
                                  }
                   }

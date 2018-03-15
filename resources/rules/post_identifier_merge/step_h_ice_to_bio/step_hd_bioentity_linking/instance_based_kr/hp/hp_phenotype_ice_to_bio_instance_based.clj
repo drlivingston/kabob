@@ -23,6 +23,7 @@
   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+                  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                   SELECT ?causal_bioentity ?human_phenotype ?record ?cause_or_contributes_to_condition ?human_phenotype_label
                   WHERE {  ?human_phenotype_identifier rdfs:subClassOf ccp:IAO_EXT_0000208 . # CCP:Human_Phenotype_Ontology_concept_identifier
@@ -44,7 +45,7 @@
 
                            {
                              select ?cause_or_contributes_to_condition {
-                                    ccp:RO_0003302 obo:IAO_0000219 ?cause_or_contributes_to_condition .
+                                    kice:RO_0003302 obo:IAO_0000219 ?cause_or_contributes_to_condition .
                                     filter (?cause_or_contributes_to_condition != obo:RO_0003302) .
                                    }
                            }

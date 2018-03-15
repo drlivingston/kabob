@@ -22,6 +22,7 @@
                 prefix franzOption_clauseReorderer: <franz:identity>
                 PREFIX obo: <http://purl.obolibrary.org/obo/>
                 PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+                prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 SELECT ?participating_bioentity ?biological_process ?has_participant ?record
@@ -45,7 +46,7 @@
 
                       {
                          select ?has_participant {
-                                 ccp:RO_0000057 obo:IAO_0000219 ?has_participant .
+                                 kice:RO_0000057 obo:IAO_0000219 ?has_participant .
                                  filter (?has_participant != obo:RO_0000057) .
                                  }
                       }

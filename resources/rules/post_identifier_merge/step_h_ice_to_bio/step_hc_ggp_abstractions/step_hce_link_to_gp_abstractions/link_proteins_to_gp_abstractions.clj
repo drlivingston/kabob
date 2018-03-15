@@ -14,6 +14,7 @@
   :description   "For each protein in the KB, find its gene and then link to its corresponding gene_product_abstraction."
   :head          ((?/p rdfs/subClassOf ?/gp_abstraction))
   :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -32,17 +33,19 @@
 
                          {
                           select ?protein {
-                                           ccp:CHEBI_36080 obo:IAO_0000219 ?protein .
+                                           kice:CHEBI_36080 obo:IAO_0000219 ?protein .
                                            filter (?protein != obo:CHEBI_36080) .
                                            }
                           }
 
                          {
-                          select ?has_gene_template {
-                             <http://ccp.ucdenver.edu/obo/ext/pr#has_gene_template> obo:IAO_0000219 ?has_gene_template .
-                             filter (?has_gene_template != <http://purl.obolibrary.org/obo/pr#has_gene_template>) .
-                             }
-                          }
+                                             select ?has_gene_template {
+                                                                        ?has_gene_template_id obo:IAO_0000219 obo_pr:has_gene_template .
+                                                                        ?has_gene_template_id obo:IAO_0000219 ?has_gene_template .
+                                                                        # ensure it's a kabob bioentity (not an obo bioentity)
+                                                                        filter (contains (str(?has_gene_template), 'http://ccp.ucdenver.edu/kabob/bio/'))
+                                                                        }
+                                             }
                   }"
   }
 
