@@ -1,10 +1,10 @@
-(ns rules-tests.build_test.test_build_step_hc_goa
+(ns rules-tests.build_test.test_build_step_hd_goa
   (use clojure.test
        kr.sesame.kb
        kr.sesame.sparql
        kr.sesame.rdf
        )
-  (:require [kabob.build.run-rules :refer [query-variables run-forward-rule-sparql-string]]
+  (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query sparql-query ask]]
             [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf]]
@@ -20,7 +20,9 @@
                                                             build-rules-step-fa
                                                             build-rules-step-fb
                                                             build-rules-step-ga build-rules-step-gb build-rules-step-gc
-                                                            build-rules-step-hc-goa
+                                                            build-rules-step-ha build-rules-step-hb build-rules-step-hca
+                                                            build-rules-step-hcb build-rules-step-hcc build-rules-step-hcd
+                                                            build-rules-step-hd-goa
                                                             expected-subpropertyof-links expected-inverseof-links
                                                             expected-subclassof-links expected-disjointwith-links
                                                             expected-restrictions expected-restrictions-in-lists
@@ -40,48 +42,58 @@
   [path]
   (filter #(.isFile %) (.listFiles (io/as-file path))))
 
+(def base-kb (let [source-kb (test-kb initial-plus-ice-triples)]
+               (run-build-rules source-kb build-rules-step-a)
+               (run-build-rules source-kb build-rules-step-b)
+               (run-build-rules source-kb build-rules-step-ca)
+               (run-build-rules source-kb build-rules-step-cb)
+               (run-build-rules source-kb build-rules-step-cc)
+               (run-build-rules source-kb build-rules-step-da)
+               (run-build-rules source-kb build-rules-step-db)
+               (run-build-rules source-kb build-rules-step-dc)
+
+               (with-tmp-dir
+                 ;; generate identifier set ntriple files and load into the source-kb
+                 (generate-all-id-sets source-kb (str tmp-dir "/"))
+                 (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
+                 (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
+                               (load-rdf source-kb (java.util.zip.GZIPInputStream.
+                                                     (clojure.java.io/input-stream
+                                                       f)) :ntriple))
+                             (get-only-files tmp-dir))))
+               (run-build-rules source-kb build-rules-step-fa)
+               (run-build-rules source-kb build-rules-step-fb)
+               (run-build-rules source-kb build-rules-step-ga)
+               (run-build-rules source-kb build-rules-step-gb)
+               (run-build-rules source-kb build-rules-step-gc)
+               (run-build-rules source-kb build-rules-step-ha)
+               (run-build-rules source-kb build-rules-step-hb)
+               (run-build-rules source-kb build-rules-step-hca)
+               (run-build-rules source-kb build-rules-step-hcb)
+               (run-build-rules source-kb build-rules-step-hcc)
+               (run-build-rules source-kb build-rules-step-hcd)
+               source-kb))
 
 
 ;;; Test that all links get transferred to bioworld
-(deftest step-hc-goa-bp-test
-  (let [source-kb (test-kb initial-plus-ice-triples)
+(deftest step-hd-goa-bp-test
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
 
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (dorun (map (fn [f] (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                                (clojure.java.io/input-stream
-                                                  f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-    (run-build-rules source-kb build-rules-step-ga)
-    (run-build-rules source-kb build-rules-step-gb)
-    (run-build-rules source-kb build-rules-step-gc)
+    (run-build-rule source-kb source-kb build-rules-step-hd-goa 0)
 
-    (run-build-rule source-kb source-kb build-rules-step-hc-goa 0)
+    (run-build-rule source-kb target-kb build-rules-step-hd-goa 0)
 
-    (run-build-rule source-kb target-kb build-rules-step-hc-goa 0)
-
-    (is (ask source-kb '((ccp/GO_0019226 obo/IAO_0000219 ?/biological_process)
+    (is (ask source-kb '((kice/GO_0019226 obo/IAO_0000219 ?/biological_process)
                           (?/biological_process_sc rdfs/subClassOf ?/biological_process)
                           ;; create a subclass of the participating bioentity
-                          (ccp/UNIPROT_P37173 obo/IAO_0000219 ?/participating_bioentity)
+                          (kice/UNIPROT_P37173 obo/IAO_0000219 ?/participating_bioentity)
                           (?/bioentity_sc rdfs/subClassOf ?/participating_bioentity)
 
                           ;; create a has_participant restriction
                           (?/participation_restriction rdf/type owl/Restriction)
                           (?/participation_restriction owl/onProperty ?/has_participant_relation) ; RO:has_participant
-                          (ccp/RO_0000057 obo/IAO_0000219 ?/has_participant_relation)
+                          (kice/RO_0000057 obo/IAO_0000219 ?/has_participant_relation)
                           (?/participation_restriction owl/someValuesFrom ?/bioentity_sc)
 
                           ;; connect the process subclass to the participation restriction
@@ -97,7 +109,7 @@
     (is (= 1 (count (query target-kb '((?/s rdf/type owl/Restriction))))))
 
     ;(let [log-kb (output-kb "/tmp/triples.nt")]
-    ;  (run-build-rule source-kb log-kb build-rules-step-hc-goa 0)
+    ;  (run-build-rule source-kb log-kb build-rules-step-hd-goa 0)
     ;  (close log-kb))
 
 ;    (prn (str "--------------------------------"))
@@ -144,56 +156,35 @@
 
 
 ;;; Test that all links get transferred to bioworld
-(deftest step-hc-goa-cc-test
-  (let [source-kb (test-kb initial-plus-ice-triples)
+(deftest step-hd-goa-cc-test
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
 
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (dorun (map (fn [f] (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                                (clojure.java.io/input-stream
-                                                  f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-    (run-build-rules source-kb build-rules-step-ga)
-    (run-build-rules source-kb build-rules-step-gb)
-    (run-build-rules source-kb build-rules-step-gc)
+    (run-build-rule source-kb source-kb build-rules-step-hd-goa 1)
 
-    (run-build-rule source-kb source-kb build-rules-step-hc-goa 1)
+    (run-build-rule source-kb target-kb build-rules-step-hd-goa 1)
 
-    (run-build-rule source-kb target-kb build-rules-step-hc-goa 1)
-
-    (is (ask source-kb '((ccp/GO_0051179 obo/IAO_0000219 ?/localization_process)
+    (is (ask source-kb '((kice/GO_0051179 obo/IAO_0000219 ?/localization_process)
                           (?/localization_sc rdfs/subClassOf ?/localization_process)
 
                           ;; create a subclass of the participating bioentity
-                          (ccp/UNIPROT_P37173 obo/IAO_0000219 ?/localized_bioentity)
+                          (kice/UNIPROT_P37173 obo/IAO_0000219 ?/localized_bioentity)
                           (?/bioentity_sc rdfs/subClassOf ?/localized_bioentity)
 
                           ;; create a subclass of cellular component
                           (?/cellular_component_sc rdfs/subClassOf ?/cellular_component)
-                          (ccp/GO_0005623 obo/IAO_0000219 ?/cellular_component)
+                          (kice/GO_0005623 obo/IAO_0000219 ?/cellular_component)
 
                           ;; create a transports_or_maintains_localization_of restriction
                           (?/trans_main_loc_restriction rdf/type owl/Restriction)
                           (?/trans_main_loc_restriction owl/onProperty ?/transports_or_maintains_localization_of)
-                          (ccp/RO_0002313 obo/IAO_0000219 ?/transports_or_maintains_localization_of)
+                          (kice/RO_0002313 obo/IAO_0000219 ?/transports_or_maintains_localization_of)
                           (?/trans_main_loc_restriction owl/someValuesFrom ?/bioentity_sc)
 
                           ;; create a has_target_end_location restriction
                           (?/target_end_restriction rdf/type owl/Restriction)
                           (?/target_end_restriction owl/onProperty ?/has_target_end_location)
-                          (ccp/RO_0002339 obo/IAO_0000219 ?/has_target_end_location)
+                          (kice/RO_0002339 obo/IAO_0000219 ?/has_target_end_location)
                           (?/target_end_restriction owl/someValuesFrom ?/cellular_component_sc)
 
                           ;; connect the localization subclass to the transports_or_maintains_localization_of and has_target_end restrictions
@@ -210,7 +201,7 @@
     (is (= 2 (count (query target-kb '((?/s rdf/type owl/Restriction))))))
 
     ;(let [log-kb (output-kb "/tmp/triples.nt")]
-    ;  (run-build-rule source-kb log-kb build-rules-step-hc-goa 1)
+    ;  (run-build-rule source-kb log-kb build-rules-step-hd-goa 1)
     ;  (close log-kb))
 
 
@@ -276,41 +267,19 @@
 
 
 
-(deftest step-hc-goa-mf-test
-  (let [source-kb (test-kb initial-plus-ice-triples)
+(deftest step-hd-goa-mf-test
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
+    ;(run-build-rule source-kb source-kb build-rules-step-hd-goa 2)
 
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (dorun (map (fn [f] (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                                (clojure.java.io/input-stream
-                                                  f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-    (run-build-rules source-kb build-rules-step-ga)
-    (run-build-rules source-kb build-rules-step-gb)
-    (run-build-rules source-kb build-rules-step-gc)
-
-    ;(run-build-rule source-kb source-kb build-rules-step-hc-goa 2)
-
-    (run-build-rule source-kb target-kb build-rules-step-hc-goa 2)
+    (run-build-rule source-kb target-kb build-rules-step-hd-goa 2)
 
     ;; TODO: add sample GOA MF data to test this rule fully
     (is (= 0
            (count (query target-kb '((?/s rdf/type owl/Restriction))))))
 
     ;(let [log-kb (output-kb "/tmp/triples.nt")]
-    ;  (run-build-rule source-kb log-kb build-rules-step-hc-goa 2)
+    ;  (run-build-rule source-kb log-kb build-rules-step-hd-goa 2)
     ;  (close log-kb))
 
     ))

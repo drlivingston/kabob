@@ -2327,12 +2327,22 @@
 ;; 
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0000204
 (ccp/IAO_EXT_0000204 rdf/type owl/Class)
-(ccp/IAO_EXT_0000204 rdfs/subClassOf ccp/IAO_EXT_0000081)
 (ccp/IAO_EXT_0000204 rdfs/subClassOf ccp/IAO_EXT_0000088)
-(ccp/IAO_EXT_0000204 rdfs/subClassOf ccp/IAO_EXT_0001699)
 (ccp/IAO_EXT_0000204 ccp/IAO_EXT_0001700 ["^\\d+$"])
 (ccp/IAO_EXT_0000204 obo/IAO_0000599 ["NCBITaxon_"])
 (ccp/IAO_EXT_0000204 rdfs/label ["NCBI Taxonomy concept identifier" "en"])
+;;
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001832
+(ccp/IAO_EXT_0001832 rdf/type owl/Class)
+(ccp/IAO_EXT_0001832 rdfs/subClassOf ccp/IAO_EXT_0000204)
+(ccp/IAO_EXT_0001832 rdfs/subClassOf ccp/IAO_EXT_0001699)
+(ccp/IAO_EXT_0001832 rdfs/subClassOf ccp/IAO_EXT_0000081)
+(ccp/IAO_EXT_0001832 obo/IAO_0000599 ["NCBITaxon_"])
+;;
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001833
+(ccp/IAO_EXT_0001833 rdf/type owl/Class)
+(ccp/IAO_EXT_0001833 rdfs/subClassOf ccp/IAO_EXT_0000204)
+(ccp/IAO_EXT_0001833 rdfs/subClassOf ccp/IAO_EXT_0000341)
 ;; 
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0000205
 (ccp/IAO_EXT_0000205 rdf/type owl/Class)

@@ -4,7 +4,7 @@
        kr.sesame.sparql
        kr.sesame.rdf
        )
-  (:require  [kabob.build.run-rules :refer [query-variables run-forward-rule run-forward-rule-sparql-string]]
+  (:require  [kabob.build.run-rules :refer [query-variables run-forward-rule]]
              [kr.core.forward-rule :refer [add-reify-fns]]
              [kr.core.sparql :refer [sparql-select-query query]]
              [kr.core.rdf :refer [register-namespaces synch-ns-mappings add!]]
@@ -37,7 +37,7 @@
 (defn rr [rule]
   (let [kb (test-kb `())]
     (prn (str (:name rule)))
-    (if (:sparql-string rule) (run-forward-rule-sparql-string kb kb rule)
+    (if (:sparql-string rule) (run-forward-rule kb kb rule)
   (run-forward-rule kb kb rule))
   ))
 

@@ -4,7 +4,7 @@
        kr.sesame.sparql
        kr.sesame.rdf
        )
-  (:require [kabob.build.run-rules :refer [query-variables run-forward-rule-sparql-string]]
+  (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query sparql-query ask]]
             [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf]]
@@ -39,31 +39,34 @@
   (filter #(.isFile %) (.listFiles (io/as-file path))))
 
 
+(def base-kb (let [source-kb (test-kb initial-plus-ice-triples)]
+               (run-build-rules source-kb build-rules-step-a)
+               (run-build-rules source-kb build-rules-step-b)
+               (run-build-rules source-kb build-rules-step-ca)
+               (run-build-rules source-kb build-rules-step-cb)
+               (run-build-rules source-kb build-rules-step-cc)
+               (run-build-rules source-kb build-rules-step-da)
+               (run-build-rules source-kb build-rules-step-db)
+               (run-build-rules source-kb build-rules-step-dc)
+
+               (with-tmp-dir
+                 ;; generate identifier set ntriple files and load into the source-kb
+                 (generate-all-id-sets source-kb (str tmp-dir "/"))
+                 (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
+                 (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
+                               (load-rdf source-kb (java.util.zip.GZIPInputStream.
+                                                     (clojure.java.io/input-stream
+                                                       f)) :ntriple))
+                             (get-only-files tmp-dir))))
+               (run-build-rules source-kb build-rules-step-fa)
+               (run-build-rules source-kb build-rules-step-fb)
+               source-kb))
+
 
 ;;; Test that list members get reproduced in bioworld where appropriate
 (deftest step-ga-test-copy-list-nodes-to-bio
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
-      (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
-                    (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                          (clojure.java.io/input-stream
-                                            f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
 
     (run-build-rule source-kb target-kb build-rules-step-ga 0)
 
@@ -84,29 +87,8 @@
 
 ;;; Test that owl restrictions get reproduced in bioworld where appropriate
 (deftest step-ga-test-copy-owl-restrictions-to-bio
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
-      (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
-                    (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                          (clojure.java.io/input-stream
-                                            f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-
     (run-build-rule source-kb target-kb build-rules-step-ga 2)
     (run-build-rule source-kb source-kb build-rules-step-ga 2)
 
@@ -147,29 +129,8 @@
 
 ;;; Test that blank nodes get transferred to bioworld (nodes that connect owl:equivalentClass to owl:intersectionOf)
 (deftest step-ga-test-copy-anonymous-nodes-to-bio
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
-      (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
-                    (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                          (clojure.java.io/input-stream
-                                            f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-
     (run-build-rule source-kb source-kb build-rules-step-ga 3)
 
     ;; testing the existence of anonymous node records links to blank nodes

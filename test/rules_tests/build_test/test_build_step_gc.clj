@@ -4,7 +4,7 @@
        kr.sesame.sparql
        kr.sesame.rdf
        )
-  (:require [kabob.build.run-rules :refer [query-variables run-forward-rule-sparql-string]]
+  (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query sparql-query ask]]
             [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf]]
@@ -39,59 +39,59 @@
   [path]
   (filter #(.isFile %) (.listFiles (io/as-file path))))
 
+(def base-kb (let [source-kb (test-kb initial-plus-ice-triples)]
+               (run-build-rules source-kb build-rules-step-a)
+               (run-build-rules source-kb build-rules-step-b)
+               (run-build-rules source-kb build-rules-step-ca)
+               (run-build-rules source-kb build-rules-step-cb)
+               (run-build-rules source-kb build-rules-step-cc)
+               (run-build-rules source-kb build-rules-step-da)
+               (run-build-rules source-kb build-rules-step-db)
+               (run-build-rules source-kb build-rules-step-dc)
 
+               (with-tmp-dir
+                 ;; generate identifier set ntriple files and load into the source-kb
+                 (generate-all-id-sets source-kb (str tmp-dir "/"))
+                 (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
+                 (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
+                               (load-rdf source-kb (java.util.zip.GZIPInputStream.
+                                                     (clojure.java.io/input-stream
+                                                       f)) :ntriple))
+                             (get-only-files tmp-dir))))
+               (run-build-rules source-kb build-rules-step-fa)
+               (run-build-rules source-kb build-rules-step-fb)
+               (run-build-rules source-kb build-rules-step-ga)
+               (run-build-rules source-kb build-rules-step-gb)
+               source-kb))
 
 ;;; Test that all links get transferred to bioworld
 (deftest step-gc-test-transfer-links-between-nodes
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
-      (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
-                    (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                          (clojure.java.io/input-stream
-                                            f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-    (run-build-rules source-kb build-rules-step-ga)
-    (run-build-rules source-kb build-rules-step-gb)
-
     (run-build-rule source-kb source-kb build-rules-step-gc 0)
 
     ;; test existence of expected subclass relations
-    (doall (map (fn [link] (let [child-concept-id-ccp (symbol "ccp" (first link))
+    (doall (map (fn [link] (let [child-concept-id-ccp (symbol "kice" (first link))
                                  child-concept-id-obo (symbol "obo" (first link))
-                                 parent-concept-id (symbol "ccp" (last link))]
+                                 parent-concept-id (symbol "kice" (last link))]
                              (is (ask source-kb `((~child-concept-id-ccp obo/IAO_0000219 ~child-concept-id-obo)
                                                    (~child-concept-id-ccp obo/IAO_0000219 ?/bioentity1)
                                                    (:filter (!= ?/bioentity1 ~child-concept-id-obo))
                                                    (?/bioentity1 rdfs/subClassOf ?/bioentity2)
                                                    (~parent-concept-id obo/IAO_0000219 ?/bioentity2))))))
-                (filter #(not= % '("HGNC_11773" "SO_0001217")) expected-subclassof-links)))
+                (filter #(not= % '("SO_0001217")) expected-subclassof-links)))
 
-    ;; separate out the expected HGNC_11773 subclass relation b/c of hgnc_pr namespace usage
-    (is (ask source-kb `((ccp/HGNC_11773 obo/IAO_0000219 hgnc_pr/gene_symbol_report?hgnc_id=11773)
-                          (ccp/HGNC_11773 obo/IAO_0000219 ?/bioentity1)
-                          (:filter (!= ?/bioentity1 hgnc_pr/gene_symbol_report?hgnc_id=11773))
-                          (?/bioentity1 rdfs/subClassOf ?/bioentity2)
-                          (ccp/SO_0001217 obo/IAO_0000219 ?/bioentity2))))
+    ;;; separate out the expected HGNC_11773 subclass relation b/c of hgnc_pr namespace usage
+    ;(is (ask source-kb `((kice/HGNC_11773 obo/IAO_0000219 hgnc_pr/gene_symbol_report?hgnc_id=11773)
+    ;                      (kice/HGNC_11773 obo/IAO_0000219 ?/bioentity1)
+    ;                      (:filter (!= ?/bioentity1 hgnc_pr/gene_symbol_report?hgnc_id=11773))
+    ;                      (?/bioentity1 rdfs/subClassOf ?/bioentity2)
+    ;                      (kice/SO_0001217 obo/IAO_0000219 ?/bioentity2))))
 
     ;; test existence of expected disjointWith relations
-    (doall (map (fn [link] (let [child-concept-id-ccp (symbol "ccp" (first link))
+    (doall (map (fn [link] (let [child-concept-id-ccp (symbol "kice" (first link))
                                  child-concept-id-obo (symbol "obo" (first link))
-                                 parent-concept-id (symbol "ccp" (last link))]
+                                 parent-concept-id (symbol "kice" (last link))]
                              (is (ask source-kb `((~child-concept-id-ccp obo/IAO_0000219 ~child-concept-id-obo)
                                                    (~child-concept-id-ccp obo/IAO_0000219 ?/bioentity1)
                                                    (:filter (!= ?/bioentity1 ~child-concept-id-obo))
@@ -100,9 +100,9 @@
                 expected-disjointwith-links))
 
     ;; test existence of expected owl:equivalentClass relations
-    (doall (map (fn [link] (let [child-concept-id-ccp (symbol "ccp" (first link))
+    (doall (map (fn [link] (let [child-concept-id-ccp (symbol "kice" (first link))
                                  child-concept-id-obo (symbol "obo" (first link))
-                                 parent-concept-id (symbol "ccp" (last link))]
+                                 parent-concept-id (symbol "kice" (last link))]
                              (is (ask source-kb `((~child-concept-id-ccp obo/IAO_0000219 ~child-concept-id-obo)
                                                    (~child-concept-id-ccp obo/IAO_0000219 ?/bioentity1)
                                                    (:filter (!= ?/bioentity1 ~child-concept-id-obo))
@@ -112,9 +112,9 @@
 
 
     ;; test rdfs:domain links
-    (doall (map (fn [link] (let [prop-id-ccp (symbol "ccp" (first link))
+    (doall (map (fn [link] (let [prop-id-ccp (symbol "kice" (first link))
                                  prop-id-obo (symbol "obo" (first link))
-                                 cls-id (symbol "ccp" (last link))]
+                                 cls-id (symbol "kice" (last link))]
                              (is (ask source-kb `((~prop-id-ccp obo/IAO_0000219 ~prop-id-obo)
                                                    (~prop-id-ccp obo/IAO_0000219 ?/bioprop)
                                                    (:filter (!= ?/bioprop ~prop-id-obo))
@@ -125,9 +125,9 @@
                 expected-rdfs-domain-links))
 
     ;; test rdfs:range links
-    (doall (map (fn [link] (let [prop-id-ccp (symbol "ccp" (first link))
+    (doall (map (fn [link] (let [prop-id-ccp (symbol "kice" (first link))
                                  prop-id-obo (symbol "obo" (first link))
-                                 cls-id (symbol "ccp" (last link))]
+                                 cls-id (symbol "kice" (last link))]
                              (is (ask source-kb `((~prop-id-ccp obo/IAO_0000219 ~prop-id-obo)
                                                    (~prop-id-ccp obo/IAO_0000219 ?/bioprop)
                                                    (:filter (!= ?/bioprop ~prop-id-obo))
@@ -136,9 +136,9 @@
                 expected-rdfs-range-links))
 
 
-    (doall (map (fn [props] (let [child-prop-id-ccp (symbol "ccp" (first props))
+    (doall (map (fn [props] (let [child-prop-id-ccp (symbol "kice" (first props))
                                   child-prop-id-obo (symbol "obo" (first props))
-                                  parent-prop-id (symbol "ccp" (last props))]
+                                  parent-prop-id (symbol "kice" (last props))]
                               (is (ask source-kb `((~child-prop-id-ccp obo/IAO_0000219 ~child-prop-id-obo)
                                                     (~child-prop-id-ccp obo/IAO_0000219 ?/biorelation1)
                                                     (:filter (!= ?/biorelation1 ~child-prop-id-obo))
@@ -146,9 +146,9 @@
                                                     (~parent-prop-id obo/IAO_0000219 ?/biorelation2))))))
                 expected-subpropertyof-links))
 
-    (doall (map (fn [props] (let [child-prop-id-ccp (symbol "ccp" (first props))
+    (doall (map (fn [props] (let [child-prop-id-ccp (symbol "kice" (first props))
                                   child-prop-id-obo (symbol "obo" (first props))
-                                  parent-prop-id (symbol "ccp" (last props))]
+                                  parent-prop-id (symbol "kice" (last props))]
                               (is (ask source-kb `((~child-prop-id-ccp obo/IAO_0000219 ~child-prop-id-obo)
                                                     (~child-prop-id-ccp obo/IAO_0000219 ?/biorelation1)
                                                     (:filter (!= ?/biorelation1 ~child-prop-id-obo))
@@ -284,31 +284,8 @@
 
 ;; tests that links with nil get transferred to bioworld
 (deftest step-gc-test-transfer-links-with-nil
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
-    (with-tmp-dir
-      ;; generate identifier set ntriple files and load into the source-kb
-      (generate-all-id-sets source-kb (str tmp-dir "/"))
-      (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
-      (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
-                    (load-rdf source-kb (java.util.zip.GZIPInputStream.
-                                          (clojure.java.io/input-stream
-                                            f)) :ntriple))
-                  (get-only-files tmp-dir))))
-    (run-build-rules source-kb build-rules-step-fa)
-    (run-build-rules source-kb build-rules-step-fb)
-    (run-build-rules source-kb build-rules-step-ga)
-    (run-build-rules source-kb build-rules-step-gb)
-
     ;(run-build-rule source-kb source-kb build-rules-step-gc 1)
 
     (run-build-rule source-kb target-kb build-rules-step-gc 1)
