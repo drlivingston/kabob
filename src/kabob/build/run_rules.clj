@@ -26,8 +26,7 @@
        kabob.core.parallel-utils
        clojure.pprint
        [kabob.build.input-kb :refer [source-kb]]
-       kabob.build.output-kb
-       [kabob.core.reification-extensions :refer [reify-sha-1]])
+       kabob.build.output-kb)
   (require [clojure.set :as set]
            ;;kabob.core.kabob
            ))
@@ -128,52 +127,10 @@
 
 (defn run-forward-rule [source-kb target-kb rule]
   (let [{head :head body :body reify :reify :as rule} (add-reify-fns rule)
-         visit-counter (atom 0)
-         t (atom (.getTime (java.util.Date.)))
-         query-vars (query-variables rule) ]
-    (println "rule query:")
-    (binding [*kb* source-kb]
-      (println (sparql-select-query body
-                                    {:select-vars query-vars})))
-    (println "running:")
-    (query-visit source-kb
-                 (fn [bindings]
-                   (swap! visit-counter inc)
-                   (when (= 0 (mod @visit-counter 10000))
-                     (System/gc))
-                   (when (= 0 (mod @visit-counter 250000))
-                     (let [new-t (.getTime (java.util.Date.))]
-                       (println @visit-counter " in " (- new-t @t) "ms")
-                       (reset! t new-t)))
-                   (dorun
-                    (map (partial add! target-kb)
-                         (doall
-                          (subst-bindings head
-                                          bindings
-                                          (reify-bindings reify ;;-with-fns
-                                                          bindings))))))
-                 body ;; TODO: need to add reify find clauses on optionally
-                 {:select-vars query-vars})
-    (println "final count: " @visit-counter)
-    (let [new-t (.getTime (java.util.Date.))]
-      (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t)))))
-
-
-(defn run-forward-rule-sparql-string [source-kb target-kb rule]
-  "This function is very similar to run-forward-rule, however it takes
-  as input a rule that has an explicitly defined SPARQL string. This
-  can be used for complex SPARQL queryies that are difficult to
-  represent using the DSL defined by the forward rule machinery in
-  this project."
-  (let [{head :head sparql-string :sparql-string reify :reify :as rule} (add-reify-fns rule)
         visit-counter (atom 0)
-        t (atom (.getTime (java.util.Date.)))]
-    (println "rule query:")
-    (binding [*kb* source-kb]
-      (println sparql-string)
-      (println "running:")
-      (visit-sparql source-kb
-                    (fn [bindings]
+        t (atom (.getTime (java.util.Date.)))
+        query-vars (query-variables rule)
+        bindings-fn (fn [bindings]
                       (swap! visit-counter inc)
                       (when (= 0 (mod @visit-counter 10000))
                         (System/gc))
@@ -181,17 +138,57 @@
                         (let [new-t (.getTime (java.util.Date.))]
                           (println @visit-counter " in " (- new-t @t) "ms")
                           (reset! t new-t)))
-                      (dorun 
-                       (map (partial add! target-kb)
-                            (doall
-                             (subst-bindings head
-                                             bindings
-                                             (reify-bindings reify
-                                                             bindings))))))
-                    sparql-string)
-      (println "final count: " @visit-counter)
-      (let [new-t (.getTime (java.util.Date.))]
-        (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t))))))
+                      (dorun
+                        (map (partial add! target-kb)
+                             (doall
+                               (subst-bindings head
+                                               bindings
+                                               (reify-bindings reify ;;-with-fns
+                                                               bindings))))))]
+    (println "rule query:")
+    (binding [*kb* source-kb]
+      (println (sparql-select-query body {:select-vars query-vars})))
+    (println "running:")
+    (cond (string? body) (visit-sparql source-kb bindings-fn body)
+          :else (query-visit source-kb bindings-fn body {:select-vars query-vars}))
+    (println "final count: " @visit-counter)
+    (let [new-t (.getTime (java.util.Date.))]
+      (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t)))))
+
+
+;(defn run-forward-rule-sparql-string [source-kb target-kb rule]
+;  "This function is very similar to run-forward-rule, however it takes
+;  as input a rule that has an explicitly defined SPARQL string. This
+;  can be used for complex SPARQL queryies that are difficult to
+;  represent using the DSL defined by the forward rule machinery in
+;  this project."
+;  (let [{head :head sparql-string :sparql-string reify :reify :as rule} (add-reify-fns rule)
+;        visit-counter (atom 0)
+;        t (atom (.getTime (java.util.Date.)))]
+;    (println "rule query:")
+;    (binding [*kb* source-kb]
+;      (println sparql-string)
+;      (println "running:")
+;      (visit-sparql source-kb
+;                    (fn [bindings]
+;                      (swap! visit-counter inc)
+;                      (when (= 0 (mod @visit-counter 10000))
+;                        (System/gc))
+;                      (when (= 0 (mod @visit-counter 250000))
+;                        (let [new-t (.getTime (java.util.Date.))]
+;                          (println @visit-counter " in " (- new-t @t) "ms")
+;                          (reset! t new-t)))
+;                      (dorun
+;                       (map (partial add! target-kb)
+;                            (doall
+;                             (subst-bindings head
+;                                             bindings
+;                                             (reify-bindings reify
+;                                                             bindings))))))
+;                    sparql-string)
+;      (println "final count: " @visit-counter)
+;      (let [new-t (.getTime (java.util.Date.))]
+;        (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t))))))
 
 
 
@@ -232,18 +229,16 @@
 (defn primary-process-rule [args rule]
   (binding [kr.core.sparql/*force-prefixes*
             (add-magic-prefixes
-             [["franzOption_memoryLimit" "franz:85g"]
-              ["franzOption_memoryExhaustionWarningPercentage" "franz:95"]]
-             rule)
+              [["franzOption_memoryLimit" "franz:85g"]
+               ["franzOption_memoryExhaustionWarningPercentage" "franz:95"]]
+              rule)
             kr.core.rdf/*use-inference* false]
     (binding [kr.core.rdf/*use-inference*
               (requested-rule-inference rule)]
       (prn (str "Processing rule: " (:name rule)))
       (let [source-connection (source-kb args)
             target-connection (rule-output-kb (:output-directory args) rule)]
-        (try (time (if (contains? rule :sparql-string)
-                     (run-forward-rule-sparql-string source-connection target-connection rule)
-                     (run-forward-rule source-connection target-connection rule)))
+        (try (time (run-forward-rule source-connection target-connection rule))
              true
              (finally (close target-connection)
                       (close source-connection)))))))
