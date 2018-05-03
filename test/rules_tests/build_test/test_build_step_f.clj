@@ -7,12 +7,13 @@
   (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query sparql-query ask]]
-            [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf]]
+            [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf *graph*]]
             [kr.core.kb :refer [kb open close]]
             [kabob.core.namespace :refer [*namespaces*]]
             [kabob.core.rule :refer [kabob-load-rules-from-classpath]]
             [kabob.build.output-kb :refer [output-kb]]
             [clojure.pprint :refer [pprint]]
+            [rules-tests.build-test.ccp-ext-ontology :refer [ccp-ext-ontology-triples]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
                                                             build-rules-step-ca build-rules-step-cb build-rules-step-cc
@@ -35,6 +36,8 @@
 
 
 (def base-kb (let [source-kb (test-kb initial-plus-ice-triples)]
+               (binding [*graph* "http://ccp-extension.owl"]
+                 (dorun (map (partial add! source-kb) ccp-ext-ontology-triples)))
                (run-build-rules source-kb build-rules-step-a)
                (run-build-rules source-kb build-rules-step-b)
                (run-build-rules source-kb build-rules-step-ca)

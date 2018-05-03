@@ -7,12 +7,13 @@
   (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query ask]]
-            [kr.core.rdf :refer [register-namespaces synch-ns-mappings add!]]
+            [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! *graph*]]
             [kr.core.kb :refer [kb open close]]
             [kabob.core.namespace :refer [*namespaces*]]
             [kabob.core.rule :refer [kabob-load-rules-from-classpath]]
             [kabob.build.output-kb :refer [output-kb]]
             [clojure.pprint :refer [pprint]]
+            [rules-tests.build-test.ccp-ext-ontology :refer [ccp-ext-ontology-triples]]
             [rules-tests.build-test.test-build-util :refer [initial-triples run-build-rule run-build-rules test-kb build-rules-step-a
                                                             go-bp-concepts go-cc-concepts cl-concepts pr-concepts chebi-concepts
                                                             gaz-concepts hgnc-concepts concepts object-properties so-concepts mi-concepts
@@ -63,6 +64,9 @@
 (deftest pre-ice-load-step-ab
   (let [source-kb (test-kb initial-triples)
         target-kb (test-kb '())]
+
+    (binding [*graph* "http://ccp-extension.owl"]
+      (dorun (map (partial add! source-kb) ccp-ext-ontology-triples)))
 
     (run-build-rule source-kb target-kb build-rules-step-a 0)
 
@@ -122,6 +126,9 @@
   (let [source-kb (test-kb initial-triples)
         target-kb (test-kb '())]
 
+    (binding [*graph* "http://ccp-extension.owl"]
+      (dorun (map (partial add! source-kb) ccp-ext-ontology-triples)))
+
     (run-build-rules source-kb build-rules-step-a 0)
     (run-build-rule source-kb target-kb build-rules-step-a 1)
 
@@ -177,7 +184,7 @@
     ;; obi
     (doall (map (fn [concept] (let [ccp-id (symbol "kice" concept)
                                     obo-id (symbol "obo" concept)]
-                                (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0001703)))))) ;; ccp:obi_ontology_identifier
+                                (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0001847)))))) ;; ccp:obi_ontology_identifier
                 obi-concepts))
 
     ;; pato
@@ -186,11 +193,11 @@
                                 (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0000211)))))) ;; ccp:pato_ontology_identifier
                 pato-concepts))
 
-    ;; gaz
-    (doall (map (fn [concept] (let [ccp-id (symbol "kice" concept)
-                                    obo-id (symbol "obo" concept)]
-                                (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0001704)))))) ;; ccp:gazetteer_ontology_identifier
-                gaz-concepts))
+    ;;; gaz
+    ;(doall (map (fn [concept] (let [ccp-id (symbol "kice" concept)
+    ;                                obo-id (symbol "obo" concept)]
+    ;                            (is (ask target-kb `((~ccp-id rdfs/subClassOf ccp/IAO_EXT_0001704)))))) ;; ccp:gazetteer_ontology_identifier
+    ;            gaz-concepts))
 
     (doall (map (fn [concept] (let [ccp-id (symbol "kice" concept)
                                     obo-id (symbol "obo" concept)]
@@ -204,18 +211,19 @@
                 mi-concepts))
 
 
-    ;; there are 4 metadata triples for each rule run so 22*4=88 metadata triples and 36 rule output triples for the
+    ;; there are 4 metadata triples for each rule run so 24*4=92 metadata triples and 36 rule output triples for the
     ;; concepts and 0 rule output triples for the object properties expected here
-    (is (= (+ 88 (count (distinct (concat go-bp-concepts go-cc-concepts cl-concepts chebi-concepts pr-concepts
-                                          so-concepts bfo-concepts obi-concepts pato-concepts gaz-concepts
+    (is (= (+ 96 (count (distinct (concat go-bp-concepts go-cc-concepts cl-concepts chebi-concepts pr-concepts hgnc-concepts
+                                          so-concepts bfo-concepts obi-concepts
+                                          pato-concepts ;gaz-concepts
                                           ncbitaxon-concepts uberon-concepts mi-concepts))))
            (count (query target-kb '((?/s ?/p ?/o))))))
 
-    ;(let [log-kb (output-kb "/tmp/triples.nt")
-    ;      src-kb (test-kb initial-triples)]
-    ;
-    ;  (run-build-rule source-kb log-kb build-rules-step-a 2)
-    ;  (close log-kb))
+    (let [log-kb (output-kb "/tmp/triples.nt")
+          src-kb (test-kb initial-triples)]
+
+      (run-build-rule source-kb log-kb build-rules-step-a 1)
+      (close log-kb))
     ))
 
 
@@ -227,6 +235,9 @@
 (deftest pre-ice-load-step-ad
   (let [source-kb (test-kb initial-triples)
         target-kb (test-kb '())]
+
+    (binding [*graph* "http://ccp-extension.owl"]
+      (dorun (map (partial add! source-kb) ccp-ext-ontology-triples)))
 
     (run-build-rules source-kb build-rules-step-a 1)
     (run-build-rule source-kb target-kb build-rules-step-a 2)

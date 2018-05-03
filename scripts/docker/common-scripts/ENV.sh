@@ -38,7 +38,7 @@ DATASOURCE_ICE_DIR=${PLATFORM_DATASOURCE_ICE_DIR:?}
 assert_datasource_dir_exists $DATASOURCE_ICE_DIR ICE
 
 # The directory into which the genereated rules will be written.
-KB_DATA_DIR=${KB_INSTANCE_DATA_DIR:?}
+KB_DATA_DIR=${KB_INSTANCE_DATA_DIR:?}/${KB_NAME}
 
 ## ------------------------------------------------------------------------- ##
 ## No user-adjustable variables beyond this point.                           ##

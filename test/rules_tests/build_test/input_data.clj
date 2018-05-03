@@ -786,7 +786,33 @@
                       (bnode/chebi_genid457772 oboInOwl/hasDbXref ["ChEBI"])
 
 
-                      ;; http://purl.obolibrary.org/obo/CHEBI_33694
+
+
+                      ;; http://purl.obolibrary.org/obo/CHEBI_10003
+                      (obo/CHEBI_10003 rdf/type owl/Class)
+                      ;(obo/CHEBI_10003 rdfs/subClassOf obo/CHEBI_38012)
+                      ;(obo/CHEBI_10003 rdfs/subClassOf obo/CHEBI_47779)
+                      (obo/CHEBI_10003 obo/IAO_0000115 ["An aminoglycoside sulfate salt resulting from the reaction of ribostamycin  with sulfuric acid."])
+                      (obo/CHEBI_10003 oboInOwl/hasDbXref ["CAS:53797-35-6"])
+                      (obo/CHEBI_10003 oboInOwl/hasDbXref ["DrugBank:DB03615"])
+                      (obo/CHEBI_10003 oboInOwl/hasDbXref ["KEGG:D02209"])
+                      (obo/CHEBI_10003 oboInOwl/hasDbXref ["MetaCyc:CPD-14143"])
+                      (obo/CHEBI_10003 oboInOwl/hasDbXref ["Reaxys:8820400"])
+                      (obo/CHEBI_10003 oboInOwl/hasOBONamespace ["chebi_ontology"])
+                      (obo/CHEBI_10003 oboInOwl/hasRelatedSynonym ["Landamycine"])
+                      (obo/CHEBI_10003 oboInOwl/hasRelatedSynonym ["Ribomycine"])
+                      (obo/CHEBI_10003 oboInOwl/hasRelatedSynonym ["SF 733 antibioic sulfate"])
+                      (obo/CHEBI_10003 oboInOwl/hasRelatedSynonym ["Vistamycin"])
+                      (obo/CHEBI_10003 oboInOwl/hasRelatedSynonym ["ribostamycin A sulfate"])
+                      (obo/CHEBI_10003 oboInOwl/id ["CHEBI:10003"])
+                      (obo/CHEBI_10003 oboInOwl/inSubset obo/chebi#3_STAR)
+                      (obo/CHEBI_10003 rdfs/label ["ribostamycin sulfate" "en"])
+
+
+
+
+
+;; http://purl.obolibrary.org/obo/CHEBI_33694
                       (obo/CHEBI_33694 rdf/type owl/Class)
                       (obo/CHEBI_33694 rdfs/subClassOf obo/CHEBI_33839)
                       (obo/CHEBI_33694 rdfs/subClassOf obo/CHEBI_50860)
@@ -2024,7 +2050,41 @@
                                    (kice/F_Yx1D_QkJseyfomgZpcEUoW5t_3c rdf/type ccp/IAO_EXT_0000814)
                                    (kice/F_Yx1D_QkJseyfomgZpcEUoW5t_3c rdf/type kice/HGNC_11773)
                                    (kice/F_Yx1D_QkJseyfomgZpcEUoW5t_3c rdfs/label ["HGNC:11773" "en"])
-                                   (kice/HGNC_11773 rdfs/subClassOf ccp/IAO_EXT_0000185)))
+                                   (kice/HGNC_11773 rdfs/subClassOf ccp/IAO_EXT_0000185)
+
+
+                                    (kice/DS_PR_20180504 obo/BFO_0000051 kice/R_X12PvPK6ADO93CPxsM-cSWwYdkg)
+                                    (kice/R_X12PvPK6ADO93CPxsM-cSWwYdkg rdf/type ccp/IAO_EXT_0000808)
+                                    (kice/R_X12PvPK6ADO93CPxsM-cSWwYdkg obo/BFO_0000051 kice/F_C2ciNC0aev2gZkUKJOlmf8l8yoA)
+                                    (kice/F_C2ciNC0aev2gZkUKJOlmf8l8yoA rdf/type ccp/IAO_EXT_0000813)
+                                    (kice/F_C2ciNC0aev2gZkUKJOlmf8l8yoA rdfs/label ["exact" "en"])
+                                    (kice/R_X12PvPK6ADO93CPxsM-cSWwYdkg obo/BFO_0000051 kice/F_tiuQsxUpY1i2Sot0rU0oS7ykYAk)
+                                    (kice/F_tiuQsxUpY1i2Sot0rU0oS7ykYAk rdf/type ccp/IAO_EXT_0000817)
+                                    (kice/F_tiuQsxUpY1i2Sot0rU0oS7ykYAk rdf/type kice/PR_P37173)
+                                    (kice/F_tiuQsxUpY1i2Sot0rU0oS7ykYAk rdfs/label ["PR:P37173" "en"])
+                                    (kice/PR_P37173 rdfs/subClassOf ccp/IAO_EXT_0000112)
+                                    (kice/R_X12PvPK6ADO93CPxsM-cSWwYdkg obo/BFO_0000051 kice/F_v8uxxLGkp2iNcDSQ3aU-nLfqQMo)
+                                    (kice/F_v8uxxLGkp2iNcDSQ3aU-nLfqQMo rdf/type ccp/IAO_EXT_0000814)
+                                    (kice/F_v8uxxLGkp2iNcDSQ3aU-nLfqQMo rdf/type kice/UNIPROT_P37173)
+                                    (kice/F_v8uxxLGkp2iNcDSQ3aU-nLfqQMo rdfs/label ["P37173" "en"])
+                                    (kice/UNIPROT_P37173 rdfs/subClassOf ccp/IAO_EXT_0000184)
+
+
+                                    (kice/DS_PR_20180517 obo/BFO_0000051 kice/R_Cj66eSBMIHxYvw79-LVx0sFmcms)
+                                    (kice/R_Cj66eSBMIHxYvw79-LVx0sFmcms rdf/type ccp/IAO_EXT_0000808)
+                                    (kice/R_Cj66eSBMIHxYvw79-LVx0sFmcms obo/BFO_0000051 kice/F_C2ciNC0aev2gZkUKJOlmf8l8yoA)
+                                    (kice/R_Cj66eSBMIHxYvw79-LVx0sFmcms obo/BFO_0000051 kice/F_R9fJX50OYwA_JUvO0dv3u-hjj0g)
+                                    (kice/F_R9fJX50OYwA_JUvO0dv3u-hjj0g rdf/type ccp/IAO_EXT_0000817)
+                                    (kice/F_R9fJX50OYwA_JUvO0dv3u-hjj0g rdf/type kice/PR_P37173-1)
+                                    (kice/F_R9fJX50OYwA_JUvO0dv3u-hjj0g rdfs/label ["PR:P37173-1" "en"])
+                                    (kice/PR_P37173-1 rdfs/subClassOf ccp/IAO_EXT_0000112)
+                                    (kice/R_Cj66eSBMIHxYvw79-LVx0sFmcms obo/BFO_0000051 kice/F_3nqN0fh3VO4aC0ewvyZnBbeQQNw)
+                                    (kice/F_3nqN0fh3VO4aC0ewvyZnBbeQQNw rdf/type ccp/IAO_EXT_0000814)
+                                    (kice/F_3nqN0fh3VO4aC0ewvyZnBbeQQNw rdf/type kice/UNIPROT_P37173-1)
+                                    (kice/F_3nqN0fh3VO4aC0ewvyZnBbeQQNw rdfs/label ["P37173-1" "en"])
+                                    (kice/UNIPROT_P37173-1 rdfs/subClassOf ccp/IAO_EXT_0001495)
+
+                                    ))
 
 
 (def refseq-release-catalog-triples '((kice/RS_REFSEQ_20170714 obo/BFO_0000051 kice/R_B1o3vxYSjHVXAoyjT9ITZ_KzMSY)

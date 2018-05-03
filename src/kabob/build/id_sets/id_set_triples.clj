@@ -22,7 +22,7 @@
 
 ;;(def ^:dynamic *graph-db-path* "/temp/kabob/neo4j/idsets/")
 
-(def ^:dynamic *id-set-ns* "ccp")
+(def ^:dynamic *id-set-ns* "kice")
 
 (def magic-prefixes
   (str "prefix franzOption_clauseReorderer: <franz:identity> \n"
@@ -33,6 +33,7 @@
        "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n"
        "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
        "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/> \n"
+       "PREFIX kice: <http://ccp.ucdenver.edu/kabob/ice/> \n"
        ))
 
 ;;;-------------------------------------------------------------------
@@ -80,7 +81,7 @@
 
 (defn generic-id-set-triples [ids]
   (let [set-sym (derive-generic-id-set-sym ids)
-        type-sym (symbol *id-set-ns* "IAO_EXT_0000316")]    ;; ccp:identifier set
+        type-sym (symbol "ccp" "IAO_EXT_0000316")]    ;; ccp:identifier set
     (conj (map (fn [id]
                  `(~set-sym obo/RO_0002351 ~id))
                ids)

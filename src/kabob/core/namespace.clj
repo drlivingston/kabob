@@ -39,7 +39,8 @@
         ;; be removed once the 'http:/' bug is resolved.
         ;; ---------------------------------------------------------------------------
         ("bnode" "http://ccp.ucdenver.edu/bnode/")
-        ("bp_base", "http://www.reactome.org/biopax/63/48887#")
+        ("bp_base", "http://www.reactome.org/biopax/64/48887#")
+
         ("reactome_download", "http://www.reactome.org/download/current/")
         ;; ---------------------------------------------------------------------------
 

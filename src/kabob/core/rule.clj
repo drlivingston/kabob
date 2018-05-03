@@ -45,5 +45,5 @@
 
 (defn kabob-load-rules-from-directory [path]
   (binding [*dynamic-reader-fn* kabob-rule-reader]
-    (prn (str "===== Loading rules from directory: " path))
+    ;(prn (str "===== Loading rules from directory: " path))
     (doall (load-rules-from-directory path))))

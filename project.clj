@@ -16,12 +16,12 @@
   				       [org.clojure/data.csv "0.1.2"]
   				       [log4j/log4j "1.2.17"]
   				       [org.slf4j/slf4j-log4j12 "1.7.2"]
-  				       [potemkin/potemkin "0.1.2"]
-  				       [commons-codec/commons-codec "1.6"]
-								 [com.complexible.stardog.sesame/stardog-sesame-core "5.0"]
-								 [virtuoso/virtuoso-jdbc "4.2"]
-								 [virtuoso/virtuoso-rdf4j "2.x"]
-								 [com.blazegraph/bigdata-core "2.1.4"]]
+  				       [potemkin/potemkin "0.4.5"]
+  				       [commons-codec/commons-codec "1.11"]
+								 [com.complexible.stardog.sesame/stardog-sesame-core "5.2.2"]]
+								 ;[virtuoso/virtuoso-jdbc "4.2"]
+								 ;[virtuoso/virtuoso-rdf4j "2.x"]
+								 ;[com.blazegraph/bigdata-core "2.1.4"]]
 	:repositories {"local" "file:mvn-local-repository"
 								 "stardog-public" "http://maven.stardog.com"}
   ;:main ^:skip-aot my-stuff.core

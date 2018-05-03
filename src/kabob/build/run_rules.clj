@@ -22,14 +22,15 @@
        kr.core.variable
        kr.core.reify
        kr.core.unify
-       ;kabob.core.staged-rule
+    ;kabob.core.staged-rule
        kabob.core.parallel-utils
        clojure.pprint
        [kabob.build.input-kb :refer [source-kb]]
        kabob.build.output-kb)
   (require [clojure.set :as set]
-           ;;kabob.core.kabob
-           ))
+    ;;kabob.core.kabob
+           )
+  (:import (org.openrdf.query MalformedQueryException)))
 
 ;;; --------------------------------------------------------
 ;;; arguments and helpers
@@ -126,7 +127,7 @@
     ))
 
 (defn run-forward-rule [source-kb target-kb rule]
-  (let [{head :head body :body reify :reify :as rule} (add-reify-fns rule)
+  (let [{rule-name :name head :head body :body reify :reify :as rule} (add-reify-fns rule)
         visit-counter (atom 0)
         t (atom (.getTime (java.util.Date.)))
         query-vars (query-variables rule)
@@ -145,12 +146,14 @@
                                                bindings
                                                (reify-bindings reify ;;-with-fns
                                                                bindings))))))]
-    (println "rule query:")
-    (binding [*kb* source-kb]
-      (println (sparql-select-query body {:select-vars query-vars})))
+
     (println "running:")
-    (cond (string? body) (visit-sparql source-kb bindings-fn body)
-          :else (query-visit source-kb bindings-fn body {:select-vars query-vars}))
+    (try
+      (cond (string? body) (visit-sparql source-kb bindings-fn body)
+            :else (query-visit source-kb bindings-fn body {:select-vars query-vars}))
+      (catch MalformedQueryException e (str "Malformed query in rule: " rule-name " " (.getMessage e))
+                                       (prn (str "Malformed query in rule: " rule-name " " (.getMessage e)))
+                                       (throw e)))
     (println "final count: " @visit-counter)
     (let [new-t (.getTime (java.util.Date.))]
       (add-rule-metadata target-kb (:name rule) new-t @visit-counter (- new-t @t)))))
