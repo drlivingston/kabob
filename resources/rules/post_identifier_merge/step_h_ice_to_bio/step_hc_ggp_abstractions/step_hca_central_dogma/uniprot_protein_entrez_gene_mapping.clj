@@ -11,7 +11,7 @@
           (?/protein rdfs/subClassOf ?/indirect_template_restriction))
   :reify ([?/indirect_template_restriction {:ln (:restriction)
                                             :ns "kbio" :prefix "RS_"}])
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

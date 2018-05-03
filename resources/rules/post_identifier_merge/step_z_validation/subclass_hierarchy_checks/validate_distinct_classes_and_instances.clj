@@ -6,11 +6,11 @@
                   a class and an instance. If this rule reports >0 hits, then there is an issue."
   :head          ()
 
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
     PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    SELECT ?cls
+    SELECT distinct ?instance
    WHERE {
           ?instance rdf:type ?cls .
           ?instance rdfs:subClassOf ?super .

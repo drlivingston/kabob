@@ -4,7 +4,7 @@
 `{:name "equivalent-class-idmappings"
   :description "create skos/exactMatch links between identifiers that denote named classes that are linked via owl:equivalentClass, e.g. CL_0000000 (cell) & GO_0005623 (cell)"
   :head ((?/id1 skos/exactMatch ?/id2))
-  :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
+  :body "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?id1 ?id2 {

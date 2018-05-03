@@ -13,7 +13,8 @@
        kabob.build.output-kb
 
        kabob.core.parallel-utils)
-  (:require [clojure.set :as cljset]))
+  (:require [clojure.set :as cljset]
+            [kr.core.utils :refer [sha-1]]))
 
 ;;;-------------------------------------------------------------------
 ;;; globals
@@ -166,7 +167,7 @@
                                       minus {?x skos:exactMatch ?id}
                                       minus {?id skos:exactMatch ?y}
                                       # exclude any identifiers that are obsolete
-                                      minus {?id rdf:type ccp:IAO_EXT_0001711}
+                                      minus {?id rdfs:subClassOf ccp:IAO_EXT_0001711}
                                       # exclude any classes of identifiers. this filter is an argument for
                                       #using rdf:type instead of rdfs:subClassOf in the identifier hierarchy
                                       filter (!contains (str(?id), 'ext/IAO_'))

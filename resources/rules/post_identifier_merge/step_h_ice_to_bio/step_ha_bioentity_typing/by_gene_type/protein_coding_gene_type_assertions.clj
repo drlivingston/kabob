@@ -5,7 +5,7 @@
   :description "This rule asserts the protein coding gene type to NCBI genes marked as 'protein-coding', excluding those
                 genes that are already subClassOF SO:protein_coding_gene (as likely asserted by the protein ontology)."
   :head ((?/gene_bioentity rdfs/subClassOf ?/protein_coding_gene)) ; SO:protein_coding_gene
-  :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
+  :body "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

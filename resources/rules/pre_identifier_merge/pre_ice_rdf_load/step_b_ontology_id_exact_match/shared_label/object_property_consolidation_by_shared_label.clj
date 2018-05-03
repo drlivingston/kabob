@@ -4,7 +4,7 @@
 `{:name "object-property-consolidation-by-shared_label"
   :description "creates exactMatch mappings between ObjectProperty identifiers whose properties share the same exact label"
   :head ((?/id1 skos/exactMatch ?/id2))
-  :sparql-string "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  :body "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select distinct ?id1 ?id2 {
                              ?p1 rdf:type owl:ObjectProperty .

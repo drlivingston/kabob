@@ -7,7 +7,7 @@
          (?/id rdfs/subClassOf ccp/IAO_EXT_0000306)) ; CCP:object_property_identifier
   :reify ([?/id {:ln (:localname ?/object_property)
                  :ns "kice" :prefix "" :suffix ""}])
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?object_property {
                      ?object_property rdf:type owl:ObjectProperty .

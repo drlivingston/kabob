@@ -28,7 +28,7 @@
                                     :ns "kice" :prefix "UNIPROT_"}]
            [?/entity_xref_db_field {:ln (:sha-1 "Reactome unification xref recorddb field" "UniProt Isoform")
                                     :ns "kice" :prefix "F_"}])
-  :sparql-string
+  :body
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>
    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
    PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

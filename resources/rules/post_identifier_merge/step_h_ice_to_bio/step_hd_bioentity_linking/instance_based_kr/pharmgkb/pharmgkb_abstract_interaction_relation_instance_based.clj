@@ -23,7 +23,7 @@
                    [?/bioentity2_instance {:ln (:sha-1 ?/interaction ?/bioentity2)
                                      :ns "kbio" :prefix "B_"}])
 
-  :sparql-string
+  :body
      "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
      prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
       PREFIX obo: <http://purl.obolibrary.org/obo/>

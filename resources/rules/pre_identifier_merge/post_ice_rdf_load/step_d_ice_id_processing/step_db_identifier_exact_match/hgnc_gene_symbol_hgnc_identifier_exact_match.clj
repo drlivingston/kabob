@@ -4,7 +4,7 @@
 `{:name "hgnc-gene-symbol-hgnc-identifier-exact-match"
   :description "This rule asserts an exact match between a hgnc symbol and an hgnc identifiers"
   :head ((?/hgnc_gene_symbol_identifier skos/exactMatch ?/hgnc_gene_identifier))
-:sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
+  :body "PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

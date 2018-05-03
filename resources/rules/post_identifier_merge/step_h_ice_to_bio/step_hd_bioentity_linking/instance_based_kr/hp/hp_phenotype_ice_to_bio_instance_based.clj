@@ -20,7 +20,7 @@
                    [?/bioentity_instance {:ln (:sha-1 ?/human_phenotype ?/causal_bioentity)
                                     :ns "kbio" :prefix "B_"}])
 
-  :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
+  :body "PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>

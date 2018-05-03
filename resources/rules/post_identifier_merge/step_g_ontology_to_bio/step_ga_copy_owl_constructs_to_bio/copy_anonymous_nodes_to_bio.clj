@@ -18,7 +18,7 @@
                                       :ns "kice" :prefix "F_" :suffix ""}]
                    [?/id {:ln (:sha-1 ?/blank_node)
                           :ns "kice" :prefix "ID_" :suffix ""}])
-  :sparql-string "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  :body "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix owl: <http://www.w3.org/2002/07/owl#>

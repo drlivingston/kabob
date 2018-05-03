@@ -6,7 +6,7 @@
   :head ((?/pr_id skos/exactMatch ?/uniprot_id))
   :reify ([?/uniprot_id {:ln (:localname ?/uniprot_identifier)
                   :ns "kice" :prefix "UNIPROT_" :suffix ""}])
-  :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
+  :body "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>

@@ -3,24 +3,27 @@
 ;; ----------------------------------------------------------------------------------
 `{:name          "goa-molecular-function-ice-to-bio-instance-based-kr"
   :description   "This rule creates a subclass of every molecular function and types it as a gene ontology molecular function concept identifier  (IAO_EXT_0000103)"
-  :head          (
-                   ;; create a subclass of the molecular function
-                   (?/molecular_function_instance rdf/type ?/molecular_function)
-                   ;; create a subclass of the participating bioentity
+  :head          ((?/molecular_function_instance rdf/type ?/molecular_function)
                    (?/bioentity_instance rdf/type ?/participating_bioentity)
+                   (?/process_instance rdf/type ?/process_root)
 
-                   (?/molecular_function_instance ?/has_participant ?/bioentity_instance)
+                   (?/process_instance ?/has_participant ?/bioentity_instance)
+                   (?/process_instance ?/realizes ?/molecular_function_instance)
 
                    ;; provenance: connect the record to the process subclass
-                   (?/record obo/IAO_0000219 ?/molecular_function_instance)) ; IAO:denotes
+                   (?/record obo/IAO_0000219 ?/molecular_function_instance)
+                   (?/record obo/IAO_0000219 ?/process_instance)
+                   (?/record obo/IAO_0000219 ?/bioentity_instance)) ; IAO:denotes
 
 
   :reify         ([?/molecular_function_instance {:ln (:sha-1 ?/molecular_function ?/participating_bioentity "mf")
                                             :ns "kbio" :prefix "B_"}]
+                   [?/process_instance {:ln (:sha-1 ?/molecular_function ?/participating_bioentity "process")
+                                  :ns "kbio" :prefix "B_"}]
                    [?/bioentity_instance {:ln (:sha-1 ?/molecular_function ?/participating_bioentity)
                                     :ns "kbio" :prefix "B_"}])
 
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                 prefix franzOption_clauseReorderer: <franz:identity>
                 PREFIX obo: <http://purl.obolibrary.org/obo/>
                 PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
@@ -52,6 +55,19 @@
                                  filter (?has_participant != obo:RO_0000057) .
                                  }
                       }
+                      {
+                                select ?realizes {
+                                                  kice:BFO_0000055 obo:IAO_0000219 ?realizes .
+                                                  filter (?realizes != obo:BFO_0000055) .
+                                                  }
+                                }
+
+                 {
+                  select ?process_root {
+                                        kice:GO_0008150 obo:IAO_0000219 ?process_root .
+                                        filter (?process_root != obo:GO_0008150) .
+                                        }
+                  }
                 }"
 
   :options       {:magic-prefixes [["franzOption_clauseReorderer" "franz:identity"]]}

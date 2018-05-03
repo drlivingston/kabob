@@ -18,7 +18,7 @@
                    (?/ggv_abstraction rdfs/subClassOf ccp/IAO_EXT_1720) ;; ccp:gene_or_gene_variant_abstraction
                    (?/ggv_abstraction rdfs/subClassOf ?/ggpv_abstraction)
                    (?/ggpv_abstraction rdfs/subClassOf ccp/IAO_EXT_0001718) ;; ccp:gene_or_gene_product_or_variant_abstraction
-                   (?/ggp_abstraction rdf/subClassOf ?/ggpv_abstraction)
+                   (?/ggp_abstraction rdfs/subClassOf ?/ggpv_abstraction)
                    (?/vg_abstraction rdfs/subClassOf ?/ggv_abstraction)
                    (?/vg_abstraction rdfs/subClassOf ccp/IAO_EXT_0001717) ;; ccp:variant_gene_abstraction
                    (?/gp_abstraction rdfs/subClassOf ?/ggp_abstraction)
@@ -43,7 +43,7 @@
                             :ns "kbio" :prefix "GGV_" :suffix ""}]
                    [?/gpgpv_abstraction {:ln (:localname ?/g)
                             :ns "kbio" :prefix "GPGPV_" :suffix ""}])
-  :sparql-string "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
+  :body "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
                   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

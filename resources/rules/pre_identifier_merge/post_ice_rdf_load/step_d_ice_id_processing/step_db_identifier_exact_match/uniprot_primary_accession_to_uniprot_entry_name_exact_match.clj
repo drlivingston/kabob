@@ -4,7 +4,7 @@
 `{:name "uniprot-primary-accession-to-uniprot-entry-name-exact-match"
   :description "This rule asserts an exact match between a uniprot primary accession and its corresponding record entry name, e.g. PPARD_HUMAN"
   :head ((?/uniprot_identifier skos/exactMatch ?/uniprot_entry_name_identifier))
-:sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
                 PREFIX obo: <http://purl.obolibrary.org/obo/>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

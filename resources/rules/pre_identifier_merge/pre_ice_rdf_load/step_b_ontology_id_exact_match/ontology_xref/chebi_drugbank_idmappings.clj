@@ -7,7 +7,7 @@
   :head ((?/chebi_id skos/exactMatch ?/db_id))
   :reify ([?/db_id {:ln (:localname ?/drug_bank_id)
                   :ns "kice" :prefix "DRUGBANK_" :suffix ""}])
-  :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
+  :body "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>

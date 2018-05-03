@@ -18,7 +18,7 @@
                  [?/bioentity_sc {:ln (:sha-1 ?/parent_bioentity ?/parent_location "inferred-location")
                                   :ns "kbio" :prefix "B_"}])
 
-  :sparql-string
+  :body
                "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                PREFIX obo: <http://purl.obolibrary.org/obo/>
                SELECT ?parent_bioentity ?parent_location ?located_in

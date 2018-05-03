@@ -1,11 +1,11 @@
 ;; -----------------------------------------------
 ;; --------- IRefWeb Binary Interactions ---------
 ;; -----------------------------------------------
-`{:name          "bioplex-interactions"
+`{:name          "bioplex-interactions-instance-based"
   :description   "This rule generates bio-representations the (biophysical) interactions cataloged by BioPlex"
   :head          ((?/interaction rdf/type ?/physical_association)
                    (?/bioentity1_instance rdf/type ?/bioentity1)
-                   (?/bioentity2_instance rdfs/type ?/bioentity2)
+                   (?/bioentity2_instance rdf/type ?/bioentity2)
                    (?/interaction ?/has_participant ?/bioentity1_instance)
                    (?/interaction ?/has_participant ?/bioentity2_instance)
                    (?/record obo/IAO_0000219 ?/interaction))
@@ -15,7 +15,7 @@
                                      :ns "kbio" :prefix "B_"}]
                    [?/bioentity2_instance {:ln (:sha-1 ?/interaction ?/bioentity2)
                                      :ns "kbio" :prefix "B_"}])
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
     PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

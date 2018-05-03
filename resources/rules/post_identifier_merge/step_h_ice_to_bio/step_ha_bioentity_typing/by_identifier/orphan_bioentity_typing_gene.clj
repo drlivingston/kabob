@@ -4,7 +4,7 @@
 `{:name "orphan-bioentity-typing-gene"
   :description "for any bioentity denoted by a DNA identifier, this rule adds a subclass relation to SO:gene if that bioentity does not already have a parent concept"
   :head ((?/bioentity rdfs/subClassOf ?/gene_bioentity))
-  :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
+  :body "PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

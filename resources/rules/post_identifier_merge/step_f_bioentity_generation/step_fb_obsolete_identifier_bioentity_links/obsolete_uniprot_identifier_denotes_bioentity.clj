@@ -5,7 +5,7 @@
   :description "This rule connects all UniProt secondary accession identifiers to their respective bioentities using obo:denotes links. Note that a single secondary uniprot accession can reference multiple bioentities."
   :head ((?/secondary_uniprot_identifier obo/IAO_0000219 ?/bioentity)) ; CCP:obsolete_identifier
   :reify ()
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

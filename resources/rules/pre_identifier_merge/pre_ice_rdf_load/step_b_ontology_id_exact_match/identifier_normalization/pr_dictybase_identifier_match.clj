@@ -11,7 +11,7 @@
           (?/id rdfs/subClassOf ccp/IAO_EXT_0000340)) ; CCP:DictyBase_gene_identifier
   :reify ([?/id {:ln (:regex "dictyBase:" "DICTYBASE_" ?/concept_id)
                  :ns "kice" :prefix "" :suffix ""}])
-  :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
+  :body "prefix franzOption_clauseReorderer: <franz:identity>
                   prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>

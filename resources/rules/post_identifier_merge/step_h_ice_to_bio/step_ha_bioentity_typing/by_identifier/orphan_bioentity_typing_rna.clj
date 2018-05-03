@@ -1,10 +1,10 @@
 ;; --------------------------------------------------------
 ;; --------- Orphan bioentity typing == mrna -----------
 ;; --------------------------------------------------------
-`{:name "orphan-bioentity-typing-mrna"
+`{:name "orphan-bioentity-typing-rna"
   :description "for any bioentity denoted by a RNA identifier, this rule adds a subclass relation to SO:RNA if that bioentity does not already have a parent concept"
   :head ((?/bioentity rdfs/subClassOf ?/rna_bioentity))
-  :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
+  :body "PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

@@ -5,7 +5,7 @@
   :description   "This rule specifically the basic formal ontology identifier"
   :head          ((?/refseq_identifier rdfs/subClassOf ccp/IAO_EXT_0001641)) ; CCP:refseq_rna_identifier
   :reify ()
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>

@@ -26,7 +26,7 @@
                                     :ns "kbio" :prefix "B_"}]
                    [?/participation_restriction {:ln (:restriction)
                                                  :ns "kbio" :prefix "RS_"}])
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                 prefix franzOption_clauseReorderer: <franz:identity>
                 PREFIX obo: <http://purl.obolibrary.org/obo/>
                 PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

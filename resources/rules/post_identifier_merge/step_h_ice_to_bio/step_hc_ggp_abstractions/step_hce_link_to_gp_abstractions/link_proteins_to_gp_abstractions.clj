@@ -13,7 +13,7 @@
 `{:name          "link-proteins-to-gp-abstractions"
   :description   "For each protein in the KB, find its gene and then link to its corresponding gene_product_abstraction."
   :head          ((?/p rdfs/subClassOf ?/gp_abstraction))
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo: <http://purl.obolibrary.org/obo/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

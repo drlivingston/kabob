@@ -5,7 +5,7 @@
   :description "This rule types RefSeq identifiers that are genomic identifiers to the more specific ccp:IAO_EXT_0001640 (RefSeq genomic identifier) type."
   :head ((?/refseq_identifier rdfs/subClassOf ccp/IAO_EXT_0001640)) ; CCP:refseq_genomic_identifier
   :reify ()
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

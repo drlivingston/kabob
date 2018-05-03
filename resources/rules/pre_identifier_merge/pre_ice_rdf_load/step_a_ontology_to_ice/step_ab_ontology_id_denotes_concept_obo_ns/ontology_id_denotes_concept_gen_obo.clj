@@ -8,7 +8,7 @@
                    (?/id rdfs/subClassOf ccp/IAO_EXT_0000088)) ; CCP:ontology_concept_identifier
   :reify         ([?/id {:ln (:localname ?/ontology_concept)
                          :ns "kice" :prefix "" :suffix ""}])
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select ?ontology_concept {

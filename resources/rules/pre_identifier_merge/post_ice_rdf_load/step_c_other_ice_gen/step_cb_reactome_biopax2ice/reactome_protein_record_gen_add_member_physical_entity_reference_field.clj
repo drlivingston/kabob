@@ -4,7 +4,7 @@
   :head ((?/prot_record obo/BFO_0000051 ?/member_prot_record)  ;; has_part
          (?/member_prot_record rdf/type ccp/IAO_EXT_0001528)) ;; Reactome member entity reference field value
 
-  :sparql-string
+  :body
   "PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#>
    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
    PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

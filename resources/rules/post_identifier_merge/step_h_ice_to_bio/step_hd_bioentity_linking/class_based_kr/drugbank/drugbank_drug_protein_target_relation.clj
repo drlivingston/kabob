@@ -58,7 +58,7 @@
                    [?/inheres {:ln (:sha-1 "drugrole" ?/drug)
                                :ns "kbio" :prefix "B_"}])
 
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
   prefix franzOption_clauseReorderer: <franz:identity>
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

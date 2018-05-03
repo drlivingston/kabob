@@ -4,7 +4,7 @@
 `{:name "protein-entity-direct-subclass-assertions"
   :description "This rule asserts a direct subClassOf relationship for every protein to the protein root class. Doing so avoids the use of *'s in downstream queries."
   :head ((?/protein_sc rdfs/subClassOf ?/protein))
-  :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
+  :body "prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
                   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
                   PREFIX franzOption_chunkProcessingAllowed: <franz:yes>

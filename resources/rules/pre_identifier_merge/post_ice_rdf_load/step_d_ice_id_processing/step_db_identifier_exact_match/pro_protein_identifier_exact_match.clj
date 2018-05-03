@@ -4,7 +4,7 @@
 `{:name "pro-protein-identifier-exact-match"
   :description "This rule asserts an exact match between proteins and other protein identifier"
   :head ((?/pr_identifier skos/exactMatch ?/other_protein_identifier))
-:sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
+  :body "PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

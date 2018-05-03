@@ -24,16 +24,17 @@
 
   :reify         ([?/interaction {:ln (:sha-1 ?/bioentity1 ?/bioentity2 ?/physical_association)
                                   :ns "kbio" :prefix "B_"}]
+                   [?/bioentity1_sc {:ln (:sha-1 ?/interaction ?/bioentity1)
+                                     :ns "kbio" :prefix "B_"}]
+                   [?/bioentity2_sc {:ln (:sha-1 ?/interaction ?/bioentity2)
+                                     :ns "kbio" :prefix "B_"}]
                    [?/bioentity1_sc_restriction {:ln (:restriction)
                                                  :ns "kbio" :prefix "RS_"}]
                    [?/bioentity2_sc_restriction {:ln (:restriction)
                                                  :ns "kbio" :prefix "RS_"}]
-                   [?/bioentity1_sc {:ln (:sha-1 ?/interaction ?/bioentity1)
-                                     :ns "kbio" :prefix "B_"}]
-                   [?/bioentity2_sc {:ln (:sha-1 ?/interaction ?/bioentity2)
-                                     :ns "kbio" :prefix "B_"}])
+                   )
 
-  :sparql-string "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
     PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

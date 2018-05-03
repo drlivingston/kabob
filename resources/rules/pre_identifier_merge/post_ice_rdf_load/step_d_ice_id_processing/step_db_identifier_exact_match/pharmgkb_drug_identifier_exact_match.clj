@@ -4,7 +4,7 @@
 `{:name "pharmgkb-drug-identifier-exact-match"
   :description "This rule creates an exact match mapping between pahrmgkb drugs and other drugs"
   :head ((?/pharmgkb_drug_identifier skos/exactMatch ?/xref_identifier))
-   :sparql-string "PREFIX obo: <http://purl.obolibrary.org/obo/>
+  :body "PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
        PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

@@ -4,7 +4,7 @@
 `{:name "go-cc-identifier-typing"
   :description "This rule specifically the GO cellular component identifier"
   :head ((?/id rdfs/subClassOf ccp/IAO_EXT_0000200)) ; CCP:go_cellular_component_ontology_identifier
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

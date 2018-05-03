@@ -18,7 +18,7 @@
                                             :ns "kbio" :prefix "RS_"}]
            [?/protein_coding_gene {:ln (:sha-1 ?/protein_missing_gene "missing")
                              :ns "kbio" :prefix "B_"}])
-  :sparql-string "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
+  :body "prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

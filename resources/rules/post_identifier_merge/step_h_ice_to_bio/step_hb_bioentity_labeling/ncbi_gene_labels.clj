@@ -7,7 +7,7 @@
          ;; create a symbol label for gene
          (?/gene rdfs/label ?/gene_symbol))
 
-  :sparql-string
+  :body
   "PREFIX obo: <http://purl.obolibrary.org/obo/>
    PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

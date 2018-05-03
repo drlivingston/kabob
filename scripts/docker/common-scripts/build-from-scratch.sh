@@ -156,8 +156,12 @@ ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hb
 ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hca_central_dogma
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcb_generate_missing_ggp_entities
 ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcb_generate_missing_ggp_entities
-#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon
-${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon/ncbi
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon/ncbi
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon/refseq
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon/refseq
+#${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon/uniprot
+${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcc_assign_taxon/uniprot
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcd_generate_gene_abstractions
 ${BASE_SCRIPT_DIR}/LOAD.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hcd_generate_gene_abstractions
 #${BASE_SCRIPT_DIR}/RULES.sh rules/post_identifier_merge/step_h_ice_to_bio/step_hc_ggp_abstractions/step_hce_link_to_gp_abstractions

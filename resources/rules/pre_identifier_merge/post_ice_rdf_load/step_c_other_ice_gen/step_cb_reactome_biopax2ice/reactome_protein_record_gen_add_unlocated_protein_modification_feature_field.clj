@@ -32,7 +32,7 @@
            [?/modification_xref_id_field {:ln (:regex ":" "_" ?/psi_mod_id)
                                           :ns "kice" :prefix ""}])
 
-  :sparql-string
+  :body
   "PREFIX biopax: <http://www.biopax.org/release/biopax-level3.owl#>
    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
    PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>

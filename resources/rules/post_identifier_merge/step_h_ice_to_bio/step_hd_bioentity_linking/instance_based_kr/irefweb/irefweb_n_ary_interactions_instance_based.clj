@@ -13,12 +13,12 @@
          (?/interaction ?/has_participant ?/bioentity_instance)
 
           (?/super_record obo/IAO_0000219 ?/interaction))
-  :reify ([?/interaction {:ln (:sha-1 ?/unique_interaction_id)
+  :reify ([?/interaction {:ln (:sha-1 ?/interaction_irig_identifier)
                           :ns "kbio" :prefix "B_"}]
            [?/bioentity_instance {:ln (:sha-1 ?/interaction ?/bioentity)
                            :ns "kbio" :prefix "B_"}])
 
-  :sparql-string
+  :body
   "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX obo: <http://purl.obolibrary.org/obo/>

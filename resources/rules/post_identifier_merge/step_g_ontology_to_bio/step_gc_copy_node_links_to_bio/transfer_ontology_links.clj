@@ -1,7 +1,7 @@
 `{:name "transfer-direct-links-from-ontology-concepts"
   :description "This rule transfers links between ontology components to representations of those components in bioworld."
   :head ((?/bio_concept ?/p ?/bio_other))
-  :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
+  :body "prefix franzOption_clauseReorderer: <franz:identity>
                   prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix owl: <http://www.w3.org/2002/07/owl#>

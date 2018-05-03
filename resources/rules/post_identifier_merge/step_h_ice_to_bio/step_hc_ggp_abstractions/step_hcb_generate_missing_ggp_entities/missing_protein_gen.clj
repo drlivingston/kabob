@@ -12,7 +12,7 @@
                                    :ns "kbio" :prefix "RS_"}]
            [?/protein_bioentity {:ln (:sha-1 ?/gene_missing_protein "missing")
                                    :ns "kbio" :prefix "B_"}])
-  :sparql-string "prefix obo: <http://purl.obolibrary.org/obo/>
+  :body "prefix obo: <http://purl.obolibrary.org/obo/>
   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix kice: <http://ccp.ucdenver.edu/kabob/ice/>
   PREFIX obo_pr: <http://purl.obolibrary.org/obo/pr#>

@@ -3,7 +3,7 @@
   :head ((?/id obo/IAO_0000219 ?/entity)) ;; obo:mentions
   :reify ([?/entity {:ln (:sha-1 ?/id_set)
                      :ns "kbio" :prefix "B_" :suffix ""}])
-  :sparql-string "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+  :body "prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   select ?id ?id_set {
                      ?id_set rdf:type ccp:IAO_EXT_0000316 .

@@ -1,7 +1,7 @@
 `{:name "transfer-ontology-labels"
   :description "This rule transfers labels to bio world"
   :head ((?/bioentity rdfs/label ?/label))
-  :sparql-string "prefix franzOption_clauseReorderer: <franz:identity>
+  :body "prefix franzOption_clauseReorderer: <franz:identity>
                   prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix owl: <http://www.w3.org/2002/07/owl#>

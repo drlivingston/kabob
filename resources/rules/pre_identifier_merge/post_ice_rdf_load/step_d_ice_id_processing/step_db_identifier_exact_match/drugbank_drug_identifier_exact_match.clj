@@ -4,7 +4,7 @@
 `{:name          "drugbank-drug-identifier-exact-match"
   :description   "This rule asserts an exact match between drugbank drugs and other drug identifiers"
   :head          ((?/drugbank_identifier skos/exactMatch ?/other_identifier))
-  :sparql-string "
+  :body "
 
   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
   prefix obo: <http://purl.obolibrary.org/obo/>

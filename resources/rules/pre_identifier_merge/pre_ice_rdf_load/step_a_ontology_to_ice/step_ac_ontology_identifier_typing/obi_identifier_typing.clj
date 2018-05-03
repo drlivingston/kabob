@@ -1,10 +1,10 @@
 ;; -----------------------------------------------
 ;; --------- pr identifier typing ---------
 ;; -----------------------------------------------
-`{:name "pr-identifier-typing"
+`{:name "obi-identifier-typing"
   :description "This rule specifically the protein ontology identifier"
   :head ((?/id rdfs/subClassOf ccp/IAO_EXT_0001703)) ; CCP:protein_ontology_identifier
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
                   prefix obo: <http://purl.obolibrary.org/obo/>
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
