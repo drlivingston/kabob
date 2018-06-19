@@ -1,7 +1,7 @@
 ;; --------------------------------------------------
 ;; --------- DrugBank Drug Label Assignment ---------
 ;; --------------------------------------------------
-`{:name "step-hb_drugbank-drug-labels"
+`{:name "step-hba_drugbank-drug-labels"
   :description "This rule creates a label for every drug record and types it as (IAO_EXT_0000367)"
   :head (
          ;; create a label for the drug

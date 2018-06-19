@@ -12,7 +12,7 @@
                   prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                   prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
                   select distinct ?id {
-                  ?c obo:namespace 'behavior_ontology' .
+                  ?c <http://purl.obolibrary.org/obo/nbo.owl#namespace> 'behavior_ontology' .
                   ?id obo:IAO_0000219 ?c . # IAO:denotes
                   ?id rdfs:subClassOf ccp:IAO_EXT_0000088 . # CCP:ontology_concept_identifier
                   }"

@@ -18,7 +18,7 @@
                        # exclude deprecated concepts
                        minus { ?ontology_concept owl:deprecated true }
                        # exclude concepts that already have an identifier (non-obo concept identifiers have been created in step aa)
-                       #minus { ?identifier obo:IAO_0000219 ?ontology_concept }
+                       minus { ?identifier obo:IAO_0000219 ?ontology_concept }
                        # exclude blank nodes - we want concepts with identifiers here
                        filter (!contains(str(?ontology_concept), '/bnode/'))
                        # exclude concepts that are subclass of information content entity
@@ -34,5 +34,6 @@
                        filter (!contains (str(?ontology_concept), 'http://www.w3.org/ns/oa#'))
                        filter (!contains (str(?ontology_concept), 'http://www.w3.org/2004/02/skos/core#'))
                        filter (!contains (str(?ontology_concept), 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'))
+                       filter (!contains (str(?ontology_concept), 'http://www.w3.org/2002/07/owl#'))
                   }"
   }

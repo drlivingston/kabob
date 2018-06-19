@@ -1,7 +1,7 @@
 ;; --------------------------------------------------
 ;; --------- Entrez Gene Label Assignment -----------
 ;; --------------------------------------------------
-`{:name "step-hb_ncbi-gene-labels"
+`{:name "step-hba_ncbi-gene-labels"
   :description "This rule creates a label for every gene record and types it as (IAO_EXT_0000877)"
   :head (
          ;; create a symbol label for gene

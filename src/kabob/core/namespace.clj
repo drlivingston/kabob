@@ -39,7 +39,25 @@
         ;; be removed once the 'http:/' bug is resolved.
         ;; ---------------------------------------------------------------------------
         ("bnode" "http://ccp.ucdenver.edu/bnode/")
-        ("bp_base", "http://www.reactome.org/biopax/64/48887#")
+        ("bp_base", "http://www.reactome.org/biopax/65/48887#")
+
+        ("araport_pr","https://www.araport.org/locus/")
+        ("cgnc_pr","http://birdgenenames.org/cgnc/")
+        ("rgd_pr","http://rgd.mcw.edu/rgdweb/report/gene/")
+        ("tair_pr","http://www.arabidopsis.org/servlets/")
+        ("hgnc_pr","http://www.genenames.org/cgi-bin/")
+        ("sgd_pr","http://www.yeastgenome.org/cgi-bin/")
+        ("flybase_pr","http://flybase.org/reports/")
+        ("eco_pr","http://www.ecogene.org/gene/")
+        ("pombase_pr","http://www.pombase.org/spombe/result/")
+        ("wormbase_pr","http://www.wormbase.org/species/c_elegans/gene/")
+        ("zfin_pr","http://zfin.org/action/marker/view/")
+        ("mgi_pr","http://www.informatics.jax.org/marker/")
+        ("ncbi_pr","http://www.ncbi.nlm.nih.gov/")
+        ("ensembl_pr", "http://www.ensembl.org/id/")
+        ("ensembl_genomes_pr", "http://www.ensemblgenomes.org/id/")
+
+        ("semanticscience", "http://semanticscience.org/resource/")
 
         ("reactome_download", "http://www.reactome.org/download/current/")
         ;; ---------------------------------------------------------------------------

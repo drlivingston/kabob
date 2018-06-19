@@ -7,6 +7,360 @@ import spock.lang.IgnoreRest
 
 class BNodeConverterSpecification extends Specification {
 
+    // ++++++++ processBnodeLines ++++++++
+    def "should return two maps -- no inter-bnode linkages"() {
+        given:
+        def converter = new BNodeConverter()
+        def lines =
+                '''# http://purl.obolibrary.org/obo/CHEBI_50611 <http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/CHEBI_22888> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/CHEBI_50759> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218001 .
+_:genid218001 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid218001 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0000087> .
+_:genid218001 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_75772> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218002 .
+_:genid218002 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid218002 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/chebi#has_functional_parent> .
+_:genid218002 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_50607> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/charge> "0"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/formula> "C20H20N2O8"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/inchi> "InChI=1S/C20H20N2O8/c23-9-21-15(19(27)28)7-11-1-3-17(25)13(5-11)14-6-12(2-4-18(14)26)8-16(20(29)30)22-10-24/h1-6,9-10,15-16,25-26H,7-8H2,(H,21,23)(H,22,24)(H,27,28)(H,29,30)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/inchikey> "OUNKRBSXIMLJRR-UHFFFAOYSA-N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/mass> "416.38148"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/monoisotopicmass> "416.122"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/smiles> "[H]C(=O)NC(Cc1ccc(O)c(c1)-c1cc(CC(NC([H])=O)C(O)=O)ccc1O)C(O)=O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> "3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "chebi_ontology"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> "N,N'-bisformyl dityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#id> "CHEBI:50611"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#inSubset> <http://purl.obolibrary.org/obo/chebi#3_STAR> .
+<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#label> "N,N'-diformyldityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid218003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid218003 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .
+_:genid218003 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> .
+_:genid218003 <http://www.w3.org/2002/07/owl#annotatedTarget> "3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "IUPAC"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasSynonymType> <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME> .
+_:genid218004 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid218004 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .
+_:genid218004 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> .
+_:genid218004 <http://www.w3.org/2002/07/owl#annotatedTarget> "N,N'-bisformyl dityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid218004 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "ChEBI"^^<http://www.w3.org/2001/XMLSchema#string> .
+#
+'''
+        def inputStream = new ByteArrayInputStream(lines.getBytes());
+
+        when:
+        def (Map<String, Set<String>> bnodeToLineMap,
+        Map<String, Set<String>>      bnodeConnectionsMap) = converter.processBnodeLines(inputStream)
+
+        then:
+        bnodeToLineMap.size() == 4
+        bnodeToLineMap.get("_:genid218001 ").size() == 3
+        bnodeToLineMap.get("_:genid218002 ").size() == 3
+        bnodeToLineMap.get("_:genid218003 ").size() == 6
+        bnodeToLineMap.get("_:genid218004 ").size() == 5
+        bnodeToLineMap.get("_:genid218001 ") == ["_:genid218001 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .",
+                                                 "_:genid218001 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0000087> .",
+                                                 "_:genid218001 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_75772> ."].toSet()
+        bnodeToLineMap.get("_:genid218002 ") == ["_:genid218002 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .",
+                                                 "_:genid218002 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/chebi#has_functional_parent> .",
+                                                 "_:genid218002 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_50607> ."].toSet()
+        bnodeToLineMap.get("_:genid218003 ") == ["_:genid218003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .",
+                                                 "_:genid218003 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .",
+                                                 "_:genid218003 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> .",
+                                                 "_:genid218003 <http://www.w3.org/2002/07/owl#annotatedTarget> \"3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]\"^^<http://www.w3.org/2001/XMLSchema#string> .",
+                                                 "_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> \"IUPAC\"^^<http://www.w3.org/2001/XMLSchema#string> .",
+                                                 "_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasSynonymType> <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME> ."].toSet()
+        bnodeToLineMap.get("_:genid218004 ") == ["_:genid218004 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .",
+                                                 "_:genid218004 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .",
+                                                 "_:genid218004 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> .",
+                                                 "_:genid218004 <http://www.w3.org/2002/07/owl#annotatedTarget> \"N,N'-bisformyl dityrosine\"^^<http://www.w3.org/2001/XMLSchema#string> .",
+                                                 "_:genid218004 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> \"ChEBI\"^^<http://www.w3.org/2001/XMLSchema#string> ."].toSet()
+
+        bnodeConnectionsMap.size() == 4
+        bnodeConnectionsMap.get("_:genid218001 ") == ["_:genid218001 "].toSet()
+        bnodeConnectionsMap.get("_:genid218002 ") == ["_:genid218002 "].toSet()
+        bnodeConnectionsMap.get("_:genid218003 ") == ["_:genid218003 "].toSet()
+        bnodeConnectionsMap.get("_:genid218004 ") == ["_:genid218004 "].toSet()
+
+    }
+
+
+    def "testing cl vs hp assertions to be equal"() {
+        given:
+        def hp_lines = '''<http://purl.obolibrary.org/obo/CL_0000122> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid299 .
+_:genid299 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid299 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002202> .
+_:genid299 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CL_0000030> .'''
+
+        def cl_lines = '''<http://purl.obolibrary.org/obo/CL_0000125> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid622 .
+_:genid622 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid622 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002202> .
+_:genid622 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CL_0000030> .'''
+
+        def hp_inputStream = new ByteArrayInputStream(hp_lines.getBytes())
+        def cl_inputStream = new ByteArrayInputStream(cl_lines.getBytes())
+        def converter = new BNodeConverter()
+
+        when:
+        Map<String, String> hp_bnodeToUriMap = converter.populateBnodeToUriMap(hp_inputStream)
+        Map<String, String> cl_bnodeToUriMap = converter.populateBnodeToUriMap(cl_inputStream)
+
+        then:
+        assert hp_bnodeToUriMap.get("_:genid299 ") != null
+        assert cl_bnodeToUriMap.get("_:genid622 ") != null
+        assert hp_bnodeToUriMap.get("_:genid299 ") == cl_bnodeToUriMap.get("_:genid622 ")
+
+    }
+
+
+    // ++++++++ processBnodeLines ++++++++
+    def "test bnode gen with inter-node linkages"() {
+        given:
+        def lines1 = '''
+_:genid335 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .
+_:genid335 <http://www.w3.org/2002/07/owl#distinctMembers> _:genid343 .
+_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .
+_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid342 .
+_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .
+_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid341 .
+_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .
+_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid340 .
+_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .
+_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid339 .
+_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .
+_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid338 .
+_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .
+_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid337 .
+_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .
+_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid336 .
+_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .
+_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+'''
+
+        def lines2 = '''
+_:genid1335 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .
+_:genid1335 <http://www.w3.org/2002/07/owl#distinctMembers> _:genid9343 .
+_:genid9343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid9343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .
+_:genid9343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid2342 .
+_:genid2342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid2342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .
+_:genid2342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid8341 .
+_:genid8341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid8341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .
+_:genid8341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid3340 .
+_:genid3340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid3340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .
+_:genid3340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid7339 .
+_:genid7339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid7339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .
+_:genid7339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid4338 .
+_:genid4338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid4338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .
+_:genid4338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid6337 .
+_:genid6337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid6337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .
+_:genid6337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid5336 .
+_:genid5336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid5336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .
+_:genid5336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+'''
+        def inputStream1 = new ByteArrayInputStream(lines1.getBytes());
+        def inputStream2 = new ByteArrayInputStream(lines2.getBytes());
+        def converter = new BNodeConverter()
+
+        when:
+        Map<String, String> bnodeToUriMap1 = converter.populateBnodeToUriMap(inputStream1)
+        Map<String, String> bnodeToUriMap2 = converter.populateBnodeToUriMap(inputStream2)
+
+        then:
+        bnodeToUriMap1.size() == 9
+        bnodeToUriMap1.get("_:genid335 ") != null
+        bnodeToUriMap1.get("_:genid343 ") != null
+        bnodeToUriMap1.get("_:genid342 ") != null
+        bnodeToUriMap1.get("_:genid341 ") != null
+        bnodeToUriMap1.get("_:genid340 ") != null
+        bnodeToUriMap1.get("_:genid339 ") != null
+        bnodeToUriMap1.get("_:genid338 ") != null
+        bnodeToUriMap1.get("_:genid337 ") != null
+        bnodeToUriMap1.get("_:genid336 ") != null
+
+        bnodeToUriMap2.size() == 9
+        bnodeToUriMap2.get("_:genid1335 ") != null
+        bnodeToUriMap2.get("_:genid9343 ") != null
+        bnodeToUriMap2.get("_:genid2342 ") != null
+        bnodeToUriMap2.get("_:genid8341 ") != null
+        bnodeToUriMap2.get("_:genid3340 ") != null
+        bnodeToUriMap2.get("_:genid7339 ") != null
+        bnodeToUriMap2.get("_:genid4338 ") != null
+        bnodeToUriMap2.get("_:genid6337 ") != null
+        bnodeToUriMap2.get("_:genid5336 ") != null
+
+
+        bnodeToUriMap1.get("_:genid335 ") == bnodeToUriMap2.get("_:genid1335 ")
+        bnodeToUriMap1.get("_:genid343 ") == bnodeToUriMap2.get("_:genid9343 ")
+        bnodeToUriMap1.get("_:genid342 ") == bnodeToUriMap2.get("_:genid2342 ")
+        bnodeToUriMap1.get("_:genid341 ") == bnodeToUriMap2.get("_:genid8341 ")
+        bnodeToUriMap1.get("_:genid340 ") == bnodeToUriMap2.get("_:genid3340 ")
+        bnodeToUriMap1.get("_:genid339 ") == bnodeToUriMap2.get("_:genid7339 ")
+        bnodeToUriMap1.get("_:genid338 ") == bnodeToUriMap2.get("_:genid4338 ")
+        bnodeToUriMap1.get("_:genid337 ") == bnodeToUriMap2.get("_:genid6337 ")
+        bnodeToUriMap1.get("_:genid336 ") == bnodeToUriMap2.get("_:genid5336 ")
+
+    }
+
+
+
+    // ++++++++ processBnodeLines ++++++++
+    def "test bnode gen with inter-node linkages - note order does matter"() {
+        given:
+        def lines1 = '''
+_:genid335 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .
+_:genid335 <http://www.w3.org/2002/07/owl#distinctMembers> _:genid343 .
+_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .
+_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid342 .
+_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .
+_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid341 .
+_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .
+_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid340 .
+_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .
+_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid339 .
+_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .
+_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid338 .
+_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .
+_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid337 .
+_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .
+_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid336 .
+_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .
+_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+'''
+
+        // the positions of IAO_0000121 and IAO_0000125 have been swapped in comparison to lines2 above
+        def lines2 = '''
+_:genid1335 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .
+_:genid1335 <http://www.w3.org/2002/07/owl#distinctMembers> _:genid9343 .
+_:genid9343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid9343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .
+_:genid9343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid2342 .
+_:genid2342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid2342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .
+_:genid2342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid8341 .
+_:genid8341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid8341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .
+_:genid8341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid3340 .
+_:genid3340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid3340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .
+_:genid3340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid7339 .
+_:genid7339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid7339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .
+_:genid7339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid4338 .
+_:genid4338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid4338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .
+_:genid4338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid6337 .
+_:genid6337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid6337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .
+_:genid6337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid5336 .
+_:genid5336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid5336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .
+_:genid5336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+'''
+        def inputStream1 = new ByteArrayInputStream(lines1.getBytes());
+        def inputStream2 = new ByteArrayInputStream(lines2.getBytes());
+        def converter = new BNodeConverter()
+
+        when:
+        Map<String, String> bnodeToUriMap1 = converter.populateBnodeToUriMap(inputStream1)
+        Map<String, String> bnodeToUriMap2 = converter.populateBnodeToUriMap(inputStream2)
+
+        then:
+        bnodeToUriMap1.size() == 9
+        bnodeToUriMap1.get("_:genid335 ") != null
+        bnodeToUriMap1.get("_:genid343 ") != null
+        bnodeToUriMap1.get("_:genid342 ") != null
+        bnodeToUriMap1.get("_:genid341 ") != null
+        bnodeToUriMap1.get("_:genid340 ") != null
+        bnodeToUriMap1.get("_:genid339 ") != null
+        bnodeToUriMap1.get("_:genid338 ") != null
+        bnodeToUriMap1.get("_:genid337 ") != null
+        bnodeToUriMap1.get("_:genid336 ") != null
+
+        bnodeToUriMap2.size() == 9
+        bnodeToUriMap2.get("_:genid1335 ") != null
+        bnodeToUriMap2.get("_:genid9343 ") != null
+        bnodeToUriMap2.get("_:genid2342 ") != null
+        bnodeToUriMap2.get("_:genid8341 ") != null
+        bnodeToUriMap2.get("_:genid3340 ") != null
+        bnodeToUriMap2.get("_:genid7339 ") != null
+        bnodeToUriMap2.get("_:genid4338 ") != null
+        bnodeToUriMap2.get("_:genid6337 ") != null
+        bnodeToUriMap2.get("_:genid5336 ") != null
+
+
+        // note that these are now different due to ordering (see note about position swap above)
+        bnodeToUriMap1.get("_:genid335 ") != bnodeToUriMap2.get("_:genid1335 ")
+        bnodeToUriMap1.get("_:genid343 ") != bnodeToUriMap2.get("_:genid9343 ")
+        bnodeToUriMap1.get("_:genid342 ") != bnodeToUriMap2.get("_:genid2342 ")
+        bnodeToUriMap1.get("_:genid341 ") != bnodeToUriMap2.get("_:genid8341 ")
+        bnodeToUriMap1.get("_:genid340 ") != bnodeToUriMap2.get("_:genid3340 ")
+        bnodeToUriMap1.get("_:genid339 ") != bnodeToUriMap2.get("_:genid7339 ")
+        bnodeToUriMap1.get("_:genid338 ") != bnodeToUriMap2.get("_:genid4338 ")
+
+        // these two are unaffected and remain equal b/c they are isolated from the swap
+        bnodeToUriMap1.get("_:genid337 ") == bnodeToUriMap2.get("_:genid6337 ")
+        bnodeToUriMap1.get("_:genid336 ") == bnodeToUriMap2.get("_:genid5336 ")
+
+    }
+
+
+
+    // ++++++++ addToCollectionMap ++++++++
+    def "adding a new key to a collection map should result in a new entry"() {
+        given:
+        def map = new HashMap<String, List<String>>()
+        def converter = new BNodeConverter()
+
+        when:
+        converter.addToCollectionMap("a", "b", map)
+
+        then:
+        map.size() == 1
+        map.get("a") == ["b"].toSet()
+    }
+
+    // ++++++++ addToCollectionMap ++++++++
+    def "adding an existing key to a collection map should result in an update to the entry"() {
+        given:
+        def map = new HashMap<String, Set<String>>()
+        map.put("a", ["b", "c"].toSet())
+        def converter = new BNodeConverter()
+
+        when:
+        converter.addToCollectionMap("a", "d", map)
+
+        then:
+        assert map.size() == 1
+        assert map.get("a") == ["b", "c", "d"].toSet()
+    }
+
 
     def "testing updateGenIdsInLine -- real case when one genid is substring of another"() {
         given:
@@ -36,7 +390,7 @@ class BNodeConverterSpecification extends Specification {
     }
 
 
-    def "testing cl vs hp assertions to be equal"() {
+    def "testing cl vs hp assertions to be equal -- added updated lines"() {
         given:
         def hp_lines = '''<http://purl.obolibrary.org/obo/CL_0000125> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid299 .
 _:genid299 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
@@ -71,6 +425,9 @@ _:genid623 <http://www.w3.org/2000/01/rdf-schema#comment> "It is unclear that al
 //            println "HP LINE: " + line
             assert updated_cl_lines.contains(line)
         }
+        assert hp_bnodeToUriMap.get("_:genid299 ") != null
+        assert cl_bnodeToUriMap.get("_:genid622 ") != null
+        assert hp_bnodeToUriMap.get("_:genid299 ") == cl_bnodeToUriMap.get("_:genid622 ")
 
     }
 
@@ -565,344 +922,8 @@ _:genid218196 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "ChEBI"^^
 
     }
 
-    def "testing creation of gen ID to normalized ID map"() {
-        given:
-        def lines = [
-"_:genid335 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .",
-"_:genid335 <http://www.w3.org/2002/07/owl#distinctMembers> _:genid343 .",
-"_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .",
-"_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid342 .",
-"_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .",
-"_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid341 .",
-"_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .",
-"_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid340 .",
-"_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .",
-"_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid339 .",
-"_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .",
-"_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid338 .",
-"_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .",
-"_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid337 .",
-"_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .",
-"_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid336 .",
-"_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-"_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .",
-"_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> ."
-]
-        def converter = new BNodeConverter()
-        when:
-        Map<String, String> map = converter.createGenIdToNormIdMap(lines)
-
-        then:
-        map.get("_:genid335 ") == "[ID1] "
-        map.get("_:genid343 ") == "[ID2] "
-        map.get("_:genid342 ") == "[ID9] "
-        map.get("_:genid341 ") == "[ID8] "
-        map.get("_:genid340 ") == "[ID7] "
-        map.get("_:genid339 ") == "[ID6] "
-        map.get("_:genid338 ") == "[ID5] "
-        map.get("_:genid337 ") == "[ID4] "
-        map.get("_:genid336 ") == "[ID3] "
-    }
 
 
-
-    def computeHash(List<String> lines, boolean linesAlreadySorted) {
-        if (!linesAlreadySorted) {
-            Collections.sort(lines)
-        }
-        StringBuilder builder = new StringBuilder()
-        lines.each { line -> builder.append(line) }
-//        println "&&&&&&&& " + builder.toString()
-        return DigestUtils.sha256Hex(builder.toString())
-    }
-
-
-    def "test bnode URI generation -- owl:AllDifferent"() {
-        given:
-        def converter = new BNodeConverter()
-        def lines = '''
-_:genid335 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .
-_:genid335 <http://www.w3.org/2002/07/owl#distinctMembers> _:genid343 .
-_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .
-_:genid343 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid342 .
-_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .
-_:genid342 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid341 .
-_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .
-_:genid341 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid340 .
-_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .
-_:genid340 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid339 .
-_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .
-_:genid339 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid338 .
-_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .
-_:genid338 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid337 .
-_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .
-_:genid337 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid336 .
-_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .
-_:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-'''
-        def inputStream = new ByteArrayInputStream(lines.getBytes());
-
-        when:
-        Map<String, String> bnodeToUriMap = converter.populateBnodeToUriMap(inputStream)
-
-        def nodeLines = ["[ID1] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .",
-                         "[ID1] <http://www.w3.org/2002/07/owl#distinctMembers> [ID2] ."]
-
-        def neighborLines = ["[ID1] <http://www.w3.org/2002/07/owl#distinctMembers> [ID2] .",
-                             "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .",
-                             "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID9] .",
-                             "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID9] .",
-                             "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .",
-                             "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID8] .",
-                             "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID8] .",
-                             "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .",
-                             "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID7] .",
-                             "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID7] .",
-                             "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .",
-                             "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID6] .",
-                             "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID6] .",
-                             "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .",
-                             "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID5] .",
-                             "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID5] .",
-                             "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .",
-                             "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID4] .",
-                             "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID4] .",
-                             "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .",
-                             "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID3] .",
-                             "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID3] .",
-                             "[ID3] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                             "[ID3] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .",
-                             "[ID3] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> ."]
-
-        Collections.sort(nodeLines)
-        Collections.sort(neighborLines)
-        nodeLines.addAll(neighborLines)
-
-        def nodeLines_last = ["[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID3] .",
-                              "[ID3] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                              "[ID3] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000428> .",
-                              "[ID3] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> ."]
-
-        def neighborLines_last = ["[ID1] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDifferent> .",
-                                  "[ID1] <http://www.w3.org/2002/07/owl#distinctMembers> [ID2] .",
-                                  "[ID1] <http://www.w3.org/2002/07/owl#distinctMembers> [ID2] .",
-                                  "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000120> .",
-                                  "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID9] .",
-                                  "[ID2] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID9] .",
-                                  "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000121> .",
-                                  "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID8] .",
-                                  "[ID9] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID8] .",
-                                  "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000122> .",
-                                  "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID7] .",
-                                  "[ID8] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID7] .",
-                                  "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000123> .",
-                                  "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID6] .",
-                                  "[ID7] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID6] .",
-                                  "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000124> .",
-                                  "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID5] .",
-                                  "[ID6] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID5] .",
-                                  "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000125> .",
-                                  "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID4] .",
-                                  "[ID5] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID4] .",
-                                  "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .",
-                                  "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/IAO_0000423> .",
-                                  "[ID4] <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> [ID3] ."]
-
-        Collections.sort(nodeLines_last)
-        Collections.sort(neighborLines_last)
-        nodeLines_last.addAll(neighborLines_last)
-
-
-        then:
-        bnodeToUriMap.size() == 9
-        bnodeToUriMap.get("_:genid335 ") == "<http://BN_" + computeHash(nodeLines, true) + "> "
-        bnodeToUriMap.get("_:genid336 ") == "<http://BN_" + computeHash(nodeLines_last, true) + "> "
-
-    }
-
-
-// ++++++++ populateBnodeToUriMap ++++++++
-    def "test bnode uri generation -- restrictions"() {
-        given:
-        def converter = new BNodeConverter()
-        def lines =
-                '''# http://purl.obolibrary.org/obo/CHEBI_50611 <http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/CHEBI_22888> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/CHEBI_50759> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218001 .
-_:genid218001 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:genid218001 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0000087> .
-_:genid218001 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_75772> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218002 .
-_:genid218002 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:genid218002 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/chebi#has_functional_parent> .
-_:genid218002 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_50607> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/charge> "0"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/formula> "C20H20N2O8"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/inchi> "InChI=1S/C20H20N2O8/c23-9-21-15(19(27)28)7-11-1-3-17(25)13(5-11)14-6-12(2-4-18(14)26)8-16(20(29)30)22-10-24/h1-6,9-10,15-16,25-26H,7-8H2,(H,21,23)(H,22,24)(H,27,28)(H,29,30)"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/inchikey> "OUNKRBSXIMLJRR-UHFFFAOYSA-N"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/mass> "416.38148"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/monoisotopicmass> "416.122"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/smiles> "[H]C(=O)NC(Cc1ccc(O)c(c1)-c1cc(CC(NC([H])=O)C(O)=O)ccc1O)C(O)=O"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> "3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "chebi_ontology"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> "N,N'-bisformyl dityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#id> "CHEBI:50611"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#inSubset> <http://purl.obolibrary.org/obo/chebi#3_STAR> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#label> "N,N'-diformyldityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
-_:genid218003 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .
-_:genid218003 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> .
-_:genid218003 <http://www.w3.org/2002/07/owl#annotatedTarget> "3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "IUPAC"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasSynonymType> <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME> .
-_:genid218004 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
-_:genid218004 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .
-_:genid218004 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> .
-_:genid218004 <http://www.w3.org/2002/07/owl#annotatedTarget> "N,N'-bisformyl dityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218004 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "ChEBI"^^<http://www.w3.org/2001/XMLSchema#string> .
-#
-'''
-        def inputStream = new ByteArrayInputStream(lines.getBytes())
-
-        when:
-        Map<String, String> bnodeToUriMap = converter.populateBnodeToUriMap(inputStream)
-
-        then:
-        bnodeToUriMap.size() == 4
-        bnodeToUriMap.get("_:genid218001 ") == "<http://BN_" + computeHash(["<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> [ID1] .",
-                                                         "[ID1] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0000087> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_75772> ."], false)  + "> "
-
-
-        bnodeToUriMap.get("_:genid218002 ") == "<http://BN_" + computeHash(["<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> [ID1] .",
-                                                         "[ID1] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/chebi#has_functional_parent> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_50607> ."], false)+ "> "
-        bnodeToUriMap.get("_:genid218003 ") == "<http://BN_" + computeHash(["[ID1] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#annotatedTarget> \"3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]\"^^<http://www.w3.org/2001/XMLSchema#string> .",
-                                                         "[ID1] <http://www.geneontology.org/formats/oboInOwl#hasDbXref> \"IUPAC\"^^<http://www.w3.org/2001/XMLSchema#string> .",
-                                                         "[ID1] <http://www.geneontology.org/formats/oboInOwl#hasSynonymType> <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME> ."], false)+ "> "
-        bnodeToUriMap.get("_:genid218004 ") == "<http://BN_" + computeHash(["[ID1] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> .",
-                                                         "[ID1] <http://www.w3.org/2002/07/owl#annotatedTarget> \"N,N'-bisformyl dityrosine\"^^<http://www.w3.org/2001/XMLSchema#string> .",
-                                                         "[ID1] <http://www.geneontology.org/formats/oboInOwl#hasDbXref> \"ChEBI\"^^<http://www.w3.org/2001/XMLSchema#string> ."], false)+ "> "
-
-    }
-
-// ++++++++ processBnodeLines ++++++++
-    def "should return two maps -- no inter-bnode linkages"() {
-        given:
-        def converter = new BNodeConverter()
-        def lines =
-                '''# http://purl.obolibrary.org/obo/CHEBI_50611 <http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/CHEBI_22888> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/CHEBI_50759> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218001 .
-_:genid218001 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:genid218001 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0000087> .
-_:genid218001 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_75772> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218002 .
-_:genid218002 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:genid218002 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/chebi#has_functional_parent> .
-_:genid218002 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_50607> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/charge> "0"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/formula> "C20H20N2O8"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/inchi> "InChI=1S/C20H20N2O8/c23-9-21-15(19(27)28)7-11-1-3-17(25)13(5-11)14-6-12(2-4-18(14)26)8-16(20(29)30)22-10-24/h1-6,9-10,15-16,25-26H,7-8H2,(H,21,23)(H,22,24)(H,27,28)(H,29,30)"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/inchikey> "OUNKRBSXIMLJRR-UHFFFAOYSA-N"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/mass> "416.38148"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/monoisotopicmass> "416.122"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://purl.obolibrary.org/obo/chebi/smiles> "[H]C(=O)NC(Cc1ccc(O)c(c1)-c1cc(CC(NC([H])=O)C(O)=O)ccc1O)C(O)=O"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> "3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "chebi_ontology"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> "N,N'-bisformyl dityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#id> "CHEBI:50611"^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.geneontology.org/formats/oboInOwl#inSubset> <http://purl.obolibrary.org/obo/chebi#3_STAR> .
-<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#label> "N,N'-diformyldityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
-_:genid218003 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .
-_:genid218003 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> .
-_:genid218003 <http://www.w3.org/2002/07/owl#annotatedTarget> "3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "IUPAC"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasSynonymType> <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME> .
-_:genid218004 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
-_:genid218004 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .
-_:genid218004 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> .
-_:genid218004 <http://www.w3.org/2002/07/owl#annotatedTarget> "N,N'-bisformyl dityrosine"^^<http://www.w3.org/2001/XMLSchema#string> .
-_:genid218004 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "ChEBI"^^<http://www.w3.org/2001/XMLSchema#string> .
-#
-'''
-        def inputStream = new ByteArrayInputStream(lines.getBytes());
-
-        when:
-        def (Map<String, Set<String>> bnodeToLineMap,
-        Map<String, Set<String>>      bnodeConnectionsMap) = converter.processBnodeLines(inputStream)
-
-        then:
-        bnodeToLineMap.size() == 4
-        bnodeToLineMap.get("_:genid218001 ").size() == 4
-        bnodeToLineMap.get("_:genid218002 ").size() == 4
-        bnodeToLineMap.get("_:genid218003 ").size() == 6
-        bnodeToLineMap.get("_:genid218004 ").size() == 5
-        bnodeToLineMap.get("_:genid218001 ") == ["<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218001 .",
-                                              "_:genid218001 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .",
-                                              "_:genid218001 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0000087> .",
-                                              "_:genid218001 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_75772> ."].toSet()
-        bnodeToLineMap.get("_:genid218002 ") == ["<http://purl.obolibrary.org/obo/CHEBI_50611> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid218002 .",
-                                              "_:genid218002 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .",
-                                              "_:genid218002 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/chebi#has_functional_parent> .",
-                                              "_:genid218002 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/CHEBI_50607> ."].toSet()
-        bnodeToLineMap.get("_:genid218003 ") == ["_:genid218003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .",
-                                              "_:genid218003 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .",
-                                              "_:genid218003 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasExactSynonym> .",
-                                              "_:genid218003 <http://www.w3.org/2002/07/owl#annotatedTarget> \"3,3'-(6,6'-dihydroxybiphenyl-3,3'-diyl)bis[2-(formylamino)propanoic acid]\"^^<http://www.w3.org/2001/XMLSchema#string> .",
-                                              "_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> \"IUPAC\"^^<http://www.w3.org/2001/XMLSchema#string> .",
-                                              "_:genid218003 <http://www.geneontology.org/formats/oboInOwl#hasSynonymType> <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME> ."].toSet()
-        bnodeToLineMap.get("_:genid218004 ") == ["_:genid218004 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .",
-                                              "_:genid218004 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/CHEBI_50611> .",
-                                              "_:genid218004 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> .",
-                                              "_:genid218004 <http://www.w3.org/2002/07/owl#annotatedTarget> \"N,N'-bisformyl dityrosine\"^^<http://www.w3.org/2001/XMLSchema#string> .",
-                                              "_:genid218004 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> \"ChEBI\"^^<http://www.w3.org/2001/XMLSchema#string> ."].toSet()
-
-        bnodeConnectionsMap.size() == 4
-        bnodeConnectionsMap.get("_:genid218001 ") == ["_:genid218001 "].toSet()
-        bnodeConnectionsMap.get("_:genid218002 ") == ["_:genid218002 "].toSet()
-        bnodeConnectionsMap.get("_:genid218003 ") == ["_:genid218003 "].toSet()
-        bnodeConnectionsMap.get("_:genid218004 ") == ["_:genid218004 "].toSet()
-
-    }
 
     // ++++++++ processBnodeLines ++++++++
     def "should return two maps - with inter-node linkages"() {
@@ -945,147 +966,282 @@ _:genid336 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/
         then:
         bnodeToLineMap.size() == 9
         bnodeToLineMap.get("_:genid335 ").size() == 2
-        bnodeToLineMap.get("_:genid343 ").size() == 4
-        bnodeToLineMap.get("_:genid342 ").size() == 4
-        bnodeToLineMap.get("_:genid341 ").size() == 4
-        bnodeToLineMap.get("_:genid340 ").size() == 4
-        bnodeToLineMap.get("_:genid339 ").size() == 4
-        bnodeToLineMap.get("_:genid338 ").size() == 4
-        bnodeToLineMap.get("_:genid337 ").size() == 4
-        bnodeToLineMap.get("_:genid336 ").size() == 4
+        bnodeToLineMap.get("_:genid343 ").size() == 3
+        bnodeToLineMap.get("_:genid342 ").size() == 3
+        bnodeToLineMap.get("_:genid341 ").size() == 3
+        bnodeToLineMap.get("_:genid340 ").size() == 3
+        bnodeToLineMap.get("_:genid339 ").size() == 3
+        bnodeToLineMap.get("_:genid338 ").size() == 3
+        bnodeToLineMap.get("_:genid337 ").size() == 3
+        bnodeToLineMap.get("_:genid336 ").size() == 3
 
         bnodeConnectionsMap.size() == 9
         bnodeConnectionsMap.get("_:genid335 ") == ["_:genid335 ", "_:genid343 "].toSet()
-        bnodeConnectionsMap.get("_:genid343 ") == ["_:genid343 ", "_:genid342 ", "_:genid335 "].toSet()
-        bnodeConnectionsMap.get("_:genid342 ") == ["_:genid342 ", "_:genid341 ", "_:genid343 "].toSet()
-        bnodeConnectionsMap.get("_:genid341 ") == ["_:genid341 ", "_:genid340 ", "_:genid342 "].toSet()
-        bnodeConnectionsMap.get("_:genid340 ") == ["_:genid340 ", "_:genid339 ", "_:genid341 "].toSet()
-        bnodeConnectionsMap.get("_:genid339 ") == ["_:genid339 ", "_:genid340 ", "_:genid338 "].toSet()
-        bnodeConnectionsMap.get("_:genid338 ") == ["_:genid338 ", "_:genid337 ", "_:genid339 "].toSet()
-        bnodeConnectionsMap.get("_:genid337 ") == ["_:genid337 ", "_:genid336 ", "_:genid338 "].toSet()
-        bnodeConnectionsMap.get("_:genid336 ") == ["_:genid336 ", "_:genid337 "].toSet()
+        bnodeConnectionsMap.get("_:genid343 ") == ["_:genid343 ", "_:genid342 "].toSet()
+        bnodeConnectionsMap.get("_:genid342 ") == ["_:genid342 ", "_:genid341 "].toSet()
+        bnodeConnectionsMap.get("_:genid341 ") == ["_:genid341 ", "_:genid340 "].toSet()
+        bnodeConnectionsMap.get("_:genid340 ") == ["_:genid340 ", "_:genid339 "].toSet()
+        bnodeConnectionsMap.get("_:genid339 ") == ["_:genid339 ", "_:genid338 "].toSet()
+        bnodeConnectionsMap.get("_:genid338 ") == ["_:genid338 ", "_:genid337 "].toSet()
+        bnodeConnectionsMap.get("_:genid337 ") == ["_:genid337 ", "_:genid336 "].toSet()
+        bnodeConnectionsMap.get("_:genid336 ") == ["_:genid336 "].toSet()
 
     }
 
-    // ++++++++ createNodeNeighborhoodMap ++++++++
-    def "should create 2 node neighborhoods [a,b,c,d,z] and [i,j,k,l]"() {
+
+
+
+
+    def "testing taxon restriction assertions to be equal"() {
         given:
-        def nodeConnectionsMap = new HashMap<String, Set<String>>()
-        nodeConnectionsMap.put("a", ["b", "c"].toSet())
-        nodeConnectionsMap.put("b", ["a"].toSet())
-        nodeConnectionsMap.put("c", ["d", "a"].toSet())
-        nodeConnectionsMap.put("d", ["c", "z"].toSet())
-        nodeConnectionsMap.put("z", ["d"].toSet())
+        def protein1_lines = '''# http://purl.obolibrary.org/obo/PR_000025130
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid72520 .
+_:genid72520 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid72520 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid72520 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene ACOT7L in human."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "protein"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.geneontology.org/formats/oboInOwl#id> "PR:000025130"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#label> "ACOT7L (human)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid72521 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid72521 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/PR_000025130> .
+_:genid72521 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid72521 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene ACOT7L in human."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid72521 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DAN"^^<http://www.w3.org/2001/XMLSchema#string> .
+#
+'''
 
-        nodeConnectionsMap.put("i", ["j", "k"].toSet())
-        nodeConnectionsMap.put("j", ["i"].toSet())
-        nodeConnectionsMap.put("k", ["l", "i"].toSet())
-        nodeConnectionsMap.put("l", ["k"].toSet())
+        def protein2_lines = '''# http://purl.obolibrary.org/obo/PR_000025132
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid72524 .
+_:genid72524 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid72524 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid72524 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene CT75 in human."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "protein"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.geneontology.org/formats/oboInOwl#id> "PR:000025132"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025132> <http://www.w3.org/2000/01/rdf-schema#label> "CT75 (human)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid72525 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid72525 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/PR_000025132> .
+_:genid72525 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid72525 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene CT75 in human."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid72525 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DAN"^^<http://www.w3.org/2001/XMLSchema#string> .
+#'''
 
+        def protein1_inputStream = new ByteArrayInputStream(protein1_lines.getBytes())
+        def protein2_inputStream = new ByteArrayInputStream(protein2_lines.getBytes())
         def converter = new BNodeConverter()
 
         when:
-        def map = converter.createNodeNeighborhoodMap(nodeConnectionsMap)
+        Map<String, String> protein1_bnodeToUriMap = converter.populateBnodeToUriMap(protein1_inputStream)
+        Map<String, String> protein2_bnodeToUriMap = converter.populateBnodeToUriMap(protein2_inputStream)
+
+        def updated_protein1_lines = []
+        def updated_protein2_lines = []
+        protein1_lines.split("\\n").each { line -> updated_protein1_lines.add(converter.updateGenIdsInLine(line, protein1_bnodeToUriMap))}
+        protein2_lines.split("\\n").each { line -> updated_protein2_lines.add(converter.updateGenIdsInLine(line, protein2_bnodeToUriMap))}
+
 
         then:
-        map.size() == 9
-        map.get("a") == ["a", "b", "c", "d", "z"].toSet()
-        map.get("b") == ["a", "b", "c", "d", "z"].toSet()
-        map.get("c") == ["a", "b", "c", "d", "z"].toSet()
-        map.get("d") == ["a", "b", "c", "d", "z"].toSet()
-        map.get("z") == ["a", "b", "c", "d", "z"].toSet()
-
-        map.get("i") == ["i", "j", "k", "l"].toSet()
-        map.get("j") == ["i", "j", "k", "l"].toSet()
-        map.get("k") == ["i", "j", "k", "l"].toSet()
-        map.get("l") == ["i", "j", "k", "l"].toSet()
+        assert protein1_bnodeToUriMap.get("_:genid72520 ") != null
+        assert protein2_bnodeToUriMap.get("_:genid72524 ") != null
+        assert protein1_bnodeToUriMap.get("_:genid72520 ") == protein2_bnodeToUriMap.get("_:genid72524 ")
 
     }
 
-    // ++++++++ getNodeNeighborhood ++++++++
-    def "node neighborhood should be a,b,c,d"() {
+
+
+
+
+
+    def "testing taxon restriction assertions to be equal when in list"() {
         given:
-        def nodeConnectionsMap = new HashMap<String, Set<String>>()
-        nodeConnectionsMap.put("a", ["b", "c"].toSet())
-        nodeConnectionsMap.put("c", ["d"].toSet())
-        def neighborhoodSet = new HashSet<String>()
+        def protein1_lines = '''# http://purl.obolibrary.org/obo/PR_000025130
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid72520 .
+_:genid72520 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid72520 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid72520 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene ACOT7L in human."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "protein"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.geneontology.org/formats/oboInOwl#id> "PR:000025130"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.obolibrary.org/obo/PR_000025130> <http://www.w3.org/2000/01/rdf-schema#label> "ACOT7L (human)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid72521 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid72521 <http://www.w3.org/2002/07/owl#annotatedSource> <http://purl.obolibrary.org/obo/PR_000025130> .
+_:genid72521 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid72521 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene ACOT7L in human."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid72521 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DAN"^^<http://www.w3.org/2001/XMLSchema#string> .
+#
+'''
+
+        def protein2_lines = '''# http://purl.obolibrary.org/obo/PR_Q8IVD9
+<http://purl.obolibrary.org/obo/PR_Q8IVD9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/PR_Q8IVD9> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid1105042 .
+_:genid1105042 <http://www.w3.org/2002/07/owl#intersectionOf> _:genid1105045 .
+_:genid1105045 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid1105045 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://purl.obolibrary.org/obo/PR_000031240> .
+_:genid1105045 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid1105043 .
+_:genid1105043 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid1105043 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:genid1967478 .
+_:genid1967478 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid1967478 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid1967478 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+_:genid1105043 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid1105042 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/PR_Q8IVD9> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/PR_000029067> .
+'''
+
+        def protein1_inputStream = new ByteArrayInputStream(protein1_lines.getBytes())
+        def protein2_inputStream = new ByteArrayInputStream(protein2_lines.getBytes())
         def converter = new BNodeConverter()
 
         when:
-        converter.getNodeNeighborhood("a", nodeConnectionsMap, neighborhoodSet)
+        Map<String, String> protein1_bnodeToUriMap = converter.populateBnodeToUriMap(protein1_inputStream)
+        Map<String, String> protein2_bnodeToUriMap = converter.populateBnodeToUriMap(protein2_inputStream)
+
+        def (Map<String, Set<String>> bnodeToLineMap,
+        Map<String, Set<String>>      bnodeConnectionsMap) = converter.processBnodeLines(new ByteArrayInputStream(protein2_lines.getBytes()))
+
+//        def updated_protein1_lines = []
+//        def updated_protein2_lines = []
+//        protein1_lines.split("\\n").each { line -> updated_protein1_lines.add(converter.updateGenIdsInLine(line, protein1_bnodeToUriMap))}
+//        protein2_lines.split("\\n").each { line -> updated_protein2_lines.add(converter.updateGenIdsInLine(line, protein2_bnodeToUriMap))}
+
 
         then:
-        neighborhoodSet.size() == 4
-        neighborhoodSet == ["a", "b", "c", "d"].toSet()
+
+        bnodeToLineMap.size() == 4
+        bnodeToLineMap.get("_:genid1105042 ").size() == 2
+        bnodeToLineMap.get("_:genid1105045 ").size() == 3
+        bnodeToLineMap.get("_:genid1105043 ").size() == 3
+        bnodeToLineMap.get("_:genid1967478 ").size() == 3
+
+        bnodeConnectionsMap.size() == 4
+        bnodeConnectionsMap.get("_:genid1105042 ") == ["_:genid1105042 ", "_:genid1105045 "].toSet()
+        bnodeConnectionsMap.get("_:genid1105045 ") == ["_:genid1105045 ", "_:genid1105043 "].toSet()
+        bnodeConnectionsMap.get("_:genid1105043 ") == ["_:genid1105043 ", "_:genid1967478 "].toSet()
+        bnodeConnectionsMap.get("_:genid1967478 ") == ["_:genid1967478 "].toSet()
+
+        assert protein1_bnodeToUriMap.get("_:genid72520 ") != null
+        assert protein2_bnodeToUriMap.get("_:genid1967478 ") != null
+        assert protein1_bnodeToUriMap.get("_:genid72520 ") == protein2_bnodeToUriMap.get("_:genid1967478 ")
+
     }
 
-    // ++++++++ getNodeNeighborhood ++++++++
-    def "node neighborhood should be a,b,c,d -- avoid cycle"() {
+
+
+
+
+
+
+
+    def "testing taxon restriction assertions to be equal NCBITaxon_9031"() {
         given:
-        def nodeConnectionsMap = new HashMap<String, Set<String>>()
-        nodeConnectionsMap.put("a", ["b", "c"].toSet())
-        nodeConnectionsMap.put("c", ["d", "a"].toSet())
-        def neighborhoodSet = new HashSet<String>()
+        def protein1_lines = '''# http://birdgenenames.org/cgnc/GeneReport?id=10048
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid4 .
+_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid4 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid4 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9031> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene GBX2 in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "gene"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.geneontology.org/formats/oboInOwl#id> "CGNC:10048"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10048> <http://www.w3.org/2000/01/rdf-schema#label> "GBX2 (chicken)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid5 <http://www.w3.org/2002/07/owl#annotatedSource> <http://birdgenenames.org/cgnc/GeneReport?id=10048> .
+_:genid5 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid5 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene GBX2 in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid5 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DNx"^^<http://www.w3.org/2001/XMLSchema#string> .
+#
+# http://birdgenenames.org/cgnc/GeneReport?id=10067
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid6 .
+_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid6 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid6 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9031> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene IL7R in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "gene"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.geneontology.org/formats/oboInOwl#id> "CGNC:10067"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10067> <http://www.w3.org/2000/01/rdf-schema#label> "IL7R (chicken)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid7 <http://www.w3.org/2002/07/owl#annotatedSource> <http://birdgenenames.org/cgnc/GeneReport?id=10067> .
+_:genid7 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid7 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene IL7R in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid7 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DNx"^^<http://www.w3.org/2001/XMLSchema#string> .
+#
+# http://birdgenenames.org/cgnc/GeneReport?id=10092
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid8 .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid8 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid8 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9031> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene PDLIM3 in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "gene"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.geneontology.org/formats/oboInOwl#id> "CGNC:10092"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10092> <http://www.w3.org/2000/01/rdf-schema#label> "PDLIM3 (chicken)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid9 <http://www.w3.org/2002/07/owl#annotatedSource> <http://birdgenenames.org/cgnc/GeneReport?id=10092> .
+_:genid9 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid9 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene PDLIM3 in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid9 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DNx"^^<http://www.w3.org/2001/XMLSchema#string> .
+#
+# http://birdgenenames.org/cgnc/GeneReport?id=10114
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001217> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid10 .
+_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid10 <http://www.w3.org/2002/07/owl#onProperty> <http://purl.obolibrary.org/obo/RO_0002160> .
+_:genid10 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://purl.obolibrary.org/obo/NCBITaxon_9031> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://purl.obolibrary.org/obo/IAO_0000115> "A protein coding gene FBXL12 in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.geneontology.org/formats/oboInOwl#hasOBONamespace> "gene"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.geneontology.org/formats/oboInOwl#id> "CGNC:10114"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.w3.org/2000/01/rdf-schema#comment> "Category=external."^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://birdgenenames.org/cgnc/GeneReport?id=10114> <http://www.w3.org/2000/01/rdf-schema#label> "FBXL12 (chicken)"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Axiom> .
+_:genid11 <http://www.w3.org/2002/07/owl#annotatedSource> <http://birdgenenames.org/cgnc/GeneReport?id=10114> .
+_:genid11 <http://www.w3.org/2002/07/owl#annotatedProperty> <http://purl.obolibrary.org/obo/IAO_0000115> .
+_:genid11 <http://www.w3.org/2002/07/owl#annotatedTarget> "A protein coding gene FBXL12 in chicken."^^<http://www.w3.org/2001/XMLSchema#string> .
+_:genid11 <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "PRO:DNx"^^<http://www.w3.org/2001/XMLSchema#string> .
+#'''
+
+        def protein1_inputStream = new ByteArrayInputStream(protein1_lines.getBytes())
         def converter = new BNodeConverter()
 
         when:
-        converter.getNodeNeighborhood("a", nodeConnectionsMap, neighborhoodSet)
+        Map<String, String> protein1_bnodeToUriMap = converter.populateBnodeToUriMap(protein1_inputStream)
+
+        def updated_protein1_lines = []
+        protein1_lines.split("\\n").each { line -> updated_protein1_lines.add(converter.updateGenIdsInLine(line, protein1_bnodeToUriMap))}
 
         then:
-        neighborhoodSet.size() == 4
-        neighborhoodSet == ["a", "b", "c", "d"].toSet()
-    }
-
-    // ++++++++ getNodeNeighborhood ++++++++
-    def "node neighborhood should be a,b,c,d,z -- shows need for cataloging bidirectional links"() {
-        given:
-        def nodeConnectionsMap = new HashMap<String, Set<String>>()
-        nodeConnectionsMap.put("a", ["b", "c"].toSet())
-        nodeConnectionsMap.put("b", ["a"].toSet())
-        nodeConnectionsMap.put("c", ["d", "a"].toSet())
-        nodeConnectionsMap.put("d", ["c", "z"].toSet())
-        nodeConnectionsMap.put("z", ["d"].toSet())
-
-        def neighborhoodSet = new HashSet<String>()
-        def converter = new BNodeConverter()
-
-        when:
-        converter.getNodeNeighborhood("z", nodeConnectionsMap, neighborhoodSet)
-
-        then:
-        neighborhoodSet.size() == 5
-        neighborhoodSet == ["a", "b", "c", "d", "z"].toSet()
+        assert protein1_bnodeToUriMap.get("_:genid4 ") != null
+        assert protein1_bnodeToUriMap.get("_:genid6 ") != null
+        assert protein1_bnodeToUriMap.get("_:genid8 ") != null
+        assert protein1_bnodeToUriMap.get("_:genid10 ") != null
+        assert protein1_bnodeToUriMap.get("_:genid4 ") == protein1_bnodeToUriMap.get("_:genid6 ")
+        assert protein1_bnodeToUriMap.get("_:genid4 ") == protein1_bnodeToUriMap.get("_:genid8 ")
+        assert protein1_bnodeToUriMap.get("_:genid4 ") == protein1_bnodeToUriMap.get("_:genid10 ")
 
     }
 
-    // ++++++++ addToCollectionMap ++++++++
-    def "adding a new key to a collection map should result in a new entry"() {
-        given:
-        def map = new HashMap<String, List<String>>()
-        def converter = new BNodeConverter()
 
-        when:
-        converter.addToCollectionMap("a", "b", map)
 
-        then:
-        map.size() == 1
-        map.get("a") == ["b"].toSet()
-    }
 
-    // ++++++++ addToCollectionMap ++++++++
-    def "adding an existing key to a collection map should result in an update to the entry"() {
-        given:
-        def map = new HashMap<String, Set<String>>()
-        map.put("a", ["b", "c"].toSet())
-        def converter = new BNodeConverter()
 
-        when:
-        converter.addToCollectionMap("a", "d", map)
 
-        then:
-        map.size() == 1
-        map.get("a") == ["b", "c", "d"].toSet()
-    }
 
 }
 

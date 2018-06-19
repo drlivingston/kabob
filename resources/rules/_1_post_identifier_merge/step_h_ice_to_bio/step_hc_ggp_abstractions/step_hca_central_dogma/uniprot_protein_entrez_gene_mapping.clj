@@ -17,6 +17,15 @@
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   SELECT ?protein ?gene ?has_gene_template
   WHERE {
+
+         {
+           select ?has_gene_template {
+              ?has_gene_template_id obo:IAO_0000219 obo_pr:has_gene_template .
+              ?has_gene_template_id obo:IAO_0000219 ?has_gene_template .
+              # ensure it's a kabob bioentity (not an obo bioentity)
+              filter (contains (str(?has_gene_template), 'http://ccp.ucdenver.edu/kabob/bio/'))
+              }
+         }
          ?record rdf:type ccp:IAO_EXT_0000235 .  # CCP:UniProt_identifier_mapping_record
          ?record obo:BFO_0000051 ?uniprot_identifier_field_value .
          ?uniprot_identifier_field_value rdf:type ccp:IAO_EXT_0000239 .  # CCP:UniProt_identifier_mapping_record__UniProt_accession_identifier_field_value
@@ -29,19 +38,10 @@
          # don't duplicate existing has_gene_template restrictions
          filter not exists {
                      ?protein rdfs:subClassOf ?r .
-                     ?r rdf:type owl:Restriction .
                      ?r owl:onProperty ?has_gene_template .
                      ?r owl:someValuesFrom ?gene .
          }
 
-         {
-          select ?has_gene_template {
-                                     ?has_gene_template_id obo:IAO_0000219 obo_pr:has_gene_template .
-                                     ?has_gene_template_id obo:IAO_0000219 ?has_gene_template .
-                                     # ensure it's a kabob bioentity (not an obo bioentity)
-                                     filter (contains (str(?has_gene_template), 'http://ccp.ucdenver.edu/kabob/bio/'))
-                                     }
-          }
          }"
   }
 

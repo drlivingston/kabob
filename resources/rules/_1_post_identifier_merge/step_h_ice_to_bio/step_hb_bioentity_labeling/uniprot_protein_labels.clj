@@ -1,7 +1,7 @@
 ;; --------------------------------------------------------
 ;; ------ Uniprot SwissProt Protein Label Assignment ------
 ;; --------------------------------------------------------
-`{:name "step-hb_uniprot-swissprot-protein-labels"
+`{:name "step-hba_uniprot-swissprot-protein-labels"
   :description "This rule creates a label for every swissprot protein record and types it as (IAO_EXT_0000932)"
   :head ((?/protein rdfs/label ?/protein_record_name))
 

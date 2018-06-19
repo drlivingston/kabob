@@ -7,5 +7,5 @@ FILE=$1
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Transforming blank nodes to URIs: ${FILE}"
-export JAVA_OPTS="$JAVA_OPTS -Xmx4G"
+export JAVA_OPTS="$JAVA_OPTS -Xmx8G"
 groovy ${DIR}/groovy/BNodeConverter.groovy ${FILE}

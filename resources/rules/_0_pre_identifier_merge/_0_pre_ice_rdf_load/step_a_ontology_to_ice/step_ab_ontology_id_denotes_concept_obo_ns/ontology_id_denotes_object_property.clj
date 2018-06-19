@@ -23,5 +23,6 @@
                      filter (!contains (str(?object_property), 'ext/IAO_'))
                      filter (!contains (str(?object_property), 'obo/IAO_'))
                      filter (!contains (str(?object_property), 'http://www.w3.org/ns/oa#'))
+                     filter (!contains (str(?ontology_concept), 'http://www.w3.org/2002/07/owl#'))
                     }"
   }

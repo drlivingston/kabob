@@ -3,7 +3,8 @@
 ;; ----------------------------------------------------
 `{:name "step-fb_obsolete-uniprot-identifier-denotes-bioentity"
   :description "This rule connects all UniProt secondary accession identifiers to their respective bioentities using obo:denotes links. Note that a single secondary uniprot accession can reference multiple bioentities."
-  :head ((?/secondary_uniprot_identifier obo/IAO_0000219 ?/bioentity)) ; CCP:obsolete_identifier
+  :head ((?/secondary_uniprot_identifier obo/IAO_0000219 ?/bioentity)
+          (?/secondary_uniprot_identifier rdfs/subClassOf ccp/IAO_EXT_0001711)) ; CCP:deprecated_identifier
   :reify ()
   :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
   prefix franzOption_clauseReorderer: <franz:identity>
@@ -20,9 +21,6 @@
 
                            # once we have the primary_uniprot_id, get a reference to the ?bioentity
                            ?primary_uniprot_identifier obo:IAO_0000219 ?bioentity .
-                           ?id_set obo:RO_0002351 ?primary_uniprot_identifier .
-                           ?id_set rdf:type ccp:IAO_EXT_0000316 .
-                           ?id_set obo:IAO_0000142 ?bioentity .
 
                            # now get any secondary accession identifiers
                            ?record obo:BFO_0000051 ?accession_field_value .
