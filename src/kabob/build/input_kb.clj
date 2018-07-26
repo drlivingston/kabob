@@ -14,22 +14,32 @@
           ; [virtuoso.rdf4j.driver VirtuosoRepository]
            [com.complexible.stardog.api ConnectionConfiguration]
            [com.complexible.stardog.sesame StardogRepository]))
+           ;[com.bigdata.rdf.sail.webapp.client RemoteRepositoryManager]))
 
 (defn initialize-kb [kb]
   (register-namespaces (synch-ns-mappings (connection kb)) *namespaces*))
 
 
 (defn stardog-kb [args]
-    ;;Init source KB connection
-    (println "forcing a stardog connection")
+    (println "opening a stardog connection")
 
     (let [server-url (:server-url args)
           repository-name (:repo-name args)
           user (:username args)
           password (:password args)
           kb (kb (StardogRepository. (.credentials (.server (ConnectionConfiguration/to repository-name) server-url) user password)))]
-      ;kb (kb (VirtuosoRepository. "jdbc:virtuoso://virtuoso-prod:1111","dba","dba"))]
       (initialize-kb kb)))
+
+
+;(defn blazegraph-kb [args]
+;  (println "opening a blazegraph connection")
+;
+;  (let [server-url (:server-url args)
+;        repository-name (:repo-name args)
+;        user (:username args)
+;        password (:password args)
+;        kb (kb (.getBigdataSailRemoteRepository (.getRepositoryForNamespace (RemoteRepositoryManager. server-url) repository-name)))]
+;    (initialize-kb kb)))
 
 ;(defn virtuoso-kb [args]
 ;  ;;Init source KB connection
@@ -51,9 +61,12 @@
             *repository-name* (:repo-name args)
             *username* (:username args)
             *password* (:password args)]
-    (if (= "true" (:is-virtuoso args))
-      (stardog-kb args)
-      ;(virtuoso-kb args)
+
+    (case (:server-impl args)
+      "stardog" (stardog-kb args)
+      ;"blazegraph" (blazegraph-kb args)
+      ;"virtuoso" (virtuoso-kb args)
+      ;; default is to open a connection to an HTTPRepository
       (initialize-kb (kb HTTPRepository)))))
 
 (def source-kb open-kb)

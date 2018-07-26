@@ -3,7 +3,7 @@
 ;; --------------------------------------------
 `{:name "delete-duplicate-triples"
   :description "This directive creates no new triples, but deletes all duplicate triples in the repository"
-  :sparql-string "prefix franzOption_chunkProcessingAllowed: <franz:yes>
+  :body "prefix franzOption_chunkProcessingAllowed: <franz:yes>
                   prefix franzOption_memoryLimit: <franz:85g>
                   delete { graph ?g1 {?s ?p ?o}} where {
                                select ?g1 ?s ?p ?o  {

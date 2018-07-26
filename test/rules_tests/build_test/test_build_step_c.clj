@@ -4,7 +4,7 @@
        kr.sesame.sparql
        kr.sesame.rdf
        )
-  (:require [kabob.build.run-rules :refer [query-variables run-forward-rule-sparql-string]]
+  (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query sparql-query ask]]
             [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf]]
@@ -21,7 +21,6 @@
             [clojure.java.io :as io])
   (:import [java.io File]
            [java.util.Arrays]))
-
 
 
 
@@ -46,10 +45,10 @@
              (?/xref_record rdf/type ccp/IAO_EXT_0001572) ;; Reactome unification xref
              (?/xref_record obo/BFO_0000051 ?/xref_db_field)
              (?/xref_db_field rdf/type ccp/IAO_EXT_0001519)  ;; Reactome unification xref db field value
-             (?/xref_record obo/BFO_0000051 ccp/REACTOME_R-HSA-379666)
-             (ccp/REACTOME_R-HSA-379666 rdf/type ccp/IAO_EXT_0001520)  ;; Reactome unification xref database id field value
-             (ccp/REACTOME_R-HSA-379666 rdf/type ccp/IAO_EXT_0001517)  ;; Reactome identifier field value
-             (ccp/REACTOME_R-HSA-379666 rdfs/label ["R-HSA-379666" "en"]))))
+             (?/xref_record obo/BFO_0000051 kice/REACTOME_R-HSA-379666)
+             (kice/REACTOME_R-HSA-379666 rdf/type ccp/IAO_EXT_0001520)  ;; Reactome unification xref database id field value
+             (kice/REACTOME_R-HSA-379666 rdf/type ccp/IAO_EXT_0001517)  ;; Reactome identifier field value
+             (kice/REACTOME_R-HSA-379666 rdfs/label ["R-HSA-379666" "en"]))))
   ))
 
 
@@ -70,10 +69,10 @@
                           (?/go_xref_record rdf/type ccp/IAO_EXT_0001588) ;; xref field value
                           (?/go_xref_record obo/BFO_0000051 ?/go_xref_db_field)  ;; has_part
                           (?/go_xref_db_field rdf/type ccp/IAO_EXT_0001519) ;; xref database field
-                          (?/go_xref_record obo/BFO_0000051 ccp/GO_0005829)  ;; has_part
-                          (ccp/GO_0005829 rdf/type ccp/IAO_EXT_0001520) ;; xref database id field
-                          (ccp/GO_0005829 rdfs/label ["GO:0005829" "en"])
-                          (ccp/GO_0005829 rdf/type ccp/IAO_EXT_0000200))))
+                          (?/go_xref_record obo/BFO_0000051 kice/GO_0005829)  ;; has_part
+                          (kice/GO_0005829 rdf/type ccp/IAO_EXT_0001520) ;; xref database id field
+                          (kice/GO_0005829 rdfs/label ["GO:0005829" "en"])
+                          (kice/GO_0005829 rdf/type ccp/IAO_EXT_0000200))))
     ))
 
 
@@ -165,10 +164,10 @@
                           (?/entity_xref_record obo/BFO_0000051 ?/entity_xref_db_field)
                           (?/entity_xref_db_field rdf/type ccp/IAO_EXT_0001519) ;; xref database field
 
-                          (?/entity_xref_record obo/BFO_0000051 ccp/UNIPROT_P49588)
-                          (ccp/UNIPROT_P49588 rdf/type ccp/IAO_EXT_0001520) ;; xref database id field
-                          (ccp/UNIPROT_P49588 rdfs/label ["P49588" "en"])
-                          (ccp/UNIPROT_P49588 rdf/type ccp/IAO_EXT_0000184))))
+                          (?/entity_xref_record obo/BFO_0000051 kice/UNIPROT_P49588)
+                          (kice/UNIPROT_P49588 rdf/type ccp/IAO_EXT_0001520) ;; xref database id field
+                          (kice/UNIPROT_P49588 rdfs/label ["P49588" "en"])
+                          (kice/UNIPROT_P49588 rdf/type ccp/IAO_EXT_0000184))))
     ))
 
 

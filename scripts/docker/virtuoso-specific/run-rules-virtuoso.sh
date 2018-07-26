@@ -22,12 +22,12 @@ RULETYPE=${7:?}
 OUTPUTDIR=${KB_DATA_DIR}/${RULETYPE}/
 RULES_RES_DIR=resources/${RULETYPE}/
 
-IS_VIRTUOSO=true
+SERVER_IMPL="virtuoso"
 
 echo Running rules
 mkdir -p ${OUTPUTDIR}
 export LEIN_ROOT=true
-cd /kabob.git && { $LEININGEN run-rules ${KB_URL} ${KB} ${KB_USER} ${KB_PASS} ${OUTPUTDIR} ${IS_VIRTUOSO} ${RULES_RES_DIR} ; cd - ; }
+cd /kabob.git && { $LEININGEN run-rules ${KB_URL} ${KB} ${KB_USER} ${KB_PASS} ${OUTPUTDIR} ${SERVER_IMPL} ${RULES_RES_DIR} ; cd - ; }
 
 # Ensure that all subdirectoes implicit in the `RULETYPE` are accessible to
 # later processes.

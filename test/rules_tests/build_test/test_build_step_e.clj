@@ -4,15 +4,16 @@
        kr.sesame.sparql
        kr.sesame.rdf
        )
-  (:require [kabob.build.run-rules :refer [query-variables run-forward-rule-sparql-string]]
+  (:require [kabob.build.run-rules :refer [query-variables]]
             [kr.core.forward-rule :refer [add-reify-fns]]
             [kr.core.sparql :refer [sparql-select-query query sparql-query ask]]
-            [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf]]
+            [kr.core.rdf :refer [register-namespaces synch-ns-mappings add! load-rdf *graph*]]
             [kr.core.kb :refer [kb open close]]
             [kabob.core.namespace :refer [*namespaces*]]
             [kabob.core.rule :refer [kabob-load-rules-from-classpath]]
             [kabob.build.output-kb :refer [output-kb]]
             [clojure.pprint :refer [pprint]]
+            [rules-tests.build-test.ccp-ext-ontology :refer [ccp-ext-ontology-triples]]
             [rules-tests.build-test.test-build-util :refer [initial-plus-ice-triples run-build-rule run-build-rules
                                                             test-kb build-rules-step-a build-rules-step-b
                                                             build-rules-step-ca build-rules-step-cb build-rules-step-cc
@@ -32,20 +33,23 @@
   [path]
   (filter #(.isFile %) (.listFiles (io/as-file path))))
 
-
+(def base-kb (let [source-kb (test-kb initial-plus-ice-triples)]
+               (binding [*graph* "http://ccp-extension.owl"]
+                 (dorun (map (partial add! source-kb) ccp-ext-ontology-triples)))
+               (run-build-rules source-kb build-rules-step-a)
+               (run-build-rules source-kb build-rules-step-b)
+               (run-build-rules source-kb build-rules-step-ca)
+               (run-build-rules source-kb build-rules-step-cb)
+               (run-build-rules source-kb build-rules-step-cc)
+               (run-build-rules source-kb build-rules-step-da)
+               (run-build-rules source-kb build-rules-step-db)
+               (run-build-rules source-kb build-rules-step-dc)
+               source-kb))
 
 ;;; This tests the ID merging queries/code for concept identifiers that are linked with skos:exactMatch
 (deftest step-e-identifier-merge-test-generation-of-merged-concept-identifier-sets
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
       (prn (str "PRINTING FILE LIST: " (count (get-only-files tmp-dir))))
@@ -76,56 +80,53 @@
 
       ;; most identifier sets consist of a single identifier, however there are a few that contain multiple identifiers
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/GO_0005623) ; obo:has_member
-                            (?/id_set obo/RO_0002351 ccp/CL_0000000)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/GO_0005623) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/CL_0000000)))) ; obo:has_member
 
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/PR_000000001)
-                            (?/id_set obo/RO_0002351 ccp/CHEBI_36080)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/PR_000000001)
+                            (?/id_set obo/RO_0002351 kice/CHEBI_36080)))) ; obo:has_member
 
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/HGNC_11773)
-                            (?/id_set obo/RO_0002351 ccp/HGNC_TGFBR2)
-                            (?/id_set obo/RO_0002351 ccp/NCBI_GENE_7048)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/HGNC_11773)
+                            (?/id_set obo/RO_0002351 kice/HGNC_TGFBR2)
+                            (?/id_set obo/RO_0002351 kice/NCBI_GENE_7048)))) ; obo:has_member
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/PR_P37173) ; obo:has_member
-                            (?/id_set obo/RO_0002351 ccp/UNIPROTENTRYNAME_TGFR2_HUMAN) ; obo:has_member
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P37173)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/HGNC_5)
+                            (?/id_set obo/RO_0002351 kice/HGNC_A1BG)
+                            (?/id_set obo/RO_0002351 kice/NCBI_GENE_1)))) ; obo:has_member
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            ;(?/id_set obo/RO_0002351 ccp/PR_P37173-2) ;; this mapping isn't in the test data
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P37173-2)
-                            (?/id_set obo/RO_0002351 ccp/REFSEQ_NP_001020018)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/PR_P37173) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROTENTRYNAME_TGFR2_HUMAN) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P37173)))) ; obo:has_member
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/PR_P37173-1)
-                            (?/id_set obo/RO_0002351 ccp/REFSEQ_NP_003233)
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P37173-1)))) ; obo:has_member
+                            ;(?/id_set obo/RO_0002351 kice/PR_P37173-2) ;; this mapping isn't in the test data
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P37173-2)
+                            (?/id_set obo/RO_0002351 kice/REFSEQ_NP_001020018)))) ; obo:has_member
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROTENTRYNAME_1433E_HUMAN) ; obo:has_member
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P62258)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/PR_P37173-1)
+                            (?/id_set obo/RO_0002351 kice/REFSEQ_NP_003233)
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P37173-1)))) ; obo:has_member
 
-      (is (= 7 (count (query target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316))))))))) ; ccp:identifier_set
+      (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
+                            (?/id_set obo/RO_0002351 kice/UNIPROTENTRYNAME_1433E_HUMAN) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P62258)))) ; obo:has_member
+
+      (is (= 8 (count (query target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316))))))))) ; ccp:identifier_set
 
 
 
 
 ;;; This tests the ID merging queries/code for property identifiers that have been linked with skos:exactMatch
 (deftest step-e-identifier-merge-test-generation-of-merged-property-identifier-sets
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
 
@@ -136,26 +137,17 @@
                   (filter #(.contains (.getName %) "combined-properties") (get-only-files tmp-dir))))
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/mi#part_of)
-                            (?/id_set obo/RO_0002351 ccp/so#part_of)
-                            (?/id_set obo/RO_0002351 ccp/BFO_0000050)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/mi#part_of)
+                            (?/id_set obo/RO_0002351 kice/so#part_of)
+                            (?/id_set obo/RO_0002351 kice/BFO_0000050)))) ; obo:has_member
 
       (is (= 1 (count (query target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316))))))))) ; ccp:identifier_set
 
 
 ;;; This tests the ID merging queries/code for non-ontology identifiers that have not been linked with skos:exactMatch
 (deftest step-e-identifier-merge-test-generation-of-orphan-identifier-sets
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
       (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
@@ -169,34 +161,34 @@
 
       ; this one is now merged with its entry name
       ;(is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-      ;                      (?/id_set obo/RO_0002351 ccp/UNIPROT_P62258)))) ; obo:has_member
+      ;                      (?/id_set obo/RO_0002351 kice/UNIPROT_P62258)))) ; obo:has_member
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_Q9UER7)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_Q9UER7)))) ; obo:has_member
 
       ;; this one is now exactmatch with a refseq id
       ;(is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-      ;                      (?/id_set obo/RO_0002351 ccp/UNIPROT_P37173-2)))) ; obo:has_member
+      ;                      (?/id_set obo/RO_0002351 kice/UNIPROT_P37173-2)))) ; obo:has_member
 
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P62258-1)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P62258-1)))) ; obo:has_member
 
 
       ;; the following 7 are brought in via interactions with P37173 in the uniprot ice rdf
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P10600)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P10600)))) ; obo:has_member
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_Q93074)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_Q93074)))) ; obo:has_member
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_Q62312)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_Q62312)))) ; obo:has_member
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P01137)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P01137)))) ; obo:has_member
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_P07200)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_P07200)))) ; obo:has_member
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_A2AGH6)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_A2AGH6)))) ; obo:has_member
       (is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-                            (?/id_set obo/RO_0002351 ccp/UNIPROT_Q8IX30)))) ; obo:has_member
+                            (?/id_set obo/RO_0002351 kice/UNIPROT_Q8IX30)))) ; obo:has_member
 
 
       (is (= 9 (count (query target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316)))))) ; ccp:identifier_set
@@ -227,17 +219,8 @@
 
 ;;; This tests the ID merging queries/code for ontology identifiers that have not been linked with skos:exactMatch
 (deftest step-e-identifier-merge-test-generation-of-obo-orphan-identifier-sets
-  (let [source-kb (test-kb initial-plus-ice-triples)
+  (let [source-kb base-kb
         target-kb (test-kb '())]
-    (run-build-rules source-kb build-rules-step-a)
-    (run-build-rules source-kb build-rules-step-b)
-    (run-build-rules source-kb build-rules-step-ca)
-    (run-build-rules source-kb build-rules-step-cb)
-    (run-build-rules source-kb build-rules-step-cc)
-    (run-build-rules source-kb build-rules-step-da)
-    (run-build-rules source-kb build-rules-step-db)
-    (run-build-rules source-kb build-rules-step-dc)
-
     (with-tmp-dir
       (generate-all-id-sets source-kb (str tmp-dir "/"))
       (dorun (map (fn [f] (prn (str "FILE TO LOAD:" f))
@@ -249,10 +232,10 @@
       ;; there are two uniprot identifiers that are not involved in any skos:exactMatch relations
       ;; one is its own uniprot record (P62258) and the other is related to P37173 via an interaction sub-record (Q9UER7)
       ;(is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-      ;                      (?/id_set obo/RO_0002351 ccp/UNIPROT_P62258)))) ; obo:has_member
+      ;                      (?/id_set obo/RO_0002351 kice/UNIPROT_P62258)))) ; obo:has_member
       ;
       ;(is (ask target-kb '((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
-      ;                      (?/id_set obo/RO_0002351 ccp/UNIPROT_Q9UER7)))) ; obo:has_member
+      ;                      (?/id_set obo/RO_0002351 kice/UNIPROT_Q9UER7)))) ; obo:has_member
 
       ;; remove properties and concepts that participate in skos:exactMatch relations
       (let [orphan-bioentity-concepts
@@ -262,7 +245,7 @@
                     (concat concepts object-properties))
             ]
 
-        (doall (map (fn [concept] (let [ccp-id (symbol "ccp" concept)]
+        (doall (map (fn [concept] (let [ccp-id (symbol "kice" concept)]
                                     (is (ask target-kb `((?/id_set rdf/type ccp/IAO_EXT_0000316) ; ccp:identifier_set
                                                           (?/id_set obo/RO_0002351 ~ccp-id)))))) ; obo:has_member
                     orphan-bioentity-concepts))
@@ -272,20 +255,20 @@
         )
 
 
-      ;(prn (str "--------------------------------"))
-      ;(doall (map #(prn (str %)) (sparql-query target-kb
-      ;                                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      ;                                          prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
-      ;                                          prefix obo: <http://purl.obolibrary.org/obo/>
-      ;                                          prefix owl: <http://www.w3.org/2002/07/owl#>
-      ;                                          prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      ;                                          select * {
-      ;                                            ?id_set rdf:type ccp:IAO_EXT_0000316 .
-      ;                                            ?id_set obo:RO_0002351 ?id .
-      ;      }"
-      ;                                         )))
-      ;
-      ;(prn (str "--------------------------------"))
+      (prn (str "--------------------------------"))
+      (doall (map #(prn (str %)) (sparql-query target-kb
+                                               "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                                                prefix ccp: <http://ccp.ucdenver.edu/obo/ext/>
+                                                prefix obo: <http://purl.obolibrary.org/obo/>
+                                                prefix owl: <http://www.w3.org/2002/07/owl#>
+                                                prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                                                select * {
+                                                  ?id_set rdf:type ccp:IAO_EXT_0000316 .
+                                                  ?id_set obo:RO_0002351 ?id .
+            }"
+                                               )))
+
+      (prn (str "--------------------------------"))
 
       ;; throw an exeception to prevent the tmp directory from being deleted so the generated files can be viewed
       ;(throw (Exception. "my exception message"))

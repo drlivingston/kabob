@@ -13,7 +13,8 @@
        kabob.build.output-kb
 
        kabob.core.parallel-utils)
-  (:require [clojure.set :as cljset]))
+  (:require [clojure.set :as cljset]
+            [kr.core.utils :refer [sha-1]]))
 
 ;;;-------------------------------------------------------------------
 ;;; globals
@@ -21,7 +22,7 @@
 
 ;;(def ^:dynamic *graph-db-path* "/temp/kabob/neo4j/idsets/")
 
-(def ^:dynamic *id-set-ns* "ccp")
+(def ^:dynamic *id-set-ns* "kice")
 
 (def magic-prefixes
   (str "prefix franzOption_clauseReorderer: <franz:identity> \n"
@@ -32,6 +33,7 @@
        "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n"
        "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
        "PREFIX ccp: <http://ccp.ucdenver.edu/obo/ext/> \n"
+       "PREFIX kice: <http://ccp.ucdenver.edu/kabob/ice/> \n"
        ))
 
 ;;;-------------------------------------------------------------------
@@ -79,7 +81,7 @@
 
 (defn generic-id-set-triples [ids]
   (let [set-sym (derive-generic-id-set-sym ids)
-        type-sym (symbol *id-set-ns* "IAO_EXT_0000316")]    ;; ccp:identifier set
+        type-sym (symbol "ccp" "IAO_EXT_0000316")]    ;; ccp:identifier set
     (conj (map (fn [id]
                  `(~set-sym obo/RO_0002351 ~id))
                ids)
@@ -130,6 +132,8 @@
                                                              ?id1 skos:exactMatch ?id2 .
                                                              ?id1 rdfs:subClassOf ?idtype1 .
                                                              ?id2 rdfs:subClassOf ?idtype2 .
+                                                             filter (?idtype1 != ccp:IAO_EXT_0000342)
+                                                             filter (?idtype2 != ccp:IAO_EXT_0000342)
                                                              minus {?idtype1 rdfs:subClassOf* ccp:IAO_EXT_0000307}
                                                              minus {?idtype2 rdfs:subClassOf* ccp:IAO_EXT_0000307}
                                                              }")]
@@ -164,7 +168,7 @@
                                       minus {?x skos:exactMatch ?id}
                                       minus {?id skos:exactMatch ?y}
                                       # exclude any identifiers that are obsolete
-                                      minus {?id rdf:type ccp:IAO_EXT_0001711}
+                                      minus {?id rdfs:subClassOf ccp:IAO_EXT_0001711}
                                       # exclude any classes of identifiers. this filter is an argument for
                                       #using rdf:type instead of rdfs:subClassOf in the identifier hierarchy
                                       filter (!contains (str(?id), 'ext/IAO_'))
@@ -352,8 +356,8 @@
 
 (defn combined-pairs-concepts-fn [kb]
   (let [query-pat `((?/id skos/exactMatch ?/id2)
-                     (?/id [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
-                     (?/id2 [rdfs/subClassOf *] ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
+                     (?/id rdfs/subClassOf ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
+                     (?/id2 rdfs/subClassOf ccp/IAO_EXT_0000342) ; ccp:identifier of a biological entity
                      (:filter (!= ?/id ?/id2)))]
     (binding [*use-inference* false
               *work-queue-single-threaded* true]

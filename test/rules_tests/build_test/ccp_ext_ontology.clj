@@ -1877,6 +1877,14 @@
 (ccp/IAO_EXT_0000112 rdfs/subClassOf ccp/IAO_EXT_0001699)
 (ccp/IAO_EXT_0000112 obo/IAO_0000599 ["PR_"])
 (ccp/IAO_EXT_0000112 rdfs/label ["Protein Ontology concept identifier" "en"])
+
+
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001848
+(ccp/IAO_EXT_0001848 rdf/type owl/Class)
+(ccp/IAO_EXT_0001848 rdfs/subClassOf ccp/IAO_EXT_0000112)
+(ccp/IAO_EXT_0001848 obo/IAO_0000599 ["PR_"])
+(ccp/IAO_EXT_0001848 rdfs/label ["Protein Ontology gene concept identifier" "en"])
+
 ;; 
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0000113
 (ccp/IAO_EXT_0000113 rdf/type owl/Class)
@@ -2327,12 +2335,22 @@
 ;; 
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0000204
 (ccp/IAO_EXT_0000204 rdf/type owl/Class)
-(ccp/IAO_EXT_0000204 rdfs/subClassOf ccp/IAO_EXT_0000081)
 (ccp/IAO_EXT_0000204 rdfs/subClassOf ccp/IAO_EXT_0000088)
-(ccp/IAO_EXT_0000204 rdfs/subClassOf ccp/IAO_EXT_0001699)
 (ccp/IAO_EXT_0000204 ccp/IAO_EXT_0001700 ["^\\d+$"])
 (ccp/IAO_EXT_0000204 obo/IAO_0000599 ["NCBITaxon_"])
 (ccp/IAO_EXT_0000204 rdfs/label ["NCBI Taxonomy concept identifier" "en"])
+;;
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001832
+(ccp/IAO_EXT_0001832 rdf/type owl/Class)
+(ccp/IAO_EXT_0001832 rdfs/subClassOf ccp/IAO_EXT_0000204)
+(ccp/IAO_EXT_0001832 rdfs/subClassOf ccp/IAO_EXT_0001699)
+(ccp/IAO_EXT_0001832 rdfs/subClassOf ccp/IAO_EXT_0000081)
+(ccp/IAO_EXT_0001832 obo/IAO_0000599 ["NCBITaxon_"])
+;;
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001833
+(ccp/IAO_EXT_0001833 rdf/type owl/Class)
+(ccp/IAO_EXT_0001833 rdfs/subClassOf ccp/IAO_EXT_0000204)
+(ccp/IAO_EXT_0001833 rdfs/subClassOf ccp/IAO_EXT_0000341)
 ;; 
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0000205
 (ccp/IAO_EXT_0000205 rdf/type owl/Class)
@@ -2390,6 +2408,27 @@
 (ccp/IAO_EXT_0000212 obo/IAO_0000599 ["NBO_"])
 (ccp/IAO_EXT_0000212 rdfs/label ["Neuro Behavior Ontology concept identifier" "en"])
 ;; 
+
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001703
+(ccp/IAO_EXT_0001703 rdf/type owl/Class)
+(ccp/IAO_EXT_0001703 rdfs/subClassOf ccp/IAO_EXT_0000088)
+(ccp/IAO_EXT_0001703 obo/IAO_0000599 ["OBI_"])
+(ccp/IAO_EXT_0001703 rdfs/label ["OBI concept identifier" "en"])
+
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001846
+(ccp/IAO_EXT_0001846 rdf/type owl/Class)
+(ccp/IAO_EXT_0001846 rdfs/subClassOf ccp/IAO_EXT_0001703)
+(ccp/IAO_EXT_0001846 obo/IAO_0000599 ["OBI_"])
+(ccp/IAO_EXT_0001846 rdfs/label ["OBI ICE concept identifier" "en"])
+
+;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001847
+(ccp/IAO_EXT_0001847 rdf/type owl/Class)
+(ccp/IAO_EXT_0001847 rdfs/subClassOf ccp/IAO_EXT_0001703)
+(ccp/IAO_EXT_0001847 rdfs/subClassOf ccp/IAO_EXT_0001699)
+(ccp/IAO_EXT_0001847 obo/IAO_0000599 ["OBI_"])
+(ccp/IAO_EXT_0001847 rdfs/label ["OBI non-ICE concept identifier" "en"])
+
+
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0000214
 (ccp/IAO_EXT_0000214 rdf/type owl/Class)
 (ccp/IAO_EXT_0000214 rdfs/subClassOf ccp/IAO_EXT_0000197)
@@ -10297,6 +10336,7 @@
 ;; http://ccp.ucdenver.edu/obo/ext/IAO_EXT_0001713
 (ccp/IAO_EXT_0001713 rdf/type owl/Class)
 (ccp/IAO_EXT_0001713 rdfs/subClassOf ccp/IAO_EXT_0001699)
+(ccp/IAO_EXT_0001713 rdfs/subClassOf ccp/IAO_EXT_0000188)
 (ccp/IAO_EXT_0001713 obo/IAO_0000115 ["This is the general identifier type for any UniProt-specific identifier, i.e. this class encompasses the UniProt isoform id, UniProt entry name id, and the regular UniProt id."])
 (ccp/IAO_EXT_0001713 rdfs/label ["UniProt KB identifier" "en"])
 ;; 

@@ -21,12 +21,11 @@ RULETYPE=${7:?}
 OUTPUTDIR=$KB_DATA_DIR/$RULETYPE/
 RULES_RES_DIR=resources/$RULETYPE/
 
-# this flag is being used to indicate a stardog usage in this branch
-IS_VIRTUOSO=true
+SERVER_IMPL="virtuoso"
 
 echo Running rules
 mkdir -p ${OUTPUTDIR}
-$LEININGEN run-rules ${KB_URL} ${KB} ${KB_USER} ${KB_PASS} ${OUTPUTDIR} ${IS_VIRTUOSO} ${RULES_RES_DIR}
+$LEININGEN run-rules ${KB_URL} ${KB} ${KB_USER} ${KB_PASS} ${OUTPUTDIR} ${SERVER_IMPL} ${RULES_RES_DIR}
 
 # Ensure that all subdirectoes implicit in the `RULETYPE` are accessible to
 # later processes.

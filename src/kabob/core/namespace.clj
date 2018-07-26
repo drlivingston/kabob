@@ -30,6 +30,8 @@
 
        ;;("iao" "http://purl.obolibrary.org/obo/")
        ("ccp" "http://ccp.ucdenver.edu/obo/ext/")
+       ("kbio" "http://ccp.ucdenver.edu/kabob/bio/")
+       ("kice" "http://ccp.ucdenver.edu/kabob/ice/")
 
         ;; ---------------------------------------------------------------------------
         ;; the following namespaces are each a workaround for the 'http:/' bug as
@@ -37,6 +39,9 @@
         ;; be removed once the 'http:/' bug is resolved.
         ;; ---------------------------------------------------------------------------
         ("bnode" "http://ccp.ucdenver.edu/bnode/")
+        ("bp_base", "http://www.reactome.org/biopax/65/48887#")
+
+        ("araport_pr","https://www.araport.org/locus/")
         ("cgnc_pr","http://birdgenenames.org/cgnc/")
         ("rgd_pr","http://rgd.mcw.edu/rgdweb/report/gene/")
         ("tair_pr","http://www.arabidopsis.org/servlets/")
@@ -49,7 +54,11 @@
         ("zfin_pr","http://zfin.org/action/marker/view/")
         ("mgi_pr","http://www.informatics.jax.org/marker/")
         ("ncbi_pr","http://www.ncbi.nlm.nih.gov/")
-        ("bp_base", "http://www.reactome.org/biopax/62/48887#")
+        ("ensembl_pr", "http://www.ensembl.org/id/")
+        ("ensembl_genomes_pr", "http://www.ensemblgenomes.org/id/")
+
+        ("semanticscience", "http://semanticscience.org/resource/")
+
         ("reactome_download", "http://www.reactome.org/download/current/")
         ;; ---------------------------------------------------------------------------
 
