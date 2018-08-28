@@ -1,0 +1,4 @@
+deprecating the ontology-xref rules b/c they are potentially unreliable.
+CHEBI references some DrugBank identifiers which do not exist, for example.
+
+The PR-UniProt mappings are obtained in step db from the dedicated PR-Uniprot mapping file.
