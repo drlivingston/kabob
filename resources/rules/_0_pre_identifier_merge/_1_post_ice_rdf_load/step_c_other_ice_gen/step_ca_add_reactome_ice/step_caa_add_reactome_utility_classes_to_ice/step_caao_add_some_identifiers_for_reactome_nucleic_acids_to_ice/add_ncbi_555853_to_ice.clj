@@ -2,8 +2,8 @@
   :name "add_ncbi_555853_to_ice",
   :reify ([?/ncbi_ice]
           ),
-  :head ((?ncbi_ice skos/exactMatch ?genbank_ice)
-         (?ncbi_ice rdfs/subClassOf ccp/IAO_EXT_0000262)
+  :head ((?/ncbi_ice skos/exactMatch ?/genbank_ice)
+         (?/ncbi_ice rdfs/subClassOf ccp/IAO_EXT_0000262)
          )
  :body
 "PREFIX franzOption_chunkProcessingAllowed: <franz:yes>

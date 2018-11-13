@@ -1,5 +1,5 @@
 `{:description "This rule finds any physical entity record described in Reactome, as well as its cellular location and its Reactome id field.",
- :name "add_reactome_physical_entities_to_ice",
+ :name "add_reactome_physical_entities_to_ice_1",
  :reify ([?/phent_record {:ns "http://ccp.ucdenver.edu/kabob/ice/", :ln (:sha-1 "Reactome physical entity record" ?/phent), :prefix "R_"}]
          [?/reactome_ice]
          ),
@@ -13,7 +13,7 @@
         (?/cl_vocab_record rdf/type ccp/IAO_EXT_0001521) ;; cellular location field
         (?/phent ccp/ekws_temp_biopax_connector_relation ?/phent_record)
         ),
- :body "#add_reactome_physical_entities_to_ice.clj
+ :body "#add_reactome_physical_entities_to_ice_1.clj
 PREFIX franzOption_chunkProcessingAllowed: <franz:yes>
 PREFIX franzOption_clauseReorderer: <franz:identity>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
